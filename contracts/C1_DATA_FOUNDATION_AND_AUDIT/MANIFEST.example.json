@@ -1,0 +1,13 @@
+{
+  "manifest_version": 1,
+  "source_database_path": "/home/hassan/psx-stock-watcher/data/psx_watcher.db",
+  "extraction_timestamp_utc": "<ISO-8601 UTC>",
+  "maximum_source_trade_date": "<YYYY-MM-DD>",
+  "source_row_count": "<integer>",
+  "symbols_included": ["<sorted symbols>"],
+  "date_range": {"min": "<YYYY-MM-DD>", "max": "<YYYY-MM-DD>"},
+  "sql_extraction_definition": "<literal ordered SELECT>",
+  "code_git_version": "<Git SHA>",
+  "adjusted_raw_field_selection": ["<ordered fields>"],
+  "universe_methodology": "<trailing-only definition>"
+}

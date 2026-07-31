@@ -1,0 +1,13 @@
+[extraction]
+table = "daily_ohlc"
+columns = ["trade_date", "symbol", "sector", "open", "high", "low", "close", "volume", "ldcp", "open_missing", "source", "open_adj", "high_adj", "low_adj", "close_adj", "volume_adj", "adj_factor"]
+
+[universe]
+lookback_sessions = 60
+minimum_history_sessions = 40
+minimum_median_turnover_pkr = 1000000
+maximum_stale_fraction = 0.20
+
+[audit]
+stale_run_sessions = 5
+factor_tolerance = 0.000001
