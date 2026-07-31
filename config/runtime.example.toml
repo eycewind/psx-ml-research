@@ -1,0 +1,5 @@
+[runtime]
+device = "auto"          # auto | cpu | cuda
+seed = 42
+deterministic = true
+allow_tf32 = false
