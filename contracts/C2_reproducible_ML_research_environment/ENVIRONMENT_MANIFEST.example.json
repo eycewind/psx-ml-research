@@ -1,0 +1,11 @@
+{
+  "manifest_version": 1,
+  "generated_at_utc": "<ISO-8601 UTC>",
+  "git_commit": "<Git SHA or dirty state>",
+  "python": {"version": "<version>", "executable": "<path>"},
+  "platform": {"system": "<system>", "release": "<release>", "machine": "<architecture>"},
+  "environment": {"name": "psx-ml-research"},
+  "packages": {"numpy": "<version>", "pyarrow": "<version>", "torch": "<version>"},
+  "cuda": {"available": true, "torch_runtime": "<version>", "driver_version": "<version>", "device_count": 1, "devices": []},
+  "reproducibility": {"seed": 42, "deterministic": true, "allow_tf32": false}
+}

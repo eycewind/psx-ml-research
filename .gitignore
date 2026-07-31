@@ -1,6 +1,11 @@
 .venv/
+venv/
+.env
 __pycache__/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 *.egg-info/
 *.py[cod]
 data/cache/*
@@ -16,3 +21,6 @@ artifacts/reports/*.parquet
 *.sqlite
 *.sqlite3
 *.parquet
+*.pt
+*.pth
+*.ckpt

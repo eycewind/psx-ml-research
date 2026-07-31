@@ -7,13 +7,15 @@ name = "psx-ml-research"
 version = "0.1.0"
 description = "Leakage-safe PSX research data foundation"
 requires-python = ">=3.11"
-dependencies = ["pyarrow>=16,<22"]
+dependencies = ["numpy>=2,<3", "pyarrow>=16,<22"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
+ml = ["torch>=2.8"]
 
 [project.scripts]
 psx-c1 = "psx_ml.cli:main"
+psx-ml-env-report = "psx_ml.runtime.diagnostics:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -21,3 +23,4 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = ["gpu: requires a working CUDA-capable PyTorch runtime"]
