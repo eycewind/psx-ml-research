@@ -1,0 +1,967 @@
+{
+  "availability_convention": "Features for D use observations through D and are available only after market close on D; earliest decision is the next session",
+  "code": {
+    "commit": "4492d477459e1f24357751b1d4b1ab63901ba453",
+    "dirty": false
+  },
+  "configuration": {
+    "daily_path": "/home/hassan/psx-ml-research/data/cache/daily_ohlcv.parquet",
+    "engine": "cpu",
+    "feature_path": "/home/hassan/psx-ml-research/data/processed/features/daily_features.parquet",
+    "float_precision": "float64",
+    "input_manifest_path": "/home/hassan/psx-ml-research/artifacts/reports/C1_MANIFEST.json",
+    "minimum_cross_section_size": 20,
+    "minimum_history": 20,
+    "output_manifest_path": "/home/hassan/psx-ml-research/data/processed/features/FEATURE_MANIFEST.json",
+    "price_family": "adjusted",
+    "report_path": "/home/hassan/psx-ml-research/artifacts/reports/C3_FEATURE_REPORT.md",
+    "return_windows": [
+      1,
+      5,
+      20
+    ],
+    "rolling_windows": [
+      5,
+      20,
+      60
+    ],
+    "stale_run_threshold": 5,
+    "universe_path": "/home/hassan/psx-ml-research/data/cache/point_in_time_universe.parquet",
+    "volume_family": "adjusted"
+  },
+  "configuration_sha256": "5aa17f16b0dc03fe4018e685e9fe1e0c4f9059f3ecb3c078910714cf9313af11",
+  "feature_registry": [
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Simple return over 1 prior observations",
+      "field_family": "adjusted",
+      "formula": "close[t]/close[t-1]-1",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 2,
+      "minimum_observations": 2,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "ret_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Simple return over 5 prior observations",
+      "field_family": "adjusted",
+      "formula": "close[t]/close[t-5]-1",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 6,
+      "minimum_observations": 6,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "ret_5obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Simple return over 20 prior observations",
+      "field_family": "adjusted",
+      "formula": "close[t]/close[t-20]-1",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 21,
+      "minimum_observations": 21,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "ret_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Log return over 1 prior observations",
+      "field_family": "adjusted",
+      "formula": "ln(close[t]/close[t-1])",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 2,
+      "minimum_observations": 2,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "log_ret_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Log return over 20 prior observations",
+      "field_family": "adjusted",
+      "formula": "ln(close[t]/close[t-20])",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 21,
+      "minimum_observations": 21,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "log_ret_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Current close/open return",
+      "field_family": "adjusted",
+      "formula": "close/open-1",
+      "inputs": [
+        "close_adj",
+        "open_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "close_to_open_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Current open versus prior observed close",
+      "field_family": "adjusted",
+      "formula": "open[t]/close[t-1]-1",
+      "inputs": [
+        "open_adj",
+        "close_adj"
+      ],
+      "lookback": 2,
+      "minimum_observations": 2,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "open_gap_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Close relative to trailing mean close",
+      "field_family": "adjusted",
+      "formula": "close/mean20(close)-1",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 20,
+      "minimum_observations": 20,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "close_to_mean_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "price",
+      "description": "Close relative to trailing maximum close",
+      "field_family": "adjusted",
+      "formula": "close/max20(close)-1",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 20,
+      "minimum_observations": 20,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "close_to_max_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "volume",
+      "description": "Natural log of one plus volume",
+      "field_family": "adjusted",
+      "formula": "log1p(volume)",
+      "inputs": [
+        "volume_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "log1p_volume_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "volume",
+      "description": "Volume divided by trailing median volume",
+      "field_family": "adjusted",
+      "formula": "volume/median20(volume)",
+      "inputs": [
+        "volume_adj"
+      ],
+      "lookback": 20,
+      "minimum_observations": 20,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "volume_ratio_median_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "liquidity",
+      "description": "Adjustment-consistent close times volume",
+      "field_family": "adjusted",
+      "formula": "close*volume",
+      "inputs": [
+        "close_adj",
+        "volume_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "turnover_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "liquidity",
+      "description": "Trailing median turnover",
+      "field_family": "adjusted",
+      "formula": "median20(close*volume)",
+      "inputs": [
+        "close_adj",
+        "volume_adj"
+      ],
+      "lookback": 20,
+      "minimum_observations": 20,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "turnover_median_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "volatility",
+      "description": "Sample standard deviation of one-observation log returns",
+      "field_family": "adjusted",
+      "formula": "std20(log_ret_1)",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 21,
+      "minimum_observations": 21,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "rv_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "volatility",
+      "description": "Max range including prior close without clipping open/close",
+      "field_family": "adjusted",
+      "formula": "max(high-low,abs(high-prev_close),abs(low-prev_close))",
+      "inputs": [
+        "high_adj",
+        "low_adj",
+        "close_adj"
+      ],
+      "lookback": 2,
+      "minimum_observations": 2,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "true_range_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "volatility",
+      "description": "Mean of 20 true-range observations",
+      "field_family": "adjusted",
+      "formula": "mean20(true_range)",
+      "inputs": [
+        "high_adj",
+        "low_adj",
+        "close_adj"
+      ],
+      "lookback": 21,
+      "minimum_observations": 21,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "atr_mean_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "liquidity",
+      "description": "Mean absolute return divided by turnover",
+      "field_family": "adjusted",
+      "formula": "mean20(abs(ret1)/turnover)",
+      "inputs": [
+        "close_adj",
+        "volume_adj"
+      ],
+      "lookback": 21,
+      "minimum_observations": 21,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "amihud_mean_20obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Consecutive unchanged observed closes",
+      "field_family": "adjusted",
+      "formula": "run_length(close[t]==close[t-1])",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 2,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "stale_close_run_length",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "defines",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Fraction unchanged transitions in trailing observations",
+      "field_family": "adjusted",
+      "formula": "mean20(close[t]==close[t-1])",
+      "inputs": [
+        "close_adj"
+      ],
+      "lookback": 20,
+      "minimum_observations": 20,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "unchanged_close_fraction_20obs",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "defines",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Calendar days since prior stored observation",
+      "field_family": "adjusted",
+      "formula": "trade_date[t]-trade_date[t-1]",
+      "inputs": [
+        "trade_date"
+      ],
+      "lookback": 2,
+      "minimum_observations": 2,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "days_since_previous_observation",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Strict impossible range flag",
+      "field_family": "adjusted",
+      "formula": "high<low",
+      "inputs": [
+        "high_adj",
+        "low_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "strict_high_below_low_flag",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Stored observation has null volume",
+      "field_family": "adjusted",
+      "formula": "is_null(volume)",
+      "inputs": [
+        "volume_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "missing_volume_flag",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "quality",
+      "description": "Stored observation has zero volume",
+      "field_family": "adjusted",
+      "formula": "volume==0",
+      "inputs": [
+        "volume_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "zero_volume_flag",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "symbol",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "cross_sectional",
+      "description": "Eligible-universe percentile rank of 20-observation return",
+      "field_family": "adjusted",
+      "formula": "average-tie percentile rank by date",
+      "inputs": [
+        "ret_20obs_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "ret_20obs_rank_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "cross_sectional",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "cross_sectional",
+      "description": "Eligible-universe percentile rank of current turnover",
+      "field_family": "adjusted",
+      "formula": "average-tie percentile rank by date",
+      "inputs": [
+        "turnover_1obs_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "turnover_rank_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "cross_sectional",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "market",
+      "description": "Eligible-universe median one-observation return",
+      "field_family": "adjusted",
+      "formula": "median by date",
+      "inputs": [
+        "ret_1obs_adj"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "market_median_ret_1obs_adj",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "market",
+      "stale_price_sensitivity": "sensitive",
+      "version": 1
+    },
+    {
+      "availability": "after market close on trade_date; earliest downstream decision is next session",
+      "category": "market",
+      "description": "Eligible symbols with stored rows on date",
+      "field_family": "adjusted",
+      "formula": "count eligible by date",
+      "inputs": [
+        "point_in_time_eligible"
+      ],
+      "lookback": 1,
+      "minimum_observations": 1,
+      "missing_observation_policy": "observation-count windows; absent symbol-dates are not synthesized",
+      "name": "eligible_symbol_count",
+      "null_policy": "null on insufficient history or invalid/nonpositive denominator; never imputed",
+      "output_dtype": "float64",
+      "scope": "market",
+      "stale_price_sensitivity": "independent",
+      "version": 1
+    }
+  ],
+  "feature_registry_sha256": "593ee776651dd06170e8f145ff9df7fb8730e749dc4a06b7f1170e9768da3403",
+  "feature_set": {
+    "name": "psx_daily_primitives",
+    "version": 1
+  },
+  "feature_statistics": {
+    "amihud_mean_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 2.0618832119957802e-08,
+      "non_null": 607177,
+      "non_null_pct": 97.6492214463311,
+      "null": 14617,
+      "p01": 2.496915958856543e-11,
+      "p99": 1.3418188078235963e-05,
+      "warmup_null": 14617
+    },
+    "atr_mean_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 1.347499999999999,
+      "non_null": 607177,
+      "non_null_pct": 97.6492214463311,
+      "null": 14617,
+      "p01": 0.06800000000000002,
+      "p99": 94.3819399999993,
+      "warmup_null": 14617
+    },
+    "close_to_max_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": -0.06137245918718287,
+      "non_null": 607826,
+      "non_null_pct": 97.75359685040384,
+      "null": 13968,
+      "p01": -0.35266504466555304,
+      "p99": 0.0,
+      "warmup_null": 13968
+    },
+    "close_to_mean_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": -0.0010268935213986752,
+      "non_null": 607826,
+      "non_null_pct": 97.75359685040384,
+      "null": 13968,
+      "p01": -0.2034795421837996,
+      "p99": 0.3655020701464782,
+      "warmup_null": 13968
+    },
+    "close_to_open_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 5799,
+      "median": 0.0,
+      "non_null": 615995,
+      "non_null_pct": 99.06737601199112,
+      "null": 5799,
+      "p01": -0.10413958515466945,
+      "p99": 0.11991768290411647,
+      "warmup_null": 0
+    },
+    "days_since_previous_observation": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 1.0,
+      "non_null": 620973,
+      "non_null_pct": 99.86796270147347,
+      "null": 821,
+      "p01": 1.0,
+      "p99": 10.0,
+      "warmup_null": 821
+    },
+    "eligible_symbol_count": {
+      "ineligible_population_null": 316527,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 196.0,
+      "non_null": 305267,
+      "non_null_pct": 49.094555431541636,
+      "null": 316527,
+      "p01": 127.0,
+      "p99": 313.0,
+      "warmup_null": 0
+    },
+    "log1p_volume_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 10.728423153495452,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 2.3978952727983707,
+      "p99": 17.145559567770924,
+      "warmup_null": 0
+    },
+    "log_ret_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 620973,
+      "non_null_pct": 99.86796270147347,
+      "null": 821,
+      "p01": -0.10385283964723581,
+      "p99": 0.10178269430994238,
+      "warmup_null": 821
+    },
+    "log_ret_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0009955222802531985,
+      "non_null": 607177,
+      "non_null_pct": 97.6492214463311,
+      "null": 14617,
+      "p01": -0.3784001283199204,
+      "p99": 0.5779167956699042,
+      "warmup_null": 14617
+    },
+    "market_median_ret_1obs_adj": {
+      "ineligible_population_null": 316527,
+      "invalid_or_insufficient_population_null": 0,
+      "median": -0.000822368421052655,
+      "non_null": 305267,
+      "non_null_pct": 49.094555431541636,
+      "null": 316527,
+      "p01": -0.046997959778490306,
+      "p99": 0.039261491122705716,
+      "warmup_null": 0
+    },
+    "missing_volume_flag": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 0.0,
+      "p99": 0.0,
+      "warmup_null": 0
+    },
+    "open_gap_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 5712,
+      "median": 0.001251539036557281,
+      "non_null": 615261,
+      "non_null_pct": 98.94933048565923,
+      "null": 6533,
+      "p01": -0.09948542024013718,
+      "p99": 0.10003710587409552,
+      "warmup_null": 821
+    },
+    "ret_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 620973,
+      "non_null_pct": 99.86796270147347,
+      "null": 821,
+      "p01": -0.09864206818703733,
+      "p99": 0.1071428571428572,
+      "warmup_null": 821
+    },
+    "ret_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.000996017977037189,
+      "non_null": 607177,
+      "non_null_pct": 97.6492214463311,
+      "null": 14617,
+      "p01": -0.3150436245697412,
+      "p99": 0.7823216221421284,
+      "warmup_null": 14617
+    },
+    "ret_20obs_rank_adj": {
+      "ineligible_population_null": 316527,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.5,
+      "non_null": 305267,
+      "non_null_pct": 49.094555431541636,
+      "null": 316527,
+      "p01": 0.007067137809187279,
+      "p99": 0.9929328621908127,
+      "warmup_null": 0
+    },
+    "ret_5obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": -0.0005550916758736424,
+      "non_null": 617869,
+      "non_null_pct": 99.36876200156321,
+      "null": 3925,
+      "p01": -0.19655864422242628,
+      "p99": 0.345288795422308,
+      "warmup_null": 3925
+    },
+    "rv_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.029497851591349263,
+      "non_null": 607177,
+      "non_null_pct": 97.6492214463311,
+      "null": 14617,
+      "p01": 0.004886980400117749,
+      "p99": 0.09991526160335597,
+      "warmup_null": 14617
+    },
+    "stale_close_run_length": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 0.0,
+      "p99": 3.0,
+      "warmup_null": 0
+    },
+    "strict_high_below_low_flag": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 0.0,
+      "p99": 0.0,
+      "warmup_null": 0
+    },
+    "true_range_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 1.1300000000000026,
+      "non_null": 620973,
+      "non_null_pct": 99.86796270147347,
+      "null": 821,
+      "p01": 0.0,
+      "p99": 100.0,
+      "warmup_null": 821
+    },
+    "turnover_1obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 1387118.525,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 649.6139000000001,
+      "p99": 1119690053.1837993,
+      "warmup_null": 0
+    },
+    "turnover_median_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 1200019.8399999999,
+      "non_null": 607826,
+      "non_null_pct": 97.75359685040384,
+      "null": 13968,
+      "p01": 4118.3925,
+      "p99": 752765338.855,
+      "warmup_null": 13968
+    },
+    "turnover_rank_adj": {
+      "ineligible_population_null": 316527,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.5,
+      "non_null": 305267,
+      "non_null_pct": 49.094555431541636,
+      "null": 316527,
+      "p01": 0.007067137809187279,
+      "p99": 0.9929328621908127,
+      "warmup_null": 0
+    },
+    "unchanged_close_fraction_20obs": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 607826,
+      "non_null_pct": 97.75359685040384,
+      "null": 13968,
+      "p01": 0.0,
+      "p99": 0.65,
+      "warmup_null": 13968
+    },
+    "volume_ratio_median_20obs_adj": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.9965489915025565,
+      "non_null": 607826,
+      "non_null_pct": 97.75359685040384,
+      "null": 13968,
+      "p01": 0.016666666666666666,
+      "p99": 39.34287664483956,
+      "warmup_null": 13968
+    },
+    "zero_volume_flag": {
+      "ineligible_population_null": 0,
+      "invalid_or_insufficient_population_null": 0,
+      "median": 0.0,
+      "non_null": 621794,
+      "non_null_pct": 100.0,
+      "null": 0,
+      "p01": 0.0,
+      "p99": 0.0,
+      "warmup_null": 0
+    }
+  },
+  "field_policy": "adjusted price OHLC and adjusted volume are paired consistently; raw fields are not mixed into formulas",
+  "float_precision": "float64",
+  "generated_at_utc": "2026-07-31T20:13:30.504405+00:00",
+  "input_summary": {
+    "date_range": {
+      "max": "2026-07-10",
+      "min": "2020-01-01"
+    },
+    "rows": 621794,
+    "symbols": 821
+  },
+  "inputs": {
+    "c1_manifest": {
+      "maximum_trade_date": "2026-07-10",
+      "path": "/home/hassan/psx-ml-research/artifacts/reports/C1_MANIFEST.json",
+      "sha256": "573b79910f6ae3cb3e9f84f0afad4ca009e40857c2fb85d1ec2e5d3dfbb62103"
+    },
+    "daily": {
+      "path": "/home/hassan/psx-ml-research/data/cache/daily_ohlcv.parquet",
+      "rows": 621794,
+      "sha256": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e"
+    },
+    "universe": {
+      "path": "/home/hassan/psx-ml-research/data/cache/point_in_time_universe.parquet",
+      "rows": 621794,
+      "sha256": "94c68a383681999749c1c50c6c98b075fc96c4b69d55999a4439273c34aa1eb7"
+    }
+  },
+  "manifest_version": 1,
+  "minimum_history_rules": {
+    "feature_specific": "registry minimum_observations",
+    "global_reporting_threshold": 20
+  },
+  "null_infinity_policy": "No imputation; insufficient history and invalid/nonpositive denominators are null; infinities are sanitized to null",
+  "ordered_features": [
+    "ret_1obs_adj",
+    "ret_5obs_adj",
+    "ret_20obs_adj",
+    "log_ret_1obs_adj",
+    "log_ret_20obs_adj",
+    "close_to_open_1obs_adj",
+    "open_gap_1obs_adj",
+    "close_to_mean_20obs_adj",
+    "close_to_max_20obs_adj",
+    "log1p_volume_adj",
+    "volume_ratio_median_20obs_adj",
+    "turnover_1obs_adj",
+    "turnover_median_20obs_adj",
+    "rv_20obs_adj",
+    "true_range_1obs_adj",
+    "atr_mean_20obs_adj",
+    "amihud_mean_20obs_adj",
+    "stale_close_run_length",
+    "unchanged_close_fraction_20obs",
+    "days_since_previous_observation",
+    "strict_high_below_low_flag",
+    "missing_volume_flag",
+    "zero_volume_flag",
+    "ret_20obs_rank_adj",
+    "turnover_rank_adj",
+    "market_median_ret_1obs_adj",
+    "eligible_symbol_count"
+  ],
+  "output": {
+    "date_range": {
+      "max": "2026-07-10",
+      "min": "2020-01-01"
+    },
+    "eligible_rows": 305267,
+    "file_sha256": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa",
+    "logical_content_sha256": "1fe2376f7690152a078115b5c7548b9d6e960a5e394fbe29162a8b314d310b83",
+    "path": "/home/hassan/psx-ml-research/data/processed/features/daily_features.parquet",
+    "rows": 621794,
+    "symbols": 821
+  },
+  "packages": {
+    "numpy": "2.4.4",
+    "pyarrow": "21.0.0",
+    "python": "3.12.13"
+  },
+  "point_in_time_universe_methodology": "Exact (trade_date,symbol) join to C1 eligibility; no fill and no latest-list projection",
+  "quality": {
+    "cross_section_population": {
+      "max": 315,
+      "median": 183.0,
+      "min": 0
+    },
+    "infinity_after_sanitation": 0,
+    "infinity_before_sanitation": 0,
+    "missing_volume_rows": 0,
+    "strict_high_below_low_rows": 0,
+    "zero_volume_rows": 0
+  },
+  "window_definitions": {
+    "return_observations": [
+      1,
+      5,
+      20
+    ],
+    "rolling_observations": [
+      5,
+      20,
+      60
+    ]
+  }
+}
