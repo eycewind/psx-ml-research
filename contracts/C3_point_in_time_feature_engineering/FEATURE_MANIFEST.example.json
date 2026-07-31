@@ -1,0 +1,12 @@
+{
+  "manifest_version": 1,
+  "feature_set": {"name": "psx_daily_primitives", "version": 1},
+  "generated_at_utc": "<ISO-8601 UTC; excluded from logical hash>",
+  "code": {"commit": "<Git SHA>", "dirty": false},
+  "inputs": {"daily": {"sha256": "<hash>"}, "universe": {"sha256": "<hash>"}, "c1_manifest": {"sha256": "<hash>"}},
+  "output": {"rows": "<integer>", "file_sha256": "<hash>", "logical_content_sha256": "<hash>"},
+  "ordered_features": ["<registry order>"],
+  "feature_registry_sha256": "<hash>",
+  "configuration_sha256": "<hash>",
+  "availability_convention": "after close D; earliest decision next session"
+}
