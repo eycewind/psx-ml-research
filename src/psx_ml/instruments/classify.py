@@ -9,36 +9,41 @@ _RIGHT = re.compile(r"R\d*$")
 _GOVERNMENT = re.compile(r"^(?:P\d{2}(?:GIS|GHS|PIB|FRR|VRR|FRZ)|PK\d{2}TB)")
 _DEBT = re.compile(r"(?:TFC|SC\d*$)")
 
-def classify_observation(symbol: str, sector: str, config: dict) -> tuple[str,str,str]:
+def matching_rules(symbol: str, sector: str, config: dict) -> list[tuple[str,str,str,str]]:
+    matches=[]
     manual={x["symbol"]:x for x in config.get("manual_mappings",())}
     if symbol in manual:
-        row=manual[symbol]; return validate_type(row["instrument_type"]),"manual_mapping",row.get("confidence","high")
-    if _GOVERNMENT.search(symbol): return "government_security","ticker_heuristic","low"
-    if sector in config.get("sector_rules",{}): return validate_type(config["sector_rules"][sector]),"observed_sector_rule","low"
-    if symbol.endswith("ETF"): return "ETF","ticker_heuristic","low"
-    if _DEBT.search(symbol): return "debt_security","ticker_heuristic","low"
-    if _RIGHT.search(symbol): return "right_or_entitlement","ticker_heuristic","low"
+        row=manual[symbol]; matches.append((validate_type(row["instrument_type"]),"manual_mapping",row.get("confidence","high"),f"manual_mapping:{symbol}"))
+    if _GOVERNMENT.search(symbol): matches.append(("government_security","ticker_heuristic","low","ticker_regex:government_security"))
+    if sector in config.get("sector_rules",{}): matches.append((validate_type(config["sector_rules"][sector]),"observed_sector_rule","low",f"sector_exact:{sector}"))
+    if symbol.endswith("ETF"): matches.append(("ETF","ticker_heuristic","low","ticker_suffix:ETF"))
+    if _DEBT.search(symbol): matches.append(("debt_security","ticker_heuristic","low","ticker_regex:debt_security"))
+    if _RIGHT.search(symbol): matches.append(("right_or_entitlement","ticker_heuristic","low","ticker_regex:right_or_entitlement"))
     if sector.startswith(config.get("ordinary_equity_sector_prefix","08")):
-        if symbol.endswith(("PS","CPS")): return "preference_share","ticker_heuristic","low"
-        return "ordinary_equity","observed_sector_rule","low"
-    return "unknown","insufficient_metadata","unknown"
+        if symbol.endswith(("PS","CPS")): matches.append(("preference_share","ticker_heuristic","low","sector_prefix:08+preference_suffix"))
+        matches.append(("ordinary_equity","sector_prefix_inference","low","sector_prefix:08"))
+    return matches
+
+def classify_observation(symbol: str, sector: str, config: dict) -> tuple[str,str,str,str]:
+    matches=matching_rules(symbol,sector,config)
+    return matches[0] if matches else ("unknown","insufficient_metadata","unknown","no_rule_matched")
 
 def classify_intervals(source: pa.Table, config: dict) -> pa.Table:
     required={"trade_date","symbol","sector"}
     if not required.issubset(source.column_names): raise ValueError(f"missing columns: {required-set(source.column_names)}")
     grouped=defaultdict(list)
     for r in source.select(sorted(required)).to_pylist():
-        typ,src,confidence=classify_observation(r["symbol"],r["sector"] or "",config)
-        grouped[r["symbol"]].append((r["trade_date"],typ,src,confidence,r["sector"] or ""))
+        typ,src,confidence,rule=classify_observation(r["symbol"],r["sector"] or "",config)
+        grouped[r["symbol"]].append((r["trade_date"],typ,src,confidence,rule,r["sector"] or ""))
     out=[]
     for symbol, rows in sorted(grouped.items()):
         rows=sorted(set(rows)); start=0
         for i in range(1,len(rows)+1):
             if i<len(rows) and rows[i][1:]==rows[start][1:]: continue
             d0=date.fromisoformat(rows[start][0]); d1=date.fromisoformat(rows[i-1][0])
-            typ,src,confidence,sector=rows[start][1:]
+            typ,src,confidence,rule,sector=rows[start][1:]
             out.append({"symbol":symbol,"effective_from":d0.isoformat(),"effective_to":d1.isoformat(),"instrument_type":typ,
-                        "classification_source":src,"classification_confidence":confidence,"observed_sector":sector})
+                        "classification_source":src,"classification_confidence":confidence,"classification_rule":rule,"observed_sector":sector})
             start=i
     return pa.Table.from_pylist(out)
 
