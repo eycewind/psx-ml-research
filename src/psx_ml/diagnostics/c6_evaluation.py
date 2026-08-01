@@ -42,9 +42,17 @@ def evaluate_predictions(predictions: pa.Table, membership: pa.Table, pit: pa.Ta
             keep=regression_robust(y,p,trim,huber)
             ic=daily_ic([r["trade_date"] for r in selected],y,p,ic_min) if model=="ridge_fixed_alpha_1" else {"dates":0,"mean_daily_ic":None,"median_daily_ic":None,"daily_ic_std":None,"positive_ic_fraction":None}
             keep.update({"ic_dates":ic.pop("dates"),**ic})
-            daily=defaultdict(list)
-            for r,e in zip(selected,np.abs(y-p)): daily[r["trade_date"]].append(float(e))
+            daily=defaultdict(list); cross_section=defaultdict(list)
+            for r,e,pp,yy in zip(selected,np.abs(y-p),p,y):
+                daily[r["trade_date"]].append(float(e)); cross_section[r["trade_date"]].append((float(pp),r["symbol"],float(yy)))
             keep["equal_date_mae"]=float(np.mean([np.mean(x) for x in daily.values()]))
+            keep["date_level_median_absolute_error"]=float(np.mean([np.median(x) for x in daily.values()]))
+            spreads=[]
+            for d,day in sorted(cross_section.items()):
+                if len(day)>=ic_min:
+                    day.sort(key=lambda x:(x[0],x[1])); q=max(1,len(day)//5)
+                    spreads.append(np.mean([x[2] for x in day[-q:]])-np.mean([x[2] for x in day[:q]]))
+            keep["mean_daily_top_minus_bottom_target_spread"]=float(np.mean(spreads)) if spreads else None
             by_symbol=defaultdict(list)
             for r,e in zip(selected,np.abs(y-p)): by_symbol[r["symbol"]].append(float(e))
             keep["equal_symbol_mae"]=float(np.mean([np.mean(x) for x in by_symbol.values()]))
