@@ -4,18 +4,21 @@
 
 C5 implements deterministic, leakage-safe Ridge regression and Logistic
 regression references across the authoritative C4 development folds, with
-train-only median imputation/scaling, naive baselines, validation-only
-hyperparameter selection, probability-aware metrics, date-block uncertainty,
-and coefficient diagnostics.
+train-only median imputation/scaling, naive baselines, predeclared fixed-model
+evaluation, probability-aware metrics, date-block uncertainty, and coefficient
+diagnostics. Same-fold hyperparameter searches are retained only as tuning
+diagnostics.
 
 Branch: `feature/c5-baseline-models-and-evaluation`. Contract commit `5326b04`;
 implementation `33fc7c3`; diagnostic refinement `ec4012b`; fold-local
-selection correction `e5a96f1`; refreshed live reports `472d0a3`.
+selection correction `e5a96f1`; refreshed live reports `472d0a3`; canonical
+fixed-model correction `780774e`.
 
-**Result: linear predictive signal was not demonstrated.** Selected Ridge beat
-the best naive RMSE baseline on 0/3 horizons. Selected Logistic beat the
-training-prevalence log-loss baseline on 0/3 horizons. The final 2026 holdout
-remained locked and was not accessed.
+**Result: linear predictive signal was not demonstrated.** Canonical Ridge with
+fixed alpha=1 beat the best naive RMSE baseline on 0/3 horizons. Canonical
+Logistic regression with fixed C=1 beat the training-prevalence log-loss
+baseline on 0/3 horizons. The final 2026 holdout remained locked and was not
+accessed.
 
 This is a model-reference result, not a trading result or profitability claim.
 
@@ -30,13 +33,13 @@ This is a model-reference result, not a trading result or profitability claim.
 - Zero convergence warnings.
 - CPU only, seed 42, single-thread fitting.
 
-Selected Ridge mean R² is negative at every horizon: approximately -0.278,
--0.367, and -0.792 for 5/10/20 sessions. Selected Logistic mean ROC AUC is
-approximately 0.488, 0.477, and 0.488. Fold dispersion is substantial and
-retained in the model report.
+Canonical fixed-alpha Ridge mean R² is negative at every horizon: approximately
+-0.519, -0.367, and -0.793 for 5/10/20 sessions. Canonical fixed-C Logistic mean
+ROC AUC is approximately 0.488, 0.476, and 0.489. Fold dispersion is substantial
+and retained in the model report.
 
 Regression error concentration is material: the top 10 symbols/instruments
-account for approximately 30.8%, 41.4%, and 70.6% of selected Ridge squared loss
+account for approximately 42.6%, 41.4%, and 70.6% of canonical Ridge squared loss
 at 5/10/20 sessions. C5 records the identifiers but does not infer security type
 from names. Classification log loss is much less concentrated (~5.1–5.4% in the
 top 10).
@@ -64,16 +67,16 @@ coefficient logical:e82403d0764b6f3d3cbaeeccc926579f0918e1f51303ee06a223fdc0aec2
 | 18–19 holdout | Explicit lock raises by default; manifest records `holdout_accessed=false` |
 | 20–21 fold/future isolation | Outside-fold target mutation canary and chronological role filtering leave earlier fold predictions unchanged |
 | 22–25 baselines/models | Hand baseline, Ridge, deterministic Logistic probability tests |
-| 26–28 selection/defaults/warnings | Grid scores use validation only; alpha/C=1 retained; warnings captured (zero live) |
+| 26–28 selection/defaults/warnings | Alpha/C=1 is canonical; same-fold grid scores are labeled biased tuning diagnostics; warnings captured (zero live) |
 | 29 shuffled target | Synthetic strong relation loses R² under deterministic target permutation |
 | 30–34 metrics | Hand MAE/RMSE/R²/Brier; negative R² retained; probability log loss/Brier/AUC/PR AUC; prevalence reported |
 | 35–38 reconciliation/uncertainty/scope labels | Prediction-derived fold metrics; mean/std; deterministic date-block bootstrap; no trading-performance labels |
-| 39–41 coefficients | Exact transformed order, artifact hashes, fold mean/std/sign consistency/near-zero diagnostics |
+| 39–41 coefficients | Canonical fixed-model coefficients; exact transformed order, artifact hashes, fold mean/std/sign consistency/near-zero diagnostics |
 | 42–44 determinism/config/Git | Matching file/logical hashes; config hash canary; clean Git provenance recorded |
 | 45 full suite | Complete CPU-only C1–C5 suite; expected C2 GPU test skip |
 | 46–48 scope/watcher | No tree/neural/signal/portfolio/cost/execution/backtest; no profit claim; C14 untouched |
 
-Final CPU-only suite: **51 passed, 1 skipped in 9.81 seconds**. The skip is the
+Final CPU-only suite: **51 passed, 1 skipped in 10.52 seconds**. The skip is the
 expected C2 GPU availability test; C5 itself is intentionally CPU-only.
 
 ## Production safety
@@ -96,12 +99,14 @@ Watcher porcelain status: <empty>
 - Ridge uses deterministic Cholesky solving; Logistic uses single-thread L-BFGS.
 - Median imputation is used without missing-indicator expansion. Missing and
   constant fields are still recorded by task/fold.
-- Selected hyperparameters minimize validation RMSE/log loss independently
-  within each development fold. This prevents another fold's outcomes from
-  influencing the selected predictions for the current fold. Fixed alpha/C=1
-  predictions and metrics remain.
-- Date-block intervals cover selected-model absolute error or log loss; IID row
-  bootstrap is not used.
+- Fixed alpha=1 and C=1 are the canonical unbiased C5 specifications. All C5
+  conclusions, uncertainty, coefficient, and concentration diagnostics use them.
+- Same-fold selected hyperparameters minimize the fold they are scored on and
+  therefore are optimistically biased tuning diagnostics, not unbiased
+  validation metrics. Sequential tuning was not implemented in this correction.
+- Date-block intervals cover canonical fixed-model absolute error or log loss;
+  same-fold selected intervals remain diagnostic only. IID row bootstrap is not
+  used.
 - Holdout authorization is recorded, but the development pipeline intentionally
   never emits test predictions even when authorization is supplied. A later
   reviewed contract should define final refit/holdout evaluation.

@@ -2,13 +2,19 @@
 
 Model set `linear_baselines_v1` v1; final holdout accessed: **False**.
 
-**Conclusion: Linear signal NOT demonstrated: selected Ridge beats the best naive RMSE baseline on 0/3 tasks; selected Logistic beats prevalence log loss on 0/3 tasks.**
+**Conclusion: Linear signal NOT demonstrated: canonical fixed-alpha Ridge beats the best naive RMSE baseline on 0/3 tasks; canonical fixed-C Logistic beats prevalence log loss on 0/3 tasks.**
 
 ## Scope and interpretation
 
 These are validation-fold reference models, not trading strategies. Metrics are predictive diagnostics only; they contain no costs, execution, portfolio, Sharpe, or profitability analysis. A model that fails naive baselines is an honest negative result.
 
-## Selected hyperparameters
+## Canonical evaluation policy
+
+The unbiased C5 evaluation is the predeclared `ridge_fixed_alpha_1` and `logistic_fixed_c_1` specification. Its validation scores drive the conclusion, uncertainty, coefficient, and concentration diagnostics.
+
+Per-fold `ridge_selected` and `logistic_selected` variants choose a hyperparameter using the same fold they are scored on. They are retained only as optimistically biased tuning diagnostics and are not unbiased validation metrics. No sequential tuning is claimed in C5.
+
+## Same-fold tuning diagnostics (non-canonical)
 
 ```json
 {
@@ -26,6 +32,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "100.0": 0.13764153588093528
     },
     "parameter": "alpha",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.10581132101061738,
@@ -64,6 +71,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "100.0": 0.2795417212825333
     },
     "parameter": "alpha",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.2071226537256743,
@@ -102,6 +110,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "100.0": 0.09155332579796456
     },
     "parameter": "alpha",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.07424756342551407,
@@ -139,6 +148,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "10.0": 0.7148219230808414
     },
     "parameter": "C",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.7182973260545803,
@@ -173,6 +183,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "10.0": 0.7217061273293369
     },
     "parameter": "C",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.7121260777470116,
@@ -207,6 +218,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
       "10.0": 0.7020174889977682
     },
     "parameter": "C",
+    "role": "same_fold_tuning_diagnostic_not_unbiased_validation",
     "validation_scores_by_fold": {
       "fold_2023": {
         "0.01": 0.7098513999488159,
@@ -233,7 +245,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
 
 ## Fold aggregate metrics
 
-| Task/model | Selected metric means and dispersion |
+| Task/model | Metric means and dispersion |
 |---|---|
 | `fwd_open_to_close_ret_10s_adj:ridge_fixed_alpha_1` | mean `{"directional_accuracy": 0.4677882905207196, "mae": 0.07549472162483394, "pearson": -0.0918799513496531, "r2": -0.36686369384230216, "rmse": 0.13750994454355486, "spearman": -0.09417908218854636}`; std `{"directional_accuracy": 0.018642782803861706, "mae": 0.0037517352212583337, "pearson": 0.10418144064818523, "r2": 0.43679599206880193, "rmse": 0.03666103762258199, "spearman": 0.019563937987171584}`; n=150,184 |
 | `fwd_open_to_close_ret_10s_adj:ridge_selected` | mean `{"directional_accuracy": 0.4677490575795356, "mae": 0.07545985461405258, "pearson": -0.0923372768474557, "r2": -0.3634776654304419, "rmse": 0.13734743622908666, "spearman": -0.09351776146269077}`; std `{"directional_accuracy": 0.01872252201197327, "mae": 0.0037775367352774402, "pearson": 0.10402353551751084, "r2": 0.43875337087470395, "rmse": 0.03679679689344137, "spearman": 0.018986381896247517}`; n=150,184 |
@@ -264,12 +276,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
 
 ```json
 {
+  "fwd_open_to_close_ret_10s_adj:fold_2023:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.07128898136134934,
+    "lower_95": 0.06761359654130636,
+    "replicates": 200,
+    "upper_95": 0.07450909205423319
+  },
   "fwd_open_to_close_ret_10s_adj:fold_2023:ridge_selected": {
     "dates": 246,
     "estimate": 0.0712026048994977,
     "lower_95": 0.0675299150973354,
     "replicates": 200,
     "upper_95": 0.07441010112844552
+  },
+  "fwd_open_to_close_ret_10s_adj:fold_2024:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.08000487211423558,
+    "lower_95": 0.07677930853786136,
+    "replicates": 200,
+    "upper_95": 0.08278331615598519
   },
   "fwd_open_to_close_ret_10s_adj:fold_2024:ridge_selected": {
     "dates": 246,
@@ -278,12 +304,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.0827866203519435
   },
+  "fwd_open_to_close_ret_10s_adj:fold_2025:ridge_fixed_alpha_1": {
+    "dates": 250,
+    "estimate": 0.07285660483917156,
+    "lower_95": 0.0711448982664091,
+    "replicates": 200,
+    "upper_95": 0.07557310563389609
+  },
   "fwd_open_to_close_ret_10s_adj:fold_2025:ridge_selected": {
     "dates": 250,
     "estimate": 0.07284475879098609,
     "lower_95": 0.07112063016400658,
     "replicates": 200,
     "upper_95": 0.07555784210006816
+  },
+  "fwd_open_to_close_ret_20s_adj:fold_2023:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.10390506464455673,
+    "lower_95": 0.09830765794278128,
+    "replicates": 200,
+    "upper_95": 0.10963462121359904
   },
   "fwd_open_to_close_ret_20s_adj:fold_2023:ridge_selected": {
     "dates": 246,
@@ -292,12 +332,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.10956915589251418
   },
+  "fwd_open_to_close_ret_20s_adj:fold_2024:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.11908621391743895,
+    "lower_95": 0.11330971511424714,
+    "replicates": 200,
+    "upper_95": 0.1256490453336456
+  },
   "fwd_open_to_close_ret_20s_adj:fold_2024:ridge_selected": {
     "dates": 246,
     "estimate": 0.11908415122431058,
     "lower_95": 0.11330722602684962,
     "replicates": 200,
     "upper_95": 0.12564452328839373
+  },
+  "fwd_open_to_close_ret_20s_adj:fold_2025:ridge_fixed_alpha_1": {
+    "dates": 250,
+    "estimate": 0.10482303730302978,
+    "lower_95": 0.10202629999421604,
+    "replicates": 200,
+    "upper_95": 0.10749773294076485
   },
   "fwd_open_to_close_ret_20s_adj:fold_2025:ridge_selected": {
     "dates": 250,
@@ -306,12 +360,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.10748846843847833
   },
+  "fwd_open_to_close_ret_5s_adj:fold_2023:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.050716730574082956,
+    "lower_95": 0.04850383007229159,
+    "replicates": 200,
+    "upper_95": 0.05295720588593653
+  },
   "fwd_open_to_close_ret_5s_adj:fold_2023:ridge_selected": {
     "dates": 246,
     "estimate": 0.05066294725381556,
     "lower_95": 0.04845173965157511,
     "replicates": 200,
     "upper_95": 0.05292681406120334
+  },
+  "fwd_open_to_close_ret_5s_adj:fold_2024:ridge_fixed_alpha_1": {
+    "dates": 246,
+    "estimate": 0.056044556513710764,
+    "lower_95": 0.05396491971075143,
+    "replicates": 200,
+    "upper_95": 0.05815742995501367
   },
   "fwd_open_to_close_ret_5s_adj:fold_2024:ridge_selected": {
     "dates": 246,
@@ -320,12 +388,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.05765849692348144
   },
+  "fwd_open_to_close_ret_5s_adj:fold_2025:ridge_fixed_alpha_1": {
+    "dates": 250,
+    "estimate": 0.05257444694329125,
+    "lower_95": 0.05100960936372026,
+    "replicates": 200,
+    "upper_95": 0.054576912991354885
+  },
   "fwd_open_to_close_ret_5s_adj:fold_2025:ridge_selected": {
     "dates": 250,
     "estimate": 0.05257256978775043,
     "lower_95": 0.051008514489283764,
     "replicates": 200,
     "upper_95": 0.054573286211198564
+  },
+  "up_10s:fold_2023:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7173255792588156,
+    "lower_95": 0.7077441980036914,
+    "replicates": 200,
+    "upper_95": 0.7276937422203691
   },
   "up_10s:fold_2023:logistic_selected": {
     "dates": 246,
@@ -334,12 +416,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.7252023273716313
   },
+  "up_10s:fold_2024:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7241307923705449,
+    "lower_95": 0.7135672016732794,
+    "replicates": 200,
+    "upper_95": 0.733117189129448
+  },
   "up_10s:fold_2024:logistic_selected": {
     "dates": 246,
     "estimate": 0.7233401237874678,
     "lower_95": 0.7128261231673058,
     "replicates": 200,
     "upper_95": 0.7322652646024451
+  },
+  "up_10s:fold_2025:logistic_fixed_c_1": {
+    "dates": 250,
+    "estimate": 0.6977151198897802,
+    "lower_95": 0.6917386582326495,
+    "replicates": 200,
+    "upper_95": 0.7024754385993849
   },
   "up_10s:fold_2025:logistic_selected": {
     "dates": 250,
@@ -348,12 +444,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.7024498061413258
   },
+  "up_20s:fold_2023:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7115931550915803,
+    "lower_95": 0.7027241465124912,
+    "replicates": 200,
+    "upper_95": 0.7216186769234874
+  },
   "up_20s:fold_2023:logistic_selected": {
     "dates": 246,
     "estimate": 0.7103395018248431,
     "lower_95": 0.7017116631103781,
     "replicates": 200,
     "upper_95": 0.7197958584951095
+  },
+  "up_20s:fold_2024:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7466080284437633,
+    "lower_95": 0.733490028504012,
+    "replicates": 200,
+    "upper_95": 0.7588732748537627
   },
   "up_20s:fold_2024:logistic_selected": {
     "dates": 246,
@@ -362,12 +472,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.7572388410031778
   },
+  "up_20s:fold_2025:logistic_fixed_c_1": {
+    "dates": 250,
+    "estimate": 0.7022865752902349,
+    "lower_95": 0.6984505472051344,
+    "replicates": 200,
+    "upper_95": 0.7059330793326721
+  },
   "up_20s:fold_2025:logistic_selected": {
     "dates": 250,
     "estimate": 0.7021588089789105,
     "lower_95": 0.6983567118074926,
     "replicates": 200,
     "upper_95": 0.7057917012793324
+  },
+  "up_5s:fold_2023:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7084631405891303,
+    "lower_95": 0.7010601016343763,
+    "replicates": 200,
+    "upper_95": 0.7160871140104059
   },
   "up_5s:fold_2023:logistic_selected": {
     "dates": 246,
@@ -376,12 +500,26 @@ These are validation-fold reference models, not trading strategies. Metrics are 
     "replicates": 200,
     "upper_95": 0.7145512487215243
   },
+  "up_5s:fold_2024:logistic_fixed_c_1": {
+    "dates": 246,
+    "estimate": 0.7028035852728319,
+    "lower_95": 0.6935255961524607,
+    "replicates": 200,
+    "upper_95": 0.7100138653318901
+  },
   "up_5s:fold_2024:logistic_selected": {
     "dates": 246,
     "estimate": 0.702259128303509,
     "lower_95": 0.6932281541528984,
     "replicates": 200,
     "upper_95": 0.7093732466452765
+  },
+  "up_5s:fold_2025:logistic_fixed_c_1": {
+    "dates": 250,
+    "estimate": 0.6902693813536873,
+    "lower_95": 0.6840896167281035,
+    "replicates": 200,
+    "upper_95": 0.6959116436209623
   },
   "up_5s:fold_2025:logistic_selected": {
     "dates": 250,
@@ -393,7 +531,7 @@ These are validation-fold reference models, not trading strategies. Metrics are 
 }
 ```
 
-Bootstrap resamples validation dates, never individual rows as the sole uncertainty unit. Fixed alpha/C=1 results remain alongside validation-selected variants. Negative R² values are retained. Classification probability metrics use probabilities, not threshold labels.
+Bootstrap resamples validation dates, never individual rows as the sole uncertainty unit. Fixed alpha/C=1 intervals are canonical; selected-model intervals are tuning diagnostics only. Negative R² values are retained. Classification probability metrics use probabilities, not threshold labels.
 
 ## Symbol-loss concentration
 
@@ -401,39 +539,39 @@ Bootstrap resamples validation dates, never individual rows as the sole uncertai
 {
   "fwd_open_to_close_ret_10s_adj": {
     "largest_loss_symbol": "PHDL",
-    "largest_symbol_share": 0.3282705558177249,
+    "largest_symbol_share": 0.3282229381389003,
     "symbols": 386,
-    "top_10_symbol_share": 0.4127183761371213
+    "top_10_symbol_share": 0.4135636217938053
   },
   "fwd_open_to_close_ret_20s_adj": {
     "largest_loss_symbol": "P01GIS150825",
-    "largest_symbol_share": 0.42939844293105356,
+    "largest_symbol_share": 0.4296622546371123,
     "symbols": 385,
-    "top_10_symbol_share": 0.7059485957068751
+    "top_10_symbol_share": 0.7062343571179092
   },
   "fwd_open_to_close_ret_5s_adj": {
     "largest_loss_symbol": "P01GIS150825",
-    "largest_symbol_share": 0.17962631170002472,
+    "largest_symbol_share": 0.29482692737401067,
     "symbols": 387,
-    "top_10_symbol_share": 0.30832404787190326
+    "top_10_symbol_share": 0.425695350363099
   },
   "up_10s": {
     "largest_loss_symbol": "PHDL",
-    "largest_symbol_share": 0.007196386361987302,
+    "largest_symbol_share": 0.0072951916327699045,
     "symbols": 386,
-    "top_10_symbol_share": 0.05332189869194833
+    "top_10_symbol_share": 0.05343213230725554
   },
   "up_20s": {
     "largest_loss_symbol": "PHDL",
-    "largest_symbol_share": 0.006988472207233105,
+    "largest_symbol_share": 0.007093558328201339,
     "symbols": 385,
-    "top_10_symbol_share": 0.05357667388307939
+    "top_10_symbol_share": 0.0536989244495753
   },
   "up_5s": {
     "largest_loss_symbol": "KAPCO",
-    "largest_symbol_share": 0.005123377181783484,
+    "largest_symbol_share": 0.005116968521032744,
     "symbols": 387,
-    "top_10_symbol_share": 0.05092420727575368
+    "top_10_symbol_share": 0.05090374906192447
   }
 }
 ```

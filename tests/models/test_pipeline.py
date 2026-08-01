@@ -14,6 +14,16 @@ def test_pipeline_determinism_scope_manifest_and_no_sqlite(model_project,monkeyp
     pred=pq.read_table(root/"out/pred.parquet"); assert set(pred["split_role"].to_pylist())=={"validation"}
     assert set(pred["model_name"].to_pylist()) >= {"zero_return_baseline","training_mean_baseline","ridge_selected","majority_class_baseline","training_prevalence_baseline","logistic_selected"}
     assert one["ordered_feature_allowlist"]==["f1","f2"] and one["counts"]["coefficient_rows"]>0
+    assert one["evaluation_policy"]=={
+        "canonical_regression_model":"ridge_fixed_alpha_1",
+        "canonical_classification_model":"logistic_fixed_c_1",
+        "same_fold_selected_role":"tuning_diagnostic_not_unbiased_validation",
+        "sequential_tuning_implemented":False,
+    }
+    assert all(v["role"]=="same_fold_tuning_diagnostic_not_unbiased_validation" for v in one["selected_hyperparameters"].values())
+    report=(root/"art/model.md").read_text()
+    assert "unbiased C5 evaluation" in report and "optimistically biased tuning diagnostics" in report
+    assert "canonical fixed-alpha Ridge" in report and "canonical fixed-C Logistic" in report
     assert "profitability" in (root/"art/model.md").read_text()
 
 def test_targets_outside_fold_do_not_change_fold_predictions(model_project):

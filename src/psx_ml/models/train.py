@@ -44,7 +44,7 @@ def evaluate(labelled,splits,config):
                 score=regression_metrics(yv,p)["rmse"] if kind=="regression" else classification_metrics(yv,p)["log_loss"]
                 grid_scores[float(hp)].append(score); fold_grid_scores[fold][float(hp)]=score; warnings_out[f"{target}:{fold}:{hp}"]=w
         chosen_by_fold={fold:min(grid,key=lambda hp:(scores[float(hp)],hp)) for fold,scores in fold_grid_scores.items()}
-        selected[target]={"parameter":"alpha" if kind=="regression" else "C","by_fold":{fold:float(v) for fold,v in chosen_by_fold.items()},
+        selected[target]={"role":"same_fold_tuning_diagnostic_not_unbiased_validation","parameter":"alpha" if kind=="regression" else "C","by_fold":{fold:float(v) for fold,v in chosen_by_fold.items()},
           "validation_scores_by_fold":{fold:{str(k):v for k,v in scores.items()} for fold,scores in fold_grid_scores.items()},"mean_grid_scores":{str(k):float(np.mean(v)) for k,v in grid_scores.items()}}
         for fold,(tr,va,pre,xt,xv,yt,yv) in fold_cache.items():
             base=regression_baselines(yt,len(yv)) if kind=="regression" else classification_baselines(yt,len(yv))
@@ -63,7 +63,7 @@ def evaluate(labelled,splits,config):
                 for rank,j in enumerate(np.argsort(-np.abs(coef)),1):
                     coefficient_rows.append({"target_name":target,"fold_id":fold,"model_name":model_name,"feature":config.features[j],"intercept":float(model.intercept_.reshape(-1)[0]),
                       "standardized_coefficient":float(coef[j]),"raw_scale_coefficient":float(coef[j]/pre.scales[j]),"sign":int(np.sign(coef[j])),"absolute_magnitude_rank":rank,"convergence_warnings":len(w)})
-                if model_name.endswith("selected"):
+                if model_name.endswith("selected") or model_name in {"ridge_fixed_alpha_1","logistic_fixed_c_1"}:
                     losses=np.abs(yv-p) if kind=="regression" else -(yv*np.log(np.clip(p,1e-12,1))+(1-yv)*np.log(np.clip(1-p,1e-12,1)))
                     bootstrap[f"{target}:{fold}:{model_name}"]=date_block_interval(dates[va],losses,config.seed,config.bootstrap_replicates)
     def merge(parts):

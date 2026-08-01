@@ -37,8 +37,8 @@ def _symbol_concentration(table):
     y=np.asarray(table["target"],dtype=float); pred=np.asarray(table["prediction"],dtype=float); prob=np.asarray(table["prediction_probability"].to_numpy(zero_copy_only=False),dtype=float)
     by=defaultdict(lambda:defaultdict(float))
     for i,(s,t,m) in enumerate(zip(symbols,targets,models)):
-        if m=="ridge_selected": loss=(y[i]-pred[i])**2
-        elif m=="logistic_selected":
+        if m=="ridge_fixed_alpha_1": loss=(y[i]-pred[i])**2
+        elif m=="logistic_fixed_c_1":
             p=np.clip(prob[i],1e-12,1-1e-12); loss=-(y[i]*np.log(p)+(1-y[i])*np.log(1-p))
         else: continue
         by[t][s]+=float(loss)
@@ -49,22 +49,23 @@ def _symbol_concentration(table):
     return out
 
 def _model_report(m,path):
-    reg_wins=sum(m["aggregate_metrics"][f"{t}:ridge_selected"]["mean"]["rmse"] < min(m["aggregate_metrics"][f"{t}:zero_return_baseline"]["mean"]["rmse"],m["aggregate_metrics"][f"{t}:training_mean_baseline"]["mean"]["rmse"]) for t in m["targets"]["regression"])
-    cls_wins=sum(m["aggregate_metrics"][f"{t}:logistic_selected"]["mean"]["log_loss"] < m["aggregate_metrics"][f"{t}:training_prevalence_baseline"]["mean"]["log_loss"] for t in m["targets"]["classification"])
-    conclusion=f"Linear signal NOT demonstrated: selected Ridge beats the best naive RMSE baseline on {reg_wins}/{len(m['targets']['regression'])} tasks; selected Logistic beats prevalence log loss on {cls_wins}/{len(m['targets']['classification'])} tasks."
+    reg_wins=sum(m["aggregate_metrics"][f"{t}:ridge_fixed_alpha_1"]["mean"]["rmse"] < min(m["aggregate_metrics"][f"{t}:zero_return_baseline"]["mean"]["rmse"],m["aggregate_metrics"][f"{t}:training_mean_baseline"]["mean"]["rmse"]) for t in m["targets"]["regression"])
+    cls_wins=sum(m["aggregate_metrics"][f"{t}:logistic_fixed_c_1"]["mean"]["log_loss"] < m["aggregate_metrics"][f"{t}:training_prevalence_baseline"]["mean"]["log_loss"] for t in m["targets"]["classification"])
+    conclusion=f"Linear signal NOT demonstrated: canonical fixed-alpha Ridge beats the best naive RMSE baseline on {reg_wins}/{len(m['targets']['regression'])} tasks; canonical fixed-C Logistic beats prevalence log loss on {cls_wins}/{len(m['targets']['classification'])} tasks."
     lines=["# C5 Linear Baseline Model Report","",f"Model set `{m['model_set']['name']}` v{m['model_set']['version']}; final holdout accessed: **{m['holdout_accessed']}**.","",f"**Conclusion: {conclusion}**","",
       "## Scope and interpretation","","These are validation-fold reference models, not trading strategies. Metrics are predictive diagnostics only; they contain no costs, execution, portfolio, Sharpe, or profitability analysis. A model that fails naive baselines is an honest negative result.","",
-      "## Selected hyperparameters","",f"```json\n{json.dumps(m['selected_hyperparameters'],indent=2,sort_keys=True)}\n```","","## Fold aggregate metrics","", "| Task/model | Selected metric means and dispersion |","|---|---|"]
+      "## Canonical evaluation policy","","The unbiased C5 evaluation is the predeclared `ridge_fixed_alpha_1` and `logistic_fixed_c_1` specification. Its validation scores drive the conclusion, uncertainty, coefficient, and concentration diagnostics.","","Per-fold `ridge_selected` and `logistic_selected` variants choose a hyperparameter using the same fold they are scored on. They are retained only as optimistically biased tuning diagnostics and are not unbiased validation metrics. No sequential tuning is claimed in C5.","",
+      "## Same-fold tuning diagnostics (non-canonical)","",f"```json\n{json.dumps(m['selected_hyperparameters'],indent=2,sort_keys=True)}\n```","","## Fold aggregate metrics","", "| Task/model | Metric means and dispersion |","|---|---|"]
     for k,v in m["aggregate_metrics"].items(): lines.append(f"| `{k}` | mean `{json.dumps(v['mean'],sort_keys=True)}`; std `{json.dumps(v['std'],sort_keys=True)}`; n={v['total_n']:,} |")
     lines += ["","## Date-block uncertainty","",f"```json\n{json.dumps(m['date_block_intervals'],indent=2,sort_keys=True)}\n```","",
-      "Bootstrap resamples validation dates, never individual rows as the sole uncertainty unit. Fixed alpha/C=1 results remain alongside validation-selected variants. Negative R² values are retained. Classification probability metrics use probabilities, not threshold labels.","","## Symbol-loss concentration","",f"```json\n{json.dumps(m['symbol_loss_concentration'],indent=2,sort_keys=True)}\n```","",
+      "Bootstrap resamples validation dates, never individual rows as the sole uncertainty unit. Fixed alpha/C=1 intervals are canonical; selected-model intervals are tuning diagnostics only. Negative R² values are retained. Classification probability metrics use probabilities, not threshold labels.","","## Symbol-loss concentration","",f"```json\n{json.dumps(m['symbol_loss_concentration'],indent=2,sort_keys=True)}\n```","",
       "## Leakage controls","","Median imputation and scaling are fitted separately on each task/fold training subset. Purged, embargoed, test, and not-in-fold rows are excluded. The final holdout is locked by default and was not scored. Feature columns exactly match the frozen C3 registry; identifiers and C4 target/future/split fields never enter matrices.",""]
     path.parent.mkdir(parents=True,exist_ok=True); path.write_text("\n".join(lines))
 
 def _coef_report(m,path):
-    selected=[(k,v) for k,v in m["coefficient_summary"].items() if ":ridge_selected:" in k or ":logistic_selected:" in k]
+    selected=[(k,v) for k,v in m["coefficient_summary"].items() if ":ridge_fixed_alpha_1:" in k or ":logistic_fixed_c_1:" in k]
     selected.sort(key=lambda kv:abs(kv[1]["fold_mean"]),reverse=True)
-    lines=["# C5 Coefficient Report","","Coefficients are associational, not causal. Correlated C3 primitives can make signs and magnitudes unstable across folds.","",
+    lines=["# C5 Coefficient Report","","This report uses the canonical predeclared alpha=1 and C=1 models. Same-fold selected variants are tuning diagnostics and are excluded here.","","Coefficients are associational, not causal. Correlated C3 primitives can make signs and magnitudes unstable across folds.","",
       "| Target/model/feature | Fold mean | Fold std | Sign consistency | Near-zero folds |","|---|---:|---:|---:|---:|"]
     for k,v in selected: lines.append(f"| `{k}` | {v['fold_mean']:.8g} | {v['fold_std']:.8g} | {v['sign_consistency']:.3f} | {v['near_zero_count']} |")
     lines += ["","The runtime coefficient Parquet also records each fold intercept, transformed feature order, standardized coefficient, raw-scale coefficient, sign, absolute-magnitude rank, and convergence-warning count.",""]
@@ -84,6 +85,7 @@ def run_pipeline(config_path,repo,allow_final_holdout=False):
       "ordered_feature_allowlist":list(c.features),"targets":{"regression":list(c.regression_targets),"classification":list(c.classification_targets)},
       "models":{"regression":["zero_return_baseline","training_mean_baseline","ridge_fixed_alpha_1","ridge_selected"],"classification":["majority_class_baseline","training_prevalence_baseline","logistic_fixed_c_1","logistic_selected"]},
       "hyperparameter_grids":{"ridge_alpha":list(c.ridge_alphas),"logistic_c":list(c.logistic_cs)},"selected_hyperparameters":evidence["selected_hyperparameters"],
+      "evaluation_policy":{"canonical_regression_model":"ridge_fixed_alpha_1","canonical_classification_model":"logistic_fixed_c_1","same_fold_selected_role":"tuning_diagnostic_not_unbiased_validation","sequential_tuning_implemented":False},
       "fold_definitions":c4["split_configuration"]["folds"],
       "preprocessing_by_fold_task":evidence["preprocessing"],"convergence_warnings":evidence["convergence_warnings"],"per_fold_metrics":evidence["metrics"],"aggregate_metrics":agg,
       "date_block_intervals":evidence["date_block_intervals"],"coefficient_summary":cs,"symbol_loss_concentration":concentration,"configuration":c.canonical(),"configuration_sha256":c.sha256(),
