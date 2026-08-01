@@ -1,0 +1,30 @@
+[output]
+assignment_path = "data/processed/datasets/temporal_split_assignments.parquet"
+manifest_path = "data/processed/datasets/TARGET_SPLIT_MANIFEST.json"
+target_report_path = "artifacts/reports/C4_TARGET_REPORT.md"
+split_report_path = "artifacts/reports/C4_SPLIT_REPORT.md"
+
+[splits]
+name = "expanding_annual_v1"
+version = 1
+embargo_sessions = 5
+final_test_start = "2026-01-01"
+final_test_end = "2026-07-10"
+
+[[folds]]
+id = "fold_2023"
+train_start = "2020-01-01"
+validation_start = "2023-01-01"
+validation_end = "2023-12-31"
+
+[[folds]]
+id = "fold_2024"
+train_start = "2020-01-01"
+validation_start = "2024-01-01"
+validation_end = "2024-12-31"
+
+[[folds]]
+id = "fold_2025"
+train_start = "2020-01-01"
+validation_start = "2025-01-01"
+validation_end = "2025-12-31"
