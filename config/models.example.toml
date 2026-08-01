@@ -1,0 +1,38 @@
+[input]
+labelled_path = "data/processed/targets/daily_feature_targets.parquet"
+split_path = "data/processed/datasets/temporal_split_assignments.parquet"
+c4_manifest_path = "artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json"
+c3_manifest_path = "artifacts/reports/C3_FEATURE_MANIFEST.json"
+c2_manifest_path = "artifacts/reports/C2_ENVIRONMENT_MANIFEST.json"
+
+[output]
+predictions_path = "artifacts/predictions/c5/validation_predictions.parquet"
+coefficients_path = "artifacts/models/c5/coefficients.parquet"
+manifest_path = "artifacts/models/c5/MODEL_MANIFEST.json"
+model_report_path = "artifacts/reports/C5_MODEL_REPORT.md"
+coefficient_report_path = "artifacts/reports/C5_COEFFICIENT_REPORT.md"
+
+[model_set]
+name = "linear_baselines_v1"
+version = 1
+seed = 42
+ridge_alphas = [0.01, 0.1, 1.0, 10.0, 100.0]
+logistic_cs = [0.01, 0.1, 1.0, 10.0]
+logistic_max_iter = 500
+bootstrap_replicates = 200
+
+features = [
+  "ret_1obs_adj", "ret_5obs_adj", "ret_20obs_adj", "log_ret_1obs_adj",
+  "log_ret_20obs_adj", "close_to_open_1obs_adj", "open_gap_1obs_adj",
+  "close_to_mean_20obs_adj", "close_to_max_20obs_adj", "log1p_volume_adj",
+  "volume_ratio_median_20obs_adj", "turnover_1obs_adj", "turnover_median_20obs_adj",
+  "rv_20obs_adj", "true_range_1obs_adj", "atr_mean_20obs_adj",
+  "amihud_mean_20obs_adj", "stale_close_run_length",
+  "unchanged_close_fraction_20obs", "days_since_previous_observation",
+  "strict_high_below_low_flag", "missing_volume_flag", "zero_volume_flag",
+  "ret_20obs_rank_adj", "turnover_rank_adj", "market_median_ret_1obs_adj",
+  "eligible_symbol_count"
+]
+
+regression_targets = ["fwd_open_to_close_ret_5s_adj", "fwd_open_to_close_ret_10s_adj", "fwd_open_to_close_ret_20s_adj"]
+classification_targets = ["up_5s", "up_10s", "up_20s"]
