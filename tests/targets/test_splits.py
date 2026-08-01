@@ -21,3 +21,18 @@ def test_split_assignment_invariant_to_input_order(target_rows,tmp_path):
     rev=targets.take(pa.array(list(reversed(range(targets.num_rows))))); b,_=generate_assignments(rev,cal,sconfig(tmp_path),1)
     key=lambda r:(r["trade_date"],r["symbol"],r["fold_id"],r["split_role"])
     assert sorted(map(key,a.to_pylist()))==sorted(map(key,b.to_pylist()))
+
+
+def test_rows_after_final_boundary_do_not_change_earlier_assignments(target_rows,tmp_path):
+    targets,_,cal=generate_targets(*tables(target_rows),tconfig(tmp_path)); base,_=generate_assignments(targets,cal,sconfig(tmp_path),1)
+    import pyarrow as pa, numpy as np
+    extra={name:[None] for name in targets.column_names}
+    for name in targets.column_names:
+        if name=="trade_date": extra[name]=["2024-01-16"]
+        elif name=="symbol": extra[name]=["A"]
+        elif name=="point_in_time_eligible": extra[name]=[True]
+    appended=pa.concat_tables([targets,pa.table({name:pa.array(extra[name],type=targets.schema.field(name).type) for name in targets.column_names})])
+    extended,_=generate_assignments(appended,np.append(cal,"2024-01-16"),sconfig(tmp_path),1)
+    key=lambda r:(r["trade_date"],r["symbol"],r["fold_id"])
+    old={key(r):r["split_role"] for r in base.to_pylist()}; new={key(r):r["split_role"] for r in extended.to_pylist()}
+    assert all(new[k]==v for k,v in old.items())

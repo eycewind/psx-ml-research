@@ -53,3 +53,15 @@ def test_pit_ranks_same_date_ties_and_ineligible_null(tmp_path):
     a=next(r for r in last if r["symbol"]=="A"); b=next(r for r in last if r["symbol"]=="B"); c=next(r for r in last if r["symbol"]=="C")
     assert a["fwd_ret_5s_rank"]==b["fwd_ret_5s_rank"]==0.5
     assert c["fwd_ret_5s_rank"] is None
+
+
+def test_other_symbol_history_and_outside_range_columns_do_not_change_target(target_rows,tmp_path):
+    features,daily=tables(target_rows); base,_,_=generate_targets(features,daily,tconfig(tmp_path)); expected=keyed(base)[(DATES[0],"A")]["fwd_open_to_close_ret_5s_adj"]
+    # High/low columns include outside-range close values but are not target validity inputs.
+    import pyarrow as pa
+    daily=daily.append_column("high_adj",pa.array([1.0]*daily.num_rows)).append_column("low_adj",pa.array([0.5]*daily.num_rows))
+    extra=[daily_row(d,"Z",999,1000,False) for d in DATES]
+    ef,ed=tables(target_rows+extra)
+    ed=ed.append_column("high_adj",pa.array([1.0]*ed.num_rows)).append_column("low_adj",pa.array([0.5]*ed.num_rows))
+    changed,_,_=generate_targets(ef,ed,tconfig(tmp_path))
+    assert keyed(changed)[(DATES[0],"A")]["fwd_open_to_close_ret_5s_adj"]==expected
