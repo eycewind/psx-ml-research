@@ -35,6 +35,8 @@ def test_membership_is_pit_and_target_prediction_independent():
     classes=pa.Table.from_pylist([{"symbol":"A","effective_from":"2024-01-01","effective_to":"2024-01-02","instrument_type":"ordinary_equity"}])
     out=membership_rows(source,pit,classes,{"equity":{"instrument_types":["ordinary_equity"]}}).to_pylist()
     assert [x["eligible"] for x in out]==[False,True] and out[0]["exclusion_reason"]=="liquidity_exclusion"
+    changed=source.append_column("target",pa.array([999.0,-999.0])).append_column("residual",pa.array([1e9,-1e9]))
+    assert membership_rows(changed,pit,classes,{"equity":{"instrument_types":["ordinary_equity"]}}).to_pylist()==out
 
 def test_robust_metrics_hand_values_and_daily_minimum():
     m=regression_robust([0,1,10],[0,2,0],trim_fraction=1/3,huber_delta=1)
