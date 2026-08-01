@@ -1,4 +1,11 @@
 {
+  "c7_universe_recommendation": {
+    "basis": "Structural PSX-master instrument-family exclusion with broad coverage and materially lower non-equity loss concentration; weak correlations, rank IC, and classification metrics mean lower RMSE is not the justification.",
+    "limitation": "The 2026-08-01 master used historically is an explicit backcast; absent historical symbols use observed-sector evidence then low-confidence fallback rules.",
+    "recommended": true,
+    "universe": "pit_liquid_ordinary_equity_v1",
+    "version": 1
+  },
   "class_interval_counts": {
     "ETF": 11,
     "REIT": 6,
@@ -114,7 +121,7 @@
     "review_queue_symbols": 785
   },
   "code": {
-    "commit": "ec419db11db53b3d7fd2a41ab389bf6112beeddb",
+    "commit": "da388fe8e515d65ba5f2cbc41fe95f8d8c4b2854",
     "dirty": true
   },
   "eligible_row_counts": {
@@ -122,7 +129,7 @@
     "pit_liquid_equity_like_v1": 302675,
     "pit_liquid_ordinary_equity_v1": 300808
   },
-  "generated_at_utc": "2026-08-01T09:18:17.888591+00:00",
+  "generated_at_utc": "2026-08-01T10:02:09.757197+00:00",
   "holdout_accessed": false,
   "inputs": {
     "daily_ohlcv": {
@@ -148,6 +155,18 @@
       "path": "/home/hassan/psx-ml-research/data/processed/universe/c6_instrument_classification.parquet",
       "rows": 859
     },
+    "extreme_rows": {
+      "file_sha256": "74fc6560c1d41fbbc6ef763837a4da4fa44cbc0b494703ac1b50501384b76cf1",
+      "logical_sha256": "c9c0f2f139bf4605f40fc837ecf06878f818cf89f0895fde62c0f745e48ce145",
+      "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c6_extreme_rows.parquet",
+      "rows": 1084
+    },
+    "loss_concentration": {
+      "file_sha256": "547ff8a9a0f75a7ecacba4ee08f3a846f85801273509b77cbd4b1031d91d0825",
+      "logical_sha256": "50977c8451f440cf0e79f3b05dcf506e872d2b035497a19df167076e23cad6d7",
+      "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c6_loss_concentration.parquet",
+      "rows": 30195
+    },
     "manual_review_queue": {
       "file_sha256": "205f23a27f76181d38a03d58cfbad6bc6fa9eba7a25d4e579be49529f28fef1f",
       "path": "/home/hassan/psx-ml-research/artifacts/reports/C6_MANUAL_REVIEW_QUEUE.csv",
@@ -158,6 +177,12 @@
       "logical_sha256": "b974b66fa1fe412966d3c34b745ec4c015d6e748962d9d0998cbb2f74b6beff4",
       "path": "/home/hassan/psx-ml-research/data/processed/universe/c6_universe_membership.parquet",
       "rows": 1865382
+    },
+    "robust_metrics": {
+      "file_sha256": "cf8cbb48a03b439a7bf8ca379e4453a526ed20e45961d56567d859f8c9bf3049",
+      "logical_sha256": "87460168cb7d30235874ebfe546bc0a19ef37267078473419c7592007b8f4309",
+      "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c6_robust_metrics.parquet",
+      "rows": 294
     },
     "rule_conflicts": {
       "file_sha256": "7f920c0ab9e7fe06de5af61847d6d22d330e94720ff71e2be8012327498cc361",
@@ -171,6 +196,26 @@
       "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c6_sector_classification_audit.parquet",
       "rows": 98
     }
+  },
+  "robust_evaluation": {
+    "c5_prediction_sha256": "19158674ccaa614496cf8c507603c59848d27b4ef834bc4f09639a6c340ee381",
+    "daily_ic_minimum": 10,
+    "final_holdout_accessed": false,
+    "huber_delta": 0.1,
+    "models": {
+      "classification": [
+        "logistic_fixed_c_1",
+        "training_prevalence_baseline",
+        "majority_class_baseline"
+      ],
+      "regression": [
+        "ridge_fixed_alpha_1",
+        "zero_return_baseline",
+        "training_mean_baseline"
+      ]
+    },
+    "stored_predictions_only": true,
+    "trim_fraction": 0.01
   },
   "stage": "classification_and_universe_foundation",
   "taxonomy": {
