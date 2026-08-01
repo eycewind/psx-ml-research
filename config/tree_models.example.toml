@@ -1,0 +1,85 @@
+[input]
+labelled_path = "data/processed/targets/daily_feature_targets.parquet"
+split_path = "data/processed/datasets/temporal_split_assignments.parquet"
+universe_path = "data/processed/universe/c6_universe_membership.parquet"
+c5_predictions_path = "artifacts/predictions/c5/validation_predictions.parquet"
+c2_manifest_path = "artifacts/reports/C2_ENVIRONMENT_MANIFEST.json"
+c3_manifest_path = "artifacts/reports/C3_FEATURE_MANIFEST.json"
+c4_manifest_path = "artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json"
+c6_manifest_path = "artifacts/reports/C6_MANIFEST.json"
+
+[output]
+predictions_path = "artifacts/predictions/c7/validation_predictions.parquet"
+importance_path = "artifacts/models/c7/feature_importance.parquet"
+manifest_path = "artifacts/models/c7/MODEL_MANIFEST.json"
+model_report_path = "artifacts/reports/C7_MODEL_REPORT.md"
+importance_report_path = "artifacts/reports/C7_FEATURE_IMPORTANCE_REPORT.md"
+runtime_report_path = "artifacts/reports/C7_RUNTIME_REPORT.md"
+
+[model_set]
+name = "gradient_boosted_trees_v1"
+version = 1
+seed = 42
+threads = 1
+canonical_universe = "pit_liquid_ordinary_equity_v1"
+bootstrap_replicates = 200
+permutation_sample_rows = 10000
+hist_max_iter = 150
+boosting_max_rounds = 500
+early_stopping_rounds = 30
+inner_validation_fraction = 0.15
+features = [
+  "ret_1obs_adj", "ret_5obs_adj", "ret_20obs_adj", "log_ret_1obs_adj",
+  "log_ret_20obs_adj", "close_to_open_1obs_adj", "open_gap_1obs_adj",
+  "close_to_mean_20obs_adj", "close_to_max_20obs_adj", "log1p_volume_adj",
+  "volume_ratio_median_20obs_adj", "turnover_1obs_adj", "turnover_median_20obs_adj",
+  "rv_20obs_adj", "true_range_1obs_adj", "atr_mean_20obs_adj",
+  "amihud_mean_20obs_adj", "stale_close_run_length",
+  "unchanged_close_fraction_20obs", "days_since_previous_observation",
+  "strict_high_below_low_flag", "missing_volume_flag", "zero_volume_flag",
+  "ret_20obs_rank_adj", "turnover_rank_adj", "market_median_ret_1obs_adj",
+  "eligible_symbol_count"
+]
+regression_targets = ["fwd_open_to_close_ret_5s_adj", "fwd_open_to_close_ret_10s_adj", "fwd_open_to_close_ret_20s_adj"]
+classification_targets = ["up_5s", "up_10s", "up_20s"]
+
+[[model_set.lightgbm_candidates]]
+name = "conservative"
+learning_rate = 0.03
+num_leaves = 15
+max_depth = 4
+min_child_samples = 100
+feature_fraction = 0.9
+bagging_fraction = 0.9
+reg_alpha = 0.1
+reg_lambda = 10.0
+max_bin = 255
+
+[[model_set.lightgbm_candidates]]
+name = "moderate"
+learning_rate = 0.03
+num_leaves = 31
+max_depth = 8
+min_child_samples = 100
+feature_fraction = 0.9
+bagging_fraction = 0.9
+reg_alpha = 0.1
+reg_lambda = 10.0
+max_bin = 255
+
+[model_set.hist_default]
+learning_rate = 0.05
+max_leaf_nodes = 31
+max_depth = 8
+min_samples_leaf = 100
+l2_regularization = 10.0
+
+[model_set.xgboost_default]
+learning_rate = 0.03
+max_depth = 5
+min_child_weight = 20
+subsample = 0.9
+colsample_bytree = 0.9
+reg_alpha = 0.1
+reg_lambda = 10.0
+max_bin = 256
