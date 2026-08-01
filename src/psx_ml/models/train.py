@@ -32,20 +32,23 @@ def evaluate(labelled,splits,config):
     tasks=[("regression",t) for t in config.regression_targets]+[("classification",t) for t in config.classification_targets]
     for kind,target in tasks:
         yall=np.asarray(labelled[target].to_numpy(zero_copy_only=False),dtype=float); grid=config.ridge_alphas if kind=="regression" else config.logistic_cs
-        grid_scores=defaultdict(list); fold_cache={}
+        grid_scores=defaultdict(list); fold_grid_scores={}; fold_cache={}
         for fold,role in roles.items():
             tr=(role=="train")&eligible&np.isfinite(yall); va=(role=="validation")&eligible&np.isfinite(yall)
             pre=TrainOnlyPreprocessor().fit(xall[tr]); xt,xv=pre.transform(xall[tr]),pre.transform(xall[va]); yt,yv=yall[tr],yall[va]
             fold_cache[fold]=(tr,va,pre,xt,xv,yt,yv); preprocessing[f"{target}:{fold}"]=pre.state(config.features)
+            fold_grid_scores[fold]={}
             for hp in grid:
                 model,w=(fit_ridge(xt,yt,hp) if kind=="regression" else fit_logistic(xt,yt,hp,config.logistic_max_iter,config.seed))
                 p=model.predict(xv) if kind=="regression" else model.predict_proba(xv)[:,1]
                 score=regression_metrics(yv,p)["rmse"] if kind=="regression" else classification_metrics(yv,p)["log_loss"]
-                grid_scores[float(hp)].append(score); warnings_out[f"{target}:{fold}:{hp}"]=w
-        chosen=min(grid,key=lambda hp:(np.mean(grid_scores[float(hp)]),hp)); selected[target]={"parameter":"alpha" if kind=="regression" else "C","value":float(chosen),"validation_scores":{str(k):v for k,v in grid_scores.items()}}
+                grid_scores[float(hp)].append(score); fold_grid_scores[fold][float(hp)]=score; warnings_out[f"{target}:{fold}:{hp}"]=w
+        chosen_by_fold={fold:min(grid,key=lambda hp:(scores[float(hp)],hp)) for fold,scores in fold_grid_scores.items()}
+        selected[target]={"parameter":"alpha" if kind=="regression" else "C","by_fold":{fold:float(v) for fold,v in chosen_by_fold.items()},
+          "validation_scores_by_fold":{fold:{str(k):v for k,v in scores.items()} for fold,scores in fold_grid_scores.items()},"mean_grid_scores":{str(k):float(np.mean(v)) for k,v in grid_scores.items()}}
         for fold,(tr,va,pre,xt,xv,yt,yv) in fold_cache.items():
             base=regression_baselines(yt,len(yv)) if kind=="regression" else classification_baselines(yt,len(yv))
-            fixed=1.0
+            fixed=1.0; chosen=chosen_by_fold[fold]
             fitted=[]
             for model_name,hp in (("ridge_fixed_alpha_1" if kind=="regression" else "logistic_fixed_c_1",fixed),("ridge_selected" if kind=="regression" else "logistic_selected",chosen)):
                 model,w=(fit_ridge(xt,yt,hp) if kind=="regression" else fit_logistic(xt,yt,hp,config.logistic_max_iter,config.seed))

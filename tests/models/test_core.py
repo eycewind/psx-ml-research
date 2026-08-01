@@ -7,6 +7,8 @@ from psx_ml.models.linear import fit_logistic,fit_ridge
 from psx_ml.models.metrics import classification_metrics,date_block_interval,regression_metrics
 from psx_ml.models.preprocessing import TrainOnlyPreprocessor
 from psx_ml.models.validation import HoldoutLockedError,require_holdout_access
+from psx_ml.models.pipeline import _coef_summary
+import pyarrow as pa
 
 def test_train_only_preprocessing_ignores_validation_outlier_and_order():
     train=np.array([[1.,np.nan,5.],[3.,2.,5.],[2.,4.,5.]])
@@ -34,3 +36,7 @@ def test_holdout_lock_and_block_bootstrap():
     with pytest.raises(HoldoutLockedError): require_holdout_access(False)
     require_holdout_access(True)
     a=date_block_interval(["a","a","b","b"],[1,2,3,4],42,20); b=date_block_interval(["a","a","b","b"],[1,2,3,4],42,20); assert a==b
+
+def test_coefficient_sign_consistency():
+    t=pa.Table.from_pylist([{"target_name":"y","model_name":"ridge_selected","feature":"x","standardized_coefficient":1.0},{"target_name":"y","model_name":"ridge_selected","feature":"x","standardized_coefficient":-2.0},{"target_name":"y","model_name":"ridge_selected","feature":"x","standardized_coefficient":3.0}])
+    s=_coef_summary(t)["y:ridge_selected:x"]; assert s["fold_mean"]==pytest.approx(2/3) and s["sign_consistency"]==pytest.approx(2/3)
