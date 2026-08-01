@@ -13,6 +13,7 @@ dependencies = ["numpy>=2,<3", "pyarrow>=16,<22"]
 dev = ["pytest>=8,<10"]
 ml = ["torch>=2.8"]
 models = ["scikit-learn>=1.5,<2"]
+trees = ["scikit-learn>=1.5,<2", "lightgbm>=4.5,<5", "xgboost>=3,<4"]
 
 [project.scripts]
 psx-c1 = "psx_ml.cli:main"
@@ -22,6 +23,7 @@ psx-c4-dataset = "psx_ml.targets.pipeline:main"
 psx-c5-linear = "psx_ml.models.pipeline:main"
 psx-c6-universe = "psx_ml.instruments.pipeline:main"
 psx-security-master = "psx_ml.instruments.security_master:main"
+psx-c7-trees = "psx_ml.tree_models.pipeline:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
