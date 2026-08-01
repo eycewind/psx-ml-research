@@ -1,0 +1,36 @@
+{
+  "endpoints": [
+    "/listings-table/main/nc",
+    "/listings-table/main/dc",
+    "/listings-table/gem/nc",
+    "/listings-table/gem/dc",
+    "/eligible-scrips",
+    "/debt-market",
+    "/company/<symbol>",
+    "/etf/<symbol>",
+    "/debt/<symbol>"
+  ],
+  "historical_semantics": "Current snapshot only; must not be projected backward as authoritative classification.",
+  "raw_response_sha256": {
+    "debt-market.html": "422bfc6920bb2eee58fd3a45cf8c67fec4ff7203b8331cd9e786df39e4df9516",
+    "eligible-scrips.html": "f55851c005eeef00ae56ec9e028a3bedf7a432a05863c74f922b6e82047b6901",
+    "listings-table-gem-dc.html": "2d899a13f7eddb2bcd4903f0ae041922d6498c739876e84a77029f08103d0140",
+    "listings-table-gem-nc.html": "77327451cadfe6398ed0282c1bd485ab0e5a246cbfe28a7150075cc6117836d8",
+    "listings-table-main-dc.html": "b7d3c5d05080abe99370f1106123a48aa934fc8eaf822d1c4d37ee7266c8e525",
+    "listings-table-main-nc.html": "b6dcb8bb892e635e15b2ccc1bf4c439656e7abc0d1a99fece1e63aba3e600417"
+  },
+  "rows": 1387,
+  "schema": [
+    "symbol",
+    "security_name",
+    "instrument_family",
+    "board",
+    "listing_status",
+    "sector",
+    "eligible_scrip_categories",
+    "source_page",
+    "snapshot_date"
+  ],
+  "snapshot_date": "2026-08-01",
+  "source_base": "https://dps.psx.com.pk"
+}
