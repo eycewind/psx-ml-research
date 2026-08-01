@@ -1,45 +1,53 @@
-# C7 Delivery and Acceptance Report
+# C7 Corrective Delivery and Acceptance Report
 
-## Outcome
+## Correction outcome
 
-C7 implemented and executed the locked walk-forward evaluation on
-`pit_liquid_ordinary_equity_v1`. The 2026 final holdout was not accessed.
+The earlier LightGBM daily-IC `NaN` values came from a legacy helper admitting
+undefined same-date Spearman correlations and ordinary fold means propagating
+those non-finite values. C7 now checks population, target variation, prediction
+variation, and correlation finiteness separately. Undefined IC is excluded from
+IC statistics and is never coerced to zero. Each reason and eligible-date count
+is retained in the manifest and model report.
 
-The nonlinear models show weak predictive structure, but not a sufficiently
-stable practical result. XGBoost produced the strongest ranking diagnostics at
-5 and 10 sessions; performance weakened materially at 20 sessions. The primary
-LightGBM configuration often stopped after very few rounds and did not establish
-stable superiority to naive baselines. No profitability claim is made.
+## Finite LightGBM IC dates
 
-## Delivered
+The model report contains the complete task/model/fold table, including Hist,
+XGBoost and baselines. Canonical LightGBM finite/eligible counts are:
 
-- HistGradientBoosting CPU regression and classification reference models.
-- Deterministic LightGBM CPU models with chronological train-internal early
-  stopping and sequential walk-forward candidate selection.
-- Independent XGBoost CUDA verification on the RTX 5070 Laptop GPU.
-- Frozen ordered 27-feature C3 allowlist and native missing-value handling.
-- C5 fixed baselines re-evaluated on the canonical C7 universe.
-- Per-fold robust regression, ranking, classification, calibration, date-block
-  uncertainty, feature-importance, and runtime evidence.
-- Deterministically sorted validation predictions and feature importance.
+| Target | 2023 | 2024 | 2025 |
+|---|---:|---:|---:|
+| 5-session regression | 182/246 | 246/246 | 67/250 |
+| 10-session regression | 185/246 | 246/246 | 218/250 |
+| 20-session regression | 120/246 | 246/246 | 250/250 |
 
-## Acceptance evidence
+Constant naive predictions correctly have zero finite IC dates. Undefined dates
+remain visible through `constant_prediction_date_count`,
+`constant_target_date_count`, and `nonfinite_ic_date_count`.
 
-- Focused tests: `5 passed`.
-- Validation prediction rows: `5,324,172`.
-- Validation dates: `742`; symbols: `367`.
-- Feature-importance rows: `972`.
-- `holdout_accessed = false` in the manifest.
-- LightGBM fold 2024 uses only 2023 selection evidence; fold 2025 uses only
-  2023–2024 evidence. Current outer validation is never early-stopping data.
-- XGBoost executed with `tree_method=hist`, `device=cuda`.
+## One-round diagnosis
 
-## Limitations and decision
+Every task/model/fold now records prediction/probability distribution statistics,
+rounded unique counts, a near-constant flag, best iteration, metric, best inner
+score, first score, and last evaluated iteration. Models selected at one or two
+rounds produced 6–294 unique rounded predictions and prediction standard
+deviations from 0.000789 to 0.00552. None was flagged constant or near-constant.
+The best score occurred at iteration 1–2 and evaluation continued through the
+30-round patience window. This supports legitimate inner-period regime or
+generalization failure rather than a constant-prediction pipeline defect.
 
-The C6 current-master historical-backcast limitation remains. Aggregate positive
-correlations alone do not establish stability: fold dispersion is meaningful,
-20-session results are weak, and classification loss generally does not improve
-on the prevalence baseline. C7 therefore does **not** establish a practical
-model and should not proceed directly to trading-rule or profitability claims.
+## Verification and provenance
 
-The final 2026 holdout remains locked for a later explicitly authorized stage.
+- CPU suite: `CUDA_VISIBLE_DEVICES="" python -m pytest -s` — 70 passed,
+  1 GPU test skipped.
+- C7 CUDA test: 1 passed on the RTX 5070 Laptop GPU.
+- Regenerated validation rows: 5,324,172.
+- Generation commit: `8b229d62a6b7eba15eee12ee3ebb5d8ee5eb529f`.
+- Generation manifest: `dirty = false`, `holdout_accessed = false`.
+
+## Decision
+
+The correction improves the accuracy and auditability of daily-IC reporting but
+does not change the C7 conclusion. Nonlinear predictive structure remains weak
+and unstable, classification loss generally does not improve on prevalence, and
+C7 does not establish a practical model or profitability result. The 2026 final
+holdout remains locked.
