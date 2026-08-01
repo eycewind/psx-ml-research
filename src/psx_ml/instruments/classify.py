@@ -14,11 +14,15 @@ def matching_rules(symbol: str, sector: str, config: dict) -> list[tuple[str,str
     manual={x["symbol"]:x for x in config.get("manual_mappings",())}
     if symbol in manual:
         row=manual[symbol]; matches.append((validate_type(row["instrument_type"]),"manual_mapping",row.get("confidence","high"),f"manual_mapping:{symbol}"))
-    if _GOVERNMENT.search(symbol): matches.append(("government_security","ticker_heuristic","low","ticker_regex:government_security"))
+    master=config.get("security_master",{}); present=symbol in master
+    if present:
+        family=master[symbol].get("instrument_family","unknown"); mapped=family if family in {"ordinary_equity","preference_share","ETF","REIT","debt_security","government_security","sukuk","right_or_entitlement"} else "unknown"
+        matches.append((mapped,"psx_security_master_snapshot","current_snapshot",f"psx_master:2026-08-01:{family}"))
     if sector in config.get("sector_rules",{}): matches.append((validate_type(config["sector_rules"][sector]),"observed_sector_rule","low",f"sector_exact:{sector}"))
-    if symbol.endswith("ETF"): matches.append(("ETF","ticker_heuristic","low","ticker_suffix:ETF"))
-    if _DEBT.search(symbol): matches.append(("debt_security","ticker_heuristic","low","ticker_regex:debt_security"))
-    if _RIGHT.search(symbol): matches.append(("right_or_entitlement","ticker_heuristic","low","ticker_regex:right_or_entitlement"))
+    if not present and _GOVERNMENT.search(symbol): matches.append(("government_security","ticker_heuristic_historical_fallback","low","ticker_regex:government_security"))
+    if not present and symbol.endswith("ETF"): matches.append(("ETF","ticker_heuristic_historical_fallback","low","ticker_suffix:ETF"))
+    if not present and _DEBT.search(symbol): matches.append(("debt_security","ticker_heuristic_historical_fallback","low","ticker_regex:debt_security"))
+    if not present and _RIGHT.search(symbol): matches.append(("right_or_entitlement","ticker_heuristic_historical_fallback","low","ticker_regex:right_or_entitlement"))
     if sector.startswith(config.get("ordinary_equity_sector_prefix","08")):
         if symbol.endswith(("PS","CPS")): matches.append(("preference_share","ticker_heuristic","low","sector_prefix:08+preference_suffix"))
         matches.append(("ordinary_equity","sector_prefix_inference","low","sector_prefix:08"))

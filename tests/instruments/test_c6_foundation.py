@@ -13,6 +13,12 @@ def test_priority_unknown_and_heuristic_provenance():
     assert classify_observation("ABCETF","0837",CFG)==("ETF","observed_sector_rule","low","sector_exact:0837")
     assert classify_observation("ABC","",CFG)==("unknown","insufficient_metadata","unknown","no_rule_matched")
 
+def test_psx_master_precedes_patterns_and_regex_is_absent_master_fallback_only():
+    cfg={**CFG,"security_master":{"HCAR":{"instrument_family":"ordinary_equity"},"ABCETF":{"instrument_family":"ETF"}}}
+    assert classify_observation("HCAR","0801",cfg)==("ordinary_equity","psx_security_master_snapshot","current_snapshot","psx_master:2026-08-01:ordinary_equity")
+    assert classify_observation("ABCETF","0837",cfg)==("ETF","psx_security_master_snapshot","current_snapshot","psx_master:2026-08-01:ETF")
+    assert classify_observation("OLDTFC1","",cfg)[1:]==("ticker_heuristic_historical_fallback","low","ticker_regex:debt_security")
+
 def test_intervals_order_invariant_and_nonoverlap():
     rows=[{"trade_date":"2024-01-01","symbol":"A","sector":"0801"},{"trade_date":"2024-01-02","symbol":"A","sector":"36"}]
     a=classify_intervals(pa.Table.from_pylist(rows),CFG); b=classify_intervals(pa.Table.from_pylist(rows[::-1]),CFG)
