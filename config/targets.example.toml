@@ -1,0 +1,20 @@
+[input]
+feature_path = "data/processed/features/daily_features.parquet"
+feature_manifest_path = "artifacts/reports/C3_FEATURE_MANIFEST.json"
+daily_path = "data/cache/daily_ohlcv.parquet"
+c1_manifest_path = "artifacts/reports/C1_MANIFEST.json"
+
+[output]
+labelled_path = "data/processed/targets/daily_feature_targets.parquet"
+target_manifest_path = "data/processed/targets/TARGET_MANIFEST.json"
+
+[targets]
+name = "next_session_open_to_future_close"
+version = 1
+price_family = "adjusted"
+horizons = [1, 5, 10, 20]
+classification_horizons = [5, 10, 20]
+rank_horizons = [5, 20]
+minimum_rank_population = 20
+primary_horizon = 20
+
