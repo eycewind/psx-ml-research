@@ -1,34 +1,34 @@
-# C6 Classification Correction Delivery
+# C6 Security-Master Direction Delivery
 
 ## Status
 
-The classification traceability correction is complete. Remaining C6 robust evaluation work is not represented as complete by this report.
+The classification evidence direction now uses a dated PSX master first. Remaining C6 robust evaluation work is not represented as complete by this report.
 
 ## Changes
 
-- Added exact `classification_rule` provenance to every classification interval.
-- Audited counts by type, source, confidence, rule, and observed sector.
-- Added deterministic sector and competing-rule Parquet diagnostics.
-- Added a targeted manual-review queue using structural flags, fixed C5 loss concentration, and development-period extreme targets.
-- Preserved classifier precedence and universe membership pending stronger evidence.
+- Inspected the live Listings, Eligible Scrips, Fixed Income, company, ETF, and debt routes and recorded their endpoints.
+- Added the versioned `psx_security_master_2026-08-01.parquet` snapshot and response-hash provenance.
+- Made the PSX snapshot the primary classification evidence after explicit manual mappings.
+- Restricted ticker regexes to historical symbols absent from the current PSX master.
+- Retained exact rule/conflict traceability and the targeted review queue.
 
 ## Snapshot findings
 
-- Generic low-confidence `sector_prefix:08`: 584 intervals.
-- Exact sector mappings: 63 intervals.
+- Master-backed classification intervals: 623.
+- Historical ticker-fallback intervals: 76.
+- Generic low-confidence `sector_prefix:08`: 87 intervals.
 - Unknown intervals: 0.
-- Competing-rule intervals: 271.
-- Manual-review symbols: 591.
-- Review reasons: `{"classification_rule_conflict": 269, "extreme_c4_target": 350, "multiple_classification_intervals": 33, "short_interval_or_maturity_like_ticker": 144, "special_security_entered_pit_universe": 24, "top_c5_squared_loss": 16, "unusual_prefix_inferred_equity": 35}`.
+- Competing-rule intervals: 769.
+- Manual-review symbols: 785.
 
-Zero unknowns arise because every otherwise unmatched interval in this snapshot has an observed sector beginning with `08`; zero does not imply authoritative coverage.
+The master is a 2026-08-01 current-state snapshot. Any historical assignment based on it is labeled as a backcast, not contemporaneous PIT evidence.
 
-The C5 negative linear conclusion is unchanged. No robust-metric reinterpretation, profitability analysis, nonlinear model, signal, portfolio, execution, or backtest is introduced by this correction.
+The C5 negative linear conclusion is unchanged. No profitability analysis, nonlinear model, signal, portfolio, execution, or backtest is introduced.
 
 ## Verification
 
-- Complete CPU-only suite with CUDA hidden: **57 passed, 1 expected GPU skip in 9.01 seconds**.
-- Two consecutive live correction runs reproduced the same logical hashes recorded in `C6_MANIFEST.json`.
+- Complete CPU-only suite with CUDA hidden: **60 passed, 1 expected GPU skip in 8.51 seconds**.
+- Two consecutive master-first runs reproduced the logical hashes in `C6_MANIFEST.json`.
 - Final holdout accessed: **false**.
 - Production DB SHA-256: `e35f224284481ab00650d6f65e495f79318f7580f340ebd6bf23fd3f08aeb67b`.
 - Watcher HEAD: `404e3637637ca89d4455b9f7069c6191a3658d83`; porcelain status empty.

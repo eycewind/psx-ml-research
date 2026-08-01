@@ -9,8 +9,8 @@ Adding classification-rule traceability and conflict diagnostics did not alter m
 ```json
 {
   "pit_liquid_all_instruments_v1": 305267,
-  "pit_liquid_equity_like_v1": 294339,
-  "pit_liquid_ordinary_equity_v1": 292357
+  "pit_liquid_equity_like_v1": 302675,
+  "pit_liquid_ordinary_equity_v1": 300808
 }
 ```
 
