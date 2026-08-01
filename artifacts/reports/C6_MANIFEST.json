@@ -121,15 +121,15 @@
     "review_queue_symbols": 785
   },
   "code": {
-    "commit": "da388fe8e515d65ba5f2cbc41fe95f8d8c4b2854",
-    "dirty": true
+    "commit": "c520fde2dd89b8d24165b36450b8c349ac1ad56b",
+    "dirty": false
   },
   "eligible_row_counts": {
     "pit_liquid_all_instruments_v1": 305267,
     "pit_liquid_equity_like_v1": 302675,
     "pit_liquid_ordinary_equity_v1": 300808
   },
-  "generated_at_utc": "2026-08-01T10:02:09.757197+00:00",
+  "generated_at_utc": "2026-08-01T10:05:16.078042+00:00",
   "holdout_accessed": false,
   "inputs": {
     "daily_ohlcv": {
