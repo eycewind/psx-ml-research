@@ -25,3 +25,5 @@ artifacts/reports/*.parquet
 *.pth
 *.ckpt
 *:Zone.Identifier
+
+*:Zone.Identifier
