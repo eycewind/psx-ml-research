@@ -2,6 +2,8 @@
 
 All variants require the unchanged same-date C1 PIT liquidity flag. Classification exclusions are separate from liquidity and history exclusions; targets, predictions, returns, and residuals are not inputs.
 
+Adding classification-rule traceability and conflict diagnostics did not alter membership: the rules and precedence are unchanged pending manual evidence.
+
 ## Eligible row counts
 
 ```json
