@@ -16,6 +16,7 @@ ml = ["torch>=2.8"]
 [project.scripts]
 psx-c1 = "psx_ml.cli:main"
 psx-ml-env-report = "psx_ml.runtime.diagnostics:main"
+psx-c3-features = "psx_ml.features.pipeline:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

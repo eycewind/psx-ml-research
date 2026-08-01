@@ -1,0 +1,26 @@
+[input]
+daily_path = "data/cache/daily_ohlcv.parquet"
+universe_path = "data/cache/point_in_time_universe.parquet"
+manifest_path = "artifacts/reports/C1_MANIFEST.json"
+
+[output]
+feature_path = "data/processed/features/daily_features.parquet"
+manifest_path = "data/processed/features/FEATURE_MANIFEST.json"
+report_path = "artifacts/reports/C3_FEATURE_REPORT.md"
+
+[fields]
+price_family = "adjusted"
+volume_family = "adjusted"
+
+[windows]
+returns = [1, 5, 20]
+rolling = [5, 20, 60]
+
+[quality]
+minimum_history = 20
+stale_run_threshold = 5
+minimum_cross_section_size = 20
+
+[execution]
+engine = "cpu"
+float_precision = "float64"
