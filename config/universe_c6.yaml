@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "variants": {
+    "pit_liquid_all_instruments_v1": {"requires_pit_liquid": true},
+    "pit_liquid_ordinary_equity_v1": {"requires_pit_liquid": true, "instrument_types": ["ordinary_equity"]},
+    "pit_liquid_equity_like_v1": {"requires_pit_liquid": true, "instrument_types": ["ordinary_equity", "preference_share", "REIT"]}
+  }
+}

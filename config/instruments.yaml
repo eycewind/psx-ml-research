@@ -1,0 +1,12 @@
+{
+  "taxonomy_version": 1,
+  "manual_mappings": [],
+  "sector_rules": {
+    "36": "debt_security",
+    "3610": "government_security",
+    "0836": "REIT",
+    "0837": "ETF"
+  },
+  "ordinary_equity_sector_prefix": "08",
+  "heuristics_version": 1
+}

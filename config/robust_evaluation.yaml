@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "canonical_regression_model": "ridge_fixed_alpha_1",
+  "canonical_classification_model": "logistic_fixed_c_1",
+  "trim_fraction": 0.01,
+  "huber_delta": 0.1,
+  "daily_ic_minimum": 10,
+  "prediction_quantiles": 5,
+  "extreme_absolute_returns": {"5": 0.50, "10": 0.75, "20": 1.00},
+  "low_price_threshold": 5.0
+}

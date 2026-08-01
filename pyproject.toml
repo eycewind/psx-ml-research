@@ -20,6 +20,7 @@ psx-ml-env-report = "psx_ml.runtime.diagnostics:main"
 psx-c3-features = "psx_ml.features.pipeline:main"
 psx-c4-dataset = "psx_ml.targets.pipeline:main"
 psx-c5-linear = "psx_ml.models.pipeline:main"
+psx-c6-universe = "psx_ml.instruments.pipeline:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
