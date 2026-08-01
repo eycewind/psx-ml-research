@@ -1,0 +1,99 @@
+{
+  "class_interval_counts": {
+    "ETF": 11,
+    "REIT": 6,
+    "debt_security": 50,
+    "government_security": 115,
+    "ordinary_equity": 584,
+    "preference_share": 11,
+    "right_or_entitlement": 82
+  },
+  "code": {
+    "commit": "5683847de80a2f5cb01958eca74d0bf86a650ca8",
+    "dirty": false
+  },
+  "eligible_row_counts": {
+    "pit_liquid_all_instruments_v1": 305267,
+    "pit_liquid_equity_like_v1": 294339,
+    "pit_liquid_ordinary_equity_v1": 292357
+  },
+  "generated_at_utc": "2026-08-01T08:20:12.790360+00:00",
+  "holdout_accessed": false,
+  "inputs": {
+    "daily_ohlcv": {
+      "file_sha256": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e",
+      "path": "/home/hassan/psx-ml-research/data/cache/daily_ohlcv.parquet"
+    },
+    "pit_universe": {
+      "file_sha256": "94c68a383681999749c1c50c6c98b075fc96c4b69d55999a4439273c34aa1eb7",
+      "path": "/home/hassan/psx-ml-research/data/cache/point_in_time_universe.parquet"
+    }
+  },
+  "manifest_version": 1,
+  "outputs": {
+    "classification": {
+      "file_sha256": "8481b54dcd3ed8effa6393218529f8d255d9054b475f84e6d1728790f705446c",
+      "logical_sha256": "b95ad681b4e518816f69fb3c272bca7b61dd7735e90ec182c55325e87b375943",
+      "path": "/home/hassan/psx-ml-research/data/processed/universe/c6_instrument_classification.parquet",
+      "rows": 859
+    },
+    "membership": {
+      "file_sha256": "ead39fbada8460661095f7a210b9ebed354e67c72568f57517a1e336d67ad70a",
+      "logical_sha256": "dd8a76b22cddeec5e60d1091730c999e24494404bbd659b18ec0e9f1258054a0",
+      "path": "/home/hassan/psx-ml-research/data/processed/universe/c6_universe_membership.parquet",
+      "rows": 1865382
+    }
+  },
+  "stage": "classification_and_universe_foundation",
+  "taxonomy": {
+    "classification_hierarchy": [
+      "manual_mapping",
+      "observed_sector_rule",
+      "ticker_heuristic",
+      "unknown"
+    ],
+    "config_sha256": "0977102b148dd47a833098e51afe67eac06669c005546d3c4b4918cc18efac02",
+    "definitions": {
+      "ETF": "Exchange-traded fund unit.",
+      "REIT": "Real-estate investment trust unit.",
+      "closed_end_fund": "Exchange-listed closed-end investment fund.",
+      "commercial_paper": "Short-term commercial paper.",
+      "debt_security": "Corporate debt or term-finance security.",
+      "government_security": "Government bill or bond.",
+      "index_or_non_security": "Index or non-security observation.",
+      "open_end_fund": "Open-end investment fund instrument.",
+      "ordinary_equity": "Residual ownership share that is not identified as a special instrument.",
+      "preference_share": "Share with documented preference terms.",
+      "right_or_entitlement": "Temporary subscription right or entitlement.",
+      "sukuk": "Shariah-compliant certificate identified as sukuk.",
+      "temporary_or_special_listing": "Temporary or otherwise special listing.",
+      "unknown": "Evidence is insufficient for a more specific class.",
+      "warrant_or_option": "Warrant, option, or similar derivative security."
+    },
+    "version": 1
+  },
+  "universe": {
+    "config_sha256": "2784bb84e861296b25d8057f3621eab628f469a256584744b0707b41c9adabdf",
+    "definitions": {
+      "pit_liquid_all_instruments_v1": {
+        "requires_pit_liquid": true
+      },
+      "pit_liquid_equity_like_v1": {
+        "instrument_types": [
+          "ordinary_equity",
+          "preference_share",
+          "REIT"
+        ],
+        "requires_pit_liquid": true
+      },
+      "pit_liquid_ordinary_equity_v1": {
+        "instrument_types": [
+          "ordinary_equity"
+        ],
+        "requires_pit_liquid": true
+      }
+    },
+    "version": 1
+  },
+  "unknown_intervals": 0
+}
