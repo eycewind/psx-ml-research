@@ -49,6 +49,7 @@ def test_agreement_ensemble_intersection_union():
 def test_concentration_bootstrap_and_empirical_p_value():
     assert np.isclose(herfindahl(["a","a","b","b"]),.5); c=concentration(rows()); assert c["selection_count"]==10 and np.isclose(c["symbol_herfindahl"],.1)
     a=moving_block_bootstrap([1,2,3,4,5],2,100,42); b=moving_block_bootstrap([1,2,3,4,5],2,100,42); assert a==b and a["estimate"]==3
+    short=moving_block_bootstrap([2],5,10,42); assert short["estimate"]==short["lower_95"]==short["upper_95"]==2
     assert empirical_p_value(3,[1,2,3,4])==.6
 
 def test_rank_persistence_and_changes_use_consecutive_sessions():
