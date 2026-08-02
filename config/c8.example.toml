@@ -1,0 +1,87 @@
+[input]
+targets_path = "data/processed/targets/daily_feature_targets.parquet"
+universe_path = "data/processed/universe/c6_universe_membership.parquet"
+split_path = "data/processed/datasets/temporal_split_assignments.parquet"
+security_master_path = "data/reference/psx_security_master_2026-08-01.parquet"
+c3_manifest_path = "artifacts/reports/C3_FEATURE_MANIFEST.json"
+c4_manifest_path = "artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json"
+c6_manifest_path = "artifacts/reports/C6_MANIFEST.json"
+c7_manifest_path = "artifacts/reports/C7_MODEL_MANIFEST.json"
+
+[target]
+horizons = [5, 10, 20]
+minimum_market_peers = 1
+minimum_sector_peers = 5
+relaxed_sector_peers = 3
+shrinkage_strength = 5.0
+shrinkage_rule = "w = valid_peer_count / (valid_peer_count + 5)"
+sector_minimum_policy = "peers_after_leave_one_out"
+rank_tie_break = "relative_return_then_symbol"
+
+[output]
+relative_targets_path = "data/processed/targets/c8_relative_targets.parquet"
+target_report_path = "artifacts/reports/C8_TARGET_REPORT.md"
+manifest_path = "artifacts/reports/C8_MANIFEST.json"
+sector_audit_path = "data/processed/diagnostics/c8_sector_target_exclusions.parquet"
+sector_coverage_path = "data/processed/diagnostics/c8_sector_target_coverage.parquet"
+sector_coverage_report_path = "artifacts/reports/C8_SECTOR_COVERAGE_REPORT.md"
+sector_sensitivity_path = "data/processed/diagnostics/c8_sector_threshold_sensitivity.parquet"
+sector_sensitivity_coverage_path = "data/processed/diagnostics/c8_sector_threshold_coverage.parquet"
+market_features_path = "data/processed/features/c8_market_context_features.parquet"
+sector_features_path = "data/processed/features/c8_sector_context_features.parquet"
+relative_features_path = "data/processed/features/c8_relative_features.parquet"
+feature_missingness_path = "data/processed/diagnostics/c8_feature_missingness_by_fold.parquet"
+feature_report_path = "artifacts/reports/C8_FEATURE_REPORT.md"
+predictions_path = "artifacts/predictions/c8/validation_predictions.parquet"
+models_root = "artifacts/models/c8"
+model_metrics_path = "data/processed/diagnostics/c8_model_metrics.parquet"
+daily_ic_path = "data/processed/diagnostics/c8_daily_ic.parquet"
+bucket_outcomes_path = "data/processed/diagnostics/c8_bucket_outcomes.parquet"
+subgroup_metrics_path = "data/processed/diagnostics/c8_subgroup_metrics.parquet"
+feature_importance_path = "data/processed/diagnostics/c8_feature_importance.parquet"
+training_diagnostics_path = "data/processed/diagnostics/c8_training_diagnostics.parquet"
+viewer_summary_path = "data/processed/diagnostics/c8_signal_viewer_summary.json"
+model_report_path = "artifacts/reports/C8_MODEL_REPORT.md"
+bucket_report_path = "artifacts/reports/C8_BUCKET_REPORT.md"
+ablation_report_path = "artifacts/reports/C8_ABLATION_REPORT.md"
+delivery_path = "artifacts/reports/C8_DELIVERY.md"
+
+[evaluation]
+seed = 42
+threads = 1
+bootstrap_replicates = 200
+inner_validation_fraction = 0.15
+early_stopping_rounds = 30
+boosting_max_rounds = 250
+hist_max_iter = 100
+horizons = [5, 10]
+minimum_daily_population = 10
+near_constant_std = 1e-10
+
+[evaluation.lightgbm]
+learning_rate = 0.03
+num_leaves = 15
+max_depth = 4
+min_child_samples = 100
+feature_fraction = 0.9
+bagging_fraction = 0.9
+reg_alpha = 0.1
+reg_lambda = 1.0
+max_bin = 127
+
+[evaluation.xgboost]
+learning_rate = 0.03
+max_depth = 3
+min_child_weight = 20
+subsample = 0.9
+colsample_bytree = 0.9
+reg_alpha = 0.1
+reg_lambda = 10.0
+max_bin = 128
+
+[evaluation.hist]
+learning_rate = 0.05
+max_leaf_nodes = 31
+max_depth = 4
+min_samples_leaf = 100
+l2_regularization = 1.0

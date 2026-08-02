@@ -24,6 +24,7 @@ psx-c5-linear = "psx_ml.models.pipeline:main"
 psx-c6-universe = "psx_ml.instruments.pipeline:main"
 psx-security-master = "psx_ml.instruments.security_master:main"
 psx-c7-trees = "psx_ml.tree_models.pipeline:main"
+psx-c8-context = "psx_ml.c8.pipeline:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
