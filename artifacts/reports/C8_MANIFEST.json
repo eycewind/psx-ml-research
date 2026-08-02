@@ -8,8 +8,8 @@
   "canonical_universe": "pit_liquid_ordinary_equity_v1",
   "code": {
     "branch": "feature/c8-market-relative-targets-and-context",
-    "commit": "3f8909fd631ebe6614250e08f7874532d7339a6b",
-    "dirty": true
+    "commit": "5643d5349763c626db0468fae31e4b4ceba75044",
+    "dirty": false
   },
   "counts": {
     "dates": 1448,
@@ -84,7 +84,7 @@
       "sector_realized_volatility_20obs"
     ]
   },
-  "generated_at_utc": "2026-08-02T09:21:20.649945+00:00",
+  "generated_at_utc": "2026-08-02T09:23:00.910832+00:00",
   "holdout_accessed": false,
   "inputs": {
     "c3_manifest_path": {
