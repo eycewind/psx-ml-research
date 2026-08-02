@@ -13,8 +13,8 @@
     "rank_prediction_rows": 2226020
   },
   "code": {
-    "commit": "268cabd6ef10e376a3f334b8f3dafe8bef1c3a9a",
-    "dirty": true
+    "commit": "23f4f239e4a568ae7b3b569ad63c7f16c2651c1d",
+    "dirty": false
   },
   "diagnostics": [
     {
@@ -23,7 +23,7 @@
       "device": "cpu",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.08449321227126648,
-      "fit_seconds": 1.0222808789999362,
+      "fit_seconds": 1.0233645610001076,
       "fold_id": "fold_2023",
       "horizon": 5,
       "inner_boundary": "2022-07-04",
@@ -40,7 +40,7 @@
       "device": "cuda",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.2906884293168145,
-      "fit_seconds": 0.49126473999990594,
+      "fit_seconds": 0.4676391150001109,
       "fold_id": "fold_2023",
       "horizon": 5,
       "inner_boundary": "2022-07-04",
@@ -57,7 +57,7 @@
       "device": "cpu",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.08447185496408978,
-      "fit_seconds": 0.6947982530000445,
+      "fit_seconds": 0.6905972729998666,
       "fold_id": "fold_2024",
       "horizon": 5,
       "inner_boundary": "2023-05-09",
@@ -74,7 +74,7 @@
       "device": "cuda",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.29064201970858683,
-      "fit_seconds": 0.7396749929998805,
+      "fit_seconds": 0.6544780409999476,
       "fold_id": "fold_2024",
       "horizon": 5,
       "inner_boundary": "2023-05-09",
@@ -91,7 +91,7 @@
       "device": "cpu",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.08416280747358348,
-      "fit_seconds": 1.0098803149999185,
+      "fit_seconds": 1.0304048340001373,
       "fold_id": "fold_2025",
       "horizon": 5,
       "inner_boundary": "2024-03-11",
@@ -108,7 +108,7 @@
       "device": "cuda",
       "feature_variant": "A_c7_only",
       "first_iteration_score": 0.2901149108995364,
-      "fit_seconds": 0.6269953529999839,
+      "fit_seconds": 0.7060265019999861,
       "fold_id": "fold_2025",
       "horizon": 5,
       "inner_boundary": "2024-03-11",
