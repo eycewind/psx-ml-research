@@ -2,13 +2,16 @@
   "benchmark_definitions": {
     "market": "same-date eligible ordinary-equity leave-one-out median",
     "minimum_sector_peers": 5,
+    "relaxed_sector_peers": 3,
     "sector": "same-date same-sector eligible ordinary-equity leave-one-out median",
-    "sector_minimum_policy": "peers_after_leave_one_out"
+    "sector_minimum_policy": "peers_after_leave_one_out",
+    "shrinkage_rule": "w = valid_peer_count / (valid_peer_count + 5)",
+    "shrinkage_strength": 5.0
   },
   "canonical_universe": "pit_liquid_ordinary_equity_v1",
   "code": {
     "branch": "feature/c8-market-relative-targets-and-context",
-    "commit": "09a01c21f59e747e1760e609015828c880bd079c",
+    "commit": "4534a8b130bf36019200f79196b5822812a70c88",
     "dirty": false
   },
   "counts": {
@@ -84,7 +87,7 @@
       "sector_realized_volatility_20obs"
     ]
   },
-  "generated_at_utc": "2026-08-02T09:24:43.479406+00:00",
+  "generated_at_utc": "2026-08-02T10:15:59.941123+00:00",
   "holdout_accessed": false,
   "inputs": {
     "c3_manifest_path": {
@@ -180,8 +183,8 @@
       "path": "/home/hassan/psx-ml-research/data/processed/features/c8_relative_features.parquet"
     },
     "relative_targets": {
-      "file_sha256": "88e42fe061f8199e546baa01c039ceb6e02cb6406e3ff1d54741d1f2c0be518c",
-      "logical_sha256": "07c6db662a92278910b80e906e2eb5a19bf036b2e163fe42598a00b5e162ba2d",
+      "file_sha256": "0f8748e7864052d3594dfeaca435ee91ad8196e1a04fdd6c8526915a715aee7e",
+      "logical_sha256": "9efb000ab1c2827488ff4a8c259991120dd8c20c669fabe564de8f7fc6da5e39",
       "path": "/home/hassan/psx-ml-research/data/processed/targets/c8_relative_targets.parquet"
     },
     "sector_audit": {
@@ -212,6 +215,16 @@
       "file_sha256": "5176f474d85a1edfeeb968f3a622be6386a257d57cc41109700506710e253c9d",
       "logical_sha256": "3424af8db022153af4afc9bf8e1599575347561d65589d1769adec4bf1d02616",
       "path": "/home/hassan/psx-ml-research/data/processed/features/c8_sector_context_features.parquet"
+    },
+    "sector_sensitivity": {
+      "file_sha256": "dfd1eb903b37fec8d6102df6503c562706ad40239d8b2c6e06a1d4727a85725f",
+      "logical_sha256": "e51da12b831ec354285b120462692b1b71ecc307c6010393622b6e83d446f098",
+      "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c8_sector_threshold_sensitivity.parquet"
+    },
+    "sector_sensitivity_coverage": {
+      "file_sha256": "43b5e11e0c9d3f2b38cc99d0703ba666a504e97822aaebfa36d4a697db513f7f",
+      "logical_sha256": "e2ee199aa81af65aff4f161d3ed91f3ab8f214594b4e7595e13e2452e9e12133",
+      "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c8_sector_threshold_coverage.parquet"
     }
   },
   "sector_exclusion_summary": [
@@ -337,27 +350,296 @@
     }
   ],
   "sector_provenance": "2026-08-01 security-master historical backcast",
+  "sector_sensitivity_summary": [
+    {
+      "benchmark_variance": 0.001969614646144993,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.004626435410210576,
+      "valid_rows": 189777,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.001969614646144993,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.004626435410210576,
+      "valid_rows": 189777,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.002079153623360616,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 340,
+      "target_variance": 0.004786284952128443,
+      "valid_rows": 226266,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.001969614646144993,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.004626435410210576,
+      "valid_rows": 189777,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.0015044085988039527,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 340,
+      "target_variance": 0.004581439078218882,
+      "valid_rows": 226266,
+      "variant": "shrunk_3_peer"
+    },
+    {
+      "benchmark_variance": 0.0014999213484902007,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 5,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.004488317962695043,
+      "valid_rows": 189777,
+      "variant": "shrunk_3_peer"
+    },
+    {
+      "benchmark_variance": 0.003766416559716674,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.009122875059058618,
+      "valid_rows": 189652,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.003766416559716674,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.009122875059058618,
+      "valid_rows": 189652,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.003990283516477331,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 339,
+      "target_variance": 0.009827484214600618,
+      "valid_rows": 226157,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.003766416559716674,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.009122875059058618,
+      "valid_rows": 189652,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.002926336016045746,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 339,
+      "target_variance": 0.0094633180788556,
+      "valid_rows": 226157,
+      "variant": "shrunk_3_peer"
+    },
+    {
+      "benchmark_variance": 0.002908183902823484,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 10,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.008870897640637693,
+      "valid_rows": 189652,
+      "variant": "shrunk_3_peer"
+    },
+    {
+      "benchmark_variance": 0.00729795345678721,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.019643558292802052,
+      "valid_rows": 189642,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.00729795345678721,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.019643558292802052,
+      "valid_rows": 189642,
+      "variant": "strict_5_peer"
+    },
+    {
+      "benchmark_variance": 0.007701532638552709,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 340,
+      "target_variance": 0.0253444764345469,
+      "valid_rows": 226039,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.00729795345678721,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.019643558292802052,
+      "valid_rows": 189642,
+      "variant": "relaxed_3_peer"
+    },
+    {
+      "benchmark_variance": 0.005620862298642174,
+      "comparison_subset": "natural_coverage",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 6,
+      "newly_usable_sectors": "FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT",
+      "sector_count": 27,
+      "symbol_count": 340,
+      "target_variance": 0.0246232561396937,
+      "valid_rows": 226039,
+      "variant": "shrunk_3_peer"
+    },
+    {
+      "benchmark_variance": 0.005617644208453284,
+      "comparison_subset": "strict_5_peer_matched",
+      "date_count": 1448,
+      "horizon": 20,
+      "newly_usable_sector_count": 0,
+      "newly_usable_sectors": "",
+      "sector_count": 21,
+      "symbol_count": 313,
+      "target_variance": 0.019147476956903744,
+      "valid_rows": 189642,
+      "variant": "shrunk_3_peer"
+    }
+  ],
   "target_definitions": [
     "market_loo_median_ret_5s",
     "sector_loo_median_ret_5s",
+    "sector_loo_median_ret_5s_relaxed_3_peer",
+    "sector_market_shrunk_benchmark_ret_5s",
+    "sector_valid_peer_count_5s",
+    "sector_benchmark_weight_5s",
+    "sector_benchmark_tier_5s",
+    "sector_benchmark_confidence_5s",
     "fwd_market_relative_ret_5s",
     "fwd_sector_relative_ret_5s",
+    "fwd_sector_relative_ret_5s_relaxed_3_peer",
+    "fwd_sector_relative_ret_5s_shrunk_3_peer",
+    "strict_5_peer_matched_subset_5s",
     "fwd_market_relative_rank_5s",
     "outperform_market_5s",
     "outperform_sector_5s",
+    "outperform_sector_5s_relaxed_3_peer",
+    "outperform_sector_5s_shrunk_3_peer",
     "market_loo_median_ret_10s",
     "sector_loo_median_ret_10s",
+    "sector_loo_median_ret_10s_relaxed_3_peer",
+    "sector_market_shrunk_benchmark_ret_10s",
+    "sector_valid_peer_count_10s",
+    "sector_benchmark_weight_10s",
+    "sector_benchmark_tier_10s",
+    "sector_benchmark_confidence_10s",
     "fwd_market_relative_ret_10s",
     "fwd_sector_relative_ret_10s",
+    "fwd_sector_relative_ret_10s_relaxed_3_peer",
+    "fwd_sector_relative_ret_10s_shrunk_3_peer",
+    "strict_5_peer_matched_subset_10s",
     "fwd_market_relative_rank_10s",
     "outperform_market_10s",
     "outperform_sector_10s",
+    "outperform_sector_10s_relaxed_3_peer",
+    "outperform_sector_10s_shrunk_3_peer",
     "market_loo_median_ret_20s",
     "sector_loo_median_ret_20s",
+    "sector_loo_median_ret_20s_relaxed_3_peer",
+    "sector_market_shrunk_benchmark_ret_20s",
+    "sector_valid_peer_count_20s",
+    "sector_benchmark_weight_20s",
+    "sector_benchmark_tier_20s",
+    "sector_benchmark_confidence_20s",
     "fwd_market_relative_ret_20s",
     "fwd_sector_relative_ret_20s",
+    "fwd_sector_relative_ret_20s_relaxed_3_peer",
+    "fwd_sector_relative_ret_20s_shrunk_3_peer",
+    "strict_5_peer_matched_subset_20s",
     "fwd_market_relative_rank_20s",
     "outperform_market_20s",
-    "outperform_sector_20s"
+    "outperform_sector_20s",
+    "outperform_sector_20s_relaxed_3_peer",
+    "outperform_sector_20s_shrunk_3_peer"
   ]
 }

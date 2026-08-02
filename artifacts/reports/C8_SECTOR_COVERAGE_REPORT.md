@@ -131,3 +131,30 @@ The canonical threshold remains five valid peers after leave-one-out. No lower-p
 | 20 | TRANSPORT | 4266 | 0 | 0.0000 | 2.0 | 0 |
 | 20 | VANASPATI & ALLIED INDUSTRIES | 293 | 0 | 0.0000 | 1.0 | 0 |
 | 20 | WOOLLEN | 219 | 0 | 0.0000 | 0.0 | 0 |
+
+## Frozen threshold sensitivity
+
+Strict five-peer remains canonical. Relaxed and shrunk variants require at least three valid peers. Shrinkage is `w=n/(n+5)` and was fixed before evaluation.
+
+| Horizon | Variant | Subset | Rows | Symbols | Dates | Sectors | Benchmark variance | Target variance | Newly usable sectors |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 5 | `strict_5_peer` | `natural_coverage` | 189777 | 313 | 1448 | 21 | 0.0019696146 | 0.0046264354 | - |
+| 5 | `strict_5_peer` | `strict_5_peer_matched` | 189777 | 313 | 1448 | 21 | 0.0019696146 | 0.0046264354 | - |
+| 5 | `relaxed_3_peer` | `natural_coverage` | 226266 | 340 | 1448 | 27 | 0.0020791536 | 0.004786285 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 5 | `relaxed_3_peer` | `strict_5_peer_matched` | 189777 | 313 | 1448 | 21 | 0.0019696146 | 0.0046264354 | - |
+| 5 | `shrunk_3_peer` | `natural_coverage` | 226266 | 340 | 1448 | 27 | 0.0015044086 | 0.0045814391 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 5 | `shrunk_3_peer` | `strict_5_peer_matched` | 189777 | 313 | 1448 | 21 | 0.0014999213 | 0.004488318 | - |
+| 10 | `strict_5_peer` | `natural_coverage` | 189652 | 313 | 1448 | 21 | 0.0037664166 | 0.0091228751 | - |
+| 10 | `strict_5_peer` | `strict_5_peer_matched` | 189652 | 313 | 1448 | 21 | 0.0037664166 | 0.0091228751 | - |
+| 10 | `relaxed_3_peer` | `natural_coverage` | 226157 | 339 | 1448 | 27 | 0.0039902835 | 0.0098274842 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 10 | `relaxed_3_peer` | `strict_5_peer_matched` | 189652 | 313 | 1448 | 21 | 0.0037664166 | 0.0091228751 | - |
+| 10 | `shrunk_3_peer` | `natural_coverage` | 226157 | 339 | 1448 | 27 | 0.002926336 | 0.0094633181 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 10 | `shrunk_3_peer` | `strict_5_peer_matched` | 189652 | 313 | 1448 | 21 | 0.0029081839 | 0.0088708976 | - |
+| 20 | `strict_5_peer` | `natural_coverage` | 189642 | 313 | 1448 | 21 | 0.0072979535 | 0.019643558 | - |
+| 20 | `strict_5_peer` | `strict_5_peer_matched` | 189642 | 313 | 1448 | 21 | 0.0072979535 | 0.019643558 | - |
+| 20 | `relaxed_3_peer` | `natural_coverage` | 226039 | 340 | 1448 | 27 | 0.0077015326 | 0.025344476 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 20 | `relaxed_3_peer` | `strict_5_peer_matched` | 189642 | 313 | 1448 | 21 | 0.0072979535 | 0.019643558 | - |
+| 20 | `shrunk_3_peer` | `natural_coverage` | 226039 | 340 | 1448 | 27 | 0.0056208623 | 0.024623256 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
+| 20 | `shrunk_3_peer` | `strict_5_peer_matched` | 189642 | 313 | 1448 | 21 | 0.0056176442 | 0.019147477 | - |
+
+Daily IC, D10-D1 spread, and fold dispersion are model-dependent and will be appended after predictions exist; they are not inferred from target construction.
