@@ -12,6 +12,9 @@ c7_manifest_path = "artifacts/reports/C7_MODEL_MANIFEST.json"
 horizons = [5, 10, 20]
 minimum_market_peers = 1
 minimum_sector_peers = 5
+relaxed_sector_peers = 3
+shrinkage_strength = 5.0
+shrinkage_rule = "w = valid_peer_count / (valid_peer_count + 5)"
 sector_minimum_policy = "peers_after_leave_one_out"
 rank_tie_break = "relative_return_then_symbol"
 
@@ -22,6 +25,8 @@ manifest_path = "artifacts/reports/C8_MANIFEST.json"
 sector_audit_path = "data/processed/diagnostics/c8_sector_target_exclusions.parquet"
 sector_coverage_path = "data/processed/diagnostics/c8_sector_target_coverage.parquet"
 sector_coverage_report_path = "artifacts/reports/C8_SECTOR_COVERAGE_REPORT.md"
+sector_sensitivity_path = "data/processed/diagnostics/c8_sector_threshold_sensitivity.parquet"
+sector_sensitivity_coverage_path = "data/processed/diagnostics/c8_sector_threshold_coverage.parquet"
 market_features_path = "data/processed/features/c8_market_context_features.parquet"
 sector_features_path = "data/processed/features/c8_sector_context_features.parquet"
 relative_features_path = "data/processed/features/c8_relative_features.parquet"

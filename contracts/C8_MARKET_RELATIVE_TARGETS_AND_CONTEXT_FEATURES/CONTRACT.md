@@ -1088,3 +1088,35 @@ C8 is a predictive research contract, not a trading-strategy contract.
 The key decision is:
 
 > Does removing broad market/sector movement from the target and adding point-in-time market/sector context produce a more stable stock-selection signal than C7?
+
+---
+
+## 28. Frozen sector peer-threshold sensitivity revision
+
+The five-valid-peer leave-one-out sector median remains the canonical scientific
+reference and must not be replaced. C8 additionally evaluates two named
+secondary variants:
+
+```text
+strict_5_peer: valid peer count >= 5; raw leave-one-out sector median
+relaxed_3_peer: valid peer count >= 3; raw leave-one-out sector median
+shrunk_3_peer: valid peer count >= 3; peer-count-shrunk sector/market benchmark
+```
+
+For `shrunk_3_peer`, the rule is frozen before evaluation:
+
+```text
+w = n / (n + 5)
+benchmark = w * sector_median + (1 - w) * market_median
+```
+
+Here `n` is the same-date valid leave-one-out sector-peer count. Rows with fewer
+than three valid peers receive no sector-relative target; their market-relative
+target remains valid. Every row retains peer count, tier, confidence, and weight.
+
+Relaxed and shrunk results must be reported on both natural coverage and the
+strict-five-peer matched subset. The sensitivity report includes valid
+row/symbol/date/sector counts, sector coverage, benchmark variance, target
+variance, and sectors newly usable relative to strict. Daily IC, D10-D1 spread,
+and fold dispersion are added after model predictions exist; target construction
+must not fabricate model-dependent metrics.
