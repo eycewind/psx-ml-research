@@ -230,3 +230,37 @@ Mean pairwise gain-rank correlation is reported below. Higher is more stable; ne
 | C8 | 10 | market_relative | A_c7_only | 0.7261699426564224 | 0.6361839654394096 |
 | C8 | 5 | sector_shrunk_3_peer | C_sector_context | 0.8009962285193034 | 0.7013496922206827 |
 | C8 | 10 | sector_shrunk_3_peer | C_sector_context | 0.7411847345327836 | 0.6502910974781589 |
+
+## Direct market-relative rank-target models
+
+Rank targets use deterministic same-date percentile relevance (`0=lowest`, `1=highest`). NDCG uses that non-negative relevance directly. D10-D1 is measured on the underlying market-relative return, not on percentile labels. B and D share identical target populations within each horizon.
+
+| Horizon | Features | Model | Mean IC | Median IC | Positive-date fraction | Fold ICs | Fold std | NDCG@5 | NDCG@10 | Top-decile capture | D10-D1 | Monotonicity | IC 95% CI | D10 95% CI |
+|---:|---|---|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|
+| 5 | `B_market_context` | `lightgbm_cpu` | 0.108729 | 0.103674 | 0.7640 | 0.099319, 0.10298, 0.12389 | 0.010823 | 0.571765 | 0.570319 | 0.0824422 | 0.00767917 | 0.866667 | [0.099007, 0.11893] | [0.0048511, 0.010429] |
+| 5 | `B_market_context` | `xgboost_gpu` | 0.102188 | 0.100033 | 0.7465 | 0.089833, 0.094849, 0.12188 | 0.0140757 | 0.571396 | 0.567352 | 0.0835608 | 0.00674451 | 0.826263 | [0.091429, 0.11403] | [0.0038841, 0.0091662] |
+| 5 | `D_full_context` | `lightgbm_cpu` | 0.106297 | 0.10828 | 0.7651 | 0.088942, 0.097413, 0.13254 | 0.0188737 | 0.562672 | 0.564223 | 0.0823144 | 0.0083471 | 0.882828 | [0.096155, 0.11737] | [0.0055502, 0.010896] |
+| 5 | `D_full_context` | `xgboost_gpu` | 0.0963049 | 0.0938565 | 0.7395 | 0.077712, 0.080905, 0.1303 | 0.0240721 | 0.55964 | 0.559752 | 0.0845269 | 0.00612469 | 0.523232 | [0.084848, 0.10762] | [0.0028566, 0.0088201] |
+| 10 | `B_market_context` | `lightgbm_cpu` | 0.0783243 | 0.0786694 | 0.7221 | 0.06154, 0.055715, 0.11772 | 0.0279573 | 0.554689 | 0.552841 | 0.0837569 | 0.00177423 | 0.486869 | [0.069785, 0.087436] | [-0.0021831, 0.0050491] |
+| 10 | `B_market_context` | `xgboost_gpu` | 0.0702259 | 0.0703592 | 0.6841 | 0.061756, 0.025068, 0.12385 | 0.0407709 | 0.560472 | 0.555164 | 0.0900705 | 0.000516736 | 0.288889 | [0.062392, 0.080208] | [-0.0043781, 0.0041812] |
+| 10 | `D_full_context` | `lightgbm_cpu` | 0.0804693 | 0.0845471 | 0.7056 | 0.051537, 0.049687, 0.14018 | 0.0422318 | 0.544748 | 0.544291 | 0.0835466 | 0.00492982 | 0.280808 | [0.072133, 0.089967] | [0.00068613, 0.0082621] |
+| 10 | `D_full_context` | `xgboost_gpu` | 0.074606 | 0.0780046 | 0.6827 | 0.051474, 0.032234, 0.14011 | 0.0469796 | 0.543459 | 0.545294 | 0.0868815 | 0.00321888 | 0.268687 | [0.065809, 0.084268] | [-0.0011311, 0.0069837] |
+
+## Relative classification models
+
+Sector classification uses the strict five-peer target population. The prevalence baseline is estimated from each fold's training rows. Calibration is retained as ten deterministic probability bins per task/model/fold; ECE below is the row-weighted absolute calibration gap.
+
+| Target | Model | ROC AUC | PR AUC | Log loss | Brier | Balanced accuracy | Prevalence | Fold ROC AUCs | Fold std | Mean ECE |
+|---|---|---:|---:|---:|---:|---:|---:|---|---:|---:|
+| `outperform_market_5s` | `lightgbm_cpu` | 0.555213 | 0.546313 | 0.68856 | 0.247717 | 0.537485 | 0.499779 | 0.5532, 0.5505, 0.56194 | 0.00488222 | 0.00842773 |
+| `outperform_market_5s` | `xgboost_gpu` | 0.55411 | 0.54502 | 0.688616 | 0.247746 | 0.537052 | 0.499779 | 0.55171, 0.55133, 0.55928 | 0.0036622 | 0.00850038 |
+| `outperform_market_5s` | `prevalence_baseline` | 0.5 | 0.499779 | 0.693147 | 0.25 | 0.5 | 0.499779 | 0.5, 0.5, 0.5 | 0 | 0.000193507 |
+| `outperform_sector_5s` | `lightgbm_cpu` | 0.539147 | 0.530804 | 0.690981 | 0.248919 | 0.528607 | 0.499146 | 0.53038, 0.53446, 0.55261 | 0.00966182 | 0.010633 |
+| `outperform_sector_5s` | `xgboost_gpu` | 0.536518 | 0.527447 | 0.691237 | 0.249047 | 0.525891 | 0.499146 | 0.52657, 0.53157, 0.55141 | 0.0107265 | 0.0152309 |
+| `outperform_sector_5s` | `prevalence_baseline` | 0.5 | 0.499146 | 0.693146 | 0.249999 | 0.5 | 0.499146 | 0.5, 0.5, 0.5 | 0 | 0.000211955 |
+| `outperform_market_10s` | `lightgbm_cpu` | 0.537024 | 0.52848 | 0.691624 | 0.249236 | 0.527074 | 0.499944 | 0.53294, 0.52756, 0.55057 | 0.00982723 | 0.0183985 |
+| `outperform_market_10s` | `xgboost_gpu` | 0.534222 | 0.526579 | 0.691449 | 0.249152 | 0.523232 | 0.499944 | 0.5355, 0.51682, 0.55035 | 0.0137182 | 0.0141807 |
+| `outperform_market_10s` | `prevalence_baseline` | 0.5 | 0.499944 | 0.693147 | 0.25 | 0.5 | 0.499944 | 0.5, 0.5, 0.5 | 0 | 0.000250976 |
+| `outperform_sector_10s` | `lightgbm_cpu` | 0.533897 | 0.526541 | 0.691939 | 0.249396 | 0.522594 | 0.499248 | 0.52275, 0.52678, 0.55216 | 0.0130214 | 0.0174349 |
+| `outperform_sector_10s` | `xgboost_gpu` | 0.529281 | 0.522437 | 0.692113 | 0.249484 | 0.515501 | 0.499248 | 0.52247, 0.51816, 0.54721 | 0.0128006 | 0.015656 |
+| `outperform_sector_10s` | `prevalence_baseline` | 0.5 | 0.499248 | 0.693147 | 0.25 | 0.5 | 0.499248 | 0.5, 0.5, 0.5 | 0 | 0.000943298 |

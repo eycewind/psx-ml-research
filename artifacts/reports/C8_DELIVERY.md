@@ -1,12 +1,23 @@
 # C8 Delivery Report
 
-Generation commit: `e79bf855dfc9ef8a915363d3e0cad1b0e81d55d3`; dirty: **False**; holdout accessed: **False**.
+Generation commit: `764886a6f160b4d833d074b6ce4af5253195966b`; dirty: **False**; holdout accessed: **False**.
 
 Prediction rows: **9850632**; fitted model/task/fold combinations: **216**.
 
 ## Conclusion
 
-C8 changes the research conclusion from C7's negative absolute-return result to a qualified positive result for target reframing: five-session market-relative LightGBM with the unchanged C7 features is positive in all folds, its aggregate daily-IC and D10-D1 intervals exclude zero, and CUDA XGBoost corroborates the sign. New context features do not consistently improve market-relative models. Shrunk sector targets improve coverage and show positive natural and strict-matched evidence at five sessions, but context-feature and importance-stability gains are mixed. This is promising predictive evidence, not evidence of implementable profitability or authorization to unlock 2026.
+C8 upgrades the conclusion from weak and unstable C7 evidence to qualified positive evidence for five-session market-relative prediction, especially for LightGBM using the unchanged C7 feature set. Its aggregate daily-IC and D10-D1 intervals exclude zero, and CUDA XGBoost corroborates the sign. Broader context features do not consistently improve this result. Shrunk sector targets improve coverage and show positive natural and strict-matched evidence at five sessions, but context-feature and importance-stability gains are mixed. This is promising predictive evidence, not evidence of implementable profitability or authorization to unlock 2026.
+
+## Canonical C8 result
+
+- Target: five-session market-relative return (`fwd_market_relative_ret_5s`).
+- Model: LightGBM CPU.
+- Features: `A_c7_only` (unchanged C7 feature set).
+- Mean daily IC: `0.05077031`; positive folds: `3/3`.
+- Mean D10-D1: `0.0085429728`; positive D10-D1 folds: `3/3`.
+- The 2026 holdout is untouched.
+
+Broader context features did not consistently improve this canonical result.
 
 ## Key evidence
 
@@ -20,6 +31,10 @@ No trade rules, fees, portfolio logic, backtest, or profitability claim is part 
 ## Verification
 
 {
-  "c8_gpu_suite": "1 passed (C8 XGBoost CUDA)",
-  "cpu_suite": "90 passed, 3 skipped (CUDA hidden)"
+  "c8_gpu_suite": "1 passed, 1 warning (C8 XGBoost CUDA)",
+  "cpu_suite": "92 passed, 3 skipped (CUDA hidden)"
 }
+
+## Remaining contract matrix
+
+Direct rank-target and relative-classification models were added from clean commit `e8e63d660f7bd90f18bcbc722e1df1e9b349053e`. They add **48** fitted models and **2226020** validation predictions. Five-session rank/B LightGBM mean daily IC is `0.108729` with fold ICs `[0.09931942323554063, 0.10297823605625356, 0.12388813128392143]`. Five-session market-outperformance LightGBM ROC AUC is `0.555213` versus `0.5` for the prevalence baseline. Full rank, NDCG, capture, spread, classification, calibration, and fold-stability results are in C8_MODEL_REPORT.md and the structured supplemental artifact. The 2026 holdout remained untouched.
