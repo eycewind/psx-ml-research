@@ -5,6 +5,8 @@ from psx_ml.c9.turnover import turnover_metrics,retention,candidate_lifetimes
 from psx_ml.c9.agreement import average_rank_ensemble,model_agreement,intersection_union
 from psx_ml.c9.concentration import herfindahl,concentration
 from psx_ml.c9.bootstrap import moving_block_bootstrap,empirical_p_value
+from psx_ml.c9.persistence import rank_persistence,rank_changes
+from psx_ml.c9.baselines import deterministic_random_same_count,random_distribution,rank_baseline
 
 def rows(date="2024-01-02"):
     return [{"trade_date":date,"symbol":chr(65+i),"prediction":float(i),"actual_rank_target":i/9,"actual_market_relative_return":i-4.5,"sector":"S"+str(i%3),"turnover_percentile_rank":i/9} for i in range(10)]
@@ -48,3 +50,14 @@ def test_concentration_bootstrap_and_empirical_p_value():
     assert np.isclose(herfindahl(["a","a","b","b"]),.5); c=concentration(rows()); assert c["selection_count"]==10 and np.isclose(c["symbol_herfindahl"],.1)
     a=moving_block_bootstrap([1,2,3,4,5],2,100,42); b=moving_block_bootstrap([1,2,3,4,5],2,100,42); assert a==b and a["estimate"]==3
     assert empirical_p_value(3,[1,2,3,4])==.6
+
+def test_rank_persistence_and_changes_use_consecutive_sessions():
+    a=percentile_ranks(rows("2024-01-01")); b=[{**r,"trade_date":"2024-01-02"} for r in a]
+    p=rank_persistence(a+b,(1,))[0]; assert np.isclose(p["rank_autocorrelation"],1) and p["top_decile_persistence"]==1
+    change=rank_changes(a+b); assert change["count"]==10 and change["mean"]==0
+
+def test_random_baseline_preserves_count_and_seed():
+    universe=percentile_ranks(rows()); counts={"2024-01-02":3}; a=deterministic_random_same_count(universe,counts,7,0); b=deterministic_random_same_count(universe,counts,7,0)
+    assert a==b and len(a)==3
+    assert random_distribution(universe,counts,5,7)==random_distribution(universe,counts,5,7)
+    momentum=rank_baseline(universe,"actual_market_relative_return","momentum"); assert momentum[-1]["prediction_percentile_rank"]==1
