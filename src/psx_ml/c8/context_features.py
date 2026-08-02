@@ -16,17 +16,18 @@ def _derive_ret10(rows):
     return out
 
 def _loo_stat(dates,groups,values,minimum,kind):
+    if kind=="median": return leave_one_out_median(dates,values,[str(i) for i in range(len(dates))],groups,minimum)
     buckets=defaultdict(list); out=[None]*len(dates)
     for i,(d,g,v) in enumerate(zip(dates,groups,values)):
         if g is not None and _finite(v): buckets[(d,g)].append((i,float(v)))
     for part in buckets.values():
-        for i,_ in part:
-            peers=[v for j,v in part if j!=i]
-            if len(peers)<minimum: continue
-            a=np.asarray(peers)
-            if kind=="median": out[i]=float(np.median(a))
-            elif kind=="positive": out[i]=float(np.mean(a>0))
-            elif kind=="std": out[i]=float(np.std(a))
+        count=len(part); total=sum(v for _,v in part); total_sq=sum(v*v for _,v in part); positives=sum(v>0 for _,v in part)
+        for i,value in part:
+            peers=count-1
+            if peers<minimum: continue
+            if kind=="positive": out[i]=(positives-int(value>0))/peers
+            elif kind=="std":
+                mean=(total-value)/peers; variance=max(0.0,(total_sq-value*value)/peers-mean*mean); out[i]=math.sqrt(variance)
     return out
 
 def _rolling_pair(rows,x,y,window=60,minimum=30):
