@@ -15,7 +15,9 @@ def random_distribution(universe,counts,repetitions=1000,seed=42):
     values=[]
     for repetition in range(repetitions):
         selected=deterministic_random_same_count(universe,counts,seed,repetition)
-        values.append(float(np.mean([r["actual_market_relative_return"] for r in selected])) if selected else None)
+        grouped=defaultdict(list)
+        for r in selected: grouped[r["trade_date"]].append(r["actual_market_relative_return"])
+        values.append(float(np.mean([np.mean(v) for v in grouped.values()])) if grouped else None)
     return values
 
 def rank_baseline(rows,field,name):
