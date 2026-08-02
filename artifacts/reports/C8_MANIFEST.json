@@ -4375,7 +4375,7 @@
   "canonical_universe": "pit_liquid_ordinary_equity_v1",
   "code": {
     "branch": "feature/c8-market-relative-targets-and-context",
-    "commit": "dee21d77c2e142c12a6ea13021cdd2a0fb596302",
+    "commit": "e79bf855dfc9ef8a915363d3e0cad1b0e81d55d3",
     "dirty": false
   },
   "counts": {
@@ -4441,7 +4441,7 @@
   },
   "evaluation_generation_code": {
     "branch": "feature/c8-market-relative-targets-and-context",
-    "commit": "c075453d5bbf3ffec005f7bb44b36ca9fc25a0d1",
+    "commit": "dee21d77c2e142c12a6ea13021cdd2a0fb596302",
     "dirty": false
   },
   "feature_definitions": {

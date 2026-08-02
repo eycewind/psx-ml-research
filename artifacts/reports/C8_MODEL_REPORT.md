@@ -161,58 +161,58 @@ Selected rounds, prediction distributions, inner scores, devices, and runtime ar
 
 | Horizon | Features | Model | Fold | Sector | Rows | Mean daily IC | Spearman |
 |---:|---|---|---|---|---:|---:|---:|
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | FERTILIZER | 626 | None | 0.057398774916126744 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.09400332378772625 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | REFINERY | 984 | None | 0.045149147352321534 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | FERTILIZER | 626 | None | 0.07848851957996596 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.04884915398544636 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | REFINERY | 984 | None | 0.036614360158523276 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | FERTILIZER | 1199 | None | 0.08495546753472605 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.03180127001533298 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | REFINERY | 984 | None | 0.012728437680007514 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | TRANSPORT | 532 | None | 0.2022365916120488 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | FERTILIZER | 1199 | None | 0.09794256658874431 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.047371716104139094 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | REFINERY | 984 | None | 0.013224134144956063 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | TRANSPORT | 532 | None | 0.23276195547274112 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | FERTILIZER | 1243 | None | 0.08629157635959664 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | LEATHER & TANNERIES | 176 | None | 0.2006936650211003 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | None | -0.015872167884552597 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | PROPERTY | 68 | None | 0.33105678508561076 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | REFINERY | 1000 | None | 0.02138683869974664 |
-| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | TRANSPORT | 1000 | None | 0.16980783502644864 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | FERTILIZER | 1243 | None | 0.10935085940944235 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | LEATHER & TANNERIES | 176 | None | 0.17119416467207252 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | None | -0.03460281125205544 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | PROPERTY | 68 | None | 0.41154740598637707 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | REFINERY | 1000 | None | 0.03981989991395103 |
-| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | TRANSPORT | 1000 | None | 0.07455165244682217 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | FERTILIZER | 626 | None | 0.0030591932006211204 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.01812765846906033 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | REFINERY | 984 | None | 0.054786334262409225 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | FERTILIZER | 626 | None | -0.08710116505001982 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.043632935955892384 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | REFINERY | 984 | None | -0.07859059254018651 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | FERTILIZER | 1199 | None | -0.03434903570483227 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | None | -0.07256668643715848 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | REFINERY | 984 | None | 0.10687001876979013 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | TRANSPORT | 532 | None | 0.12348082169877364 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | FERTILIZER | 1199 | None | 0.01892725073214519 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | None | 0.05460795394470227 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | REFINERY | 984 | None | 0.08730865911384161 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | TRANSPORT | 532 | None | 0.1766899799731954 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | FERTILIZER | 1243 | None | 0.1680361718636292 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | LEATHER & TANNERIES | 176 | None | -0.013744085635738867 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | None | 0.10562471966613933 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | PROPERTY | 68 | None | 0.3217456115839425 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | REFINERY | 1000 | None | 0.02534056991450788 |
-| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | TRANSPORT | 1000 | None | 0.26875167793150007 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | FERTILIZER | 1243 | None | 0.17009194297355165 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | LEATHER & TANNERIES | 176 | None | 0.04370195372369752 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | None | 0.08479148802812081 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | PROPERTY | 68 | None | 0.5140146248684823 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | REFINERY | 1000 | None | 0.060634316183483764 |
-| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | TRANSPORT | 1000 | None | 0.21252097490721658 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | FERTILIZER | 626 | — | 0.0573988 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0940033 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2023` | REFINERY | 984 | — | 0.0451491 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | FERTILIZER | 626 | — | 0.0784885 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0488492 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2023` | REFINERY | 984 | — | 0.0366144 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | FERTILIZER | 1199 | — | 0.0849555 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0318013 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | REFINERY | 984 | — | 0.0127284 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2024` | TRANSPORT | 532 | — | 0.202237 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | FERTILIZER | 1199 | — | 0.0979426 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0473717 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | REFINERY | 984 | — | 0.0132241 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2024` | TRANSPORT | 532 | — | 0.232762 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | FERTILIZER | 1243 | — | 0.0862916 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | LEATHER & TANNERIES | 176 | — | 0.200694 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | — | -0.0158722 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | PROPERTY | 68 | — | 0.331057 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | REFINERY | 1000 | — | 0.0213868 |
+| 5 | `C_sector_context` | `lightgbm_cpu` | `fold_2025` | TRANSPORT | 1000 | — | 0.169808 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | FERTILIZER | 1243 | — | 0.109351 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | LEATHER & TANNERIES | 176 | — | 0.171194 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | — | -0.0346028 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | PROPERTY | 68 | — | 0.411547 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | REFINERY | 1000 | — | 0.0398199 |
+| 5 | `C_sector_context` | `xgboost_gpu` | `fold_2025` | TRANSPORT | 1000 | — | 0.0745517 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | FERTILIZER | 626 | — | 0.00305919 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0181277 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2023` | REFINERY | 984 | — | 0.0547863 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | FERTILIZER | 626 | — | -0.0871012 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.0436329 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2023` | REFINERY | 984 | — | -0.0785906 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | FERTILIZER | 1199 | — | -0.034349 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | — | -0.0725667 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | REFINERY | 984 | — | 0.10687 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2024` | TRANSPORT | 532 | — | 0.123481 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | FERTILIZER | 1199 | — | 0.0189273 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | OIL & GAS EXPLORATION COMPANIES | 984 | — | 0.054608 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | REFINERY | 984 | — | 0.0873087 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2024` | TRANSPORT | 532 | — | 0.17669 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | FERTILIZER | 1243 | — | 0.168036 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | LEATHER & TANNERIES | 176 | — | -0.0137441 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | — | 0.105625 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | PROPERTY | 68 | — | 0.321746 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | REFINERY | 1000 | — | 0.0253406 |
+| 10 | `A_c7_only` | `lightgbm_cpu` | `fold_2025` | TRANSPORT | 1000 | — | 0.268752 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | FERTILIZER | 1243 | — | 0.170092 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | LEATHER & TANNERIES | 176 | — | 0.043702 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | OIL & GAS EXPLORATION COMPANIES | 1000 | — | 0.0847915 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | PROPERTY | 68 | — | 0.514015 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | REFINERY | 1000 | — | 0.0606343 |
+| 10 | `A_c7_only` | `xgboost_gpu` | `fold_2025` | TRANSPORT | 1000 | — | 0.212521 |
 
 ## Interpretation guardrails
 
