@@ -14,6 +14,7 @@ data/processed/*
 !data/processed/.gitkeep
 artifacts/models/*
 !artifacts/models/.gitkeep
+artifacts/c9/models/*
 artifacts/reports/C1_*.json
 artifacts/reports/*.csv
 artifacts/reports/*.parquet

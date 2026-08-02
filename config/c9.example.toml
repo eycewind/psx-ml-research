@@ -1,0 +1,39 @@
+[input]
+c8_manifest_path = "artifacts/reports/C8_MANIFEST.json"
+c8_rank_predictions_path = "artifacts/predictions/c8/supplemental_predictions.parquet"
+c8_regression_predictions_path = "artifacts/predictions/c8/validation_predictions.parquet"
+c7_predictions_path = "artifacts/predictions/c7/validation_predictions.parquet"
+feature_targets_path = "data/processed/targets/daily_feature_targets.parquet"
+relative_targets_path = "data/processed/targets/c8_relative_targets.parquet"
+
+[output]
+processed_root = "data/processed/c9"
+artifact_root = "artifacts/c9"
+report_root = "artifacts/reports"
+
+[study]
+canonical_universe = "pit_liquid_ordinary_equity_v1"
+primary_horizon = 5
+secondary_horizon = 10
+canonical_target = "fwd_market_relative_rank_5s"
+canonical_features = "B_market_context"
+reference_features = "A_c7_only"
+models = ["lightgbm_cpu", "xgboost_gpu"]
+seed = 42
+
+[selection]
+percentiles = [0.05, 0.10, 0.20]
+fixed_counts = [5, 10, 20]
+rank_thresholds = [0.80, 0.90, 0.95]
+rebalance_schedules = ["daily", "every_2_sessions", "weekly_first_session", "weekly_last_session", "non_overlapping_5_session"]
+liquidity_screens = ["L0", "L1", "L2"]
+sector_constraints = ["S0", "S1", "S2", "S3"]
+
+[bootstrap]
+block_length_sessions = 5
+iterations = 2000
+
+[baseline]
+random_repetitions = 1000
+seed = 42
+

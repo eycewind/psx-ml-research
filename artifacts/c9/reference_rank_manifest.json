@@ -1,0 +1,192 @@
+{
+  "c8_prediction_provenance": {
+    "branch": "feature/c9-ranking-selection-robustness",
+    "hashes": {
+      "c7_predictions_path": "6769df96065fe9718bd8c1e3e37239d100d8bf22112c2f4ec6c7e7f06a2c3d2b",
+      "c8_manifest_path": "b5009fc5fb4f1c9ff57736508a64b71303abaa61a99c8fcb611c3ac7dd1058c0",
+      "c8_rank_predictions_path": "7f2f10d16742173251cafa00af3bc347bf88ba40bc34afdad30f860bebc2cd1a",
+      "c8_regression_predictions_path": "f5420468eb8cce20b8f9bdc1bc19585904993af69bcc95cadb60f28661466ee3",
+      "feature_targets_path": "8ef1d78a54cd2d0492e6e75fb3b9961708dde8b9a75fd31076aa5768c8590f69",
+      "relative_targets_path": "0f8748e7864052d3594dfeaca435ee91ad8196e1a04fdd6c8526915a715aee7e"
+    },
+    "maximum_trade_date": "2025-12-31",
+    "rank_prediction_rows": 2226020
+  },
+  "code": {
+    "commit": "23f4f239e4a568ae7b3b569ad63c7f16c2651c1d",
+    "dirty": false
+  },
+  "diagnostics": [
+    {
+      "best_inner_score": 0.08371975379952772,
+      "best_iteration": 174,
+      "device": "cpu",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.08449321227126648,
+      "fit_seconds": 1.0233645610001076,
+      "fold_id": "fold_2023",
+      "horizon": 5,
+      "inner_boundary": "2022-07-04",
+      "last_evaluated_iteration": 204,
+      "model_name": "lightgbm_cpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 112787,
+      "validation_rows": 35317
+    },
+    {
+      "best_inner_score": 0.2895604855015354,
+      "best_iteration": 174,
+      "device": "cuda",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.2906884293168145,
+      "fit_seconds": 0.4676391150001109,
+      "fold_id": "fold_2023",
+      "horizon": 5,
+      "inner_boundary": "2022-07-04",
+      "last_evaluated_iteration": 204,
+      "model_name": "xgboost_gpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 112787,
+      "validation_rows": 35317
+    },
+    {
+      "best_inner_score": 0.08404281146558838,
+      "best_iteration": 58,
+      "device": "cpu",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.08447185496408978,
+      "fit_seconds": 0.6905972729998666,
+      "fold_id": "fold_2024",
+      "horizon": 5,
+      "inner_boundary": "2023-05-09",
+      "last_evaluated_iteration": 88,
+      "model_name": "lightgbm_cpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 146793,
+      "validation_rows": 48505
+    },
+    {
+      "best_inner_score": 0.28987879346116224,
+      "best_iteration": 241,
+      "device": "cuda",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.29064201970858683,
+      "fit_seconds": 0.6544780409999476,
+      "fold_id": "fold_2024",
+      "horizon": 5,
+      "inner_boundary": "2023-05-09",
+      "last_evaluated_iteration": 250,
+      "model_name": "xgboost_gpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 146793,
+      "validation_rows": 48505
+    },
+    {
+      "best_inner_score": 0.08357363988050273,
+      "best_iteration": 68,
+      "device": "cpu",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.08416280747358348,
+      "fit_seconds": 1.0304048340001373,
+      "fold_id": "fold_2025",
+      "horizon": 5,
+      "inner_boundary": "2024-03-11",
+      "last_evaluated_iteration": 98,
+      "model_name": "lightgbm_cpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 194556,
+      "validation_rows": 64191
+    },
+    {
+      "best_inner_score": 0.289102933689175,
+      "best_iteration": 108,
+      "device": "cuda",
+      "feature_variant": "A_c7_only",
+      "first_iteration_score": 0.2901149108995364,
+      "fit_seconds": 0.7060265019999861,
+      "fold_id": "fold_2025",
+      "horizon": 5,
+      "inner_boundary": "2024-03-11",
+      "last_evaluated_iteration": 138,
+      "model_name": "xgboost_gpu",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank",
+      "train_rows": 194556,
+      "validation_rows": 64191
+    }
+  ],
+  "feature_variant": "A_c7_only",
+  "holdout_accessed": false,
+  "manifest_version": 1,
+  "models": [
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2023",
+      "horizon": 5,
+      "model_name": "lightgbm_cpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2023_lightgbm_cpu.txt",
+      "sha256": "8e2b122cf8fe36b019cc810aba4d429ae016aa071009f80da22b3345da99034e",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    },
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2023",
+      "horizon": 5,
+      "model_name": "xgboost_gpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2023_xgboost_gpu.json",
+      "sha256": "e97c12b292a9f1910a0be2f17b6c94b1b577a058bc1dc99dc9658f932404e1a5",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    },
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2024",
+      "horizon": 5,
+      "model_name": "lightgbm_cpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2024_lightgbm_cpu.txt",
+      "sha256": "06279ad2d5b981f78280c092c9c2d83ab939b6a5e9f7062ebc2aba283b6259e1",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    },
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2024",
+      "horizon": 5,
+      "model_name": "xgboost_gpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2024_xgboost_gpu.json",
+      "sha256": "098b641e58b93717f8f3d25744986cca18534a3b2aac74fd15d2b38355e9affb",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    },
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2025",
+      "horizon": 5,
+      "model_name": "lightgbm_cpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2025_lightgbm_cpu.txt",
+      "sha256": "a882c0528e755751f15b7637b474a508415db39177b74b2524cc5d94088403e2",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    },
+    {
+      "feature_variant": "A_c7_only",
+      "fold_id": "fold_2025",
+      "horizon": 5,
+      "model_name": "xgboost_gpu",
+      "path": "/home/hassan/psx-ml-research/artifacts/c9/models/c9_reference_A_5_fold_2025_xgboost_gpu.json",
+      "sha256": "2fc6df2233b892db2f98870dc97cc5e0603cf956957849e46203feb7278b3803",
+      "target_name": "fwd_market_relative_rank_5s",
+      "task_type": "rank"
+    }
+  ],
+  "prediction_path": "/home/hassan/psx-ml-research/artifacts/c9/reference_rank_predictions.parquet",
+  "prediction_rows": 296026,
+  "prediction_sha256": "74d3827d8a759e6a151d7b84fae9e32e2f46f91aeabdc741d95583fc7faf37a8",
+  "target": "fwd_market_relative_rank_5s"
+}
