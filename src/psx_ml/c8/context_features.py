@@ -26,6 +26,7 @@ def _loo_stat(dates,groups,values,minimum,kind):
             peers=count-1
             if peers<minimum: continue
             if kind=="positive": out[i]=(positives-int(value>0))/peers
+            elif kind=="mean": out[i]=(total-value)/peers
             elif kind=="std":
                 mean=(total-value)/peers; variance=max(0.0,(total_sq-value*value)/peers-mean*mean); out[i]=math.sqrt(variance)
     return out
@@ -49,20 +50,14 @@ def build_context_features(rows,minimum_sector_peers=5,rolling_window=60,minimum
     result={}
     for h,values in ret.items():
         result[f"market_median_ret_{h}obs"]=_loo_stat(dates,market_group,values,1,"median")
-        by_date=defaultdict(list)
-        for d,v in zip(dates,values):
-            if _finite(v): by_date[d].append(float(v))
-        result[f"market_mean_ret_{h}obs"]=[float(np.mean(by_date[d])) if by_date[d] else None for d in dates]
+        result[f"market_mean_ret_{h}obs"]=_loo_stat(dates,market_group,values,1,"mean")
         result[f"sector_median_ret_{h}obs"]=_loo_stat(dates,sectors,values,minimum_sector_peers,"median")
     for h in (1,5):
         result[f"market_breadth_positive_{h}obs"]=_loo_stat(dates,market_group,ret[h],1,"positive")
         result[f"sector_breadth_positive_{h}obs"]=_loo_stat(dates,sectors,ret[h],minimum_sector_peers,"positive")
         result[f"market_advance_decline_ratio_{h}obs"]=[None if x is None or x>=1 else x/(1-x) for x in result[f"market_breadth_positive_{h}obs"]]
     above=[None if not _finite(r.get("close_to_mean_20obs_adj")) else float(r["close_to_mean_20obs_adj"])>0 for r in rows]
-    by_date=defaultdict(list)
-    for d,v in zip(dates,above):
-        if v is not None: by_date[d].append(v)
-    result["market_breadth_above_20obs_mean"]=[float(np.mean(by_date[d])) if by_date[d] else None for d in dates]
+    result["market_breadth_above_20obs_mean"]=_loo_stat(dates,market_group,above,1,"positive")
     for h in (1,5,20): result[f"market_cross_sectional_dispersion_{h}obs"]=_loo_stat(dates,market_group,ret[h],1,"std")
     for h in (1,20): result[f"sector_cross_sectional_dispersion_{h}obs"]=_loo_stat(dates,sectors,ret[h],minimum_sector_peers,"std")
     turnover1=[r.get("turnover_1obs_adj") for r in rows]; turnover20=[r.get("turnover_median_20obs_adj") for r in rows]

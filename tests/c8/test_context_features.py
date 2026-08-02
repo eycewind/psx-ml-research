@@ -6,6 +6,7 @@ def _rows(dates=35):
 def test_context_features_are_leave_one_out_and_have_history_minimum():
     rows=_rows(); f=build_context_features(rows,minimum_sector_peers=5,minimum_rolling=30)
     assert f["market_median_ret_1obs"][0]>.0
+    assert f["market_mean_ret_1obs"][0]>.0
     assert f["sector_eligible_symbol_count"][0]==5
     assert f["rolling_beta_market_60obs"][0] is None
     assert f["rolling_beta_market_60obs"][-1] is not None
