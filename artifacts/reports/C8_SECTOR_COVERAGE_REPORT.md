@@ -157,4 +157,4 @@ Strict five-peer remains canonical. Relaxed and shrunk variants require at least
 | 20 | `shrunk_3_peer` | `natural_coverage` | 226039 | 340 | 1448 | 27 | 0.0056208623 | 0.024623256 | FERTILIZER|LEATHER & TANNERIES|OIL & GAS EXPLORATION COMPANIES|PROPERTY|REFINERY|TRANSPORT |
 | 20 | `shrunk_3_peer` | `strict_5_peer_matched` | 189642 | 313 | 1448 | 21 | 0.0056176442 | 0.019147477 | - |
 
-Daily IC, D10-D1 spread, and fold dispersion are model-dependent and will be appended after predictions exist; they are not inferred from target construction.
+Model-dependent daily IC, D10-D1, fold dispersion, natural-coverage, and strict-matched results are now reported in C8_MODEL_REPORT.md and the structured model diagnostics.

@@ -40,7 +40,12 @@ def model_report(result,path):
     lines += ["","## Training diagnostics","",f"Fits: **{len(diagnostics)}**; one-round fits: **{sum(r['best_iteration']==1 for r in diagnostics)}**; near-constant predictions: **{sum(r['near_constant'] for r in diagnostics)}**; minimum prediction standard deviation: **{min(r['prediction_std'] for r in diagnostics):.8g}**.","","Selected rounds, prediction distributions, inner scores, devices, and runtime are available in the structured training diagnostics artifact."]
     added={"FERTILIZER","LEATHER & TANNERIES","OIL & GAS EXPLORATION COMPANIES","PROPERTY","REFINERY","TRANSPORT"}; focus=[r for r in result["subgroup_metrics"] if r["dimension"]=="sector" and r["value"] in added and r["model_name"] in {"lightgbm_cpu","xgboost_gpu"} and r["target_family"]=="sector_shrunk_3_peer" and ((r["horizon"]==5 and r["feature_variant"]=="C_sector_context") or (r["horizon"]==10 and r["feature_variant"]=="A_c7_only"))]
     lines += ["","## Six newly covered sectors — focused shrunk-target diagnostics","","| Horizon | Features | Model | Fold | Sector | Rows | Mean daily IC | Spearman |","|---:|---|---|---|---|---:|---:|---:|"]
-    for r in focus: lines.append(f"| {r['horizon']} | `{r['feature_variant']}` | `{r['model_name']}` | `{r['fold_id']}` | {r['value']} | {r['row_count']} | {r['mean_daily_ic']} | {r['spearman']} |")
+    for r in focus:
+        lines.append(
+            f"| {r['horizon']} | `{r['feature_variant']}` | `{r['model_name']}` | "
+            f"`{r['fold_id']}` | {r['value']} | {r['row_count']} | "
+            f"{f(r['mean_daily_ic'])} | {f(r['spearman'])} |"
+        )
     lines += ["","## Interpretation guardrails","","Natural-coverage sector results are always paired with strict-five-peer matched results. No result is called better solely because coverage or target variance changed. Sector, peer-tier, and training-period market-regime metrics are available in the structured subgroup artifact. The 2026 final holdout remained locked."]
     path.write_text("\n".join(lines)+"\n")
 
