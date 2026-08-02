@@ -1,5 +1,5 @@
 import numpy as np
-from psx_ml.c8.evaluation_metrics import aggregate_folds,evaluate_predictions
+from psx_ml.c8.evaluation_metrics import aggregate_folds,attach_aggregate_bootstrap,evaluate_predictions
 
 def test_buckets_daily_ic_and_bootstrap_are_deterministic():
     dates=["a"]*20+["b"]*20; symbols=[str(i) for i in range(20)]*2; y=np.arange(40,dtype=float); p=y.copy()
@@ -15,3 +15,9 @@ def test_fold_aggregation_retains_stability():
     base={"stage":1,"horizon":5,"target_family":"x","feature_variant":"A","model_name":"m","comparison_subset":"natural","finite_ic_date_count":2,"population_eligible_date_count":3,"d10_d1_mean_spread":.1}
     rows=[{**base,"mean_daily_ic":.2},{**base,"mean_daily_ic":-.1}]
     a=aggregate_folds(rows)[0]; assert a["positive_ic_folds"]==1 and a["undefined_ic_dates"]==2
+
+def test_aggregate_date_bootstrap_is_deterministic():
+    aggregate=[{"stage":1,"horizon":5,"target_family":"x","feature_variant":"A","model_name":"m","comparison_subset":"natural"}]
+    daily=[{**aggregate[0],"daily_ic":x,"d10_d1_spread":x/10} for x in (.1,.2,.3)]
+    a=attach_aggregate_bootstrap([dict(aggregate[0])],daily,42,20); b=attach_aggregate_bootstrap([dict(aggregate[0])],daily,42,20)
+    assert a==b and a[0]["aggregate_mean_daily_ic_ci95"]["finite_dates"]==3

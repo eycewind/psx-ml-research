@@ -9,7 +9,7 @@ import pyarrow.parquet as pq
 import lightgbm as lgb
 from psx_ml.tree_models.datasets import inner_chronological
 from psx_ml.tree_models.models import hist_model,lgb_model,predict,xgb_model
-from .evaluation_metrics import aggregate_folds,evaluate_predictions
+from .evaluation_metrics import aggregate_folds,attach_aggregate_bootstrap,evaluate_predictions
 from .feature_variants import stage1_matrix,stage2_matrix
 
 TARGETS={
@@ -124,5 +124,5 @@ def run_evaluation(rows,derived,context,roles,variants,cfg,prediction_path,model
                 subgroup += _subgroup_rows(meta,pred_rows,cfg["minimum_daily_population"])
     finally:
       if writer is not None: writer.close()
-    aggregates=aggregate_folds(metrics)
+    aggregates=attach_aggregate_bootstrap(aggregate_folds(metrics),daily_rows,cfg["seed"],cfg["bootstrap_replicates"])
     return {"metrics":metrics,"aggregate_metrics":aggregates,"daily_ic":daily_rows,"buckets":bucket_rows,"feature_importance":importance,"training_diagnostics":diagnostics,"regime_thresholds":thresholds,"subgroup_metrics":subgroup,"model_files":model_files,"prediction_rows":prediction_count}

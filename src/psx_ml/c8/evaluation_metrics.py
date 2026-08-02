@@ -62,3 +62,12 @@ def aggregate_folds(metric_rows):
         spreads=[r["d10_d1_mean_spread"] for r in rows if r["d10_d1_mean_spread"] is not None]
         out.append(dict(zip(("stage","horizon","target_family","feature_variant","model_name","comparison_subset"),key),fold_count=len(rows),mean_daily_ic=float(np.mean(values)) if values else None,daily_ic_fold_std=float(np.std(values)) if values else None,worst_fold_ic=float(np.min(values)) if values else None,best_fold_ic=float(np.max(values)) if values else None,positive_ic_folds=sum(x>0 for x in values),mean_d10_d1=float(np.mean(spreads)) if spreads else None,positive_spread_folds=sum(x>0 for x in spreads),finite_ic_dates=sum(r["finite_ic_date_count"] for r in rows),undefined_ic_dates=sum(r["population_eligible_date_count"]-r["finite_ic_date_count"] for r in rows)))
     return out
+
+def attach_aggregate_bootstrap(aggregates,daily_rows,seed=42,reps=200):
+    keys=("stage","horizon","target_family","feature_variant","model_name","comparison_subset")
+    grouped=defaultdict(list)
+    for r in daily_rows: grouped[tuple(r[k] for k in keys)].append(r)
+    lookup={tuple(r[k] for k in keys):r for r in aggregates}
+    for key,rows in grouped.items():
+        target=lookup[key]; target["aggregate_mean_daily_ic_ci95"]=_bootstrap([r["daily_ic"] for r in rows],seed,reps); target["aggregate_d10_d1_ci95"]=_bootstrap([r["d10_d1_spread"] for r in rows],seed+1,reps)
+    return aggregates

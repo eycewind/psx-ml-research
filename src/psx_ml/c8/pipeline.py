@@ -14,7 +14,7 @@ from .context_features import build_context_features
 from .sensitivity import sensitivity_audit
 from .feature_variants import build_feature_variants
 from .evaluation_train import run_evaluation
-from .evaluation_reports import ablation_report,bucket_report,delivery_report,importance_stability,model_report
+from .evaluation_reports import ablation_report,bucket_report,delivery_report,importance_fold_stability,importance_stability,model_report
 
 CANONICAL="pit_liquid_ordinary_equity_v1"
 
@@ -85,7 +85,7 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
     for label,result_key,path_key in (("model_metrics","metrics","model_metrics_path"),("daily_ic","daily_ic","daily_ic_path"),("bucket_outcomes","buckets","bucket_outcomes_path"),("subgroup_metrics","subgroup_metrics","subgroup_metrics_path"),("feature_importance","feature_importance","feature_importance_path"),("training_diagnostics","training_diagnostics","training_diagnostics_path")):
         dt=pa.Table.from_pylist(result[result_key]); dp=_inside(repo,raw["output"][path_key]); _write_parquet(dt,dp); diagnostic_outputs[label]={"path":str(dp),"file_sha256":sha256_file(dp),"logical_sha256":logical_hash(dt),"rows":dt.num_rows}
     stability=importance_stability(result["feature_importance"])
-    viewer={"manifest_version":1,"holdout_accessed":False,"aggregate_metrics":result["aggregate_metrics"],"artifacts":diagnostic_outputs,"feature_importance_stability":stability,"training_diagnostics":result["training_diagnostics"],"regime_thresholds":result["regime_thresholds"]}
+    viewer={"manifest_version":1,"holdout_accessed":False,"aggregate_metrics":result["aggregate_metrics"],"artifacts":diagnostic_outputs,"feature_importance_stability":stability,"feature_importance_fold_stability":importance_fold_stability(result["feature_importance"]),"training_diagnostics":result["training_diagnostics"],"regime_thresholds":result["regime_thresholds"]}
     viewer_path=_inside(repo,raw["output"]["viewer_summary_path"]); write_json(viewer,viewer_path)
     counts={"rows":table.num_rows,"dates":len({r["trade_date"] for r in rows}),"symbols":len({r["symbol"] for r in rows}),"missing_sector_rows":sum(r["sector"] is None for r in rows)}
     for h in horizons:
