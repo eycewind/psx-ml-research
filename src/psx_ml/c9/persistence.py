@@ -29,7 +29,6 @@ def rank_changes(rows):
     dates=sorted(by_date); values=[]
     for i in range(1,len(dates)):
         a=by_date[dates[i-1]]; b=by_date[dates[i]]
-        values += [b[s]-a[s] for s in set(a)&set(b)]
+        values += [b[s]-a[s] for s in sorted(set(a)&set(b))]
     a=np.asarray(values,float)
     return {"count":len(a),"mean":float(np.mean(a)) if len(a) else None,"median":float(np.median(a)) if len(a) else None,"p05":float(np.quantile(a,.05)) if len(a) else None,"p95":float(np.quantile(a,.95)) if len(a) else None}
-
