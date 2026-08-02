@@ -23,8 +23,8 @@ def sector_coverage_audit(rows,horizons,relative,minimum_peers):
             eligible_peers=0 if sector is None else member_counts[(r["trade_date"],sector)]-1
             valid_peers=0 if sector is None else valid_counts[h][(r["trade_date"],sector)]-int(own_valid)
             result=relative[f"fwd_sector_relative_ret_{h}s"][i]
-            if not own_valid: reason="stock_target_missing"
-            elif sector is None: reason="missing_sector"
+            if sector is None: reason="missing_sector"
+            elif not own_valid: reason="stock_target_missing"
             elif eligible_peers<minimum_peers: reason="insufficient_sector_peers"
             elif valid_peers<minimum_peers: reason="peer_targets_insufficient"
             elif result is None: reason="other"

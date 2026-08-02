@@ -18,3 +18,8 @@ def test_peer_target_shortage_is_distinct_from_structural_shortage():
     rows=[{"trade_date":"d","symbol":str(i),"sector":"x","fwd_open_to_close_ret_5s_adj":1. if i<5 else None} for i in range(7)]
     relative=build_relative_target_columns(rows,(5,),5); detail,_,_=sector_coverage_audit(rows,(5,),relative,5)
     assert {r["invalid_reason"] for r in detail if r["symbol"] in {"0","1"}}=={"peer_targets_insufficient"}
+
+def test_missing_sector_precedes_concurrent_stock_target_missing():
+    rows=[{"trade_date":"d","symbol":"A","sector":None,"fwd_open_to_close_ret_5s_adj":None}]
+    relative=build_relative_target_columns(rows,(5,),5); detail,_,_=sector_coverage_audit(rows,(5,),relative,5)
+    assert detail[0]["invalid_reason"]=="missing_sector"
