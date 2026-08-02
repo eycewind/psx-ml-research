@@ -1,6 +1,6 @@
 # C8 Delivery Report
 
-Generation commit: `764886a6f160b4d833d074b6ce4af5253195966b`; dirty: **False**; holdout accessed: **False**.
+Generation commit: `19effafc90c6ccf338535a9400fee5bcc11a30b3`; dirty: **False**; holdout accessed: **False**.
 
 Prediction rows: **9850632**; fitted model/task/fold combinations: **216**.
 
@@ -13,8 +13,8 @@ C8 upgrades the conclusion from weak and unstable C7 evidence to qualified posit
 - Target: five-session market-relative return (`fwd_market_relative_ret_5s`).
 - Model: LightGBM CPU.
 - Features: `A_c7_only` (unchanged C7 feature set).
-- Mean daily IC: `0.05077031`; positive folds: `3/3`.
-- Mean D10-D1: `0.0085429728`; positive D10-D1 folds: `3/3`.
+- Mean daily IC: `0.0507703`; positive folds: `3/3`.
+- Mean D10-D1: `0.00854297`; positive D10-D1 folds: `3/3`.
 - The 2026 holdout is untouched.
 
 Broader context features did not consistently improve this canonical result.
