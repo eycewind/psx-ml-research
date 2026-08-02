@@ -6,11 +6,15 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
+import numpy as np
 from psx_ml.features.manifest import git_state,logical_hash,sha256_file,write_json
 from .relative_targets import build_relative_target_columns
 from .sector_audit import sector_coverage_audit
 from .context_features import build_context_features
 from .sensitivity import sensitivity_audit
+from .feature_variants import build_feature_variants
+from .evaluation_train import run_evaluation
+from .evaluation_reports import ablation_report,bucket_report,delivery_report,importance_stability,model_report
 
 CANONICAL="pit_liquid_ordinary_equity_v1"
 
@@ -36,7 +40,8 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
     splits=pq.read_table(paths["split_path"],columns=["trade_date","symbol","fold_id","split_role"])
     split_rows=splits.to_pylist(); development_dates={r["trade_date"] for r in split_rows if r["split_role"] in {"train","validation"}}
     master=pq.read_table(paths["security_master_path"],columns=["symbol","sector"]).to_pylist(); sectors={r["symbol"]:r["sector"] for r in master if r["sector"]}
-    horizons=tuple(raw["target"]["horizons"]); cols=["trade_date","symbol","ret_1obs_adj","ret_5obs_adj","ret_20obs_adj","turnover_1obs_adj","turnover_median_20obs_adj","close_to_mean_20obs_adj"]+[f"fwd_open_to_close_ret_{h}s_adj" for h in horizons]
+    c3=json.loads(paths["c3_manifest_path"].read_text()); c7_features=c3["ordered_features"]
+    horizons=tuple(raw["target"]["horizons"]); cols=list(dict.fromkeys(["trade_date","symbol"]+c7_features+[f"fwd_open_to_close_ret_{h}s_adj" for h in horizons]))
     source=pq.read_table(paths["targets_path"],columns=cols)
     rows=[]
     for r in source.to_pylist():
@@ -68,11 +73,25 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
         for name,values in context.items():
             nulls=sum(values[i] is None for i in idx); missing.append({"fold_id":fold,"split_role":"validation","feature":name,"row_count":len(idx),"null_count":nulls,"null_fraction":nulls/len(idx) if idx else None})
     missing_table=pa.Table.from_pylist(missing); missing_path=_inside(repo,raw["output"]["feature_missingness_path"]); _write_parquet(missing_table,missing_path)
+    folds=sorted({r["fold_id"] for r in split_rows}); roles={fold:np.full(len(rows),"not_in_fold",object) for fold in folds}
+    for r in split_rows:
+        i=row_index.get((r["trade_date"],r["symbol"]));
+        if i is not None: roles[r["fold_id"]][i]=r["split_role"]
+    variants=build_feature_variants(c7_features,market_names,sector_names,relative_names)
+    eval_cfg={**raw["evaluation"],"horizons":tuple(raw["evaluation"]["horizons"])}
+    pred_path=_inside(repo,raw["output"]["predictions_path"]); pred_tmp=pred_path.with_suffix(pred_path.suffix+".tmp")
+    result=run_evaluation(rows,derived,context,roles,variants,eval_cfg,pred_tmp,_inside(repo,raw["output"]["models_root"])); pred_tmp.replace(pred_path)
+    diagnostic_outputs={}
+    for label,result_key,path_key in (("model_metrics","metrics","model_metrics_path"),("daily_ic","daily_ic","daily_ic_path"),("bucket_outcomes","buckets","bucket_outcomes_path"),("subgroup_metrics","subgroup_metrics","subgroup_metrics_path"),("feature_importance","feature_importance","feature_importance_path"),("training_diagnostics","training_diagnostics","training_diagnostics_path")):
+        dt=pa.Table.from_pylist(result[result_key]); dp=_inside(repo,raw["output"][path_key]); _write_parquet(dt,dp); diagnostic_outputs[label]={"path":str(dp),"file_sha256":sha256_file(dp),"logical_sha256":logical_hash(dt),"rows":dt.num_rows}
+    stability=importance_stability(result["feature_importance"])
+    viewer={"manifest_version":1,"holdout_accessed":False,"aggregate_metrics":result["aggregate_metrics"],"artifacts":diagnostic_outputs,"feature_importance_stability":stability,"training_diagnostics":result["training_diagnostics"],"regime_thresholds":result["regime_thresholds"]}
+    viewer_path=_inside(repo,raw["output"]["viewer_summary_path"]); write_json(viewer,viewer_path)
     counts={"rows":table.num_rows,"dates":len({r["trade_date"] for r in rows}),"symbols":len({r["symbol"] for r in rows}),"missing_sector_rows":sum(r["sector"] is None for r in rows)}
     for h in horizons:
         counts[f"valid_market_relative_{h}s"]=sum(x is not None for x in derived[f"fwd_market_relative_ret_{h}s"])
         counts[f"valid_sector_relative_{h}s"]=sum(x is not None for x in derived[f"fwd_sector_relative_ret_{h}s"])
-    manifest={"manifest_version":1,"generated_at_utc":datetime.now(timezone.utc).isoformat(),"code":code,"holdout_accessed":False,"canonical_universe":CANONICAL,"sector_provenance":"2026-08-01 security-master historical backcast","benchmark_definitions":{"market":"same-date eligible ordinary-equity leave-one-out median","sector":"same-date same-sector eligible ordinary-equity leave-one-out median","sector_minimum_policy":raw["target"]["sector_minimum_policy"],"minimum_sector_peers":raw["target"]["minimum_sector_peers"],"relaxed_sector_peers":raw["target"]["relaxed_sector_peers"],"shrinkage_rule":raw["target"]["shrinkage_rule"],"shrinkage_strength":raw["target"]["shrinkage_strength"]},"target_definitions":list(derived),"feature_definitions":{"market":market_names,"sector":sector_names,"relative":relative_names,"ret_10obs":"compound current ret_5obs with the same symbol's five-observation-lag ret_5obs","rolling_window":60,"minimum_rolling_observations":30},"counts":counts,"sector_exclusion_summary":audit_summary,"sector_sensitivity_summary":sensitivity,"inputs":{k:{"path":str(v),"sha256":sha256_file(v)} for k,v in paths.items()},"outputs":{"relative_targets":{"path":str(out),"file_sha256":sha256_file(out),"logical_sha256":logical_hash(table)},"sector_audit":{"path":str(audit_path),"file_sha256":sha256_file(audit_path),"logical_sha256":logical_hash(audit_table)},"sector_coverage":{"path":str(coverage_path),"file_sha256":sha256_file(coverage_path),"logical_sha256":logical_hash(coverage_table)},"sector_sensitivity":{"path":str(sensitivity_path),"file_sha256":sha256_file(sensitivity_path),"logical_sha256":logical_hash(sensitivity_table)},"sector_sensitivity_coverage":{"path":str(sensitivity_coverage_path),"file_sha256":sha256_file(sensitivity_coverage_path),"logical_sha256":logical_hash(sensitivity_coverage_table)},"feature_missingness":{"path":str(missing_path),"file_sha256":sha256_file(missing_path),"logical_sha256":logical_hash(missing_table)},**feature_outputs}}
+    manifest={"manifest_version":1,"generated_at_utc":datetime.now(timezone.utc).isoformat(),"code":code,"holdout_accessed":False,"canonical_universe":CANONICAL,"sector_provenance":"2026-08-01 security-master historical backcast","benchmark_definitions":{"market":"same-date eligible ordinary-equity leave-one-out median","sector":"same-date same-sector eligible ordinary-equity leave-one-out median","sector_minimum_policy":raw["target"]["sector_minimum_policy"],"minimum_sector_peers":raw["target"]["minimum_sector_peers"],"relaxed_sector_peers":raw["target"]["relaxed_sector_peers"],"shrinkage_rule":raw["target"]["shrinkage_rule"],"shrinkage_strength":raw["target"]["shrinkage_strength"]},"target_definitions":list(derived),"feature_definitions":{"market":market_names,"sector":sector_names,"relative":relative_names,"variants":variants,"ret_10obs":"compound current ret_5obs with the same symbol's five-observation-lag ret_5obs","rolling_window":60,"minimum_rolling_observations":30},"evaluation_configuration":eval_cfg,"selection_strategy":"fixed C7-derived configuration with train-internal chronological early stopping; outer validation never selects parameters","counts":counts,"evaluation_counts":{"prediction_rows":result["prediction_rows"],"fit_count":len(result["training_diagnostics"]),"metric_rows":len(result["metrics"]),"model_file_count":len(result["model_files"])},"aggregate_metrics":result["aggregate_metrics"],"sector_exclusion_summary":audit_summary,"sector_sensitivity_summary":sensitivity,"model_files":result["model_files"],"inputs":{k:{"path":str(v),"sha256":sha256_file(v)} for k,v in paths.items()},"outputs":{"relative_targets":{"path":str(out),"file_sha256":sha256_file(out),"logical_sha256":logical_hash(table)},"predictions":{"path":str(pred_path),"file_sha256":sha256_file(pred_path),"logical_sha256":sha256_file(pred_path)},"viewer_summary":{"path":str(viewer_path),"file_sha256":sha256_file(viewer_path)},"sector_audit":{"path":str(audit_path),"file_sha256":sha256_file(audit_path),"logical_sha256":logical_hash(audit_table)},"sector_coverage":{"path":str(coverage_path),"file_sha256":sha256_file(coverage_path),"logical_sha256":logical_hash(coverage_table)},"sector_sensitivity":{"path":str(sensitivity_path),"file_sha256":sha256_file(sensitivity_path),"logical_sha256":logical_hash(sensitivity_table)},"sector_sensitivity_coverage":{"path":str(sensitivity_coverage_path),"file_sha256":sha256_file(sensitivity_coverage_path),"logical_sha256":logical_hash(sensitivity_coverage_table)},"feature_missingness":{"path":str(missing_path),"file_sha256":sha256_file(missing_path),"logical_sha256":logical_hash(missing_table)},**feature_outputs,**diagnostic_outputs}}
     report=_inside(repo,raw["output"]["target_report_path"]); report.parent.mkdir(parents=True,exist_ok=True)
     report.write_text("# C8 Relative Target Report\n\nFinal holdout accessed: **false**.\n\nMarket and sector benchmarks are same-date leave-one-out medians. Sector eligibility requires five valid peers after exclusion. Sector labels retain the 2026-08-01 historical-backcast limitation.\n\n```json\n"+json.dumps(counts,indent=2,sort_keys=True)+"\n```\n")
     coverage_report=_inside(repo,raw["output"]["sector_coverage_report_path"])
@@ -88,6 +107,7 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
     flines=["# C8 Context Feature Report","","All features use current or past observations only. Market and sector cross-sectional statistics are leave-one-out where the stock would otherwise contribute mechanically. Sector features require five valid peers; nulls remain explicit. The final 2026 holdout was inaccessible.","","## Feature families","",f"- Market context: {len(market_names)} features",f"- Sector context: {len(sector_names)} features",f"- Stock-relative: {len(relative_names)} features","","## Validation-fold missingness","","| Fold | Feature | Rows | Nulls | Null fraction |","|---|---|---:|---:|---:|"]
     flines += [f"| `{r['fold_id']}` | `{r['feature']}` | {r['row_count']} | {r['null_count']} | {r['null_fraction']:.4f} |" for r in missing]
     feature_report.write_text("\n".join(flines)+"\n")
+    model_report(result,_inside(repo,raw["output"]["model_report_path"])); bucket_report(result,_inside(repo,raw["output"]["bucket_report_path"])); ablation_report(result,_inside(repo,raw["output"]["ablation_report_path"])); delivery_report(result,manifest,_inside(repo,raw["output"]["delivery_path"]))
     write_json(manifest,_inside(repo,raw["output"]["manifest_path"])); return manifest
 
 def main():

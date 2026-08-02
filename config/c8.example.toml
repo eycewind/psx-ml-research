@@ -32,3 +32,56 @@ sector_features_path = "data/processed/features/c8_sector_context_features.parqu
 relative_features_path = "data/processed/features/c8_relative_features.parquet"
 feature_missingness_path = "data/processed/diagnostics/c8_feature_missingness_by_fold.parquet"
 feature_report_path = "artifacts/reports/C8_FEATURE_REPORT.md"
+predictions_path = "artifacts/predictions/c8/validation_predictions.parquet"
+models_root = "artifacts/models/c8"
+model_metrics_path = "data/processed/diagnostics/c8_model_metrics.parquet"
+daily_ic_path = "data/processed/diagnostics/c8_daily_ic.parquet"
+bucket_outcomes_path = "data/processed/diagnostics/c8_bucket_outcomes.parquet"
+subgroup_metrics_path = "data/processed/diagnostics/c8_subgroup_metrics.parquet"
+feature_importance_path = "data/processed/diagnostics/c8_feature_importance.parquet"
+training_diagnostics_path = "data/processed/diagnostics/c8_training_diagnostics.parquet"
+viewer_summary_path = "data/processed/diagnostics/c8_signal_viewer_summary.json"
+model_report_path = "artifacts/reports/C8_MODEL_REPORT.md"
+bucket_report_path = "artifacts/reports/C8_BUCKET_REPORT.md"
+ablation_report_path = "artifacts/reports/C8_ABLATION_REPORT.md"
+delivery_path = "artifacts/reports/C8_DELIVERY.md"
+
+[evaluation]
+seed = 42
+threads = 1
+bootstrap_replicates = 200
+inner_validation_fraction = 0.15
+early_stopping_rounds = 30
+boosting_max_rounds = 250
+hist_max_iter = 100
+horizons = [5, 10]
+minimum_daily_population = 10
+near_constant_std = 1e-10
+
+[evaluation.lightgbm]
+learning_rate = 0.03
+num_leaves = 15
+max_depth = 4
+min_child_samples = 100
+feature_fraction = 0.9
+bagging_fraction = 0.9
+reg_alpha = 0.1
+reg_lambda = 1.0
+max_bin = 127
+
+[evaluation.xgboost]
+learning_rate = 0.03
+max_depth = 3
+min_child_weight = 20
+subsample = 0.9
+colsample_bytree = 0.9
+reg_alpha = 0.1
+reg_lambda = 10.0
+max_bin = 128
+
+[evaluation.hist]
+learning_rate = 0.05
+max_leaf_nodes = 31
+max_depth = 4
+min_samples_leaf = 100
+l2_regularization = 1.0
