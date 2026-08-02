@@ -2,6 +2,16 @@
 
 Turnover is diagnostic; costs belong to C10.
 
+## Rank persistence
+
+| lag_sessions | rank_autocorrelation | top_decile_persistence | bottom_decile_persistence | selected_falling_below_median | unselected_entering_top_tail |
+|---|---|---|---|---|---|
+| 1 | 0.8098531573598258 | 0.6822051259621971 | 0.5728406816306937 | 0.05004404810199488 | 0.03534340586390773 |
+| 2 | 0.7299328764085313 | 0.6168768734495033 | 0.48231597953428257 | 0.0830039054365569 | 0.042269395666599194 |
+| 5 | 0.5805031525183761 | 0.5151385763936688 | 0.3235944232342587 | 0.142023787759303 | 0.053430360119309475 |
+
+## Policy turnover sample
+
 | policy_id | trade_date | candidate_count | retained | entries | exits | jaccard | gross_candidate_turnover |
 |---|---|---|---|---|---|---|---|
 | P1_broad_canonical | 2023-01-02 | 12 | 0 | 12 | 0 | 0.0 | 1.0 |
