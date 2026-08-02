@@ -50,6 +50,8 @@ def _contribution_robustness(selected,dimension):
     return {"dimension":dimension,"base_row_mean":base,"group_count":len(grouped),**shares,**leave,"top_groups":[{"value":x[0],"contribution":x[1],"rows":x[2]} for x in contributions[:20]]}
 def _prepare(paths,manifest):
     rank=pq.read_table(paths["c8_rank_predictions_path"],filters=[("task_type","=","rank")]).to_pylist()
+    reference_path=Path(paths["c8_rank_predictions_path"]).parents[2]/"c9/reference_rank_predictions.parquet"
+    if reference_path.exists(): rank += pq.read_table(reference_path).to_pylist()
     features={(r["trade_date"],r["symbol"]):r for r in pq.read_table(paths["feature_targets_path"],columns=["trade_date","symbol","turnover_median_20obs_adj","turnover_rank_adj","ret_20obs_rank_adj"]).to_pylist()}
     relative={(r["trade_date"],r["symbol"]):r for r in pq.read_table(paths["relative_targets_path"],columns=["trade_date","symbol","sector"]).to_pylist()}
     reg=pq.read_table(paths["c8_regression_predictions_path"],filters=[("horizon","=",5),("target_family","=","market_relative"),("feature_variant","=","B_market_context"),("model_name","=","lightgbm_cpu"),("comparison_subset_natural","=",True)]).to_pylist()
