@@ -22,8 +22,8 @@
   "c8_manifest_sha256": "b5009fc5fb4f1c9ff57736508a64b71303abaa61a99c8fcb611c3ac7dd1058c0",
   "code": {
     "branch": "feature/c9-ranking-selection-robustness",
-    "commit": "fe1e955bfed7dea5d6e5fbc87dfa5e77ff05f6e3",
-    "dirty": true
+    "commit": "1d2a54aa296f5a7ecfd0e30b24cf91bb38a51c57",
+    "dirty": false
   },
   "concentration_robustness": [
     {
@@ -433,7 +433,7 @@
     "fold_2024",
     "fold_2025"
   ],
-  "generated_at_utc": "2026-08-02T12:52:24.098355+00:00",
+  "generated_at_utc": "2026-08-02T12:55:00.440184+00:00",
   "holdout_accessed": false,
   "input_provenance": {
     "branch": "feature/c9-ranking-selection-robustness",
@@ -12637,7 +12637,7 @@
     "nearby_liquidity_sector_model_schedule": true,
     "random_baseline": true
   },
-  "runtime_seconds": 134.59456439899986,
+  "runtime_seconds": 134.7512320679998,
   "selected_conservative_policy": "P2_conservative_consensus",
   "selected_primary_policy": "P1_broad_canonical",
   "target": "fwd_market_relative_rank_5s",
