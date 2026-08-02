@@ -1,0 +1,94 @@
+{
+  "benchmark_definitions": {
+    "market": "same-date eligible ordinary-equity leave-one-out median",
+    "minimum_sector_peers": 5,
+    "sector": "same-date same-sector eligible ordinary-equity leave-one-out median",
+    "sector_minimum_policy": "peers_after_leave_one_out"
+  },
+  "canonical_universe": "pit_liquid_ordinary_equity_v1",
+  "code": {
+    "branch": "feature/c8-market-relative-targets-and-context",
+    "commit": "9cf52ac33cbcef1a5c1f6db3b1967113915cd3f2",
+    "dirty": false
+  },
+  "counts": {
+    "dates": 1448,
+    "missing_sector_rows": 13540,
+    "rows": 265231,
+    "symbols": 394,
+    "valid_market_relative_10s": 263363,
+    "valid_market_relative_20s": 263085,
+    "valid_market_relative_5s": 263575,
+    "valid_sector_relative_10s": 189652,
+    "valid_sector_relative_20s": 189642,
+    "valid_sector_relative_5s": 189777
+  },
+  "generated_at_utc": "2026-08-02T05:36:57.300433+00:00",
+  "holdout_accessed": false,
+  "inputs": {
+    "c3_manifest_path": {
+      "path": "/home/hassan/psx-ml-research/artifacts/reports/C3_FEATURE_MANIFEST.json",
+      "sha256": "99fe94422c6ebae5ab0bfb843a7a75c727b937aadbfc1232c0f1a35c9625fc8c"
+    },
+    "c4_manifest_path": {
+      "path": "/home/hassan/psx-ml-research/artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json",
+      "sha256": "f91b5f091db3bbdb3b3a59bd7b2d8e8dd1311e8f80cc6f02a5d2307eab61dc9e"
+    },
+    "c6_manifest_path": {
+      "path": "/home/hassan/psx-ml-research/artifacts/reports/C6_MANIFEST.json",
+      "sha256": "22e63ebf0d3eff95b28dabc66d52ee0e630877005828ae80592e85470ccd5e2d"
+    },
+    "c7_manifest_path": {
+      "path": "/home/hassan/psx-ml-research/artifacts/reports/C7_MODEL_MANIFEST.json",
+      "sha256": "a4cbb497cbfb9a5bff08dcc583f59c49e42a628ad9dc5d71223ec757a2556ab9"
+    },
+    "security_master_path": {
+      "path": "/home/hassan/psx-ml-research/data/reference/psx_security_master_2026-08-01.parquet",
+      "sha256": "d46e89d0bd95b0e78651dab43e9504d328ac54f967fe723fa78ba17430633a07"
+    },
+    "split_path": {
+      "path": "/home/hassan/psx-ml-research/data/processed/datasets/temporal_split_assignments.parquet",
+      "sha256": "aebbc1dd688e3a462c7a069559c162f28c595dd2041f2d4e0c5e361c07959d58"
+    },
+    "targets_path": {
+      "path": "/home/hassan/psx-ml-research/data/processed/targets/daily_feature_targets.parquet",
+      "sha256": "8ef1d78a54cd2d0492e6e75fb3b9961708dde8b9a75fd31076aa5768c8590f69"
+    },
+    "universe_path": {
+      "path": "/home/hassan/psx-ml-research/data/processed/universe/c6_universe_membership.parquet",
+      "sha256": "4f7cc52956b8dcd175a428e5d6c124c347a7562bbf4f59065c3d0f918207264b"
+    }
+  },
+  "manifest_version": 1,
+  "outputs": {
+    "relative_targets": {
+      "file_sha256": "88e42fe061f8199e546baa01c039ceb6e02cb6406e3ff1d54741d1f2c0be518c",
+      "logical_sha256": "07c6db662a92278910b80e906e2eb5a19bf036b2e163fe42598a00b5e162ba2d",
+      "path": "/home/hassan/psx-ml-research/data/processed/targets/c8_relative_targets.parquet"
+    }
+  },
+  "sector_provenance": "2026-08-01 security-master historical backcast",
+  "target_definitions": [
+    "market_loo_median_ret_5s",
+    "sector_loo_median_ret_5s",
+    "fwd_market_relative_ret_5s",
+    "fwd_sector_relative_ret_5s",
+    "fwd_market_relative_rank_5s",
+    "outperform_market_5s",
+    "outperform_sector_5s",
+    "market_loo_median_ret_10s",
+    "sector_loo_median_ret_10s",
+    "fwd_market_relative_ret_10s",
+    "fwd_sector_relative_ret_10s",
+    "fwd_market_relative_rank_10s",
+    "outperform_market_10s",
+    "outperform_sector_10s",
+    "market_loo_median_ret_20s",
+    "sector_loo_median_ret_20s",
+    "fwd_market_relative_ret_20s",
+    "fwd_sector_relative_ret_20s",
+    "fwd_market_relative_rank_20s",
+    "outperform_market_20s",
+    "outperform_sector_20s"
+  ]
+}
