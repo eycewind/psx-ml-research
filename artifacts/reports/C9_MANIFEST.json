@@ -22,7 +22,7 @@
   "c8_manifest_sha256": "b5009fc5fb4f1c9ff57736508a64b71303abaa61a99c8fcb611c3ac7dd1058c0",
   "code": {
     "branch": "feature/c9-ranking-selection-robustness",
-    "commit": "9443bd81a7964b7f740b09a5f6e2ceaf53d6273c",
+    "commit": "4893ef2f5666af4bbd402db8b1bb3898f0f35dcb",
     "dirty": true
   },
   "concentration_robustness": [
@@ -366,7 +366,7 @@
   "counts": {
     "canonical_prediction_rows": 296026,
     "dates": 742,
-    "enriched_prediction_rows": 1183684,
+    "enriched_prediction_rows": 1479710,
     "sectors": 35,
     "selection_metric_rows": 1218,
     "selection_rows": 5730,
@@ -433,7 +433,7 @@
     "fold_2024",
     "fold_2025"
   ],
-  "generated_at_utc": "2026-08-02T12:34:07.916678+00:00",
+  "generated_at_utc": "2026-08-02T12:41:27.092864+00:00",
   "holdout_accessed": false,
   "input_provenance": {
     "branch": "feature/c9-ranking-selection-robustness",
@@ -527,7 +527,7 @@
       "rows": 463
     },
     "viewer_summary": {
-      "file_sha256": "420eab2ba7ad39ae2221d2bbb00d525584ad13e38d120ec0091d831b91e05ca7",
+      "file_sha256": "22393908b5cdc12db234e547b7b465fc7101ac7580fd64e66bf17fd6034ff8f8",
       "path": "/home/hassan/psx-ml-research/artifacts/c9/viewer_summary.json"
     }
   },
@@ -582,7 +582,7 @@
   ],
   "rank_change": {
     "count": 146946,
-    "mean": 0.00047833118724193043,
+    "mean": 0.00047833118724193064,
     "median": 0.0053329804860088315,
     "p05": -0.3032200684649117,
     "p95": 0.27137158548923257
@@ -12499,40 +12499,40 @@
       "top_decile_capture": 0.0901489715212192
     },
     {
-      "bottom_decile_rejection": null,
-      "date_count": 0,
+      "bottom_decile_rejection": 0.9446155797864156,
+      "date_count": 742,
       "feature_variant": "A_c7_only",
       "horizon": 5,
       "model_name": "lightgbm_cpu",
-      "mrr_actual_top_decile": null,
-      "ndcg_at_10": null,
-      "ndcg_at_20": null,
-      "ndcg_at_5": null,
-      "precision_at_10": null,
-      "precision_at_20": null,
-      "precision_at_5": null,
-      "recall_at_10": null,
-      "recall_at_20": null,
-      "recall_at_5": null,
-      "top_decile_capture": null
+      "mrr_actual_top_decile": 0.031132726436716315,
+      "ndcg_at_10": 0.5699382705406666,
+      "ndcg_at_20": 0.5750740647760108,
+      "ndcg_at_5": 0.5713515012289727,
+      "precision_at_10": 0.04649595687331536,
+      "precision_at_20": 0.09642857142857142,
+      "precision_at_5": 0.025606469002695417,
+      "recall_at_10": 0.04649595687331536,
+      "recall_at_20": 0.09642857142857142,
+      "recall_at_5": 0.025606469002695417,
+      "top_decile_capture": 0.09187592199315725
     },
     {
-      "bottom_decile_rejection": null,
-      "date_count": 0,
+      "bottom_decile_rejection": 0.9433647426635661,
+      "date_count": 742,
       "feature_variant": "A_c7_only",
       "horizon": 5,
       "model_name": "xgboost_gpu",
-      "mrr_actual_top_decile": null,
-      "ndcg_at_10": null,
-      "ndcg_at_20": null,
-      "ndcg_at_5": null,
-      "precision_at_10": null,
-      "precision_at_20": null,
-      "precision_at_5": null,
-      "recall_at_10": null,
-      "recall_at_20": null,
-      "recall_at_5": null,
-      "top_decile_capture": null
+      "mrr_actual_top_decile": 0.03130013243255362,
+      "ndcg_at_10": 0.5677316501537727,
+      "ndcg_at_20": 0.5736176229801827,
+      "ndcg_at_5": 0.5706691082785059,
+      "precision_at_10": 0.048652291105121294,
+      "precision_at_20": 0.09541778975741241,
+      "precision_at_5": 0.029110512129380057,
+      "recall_at_10": 0.048652291105121294,
+      "recall_at_20": 0.09541778975741241,
+      "recall_at_5": 0.029110512129380057,
+      "top_decile_capture": 0.09054763196579775
     },
     {
       "bottom_decile_rejection": 0.9345480501160273,
@@ -12571,6 +12571,17 @@
       "top_decile_capture": 0.09343250398081078
     }
   ],
+  "reference_rank_provenance": {
+    "generation_code": {
+      "commit": "23f4f239e4a568ae7b3b569ad63c7f16c2651c1d",
+      "dirty": false
+    },
+    "holdout_accessed": false,
+    "manifest_path": "/home/hassan/psx-ml-research/artifacts/c9/reference_rank_manifest.json",
+    "manifest_sha256": "ca395881d198f6feb3a76fa6319f34a2218a98f9000170ee8de07877a1d73c9b",
+    "model_count": 6,
+    "prediction_sha256": "74d3827d8a759e6a151d7b84fae9e32e2f46f91aeabdc741d95583fc7faf37a8"
+  },
   "robustness_comparators": [
     {
       "comparison": "E0_lightgbm|top_5pct|weekly_first_session|L0|S1",
@@ -12626,7 +12637,7 @@
     "nearby_liquidity_sector_model_schedule": true,
     "random_baseline": true
   },
-  "runtime_seconds": 145.47425210400002,
+  "runtime_seconds": 149.89512132200002,
   "selected_conservative_policy": "P2_conservative_consensus",
   "selected_primary_policy": "P1_broad_canonical",
   "target": "fwd_market_relative_rank_5s"
