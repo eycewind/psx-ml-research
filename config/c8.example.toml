@@ -1,0 +1,21 @@
+[input]
+targets_path = "data/processed/targets/daily_feature_targets.parquet"
+universe_path = "data/processed/universe/c6_universe_membership.parquet"
+split_path = "data/processed/datasets/temporal_split_assignments.parquet"
+security_master_path = "data/reference/psx_security_master_2026-08-01.parquet"
+c3_manifest_path = "artifacts/reports/C3_FEATURE_MANIFEST.json"
+c4_manifest_path = "artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json"
+c6_manifest_path = "artifacts/reports/C6_MANIFEST.json"
+c7_manifest_path = "artifacts/reports/C7_MODEL_MANIFEST.json"
+
+[target]
+horizons = [5, 10, 20]
+minimum_market_peers = 1
+minimum_sector_peers = 5
+sector_minimum_policy = "peers_after_leave_one_out"
+rank_tie_break = "relative_return_then_symbol"
+
+[output]
+relative_targets_path = "data/processed/targets/c8_relative_targets.parquet"
+target_report_path = "artifacts/reports/C8_TARGET_REPORT.md"
+manifest_path = "artifacts/reports/C8_MANIFEST.json"

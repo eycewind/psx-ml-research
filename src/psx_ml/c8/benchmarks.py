@@ -30,10 +30,11 @@ def leave_one_out_median(
     for rows in members.values():
         rows.sort(key=lambda x:(x[0],x[1],x[2])); n=len(rows)
         if n-1<minimum_peers: continue
-        ordered=[x[0] for x in rows]
+        ordered=[x[0] for x in rows]; remaining_n=n-1
         for rank,(_,_,original) in enumerate(rows):
-            remaining=ordered[:rank]+ordered[rank+1:]
-            out[original]=_median_sorted(remaining)
+            def retained(position): return ordered[position+(position>=rank)]
+            mid=remaining_n//2
+            out[original]=retained(mid) if remaining_n%2 else (retained(mid-1)+retained(mid))/2.0
     return out
 
 
@@ -48,4 +49,3 @@ def date_local_rank(dates: Iterable[str], values: Iterable[float | None], symbol
         rows.sort(key=lambda x:(x[0],x[1],x[2])); denominator=max(1,len(rows)-1)
         for rank,(_,_,original) in enumerate(rows): out[original]=rank/denominator if len(rows)>1 else 0.5
     return out
-
