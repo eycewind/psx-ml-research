@@ -40,10 +40,10 @@ def _turnover_ranks(rows):
         for i,r in enumerate(ordered): out[(d,r["symbol"])]=i/(n-1) if n>1 else .5
     return out
 def _prepare(paths,manifest):
-    rank=[r for r in pq.read_table(paths["c8_rank_predictions_path"]).to_pylist() if r["task_type"]=="rank"]
+    rank=pq.read_table(paths["c8_rank_predictions_path"],filters=[("task_type","=","rank")]).to_pylist()
     features={(r["trade_date"],r["symbol"]):r for r in pq.read_table(paths["feature_targets_path"],columns=["trade_date","symbol","turnover_median_20obs_adj","turnover_rank_adj","ret_20obs_rank_adj"]).to_pylist()}
     relative={(r["trade_date"],r["symbol"]):r for r in pq.read_table(paths["relative_targets_path"],columns=["trade_date","symbol","sector"]).to_pylist()}
-    reg=[r for r in pq.read_table(paths["c8_regression_predictions_path"]).to_pylist() if r["horizon"]==5 and r["target_family"]=="market_relative" and r["feature_variant"]=="B_market_context" and r["model_name"]=="lightgbm_cpu" and r["comparison_subset_natural"]]
+    reg=pq.read_table(paths["c8_regression_predictions_path"],filters=[("horizon","=",5),("target_family","=","market_relative"),("feature_variant","=","B_market_context"),("model_name","=","lightgbm_cpu"),("comparison_subset_natural","=",True)]).to_pylist()
     regmap={(r["fold_id"],r["trade_date"],r["symbol"]):r for r in reg}; turnover=_turnover_ranks(features.values()); out=[]
     provenance=manifest["supplemental_evaluation"]["generation_code"]["commit"]
     for r in rank:
@@ -56,7 +56,9 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
     for key in sorted({(r["model_name"],r["fold_id"]) for r in canonical}): ranked += percentile_ranks([r for r in canonical if (r["model_name"],r["fold_id"])==key])
     lgb=[r for r in ranked if r["model_name"]=="lightgbm_cpu"]; xgb=[r for r in ranked if r["model_name"]=="xgboost_gpu"]; ensemble=average_rank_ensemble(lgb,xgb); model_sets={"E0_lightgbm":lgb,"E1_xgboost":xgb,"E2_average_rank":ensemble}
     selection_metrics=[]; selection_rows=[]; skipped=[]
-    definitions=[("percentile",x,f"top_{int(x*100)}pct") for x in cfg["selection"]["percentiles"]]+[("fixed",x,f"top_{x}") for x in cfg["selection"]["fixed_counts"]]
+    definitions=([("percentile",x,f"top_{int(x*100)}pct") for x in cfg["selection"]["percentiles"]]
+        +[("fixed",x,f"top_{x}") for x in cfg["selection"]["fixed_counts"]]
+        +[("threshold",x,f"rank_gte_{int(x*100)}") for x in cfg["selection"]["rank_thresholds"]])
     for model,model_rows in model_sets.items():
       for kind,value,name in definitions:
        for schedule in cfg["selection"]["rebalance_schedules"]:
@@ -64,11 +66,11 @@ def run(config_path:Path,repo:Path,allow_final_holdout=False):
          for sector in ("S0","S1","S2"):
           chosen,skip,eligible=_policy(model_rows,kind,value,schedule,liquidity,sector); meta={"policy_id":"|".join(map(str,(model,name,schedule,liquidity,sector))),"model":model,"selection_policy":name,"selection_kind":kind,"threshold":value,"rebalance_schedule":schedule,"liquidity_screen":liquidity,"sector_constraint":sector}
           selection_metrics.append(_aggregate(chosen,eligible,cfg,meta)); skipped += [{**meta,**r} for r in skip]
-          selection_rows += [{**meta,**r} for r in chosen]
     for model,model_rows in model_sets.items():
-        chosen,skip,eligible=_policy(model_rows,"percentile",1.,"weekly_first_session","L0","S3"); meta={"policy_id":f"{model}|sector_neutral","model":model,"selection_policy":"sector_neutral","selection_kind":"sector_neutral","threshold":None,"rebalance_schedule":"weekly_first_session","liquidity_screen":"L0","sector_constraint":"S3"}; selection_metrics.append(_aggregate(chosen,eligible,cfg,meta)); skipped += [{**meta,**r} for r in skip]; selection_rows += [{**meta,**r} for r in chosen]
+        chosen,skip,eligible=_policy(model_rows,"percentile",1.,"weekly_first_session","L0","S3"); meta={"policy_id":f"{model}|sector_neutral","model":model,"selection_policy":"sector_neutral","selection_kind":"sector_neutral","threshold":None,"rebalance_schedule":"weekly_first_session","liquidity_screen":"L0","sector_constraint":"S3"}; selection_metrics.append(_aggregate(chosen,eligible,cfg,meta)); skipped += [{**meta,**r} for r in skip]
     p1,_skip,p1u=_policy(lgb,"percentile",.10,"weekly_first_session","L0","S1"); lt=select(_filter_schedule(apply_liquidity(lgb,"L1"),"weekly_first_session"),"percentile",.10); xt=select(_filter_schedule(apply_liquidity(xgb,"L1"),"weekly_first_session"),"percentile",.10); consensus,_=intersection_union(lt,xt); p2,_=sector_constraint(consensus,"S1"); p3,_skip,p3u=_policy(ensemble,"percentile",.05,"non_overlapping_5_session","L2","S2")
     candidates={"P1_broad_canonical":(p1,p1u),"P2_conservative_consensus":(p2,apply_liquidity(lgb,"L1")),"P3_high_conviction":(p3,p3u)}; policy_metrics=[_aggregate(v[0],v[1],cfg,{"policy_id":k}) for k,v in candidates.items()]
+    selection_rows=[{"policy_id":k,**r} for k,v in candidates.items() for r in v[0]]
     agreement=model_agreement(lgb,xgb); ranking=date_ranking_metrics(lgb); persistence=rank_persistence(lgb); rank_change=rank_changes(lgb); retention_rows=[]; lifetime_rows=[]; turnover_rows=[]
     for k,(chosen,_) in candidates.items(): retention_rows += [{"policy_id":k,**r} for r in retention(chosen)]; lifetime_rows += [{"policy_id":k,**r} for r in candidate_lifetimes(chosen)]; turnover_rows += [{"policy_id":k,**r} for r in turnover_metrics(chosen)]
     baselines=[]; p1_counts=Counter(r["trade_date"] for r in p1); random=random_distribution(p1u,p1_counts,cfg["baseline"]["random_repetitions"],cfg["baseline"]["seed"]); observed=policy_metrics[0]["mean_outcome"]
