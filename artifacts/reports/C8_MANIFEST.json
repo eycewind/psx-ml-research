@@ -8,7 +8,7 @@
   "canonical_universe": "pit_liquid_ordinary_equity_v1",
   "code": {
     "branch": "feature/c8-market-relative-targets-and-context",
-    "commit": "5643d5349763c626db0468fae31e4b4ceba75044",
+    "commit": "09a01c21f59e747e1760e609015828c880bd079c",
     "dirty": false
   },
   "counts": {
@@ -84,7 +84,7 @@
       "sector_realized_volatility_20obs"
     ]
   },
-  "generated_at_utc": "2026-08-02T09:23:00.910832+00:00",
+  "generated_at_utc": "2026-08-02T09:24:43.479406+00:00",
   "holdout_accessed": false,
   "inputs": {
     "c3_manifest_path": {
@@ -123,8 +123,8 @@
   "manifest_version": 1,
   "outputs": {
     "feature_missingness": {
-      "file_sha256": "a7088fa5d0eadb62ed262ca8332947e57c10e7dbea6f5ce29047826bce667fe5",
-      "logical_sha256": "96bb7ef9592d8e42c266d75357156a0341840092a9e11c5cf55212b1091c8211",
+      "file_sha256": "a9e1162537a1c77e30a6a4deb791261f53aa45b5fe38f6b18e41c041e172b6c9",
+      "logical_sha256": "76778138b58a623c9a64c88ff3523a73241ceaea79440e740bd01906b303dbab",
       "path": "/home/hassan/psx-ml-research/data/processed/diagnostics/c8_feature_missingness_by_fold.parquet"
     },
     "market_features": {
@@ -152,8 +152,8 @@
         "market_realized_volatility_5obs",
         "market_realized_volatility_20obs"
       ],
-      "file_sha256": "64413e53e6f92fcbd9757ac823b9335109da138f96e342dff31a9a9168bccf6e",
-      "logical_sha256": "b5d80b9a2ed529fc61324f6a9fa1183ac868e1dcbb9da44f5f1ea3d7bb819e56",
+      "file_sha256": "36ddd9fbc355669a9b047dcd8f8ac0605d8ea54fbd4c10b1ec81a013b4924270",
+      "logical_sha256": "f02cb7e5ae6f225fabb123cb2ee3a7d46c84abb69ca811fc7975bf974de97597",
       "path": "/home/hassan/psx-ml-research/data/processed/features/c8_market_context_features.parquet"
     },
     "relative_features": {

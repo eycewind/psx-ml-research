@@ -19,7 +19,7 @@ All features use current or past observations only. Market and sector cross-sect
 | `fold_2023` | `market_mean_ret_5obs` | 35500 | 0 | 0.0000 |
 | `fold_2023` | `sector_median_ret_5obs` | 35500 | 11462 | 0.3229 |
 | `fold_2023` | `market_median_ret_10obs` | 35500 | 98 | 0.0028 |
-| `fold_2023` | `market_mean_ret_10obs` | 35500 | 0 | 0.0000 |
+| `fold_2023` | `market_mean_ret_10obs` | 35500 | 98 | 0.0028 |
 | `fold_2023` | `sector_median_ret_10obs` | 35500 | 11587 | 0.3264 |
 | `fold_2023` | `market_median_ret_20obs` | 35500 | 0 | 0.0000 |
 | `fold_2023` | `market_mean_ret_20obs` | 35500 | 0 | 0.0000 |
@@ -69,7 +69,7 @@ All features use current or past observations only. Market and sector cross-sect
 | `fold_2024` | `market_mean_ret_5obs` | 48805 | 0 | 0.0000 |
 | `fold_2024` | `sector_median_ret_5obs` | 48805 | 12658 | 0.2594 |
 | `fold_2024` | `market_median_ret_10obs` | 48805 | 211 | 0.0043 |
-| `fold_2024` | `market_mean_ret_10obs` | 48805 | 0 | 0.0000 |
+| `fold_2024` | `market_mean_ret_10obs` | 48805 | 211 | 0.0043 |
 | `fold_2024` | `sector_median_ret_10obs` | 48805 | 12853 | 0.2634 |
 | `fold_2024` | `market_median_ret_20obs` | 48805 | 0 | 0.0000 |
 | `fold_2024` | `market_mean_ret_20obs` | 48805 | 0 | 0.0000 |
@@ -119,7 +119,7 @@ All features use current or past observations only. Market and sector cross-sect
 | `fold_2025` | `market_mean_ret_5obs` | 64261 | 0 | 0.0000 |
 | `fold_2025` | `sector_median_ret_5obs` | 64261 | 11399 | 0.1774 |
 | `fold_2025` | `market_median_ret_10obs` | 64261 | 339 | 0.0053 |
-| `fold_2025` | `market_mean_ret_10obs` | 64261 | 0 | 0.0000 |
+| `fold_2025` | `market_mean_ret_10obs` | 64261 | 339 | 0.0053 |
 | `fold_2025` | `sector_median_ret_10obs` | 64261 | 11774 | 0.1832 |
 | `fold_2025` | `market_median_ret_20obs` | 64261 | 0 | 0.0000 |
 | `fold_2025` | `market_mean_ret_20obs` | 64261 | 0 | 0.0000 |
