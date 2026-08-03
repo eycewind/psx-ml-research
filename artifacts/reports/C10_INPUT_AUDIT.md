@@ -40,7 +40,7 @@
 - Minimum date: `2023-01-02`
 - Maximum date: `2025-12-29`
 - Holdout rows: `0`
-- Duplicate date-symbol keys: `0`
+- Duplicate policy/date/symbol keys: `0`
 
 ## Liquidity features
 
@@ -50,6 +50,6 @@
 - Minimum date: `2020-01-01`
 - Maximum date: `2025-12-29`
 - Holdout rows: `0`
-- Duplicate date-symbol keys: `0`
+- Duplicate policy/date/symbol keys: `0`
 
 The 2026 final holdout remained inaccessible.

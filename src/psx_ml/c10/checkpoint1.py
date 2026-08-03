@@ -7,6 +7,7 @@ from pathlib import Path
 from psx_ml.c10.inputs import (
     C9_SELECTIONS_PATH,
     FEATURE_PATH,
+    LAST_PRE_HOLDOUT_DATE,
     PRICE_PATH,
     audit_frame,
     load_c9_selections,
@@ -37,14 +38,14 @@ def main() -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
     selections = load_c9_selections()
-    maximum_source_date = selections["trade_date"].max()
+    maximum_signal_date = selections["trade_date"].max()
 
     prices = load_execution_prices(
-        maximum_date=maximum_source_date,
+        maximum_date=LAST_PRE_HOLDOUT_DATE,
     )
 
     liquidity = load_liquidity_features(
-        maximum_date=maximum_source_date,
+        maximum_date=maximum_signal_date,
     )
 
     mapped = map_next_session_entries(
@@ -126,7 +127,7 @@ def main() -> None:
 - Minimum date: `{selection_audit.min_date}`
 - Maximum date: `{selection_audit.max_date}`
 - Holdout rows: `{selection_audit.holdout_rows}`
-- Duplicate date-symbol keys: `{selection_audit.duplicate_keys}`
+- Duplicate policy/date/symbol keys: `{selection_audit.duplicate_keys}`
 
 ## Liquidity features
 
@@ -136,7 +137,7 @@ def main() -> None:
 - Minimum date: `{liquidity_audit.min_date}`
 - Maximum date: `{liquidity_audit.max_date}`
 - Holdout rows: `{liquidity_audit.holdout_rows}`
-- Duplicate date-symbol keys: `{liquidity_audit.duplicate_keys}`
+- Duplicate policy/date/symbol keys: `{selection_audit.duplicate_keys}`
 
 The 2026 final holdout remained inaccessible.
 """
@@ -156,7 +157,7 @@ The 2026 final holdout remained inaccessible.
 - Minimum date: `{price_audit.min_date}`
 - Maximum date: `{price_audit.max_date}`
 - Holdout rows: `{price_audit.holdout_rows}`
-- Duplicate date-symbol keys: `{price_audit.duplicate_keys}`
+- Duplicate date/symbol keys: `{price_audit.duplicate_keys}`
 
 ## Canonical price basis
 
@@ -180,6 +181,8 @@ Raw and adjusted OHLC columns both exist in the source, but C10 uses the adjuste
         "contract": "C10",
         "checkpoint": 1,
         "holdout_accessed": False,
+        "maximum_signal_date": maximum_signal_date.date().isoformat(),
+        "maximum_loaded_price_date": price_audit.max_date,
         "inputs": {
             str(C9_SELECTIONS_PATH): sha256_file(
                 C9_SELECTIONS_PATH

@@ -1,0 +1,20 @@
+In checkpoint1.py:
+
+1. Import LAST_PRE_HOLDOUT_DATE from psx_ml.c10.inputs.
+
+2. Replace:
+    maximum_source_date = selections["trade_date"].max()
+    prices = load_execution_prices(maximum_date=maximum_source_date)
+    liquidity = load_liquidity_features(maximum_date=maximum_source_date)
+
+   with:
+    maximum_signal_date = selections["trade_date"].max()
+    prices = load_execution_prices(maximum_date=LAST_PRE_HOLDOUT_DATE)
+    liquidity = load_liquidity_features(maximum_date=maximum_signal_date)
+
+3. Change the selection audit call to:
+    selection_audit = audit_frame(
+        selections,
+        path=C9_SELECTIONS_PATH,
+        key_columns=("policy_id", "trade_date", "symbol"),
+    )

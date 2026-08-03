@@ -8,18 +8,18 @@
   "contract": "C10",
   "entry_availability": [
     {
-      "availability_rate": 0.9918478260869565,
-      "available_entries": 2555,
-      "missing_entries": 21,
+      "availability_rate": 1.0,
+      "available_entries": 2576,
+      "missing_entries": 0,
       "policy_id": "P1_broad_canonical",
       "selection_dates": 157,
       "selection_rows": 2576,
       "symbols": 249
     },
     {
-      "availability_rate": 0.9915094339622641,
-      "available_entries": 2102,
-      "missing_entries": 18,
+      "availability_rate": 1.0,
+      "available_entries": 2120,
+      "missing_entries": 0,
       "policy_id": "P2_conservative_consensus",
       "selection_dates": 157,
       "selection_rows": 2120,
@@ -41,26 +41,17 @@
     "rows": 557346,
     "symbols": 778
   },
-  "missing_reasons": [
-    {
-      "entry_missing_reason": "no_next_market_session",
-      "policy_id": "P1_broad_canonical",
-      "rows": 21
-    },
-    {
-      "entry_missing_reason": "no_next_market_session",
-      "policy_id": "P2_conservative_consensus",
-      "rows": 18
-    }
-  ],
+  "maximum_loaded_price_date": "2025-12-31",
+  "maximum_signal_date": "2025-12-29",
+  "missing_reasons": [],
   "price_audit": {
     "duplicate_keys": 0,
     "holdout_rows": 0,
-    "max_date": "2025-12-29",
+    "max_date": "2025-12-31",
     "min_date": "2020-01-01",
     "path": "data/cache/daily_ohlcv.parquet",
-    "rows": 557346,
-    "symbols": 778
+    "rows": 558325,
+    "symbols": 780
   },
   "selection_audit": {
     "duplicate_keys": 0,
