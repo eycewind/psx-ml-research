@@ -1,0 +1,84 @@
+{
+  "checkpoint": 2,
+  "contract": "C10",
+  "holdout_accessed": false,
+  "inputs": {
+    "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e",
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520"
+  },
+  "outputs": {
+    "data/processed/c10/frictionless_nav.parquet": {
+      "rows": 1482,
+      "sha256": "384c3471f71df6ddb73848f9dce31a9c28e6dedc996c02e7b2a927ce7d0e3d4e"
+    },
+    "data/processed/c10/frictionless_positions.parquet": {
+      "rows": 22235,
+      "sha256": "bc3222d72b8238090f6f167d7bae330b35f91df0354366b56142b2e08718e6d2"
+    },
+    "data/processed/c10/frictionless_trades.parquet": {
+      "rows": 7049,
+      "sha256": "8cf75637a4f17ef537f2fbff01247bc37d094cd2d139b6c8d9360ba271772a0f"
+    }
+  },
+  "policy_summaries": [
+    {
+      "annualized_return": 0.6904201415615117,
+      "annualized_volatility": 0.1813587015826957,
+      "deferred_exit_trades": 1,
+      "end_date": "2025-12-31",
+      "ending_nav": 4811354.800964431,
+      "max_drawdown": -0.13682548095838165,
+      "max_pending_exits": 1,
+      "observations": 741,
+      "pending_exit_days": 1,
+      "policy_id": "P1_broad_canonical",
+      "position_rows": 12198,
+      "positive_day_fraction": 0.6059379217273954,
+      "rebalance_count": 157,
+      "sharpe_zero_rf": 3.039275384529373,
+      "stale_position_days": 18,
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_return": 3.8113548009644305,
+      "trade_rows": 3866,
+      "unique_symbols_traded": 249
+    },
+    {
+      "annualized_return": 0.7157756593943296,
+      "annualized_volatility": 0.1858333336364648,
+      "deferred_exit_trades": 1,
+      "end_date": "2025-12-31",
+      "ending_nav": 5030558.842194133,
+      "max_drawdown": -0.12917188736971708,
+      "max_pending_exits": 1,
+      "observations": 741,
+      "pending_exit_days": 1,
+      "policy_id": "P2_conservative_consensus",
+      "position_rows": 10037,
+      "positive_day_fraction": 0.5991902834008097,
+      "rebalance_count": 157,
+      "sharpe_zero_rf": 3.052188854734236,
+      "stale_position_days": 15,
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_return": 4.030558842194133,
+      "trade_rows": 3183,
+      "unique_symbols_traded": 231
+    }
+  ],
+  "portfolio_basis": {
+    "capacity_limits": false,
+    "fees": 0.0,
+    "missing_close_policy": "latest_prior_valid_close",
+    "missing_exit_open_policy": "defer_until_first_later_valid_open",
+    "rebalance_execution": "next_session_open_adj",
+    "shares": "fractional",
+    "slippage": 0.0,
+    "starting_capital_pkr": 1000000.0,
+    "taxes": 0.0,
+    "trading": "net_to_target",
+    "valuation": "daily_close_adj",
+    "weighting": "equal_weight"
+  },
+  "status": "COMPLETE"
+}

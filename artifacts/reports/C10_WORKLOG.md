@@ -29,3 +29,16 @@
   P1 2576/2576, P2 2120/2120.
 - No missing next-session entries.
 - Portfolio accounting and costs remain out of scope for Checkpoint 1.
+
+## Checkpoint 2 — Frictionless portfolio engine
+
+- Built independent P1 and P2 equal-weight portfolios.
+- Starting capital: PKR 1,000,000 per policy.
+- Entry execution: next-session adjusted open.
+- Valuation: daily adjusted close.
+- Missing closes: latest prior valid close, without lookahead.
+- Blocked exits: first later valid adjusted open.
+- Deferred-exit proceeds remain cash until the next scheduled rebalance.
+- Fractional shares are permitted.
+- No fees, taxes, slippage, board lots or capacity restrictions.
+- Ledger reconciliation and temporal audits passed.
