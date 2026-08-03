@@ -1,0 +1,74 @@
+{
+  "canonical_price_basis": {
+    "entry": "next_session_open_adj",
+    "valuation": "close_adj",
+    "volume": "volume_adj"
+  },
+  "checkpoint": 1,
+  "contract": "C10",
+  "entry_availability": [
+    {
+      "availability_rate": 0.9918478260869565,
+      "available_entries": 2555,
+      "missing_entries": 21,
+      "policy_id": "P1_broad_canonical",
+      "selection_dates": 157,
+      "selection_rows": 2576,
+      "symbols": 249
+    },
+    {
+      "availability_rate": 0.9915094339622641,
+      "available_entries": 2102,
+      "missing_entries": 18,
+      "policy_id": "P2_conservative_consensus",
+      "selection_dates": 157,
+      "selection_rows": 2120,
+      "symbols": 231
+    }
+  ],
+  "holdout_accessed": false,
+  "inputs": {
+    "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e",
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+    "data/processed/features/daily_features.parquet": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa"
+  },
+  "liquidity_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-29",
+    "min_date": "2020-01-01",
+    "path": "data/processed/features/daily_features.parquet",
+    "rows": 557346,
+    "symbols": 778
+  },
+  "missing_reasons": [
+    {
+      "entry_missing_reason": "no_next_market_session",
+      "policy_id": "P1_broad_canonical",
+      "rows": 21
+    },
+    {
+      "entry_missing_reason": "no_next_market_session",
+      "policy_id": "P2_conservative_consensus",
+      "rows": 18
+    }
+  ],
+  "price_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-29",
+    "min_date": "2020-01-01",
+    "path": "data/cache/daily_ohlcv.parquet",
+    "rows": 557346,
+    "symbols": 778
+  },
+  "selection_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-29",
+    "min_date": "2023-01-02",
+    "path": "data/processed/c9/candidate_selections.parquet",
+    "rows": 4696,
+    "symbols": 249
+  }
+}
