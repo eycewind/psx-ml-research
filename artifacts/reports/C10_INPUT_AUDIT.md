@@ -28,15 +28,27 @@
     "rebalance": "weekly_first_session",
     "sector_cap": 2,
     "liquidity_screen": "L1"
+  },
+  "P4_kmi30_strict": {
+    "policy_id": "P4_kmi30_strict",
+    "models": [
+      "lightgbm_cpu"
+    ],
+    "target": "fwd_market_relative_rank_5s",
+    "feature_variant": "B_market_context",
+    "selection": "top_10pct_within_point_in_time_kmi30",
+    "rebalance": "weekly_first_session",
+    "sector_cap": 2,
+    "liquidity_screen": "KMI30_membership"
   }
 }
 ```
 
-## C9 selections
+## Combined C10 selections
 
-- Path: `data/processed/c9/candidate_selections.parquet`
-- Rows: `4696`
-- Symbols: `249`
+- Path: `combined:C9+P4`
+- Rows: `5167`
+- Symbols: `254`
 - Minimum date: `2023-01-02`
 - Maximum date: `2025-12-29`
 - Holdout rows: `0`

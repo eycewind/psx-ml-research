@@ -10,10 +10,11 @@ import pyarrow.parquet as pq
 
 from psx_ml.c10.inputs import (
     C9_SELECTIONS_PATH,
+    P4_SELECTIONS_PATH,
     LAST_PRE_HOLDOUT_DATE,
     PRICE_PATH,
     assert_no_holdout,
-    load_c9_selections,
+    load_c10_selections,
     load_execution_prices,
 )
 from psx_ml.c10.portfolio import (
@@ -71,6 +72,66 @@ def write_parquet_without_filesystem(
         pq.write_table(table, handle)
 
 
+def _canonical_policy_frame(
+    frame: pd.DataFrame,
+    policy_ids: set[str],
+) -> pd.DataFrame:
+    subset = frame.loc[
+        frame["policy_id"].isin(policy_ids)
+    ].copy()
+
+    sort_columns = [
+        column
+        for column in (
+            "policy_id",
+            "trade_date",
+            "symbol",
+            "side",
+            "reason",
+        )
+        if column in subset.columns
+    ]
+
+    return subset.sort_values(
+        sort_columns,
+        kind="mergesort",
+    ).reset_index(drop=True)
+
+
+def _assert_existing_p1_p2_unchanged(
+    *,
+    path: Path,
+    regenerated: pd.DataFrame,
+) -> None:
+    if not path.exists():
+        return
+
+    existing = pd.read_parquet(path)
+    policies = {
+        "P1_broad_canonical",
+        "P2_conservative_consensus",
+    }
+
+    expected = _canonical_policy_frame(
+        existing,
+        policies,
+    )
+    actual = _canonical_policy_frame(
+        regenerated,
+        policies,
+    )
+
+    pd.testing.assert_frame_equal(
+        actual,
+        expected,
+        check_dtype=False,
+        check_exact=False,
+        rtol=1e-12,
+        atol=1e-9,
+    )
+
+
+
 def main() -> None:
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
@@ -79,7 +140,7 @@ def main() -> None:
         starting_capital=1_000_000.0
     )
 
-    selections = load_c9_selections()
+    selections = load_c10_selections()
 
     prices = load_execution_prices(
         maximum_date=LAST_PRE_HOLDOUT_DATE,
@@ -93,6 +154,7 @@ def main() -> None:
     policy_ids = [
         "P1_broad_canonical",
         "P2_conservative_consensus",
+        "P4_kmi30_strict",
     ]
 
     trade_frames: list[pd.DataFrame] = []
@@ -157,6 +219,19 @@ def main() -> None:
         ignore_index=True,
     )
 
+    _assert_existing_p1_p2_unchanged(
+        path=TRADES_PATH,
+        regenerated=trades,
+    )
+    _assert_existing_p1_p2_unchanged(
+        path=POSITIONS_PATH,
+        regenerated=positions,
+    )
+    _assert_existing_p1_p2_unchanged(
+        path=NAV_PATH,
+        regenerated=nav,
+    )
+
     write_parquet_without_filesystem(
         trades,
         TRADES_PATH,
@@ -182,7 +257,7 @@ This checkpoint evaluates portfolio construction and gross accounting only.
 
 Included:
 
-- frozen C9 policies P1 and P2;
+- frozen policies P1, P2 and P4;
 - next-session adjusted-open execution;
 - equal target weights at every weekly rebalance;
 - net trading from existing holdings to new target holdings;
@@ -251,9 +326,8 @@ These are frictionless results and are not estimates of realizable net performan
             "capacity_limits": False,
         },
         "inputs": {
-            str(C9_SELECTIONS_PATH): sha256_file(
-                C9_SELECTIONS_PATH
-            ),
+            str(C9_SELECTIONS_PATH): sha256_file(C9_SELECTIONS_PATH),
+            str(P4_SELECTIONS_PATH): sha256_file(P4_SELECTIONS_PATH),
             str(PRICE_PATH): sha256_file(
                 PRICE_PATH
             ),
@@ -290,7 +364,7 @@ Status: **COMPLETE**
 
 Checkpoint 2 adds:
 
-- equal-weight portfolio construction for P1 and P2;
+- equal-weight portfolio construction for P1, P2 and P4;
 - net rebalancing at next-session adjusted opens;
 - trade-level gross cash-flow accounting;
 - deferred exits where a valid opening execution price is unavailable;

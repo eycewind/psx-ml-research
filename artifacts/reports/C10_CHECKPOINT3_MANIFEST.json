@@ -51,22 +51,22 @@
   ],
   "holdout_accessed": false,
   "inputs": {
-    "data/processed/c10/frictionless_nav.parquet": "384c3471f71df6ddb73848f9dce31a9c28e6dedc996c02e7b2a927ce7d0e3d4e",
-    "data/processed/c10/frictionless_trades.parquet": "8cf75637a4f17ef537f2fbff01247bc37d094cd2d139b6c8d9360ba271772a0f"
+    "data/processed/c10/frictionless_nav.parquet": "20681364c2683ff552f6e6582dae56ffd23bec2085997631846d722cbaa31d99",
+    "data/processed/c10/frictionless_trades.parquet": "d13ac37a5e80026867ddbea43535c811f236878e3be1bc4f97a69834c2b18f7f"
   },
   "method": "scale_invariant_daily_return_cost_overlay",
   "outputs": {
     "data/processed/c10/cost_summary.parquet": {
-      "rows": 8,
-      "sha256": "9a14e2e0fa01455af01d76ebf9c78664b0f9cdf7bdb46b68fd34bf2c60f8ef72"
+      "rows": 12,
+      "sha256": "8a538f97033c9b6aac46f6b594305de08b2609430cef0c38646f8a1a45abc627"
     },
     "data/processed/c10/costed_nav.parquet": {
-      "rows": 5928,
-      "sha256": "5ab66c322a3e085ac95d4446565b8a60221d4b4a6d22068d5daa1d271058f5b3"
+      "rows": 8892,
+      "sha256": "75f3d751270cfa9734ae096dafbdf992bf9163150f56eb5a86603203955e5d04"
     },
     "data/processed/c10/costed_trades.parquet": {
-      "rows": 28196,
-      "sha256": "e9168c8f296f0139219df1406e047e075ec722782606cdf8887c7677c31f4e25"
+      "rows": 31148,
+      "sha256": "f9c6cbdc11cbce86a6c232b147dab4ad682a92f8e7ad9cd326f52c12c7897236"
     }
   },
   "status": "COMPLETE",
@@ -122,6 +122,31 @@
       "weighted_average_cost_rate": 0.0026091323495206994
     },
     {
+      "cost_days": 157,
+      "cost_schedule_id": "actual_broker_20bps",
+      "end_date": "2025-12-31",
+      "ending_gross_nav": 5067167.326233011,
+      "ending_nav_cost_drag": 1927575.4329336924,
+      "ending_net_nav": 3139591.8932993184,
+      "gross_total_return": 4.067167326233011,
+      "net_annualized_return": 0.4656865835967343,
+      "net_annualized_volatility": 0.3257052189700576,
+      "net_max_drawdown": -0.2696815192409556,
+      "net_sharpe_zero_rf": 1.3571827008915962,
+      "net_total_return": 2.1395918932993183,
+      "observations": 741,
+      "policy_id": "P4_kmi30_strict",
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_brokerage": 1262776.369644606,
+      "total_cdc": 69461.37223795263,
+      "total_sst": 189416.4554466909,
+      "total_traded_notional": 588698037.4205906,
+      "total_transaction_cost": 1521654.1973292497,
+      "trade_count": 738,
+      "weighted_average_cost_rate": 0.0025847787840374875
+    },
+    {
       "cost_days": 158,
       "cost_schedule_id": "actual_broker_25bps",
       "end_date": "2025-12-31",
@@ -170,6 +195,31 @@
       "total_transaction_cost": 1201013.5069315094,
       "trade_count": 3183,
       "weighted_average_cost_rate": 0.003147336055743802
+    },
+    {
+      "cost_days": 157,
+      "cost_schedule_id": "actual_broker_25bps",
+      "end_date": "2025-12-31",
+      "ending_gross_nav": 5067167.326233011,
+      "ending_nav_cost_drag": 2217127.359734939,
+      "ending_net_nav": 2850039.966498072,
+      "gross_total_return": 4.067167326233011,
+      "net_annualized_return": 0.419052468188426,
+      "net_annualized_volatility": 0.32601408385685365,
+      "net_max_drawdown": -0.27482538776679655,
+      "net_sharpe_zero_rf": 1.2551526009666085,
+      "net_total_return": 1.850039966498072,
+      "observations": 741,
+      "policy_id": "P4_kmi30_strict",
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_brokerage": 1538011.6762058237,
+      "total_cdc": 69461.37223795263,
+      "total_sst": 230701.75143087356,
+      "total_traded_notional": 588698037.4205906,
+      "total_transaction_cost": 1838174.7998746498,
+      "trade_count": 738,
+      "weighted_average_cost_rate": 0.0031224408491808517
     },
     {
       "cost_days": 158,
@@ -222,6 +272,31 @@
       "weighted_average_cost_rate": 0.002085903597061237
     },
     {
+      "cost_days": 157,
+      "cost_schedule_id": "actual_broker_all_in",
+      "end_date": "2025-12-31",
+      "ending_gross_nav": 5067167.326233011,
+      "ending_nav_cost_drag": 1621214.140121263,
+      "ending_net_nav": 3445953.1861117478,
+      "gross_total_return": 4.067167326233011,
+      "net_annualized_return": 0.512006819096225,
+      "net_annualized_volatility": 0.3254759370544167,
+      "net_max_drawdown": -0.2645796499259162,
+      "net_sharpe_zero_rf": 1.4553211726007038,
+      "net_total_return": 2.4459531861117476,
+      "observations": 741,
+      "policy_id": "P4_kmi30_strict",
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_brokerage": 996215.3317553839,
+      "total_cdc": 69461.37223795263,
+      "total_sst": 149432.29976330756,
+      "total_traded_notional": 588698037.4205906,
+      "total_transaction_cost": 1215109.003756644,
+      "trade_count": 738,
+      "weighted_average_cost_rate": 0.0020640615842388464
+    },
+    {
       "cost_days": 158,
       "cost_schedule_id": "psx_minimum_brokerage_only",
       "end_date": "2025-12-31",
@@ -270,6 +345,31 @@
       "total_transaction_cost": 651935.1239171952,
       "trade_count": 3183,
       "weighted_average_cost_rate": 0.0017084395051915136
+    },
+    {
+      "cost_days": 157,
+      "cost_schedule_id": "psx_minimum_brokerage_only",
+      "end_date": "2025-12-31",
+      "ending_gross_nav": 5067167.326233011,
+      "ending_nav_cost_drag": 1368251.6525230268,
+      "ending_net_nav": 3698915.673709984,
+      "gross_total_return": 4.067167326233011,
+      "net_annualized_return": 0.5482267636858897,
+      "net_annualized_volatility": 0.32531758556506185,
+      "net_max_drawdown": -0.2614355256945412,
+      "net_sharpe_zero_rf": 1.5300343808161796,
+      "net_total_return": 2.6989156737099838,
+      "observations": 741,
+      "policy_id": "P4_kmi30_strict",
+      "start_date": "2023-01-03",
+      "starting_capital": 1000000.0,
+      "total_brokerage": 996215.3317553839,
+      "total_cdc": 0.0,
+      "total_sst": 0.0,
+      "total_traded_notional": 588698037.4205906,
+      "total_transaction_cost": 996215.3317553839,
+      "trade_count": 738,
+      "weighted_average_cost_rate": 0.0016922348444040178
     }
   ]
 }

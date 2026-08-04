@@ -4,7 +4,7 @@ Status: **COMPLETE**
 
 Checkpoint 2 adds:
 
-- equal-weight portfolio construction for P1 and P2;
+- equal-weight portfolio construction for P1, P2 and P4;
 - net rebalancing at next-session adjusted opens;
 - trade-level gross cash-flow accounting;
 - deferred exits where a valid opening execution price is unavailable;

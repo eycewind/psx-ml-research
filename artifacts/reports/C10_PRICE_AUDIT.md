@@ -25,6 +25,7 @@ Raw and adjusted OHLC columns both exist in the source, but C10 uses the adjuste
 |:--------------------------|-----------------:|--------------------:|------------------:|------------------:|----------:|--------------------:|
 | P1_broad_canonical        |             2576 |                2576 |                 0 |               157 |       249 |                   1 |
 | P2_conservative_consensus |             2120 |                2120 |                 0 |               157 |       231 |                   1 |
+| P4_kmi30_strict           |              471 |                 471 |                 0 |               157 |        51 |                   1 |
 
 ## Missing-entry reasons
 

@@ -6,11 +6,12 @@ from pathlib import Path
 
 from psx_ml.c10.inputs import (
     C9_SELECTIONS_PATH,
+    P4_SELECTIONS_PATH,
     FEATURE_PATH,
     LAST_PRE_HOLDOUT_DATE,
     PRICE_PATH,
     audit_frame,
-    load_c9_selections,
+    load_c10_selections,
     load_execution_prices,
     load_liquidity_features,
 )
@@ -37,7 +38,7 @@ def sha256_file(path: Path) -> str:
 def main() -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-    selections = load_c9_selections()
+    selections = load_c10_selections()
     maximum_signal_date = selections["trade_date"].max()
 
     prices = load_execution_prices(
@@ -55,7 +56,7 @@ def main() -> None:
 
     selection_audit = audit_frame(
         selections,
-        path=C9_SELECTIONS_PATH,
+        path=Path("combined:C9+P4"),
         key_columns=(
             "policy_id",
             "trade_date",
@@ -119,7 +120,7 @@ def main() -> None:
 {frozen_policies_json}
 ```
 
-## C9 selections
+## Combined C10 selections
 
 - Path: `{selection_audit.path}`
 - Rows: `{selection_audit.rows}`
@@ -184,9 +185,8 @@ Raw and adjusted OHLC columns both exist in the source, but C10 uses the adjuste
         "maximum_signal_date": maximum_signal_date.date().isoformat(),
         "maximum_loaded_price_date": price_audit.max_date,
         "inputs": {
-            str(C9_SELECTIONS_PATH): sha256_file(
-                C9_SELECTIONS_PATH
-            ),
+            str(C9_SELECTIONS_PATH): sha256_file(C9_SELECTIONS_PATH),
+            str(P4_SELECTIONS_PATH): sha256_file(P4_SELECTIONS_PATH),
             str(PRICE_PATH): sha256_file(PRICE_PATH),
             str(FEATURE_PATH): sha256_file(FEATURE_PATH),
         },
@@ -212,8 +212,8 @@ Status: **COMPLETE**
 
 Checkpoint 1 established:
 
-- frozen C9 P1 and P2 policy identities;
-- authoritative C9 candidate-selection input;
+- frozen P1, P2 and P4 policy identities;
+- authoritative C9 P1/P2 and C10 P4 selection inputs;
 - adjusted next-session open execution basis;
 - adjusted close valuation basis;
 - point-in-time liquidity inputs;

@@ -24,11 +24,21 @@
       "selection_dates": 157,
       "selection_rows": 2120,
       "symbols": 231
+    },
+    {
+      "availability_rate": 1.0,
+      "available_entries": 471,
+      "missing_entries": 0,
+      "policy_id": "P4_kmi30_strict",
+      "selection_dates": 157,
+      "selection_rows": 471,
+      "symbols": 51
     }
   ],
   "holdout_accessed": false,
   "inputs": {
     "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e",
+    "data/processed/c10/p4_kmi30_selections.parquet": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
     "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
     "data/processed/features/daily_features.parquet": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa"
   },
@@ -58,8 +68,8 @@
     "holdout_rows": 0,
     "max_date": "2025-12-29",
     "min_date": "2023-01-02",
-    "path": "data/processed/c9/candidate_selections.parquet",
-    "rows": 4696,
-    "symbols": 249
+    "path": "combined:C9+P4",
+    "rows": 5167,
+    "symbols": 254
   }
 }

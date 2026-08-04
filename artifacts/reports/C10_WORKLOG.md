@@ -88,3 +88,49 @@
 - Capacity degradation became material at PKR 5m and severe at PKR 10m.
 - This checkpoint remained diagnostic only; partial fills were not fed into holdings or NAV.
 - No 2026 holdout data was accessed.
+
+## CP4A — P4 strict KMI-30 integration
+
+- Added `P4_kmi30_strict`.
+- Used point-in-time KMI-30 membership from six official PSX recomposition intervals.
+- Generated 471 selections over 157 weekly dates.
+- Selected exactly three holdings per signal date.
+- Every selected row was an effective KMI-30 member.
+- P4 entry availability was 100%.
+- Integrated P4 into Checkpoints 1–4.
+- Existing P1/P2 frictionless ledgers remained unchanged.
+
+### Frictionless P4
+
+- Ending NAV: PKR 5.067m
+- Annualized return: 71.99%
+- Annualized volatility: 32.51%
+- Sharpe: 1.86
+- Maximum drawdown: -24.66%
+
+### Actual all-in costs
+
+- Ending net NAV: PKR 3.446m
+- Annualized net return: 51.20%
+- Net Sharpe: 1.46
+- Net maximum drawdown: -26.46%
+- Weighted average all-in transaction cost: 0.2064%
+
+### Capacity
+
+At PKR 1m and 10% participation:
+
+- Fully feasible trades: 98.10%
+- Notional fill: 99.39%
+
+At PKR 5m and 10% participation:
+
+- Fully feasible trades: 79.54%
+- Notional fill: 86.97%
+
+At PKR 10m and 10% participation:
+
+- Fully feasible trades: 70.33%
+- Notional fill: 76.82%
+
+P4 was materially more scalable than P1/P2 but had substantially higher concentration risk, volatility and drawdown.

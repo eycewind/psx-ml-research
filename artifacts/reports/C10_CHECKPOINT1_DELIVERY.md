@@ -4,8 +4,8 @@ Status: **COMPLETE**
 
 Checkpoint 1 established:
 
-- frozen C9 P1 and P2 policy identities;
-- authoritative C9 candidate-selection input;
+- frozen P1, P2 and P4 policy identities;
+- authoritative C9 P1/P2 and C10 P4 selection inputs;
 - adjusted next-session open execution basis;
 - adjusted close valuation basis;
 - point-in-time liquidity inputs;
