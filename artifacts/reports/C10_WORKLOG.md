@@ -42,3 +42,27 @@
 - Fractional shares are permitted.
 - No fees, taxes, slippage, board lots or capacity restrictions.
 - Ledger reconciliation and temporal audits passed.
+
+## Checkpoint 3 — Transaction-cost model
+
+- Applied transaction costs to the audited Checkpoint 2 gross ledger.
+- Primary baseline calibrated from actual broker transaction records:
+  - commission: max(0.15% of notional, PKR 0.03/share)
+  - SST: 15% of commission
+  - CDC: PKR 0.005/share
+- The adjustment transaction was excluded from cost calibration.
+- Retained a commission-only regulatory-minimum comparison.
+- Added 0.20% and 0.25% commission sensitivity scenarios with SST and CDC.
+- Applied costs independently to buys and sells.
+- Baseline weighted all-in cost:
+  - P1: 0.2211%
+  - P2: 0.2086%
+- Baseline net annualized return:
+  - P1: 48.32%
+  - P2: 50.96%
+- Baseline net maximum drawdown:
+  - P1: -17.61%
+  - P2: -17.13%
+- P2 remained stronger than P1 after transaction costs.
+- No 2026 holdout data was used.
+- CGT, slippage, spread, impact, capacity, board lots and financing remain excluded.
