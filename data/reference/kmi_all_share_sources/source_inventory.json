@@ -1,0 +1,83 @@
+[
+  {
+    "source_id": "review_2021_h1",
+    "review_from": "2021-01-01",
+    "review_to": "2021-06-30",
+    "effective_from": "2022-01-03",
+    "filename": "sharia_KMI_All_Share_list_June_2021_Final_27122021.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/sharia_KMI_All_Share_list_June_2021_Final_27122021.pdf",
+    "role": "baseline_full_membership"
+  },
+  {
+    "source_id": "review_2021_h2",
+    "review_from": "2021-07-01",
+    "review_to": "2021-12-31",
+    "effective_from": "2022-07-15",
+    "filename": "Notice-_KMI_All_Shares_Index_Recomposition_30-June-22_(M).pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Notice-_KMI_All_Shares_Index_Recomposition_30-June-22_%28M%29.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2022_h1",
+    "review_from": "2022-01-01",
+    "review_to": "2022-06-30",
+    "effective_from": "2023-01-12",
+    "filename": "Copy_of_KMI_All_Share_June_-22_23122022.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Copy_of_KMI_All_Share_June_-22_23122022.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2022_h2",
+    "review_from": "2022-07-01",
+    "review_to": "2022-12-31",
+    "effective_from": "2023-07-10",
+    "filename": "Notice-666_KMI_All_Share_Index_re-composition_for_Dec-22.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Notice-666_KMI_All_Share_Index_re-composition_for_Dec-22.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2023_h1",
+    "review_from": "2023-01-01",
+    "review_to": "2023-06-30",
+    "effective_from": "2023-12-26",
+    "filename": "Notice-_KMI-All-Index-Re-composition-Jun-30-2023-Final.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Notice-_KMI-All-Index-Re-composition-Jun-30-2023-Final.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2023_h2",
+    "review_from": "2023-07-01",
+    "review_to": "2023-12-31",
+    "effective_from": "2024-06-25",
+    "filename": "KMI-ALL-Share-Recomposition-Notice.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/KMI-ALL-Share-Recomposition-Notice.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2024_h1",
+    "review_from": "2024-01-01",
+    "review_to": "2024-06-30",
+    "effective_from": "2025-01-03",
+    "filename": "Notice-KMIALLshare-Notice-as-of-June-2024.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Notice-KMIALLshare-Notice-as-of-June-2024.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2024_h2",
+    "review_from": "2024-07-01",
+    "review_to": "2024-12-31",
+    "effective_from": "2025-06-02",
+    "filename": "KMI-All-share-Notice-Recomposition-as-of-Dec-_2024-Final.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/KMI-All-share-Notice-Recomposition-as-of-Dec-_2024-Final.pdf",
+    "role": "recomposition"
+  },
+  {
+    "source_id": "review_2025_h1",
+    "review_from": "2025-01-01",
+    "review_to": "2025-06-30",
+    "effective_from": "2025-12-02",
+    "filename": "Merged_KMIALL_Notice_and_FinalList_June2025.pdf",
+    "url": "https://www.psx.com.pk/psx/themes/psx/uploads/Merged_KMIALL_Notice_and_FinalList_June2025.pdf",
+    "role": "recomposition_with_final_list"
+  }
+]
