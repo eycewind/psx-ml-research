@@ -66,3 +66,25 @@
 - P2 remained stronger than P1 after transaction costs.
 - No 2026 holdout data was used.
 - CGT, slippage, spread, impact, capacity, board lots and financing remain excluded.
+
+## Checkpoint 4 — Liquidity and capacity diagnostics
+
+- Used point-in-time `turnover_median_20obs_adj`.
+- Liquidity was joined using the latest valid observation on or before each signal date.
+- No execution-day or future turnover was used.
+- Exact-date liquidity matches:
+  - P1: 3,861 of 3,866 trades
+  - P2: 3,180 of 3,183 trades
+- All remaining observations used a prior value no more than 3 calendar days old.
+- Missing liquidity rows after as-of fallback: 0.
+- Tested participation caps of 5%, 10% and 20%.
+- Tested capital levels of PKR 1m, 5m, 10m, 25m and 50m.
+- At PKR 1m and 10% participation:
+  - P1 fully feasible trades: 90.87%
+  - P1 notional fill: 94.63%
+  - P2 fully feasible trades: 87.21%
+  - P2 notional fill: 92.38%
+- P2 remained less scalable than P1.
+- Capacity degradation became material at PKR 5m and severe at PKR 10m.
+- This checkpoint remained diagnostic only; partial fills were not fed into holdings or NAV.
+- No 2026 holdout data was accessed.
