@@ -1,0 +1,144 @@
+{
+  "candidate_tables": [
+    {
+      "columns": [
+        "review_as_of",
+        "notice_date",
+        "effective_from",
+        "effective_to",
+        "notice_no",
+        "source_url",
+        "symbol",
+        "source_type"
+      ],
+      "path": "data/reference/kmi30_membership_history.csv",
+      "relevant_columns": [
+        "symbol"
+      ],
+      "rows": 180
+    },
+    {
+      "columns": [
+        "symbol",
+        "company_name",
+        "effective_from",
+        "shariah_compliant",
+        "index_member",
+        "source_row_number",
+        "pdf_page",
+        "final_shariah_status",
+        "source_notice_no",
+        "source_notice_date",
+        "source_url",
+        "source_type"
+      ],
+      "path": "data/reference/kmi_all_share_baseline_2022_01_03.csv",
+      "relevant_columns": [
+        "symbol"
+      ],
+      "rows": 250
+    },
+    {
+      "columns": [
+        "symbol",
+        "company_name",
+        "effective_from",
+        "shariah_compliant",
+        "index_member",
+        "source_row_number",
+        "pdf_page",
+        "final_shariah_status",
+        "source_notice_no",
+        "source_notice_date",
+        "source_url",
+        "source_type"
+      ],
+      "path": "data/reference/kmi_all_share_baseline_2022_01_03.parquet",
+      "relevant_columns": [
+        "symbol"
+      ],
+      "rows": 250
+    },
+    {
+      "columns": [
+        "symbol",
+        "effective_from",
+        "effective_to",
+        "screening_snapshot_date",
+        "membership_source",
+        "membership_confidence",
+        "source_id",
+        "source_note",
+        "is_exact_index_membership",
+        "is_shariah_screened_eligible"
+      ],
+      "path": "data/reference/kmi_all_share_screened_universe_history.csv",
+      "relevant_columns": [
+        "symbol"
+      ],
+      "rows": 2440
+    },
+    {
+      "columns": [
+        "symbol",
+        "effective_from",
+        "effective_to",
+        "screening_snapshot_date",
+        "membership_source",
+        "membership_confidence",
+        "source_id",
+        "source_note",
+        "is_exact_index_membership",
+        "is_shariah_screened_eligible"
+      ],
+      "path": "data/reference/kmi_all_share_screened_universe_history.parquet",
+      "relevant_columns": [
+        "symbol"
+      ],
+      "rows": 2440
+    },
+    {
+      "columns": [
+        "symbol",
+        "security_name",
+        "instrument_family",
+        "board",
+        "listing_status",
+        "sector",
+        "eligible_scrip_categories",
+        "source_page",
+        "snapshot_date"
+      ],
+      "path": "data/reference/psx_security_master_2026-08-01.parquet",
+      "relevant_columns": [
+        "symbol",
+        "sector"
+      ],
+      "rows": 1387
+    }
+  ],
+  "checkpoint": "C10-CP4B-3-p5-input-audit",
+  "holdout_accessed": false,
+  "p1_summary": null,
+  "screened_summary": {
+    "columns": [
+      "symbol",
+      "effective_from",
+      "effective_to",
+      "screening_snapshot_date",
+      "membership_source",
+      "membership_confidence",
+      "source_id",
+      "source_note",
+      "is_exact_index_membership",
+      "is_shariah_screened_eligible"
+    ],
+    "confidence_values": [
+      "high",
+      "low",
+      "medium"
+    ],
+    "intervals": 9,
+    "rows": 2440
+  }
+}
