@@ -1,0 +1,31 @@
+{
+  "checkpoint": "C10-CP4B-1-baseline-2022",
+  "effective_from": "2022-01-03",
+  "excluded_defaulter_count": 6,
+  "excluded_defaulter_symbols": [
+    "CLOV",
+    "DMTX",
+    "JUBS",
+    "LMSM",
+    "NCML",
+    "RUBY"
+  ],
+  "holdout_accessed": false,
+  "official_index_count": 250,
+  "outputs": {
+    "artifacts/reports/C10_CP4B_KMI_ALL_SHARE_BASELINE_2022_REPORT.md": {
+      "sha256": "630bbcc61de2e515141b901da5ffd72fc4e183dbd2728f22c62ae778d1e10e75"
+    },
+    "data/reference/kmi_all_share_baseline_2022_01_03.csv": {
+      "rows": 250,
+      "sha256": "fb4a50129d502d6dd3029f78a6edf34b29e38905d70de5dba1902edf43da692e"
+    },
+    "data/reference/kmi_all_share_baseline_2022_01_03.parquet": {
+      "rows": 250,
+      "sha256": "c4bb95009d64afe1d294b771e02b84dc4074fdf7fc276d505bdd2651b62e0f68"
+    }
+  },
+  "screened_compliant_count": 256,
+  "source_pdf": "data/reference/kmi_all_share_sources/sharia_KMI_All_Share_list_June_2021_Final_27122021.pdf",
+  "source_pdf_sha256": "f46857b2852c10ff00feb1675bda88924bfe800bb644a08766719b3e5375241d"
+}

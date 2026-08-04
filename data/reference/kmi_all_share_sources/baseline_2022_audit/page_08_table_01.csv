@@ -1,0 +1,78 @@
+No.,Ticker,Company Name,Objective,Debt Ratio (D/A < 37%),Investment Ratio (NCInv/TA < 33%),Income Ratio (NCInc/TR < 5%),Illiquid Assets Ratio (IA/TA => 25%),Net Liquid Assets Ratio (NLA < P),Share Price as of June 30 2021,Final Shariah Status
+1,AGL,Agritech Limited,Compliant,73.67%,0.00%,0.08%,94.85%,(152.84),0.00,Non-Compliant
+2,AABS,Al-Abbas Sugar Mills Ltd*,Compliant,39.56%,4.16%,1.93%,92.33%,(252.20),0.00,Non-Compliant1
+3,ALNRS,Al-Noor Sugar Mills Ltd*,Compliant,29.87%,0.50%,5.13%,85.43%,(351.03),0.00,Non-Compliant
+4,ALTN,Altern Energy Ltd,Compliant,0.18%,0.00%,9.65%,45.37%,45.26,25.50,Non-Compliant
+5,ASTL,Amreli Steels Ltd,Compliant,38.82%,0.04%,0.00%,76.21%,(46.37),0.00,Non-Compliant
+6,AHCL,Arif Habib Corporation Ltd,Compliant,23.33%,10.49%,20.31%,68.78%,(3.28),0.00,Non-Compliant
+7,ADMM,Artistic Denim Mills Ltd,Compliant,42.77%,0.00%,0.00%,75.51%,(77.64),0.00,Non-Compliant
+8,ARUJ,Aruj Industries Ltd,Compliant,42.53%,0.00%,0.00%,57.92%,(3.06),0.00,Non-Compliant
+9,BAFS,Baba Farid Sugar Mills LTd*,Compliant,37.55%,0.00%,0.00%,93.80%,(407.74),0.00,Non-Compliant
+10,BAPL,Bawany Air Product Ltd,Compliant,0.00%,0.00%,0.00%,0.76%,(0.53),0.00,Non-Compliant
+11,BILF,Bilal Fibres Ltd,Compliant,77.44%,0.00%,0.00%,97.46%,(66.45),0.00,Non-Compliant
+12,BCL,Bolan Castings Ltd,Compliant,38.59%,0.00%,2.44%,71.14%,(44.64),0.00,Non-Compliant
+13,CWSM,Chakwal Spinning Mills Ltd,Compliant,56.50%,0.00%,0.00%,92.28%,(6.62),0.00,Non-Compliant3
+14,CHAS,Chashma Sugar Mills Ltd*,Compliant,49.58%,0.00%,0.05%,90.44%,(450.36),0.00,Non-Compliant1
+15,COLG,Colgate Palmolive (Pakistan),Compliant,5.38%,35.06%,1.05%,51.20%,88.56,2500.00,Non-Compliant
+16,CTM,Colony Textile Mills Ltd,Compliant,37.70%,1.54%,0.87%,87.67%,(30.00),0.00,Non-Compliant
+17,CSAP,Crescent Steel & Allied Products,Compliant,10.36%,35.57%,6.41%,43.25%,42.60,83.98,Non-Compliant
+18,CRTM,Crescent Textile Mills Ltd,Compliant,37.75%,3.91%,0.30%,74.67%,(65.72),0.00,Non-Compliant
+19,DNCC,Dandot Cement Co. Ltd,Compliant,45.94%,0.00%,97.80%,97.67%,(39.78),0.00,Non-Compliant
+20,DSML,Dar-es-Salaam Textile Mills Ltd,Compliant,101.95%,0.00%,7.63%,92.02%,(59.93),0.00,Non-Compliant
+21,DLL,Dawood Lawrencepur Limited,Compliant,31.05%,37.49%,1.53%,42.08%,59.61,184.85,Non-Compliant
+22,DFML,Dewan Farooque Motors Ltd,Compliant,171.68%,0.00%,0.00%,62.58%,(34.07),0.00,Non-Compliant
+23,DWSM,Dewan Sugar Mills Ltd*,Compliant,37.58%,0.00%,0.01%,94.27%,(88.48),0.00,Non-Compliant1
+24,DWTM,Dewan Textile Mills,Compliant,76.00%,0.00%,0.00%,96.39%,(8.39),0.00,Non-Compliant
+25,DSL,Dost Steel Ltd,Compliant,59.66%,0.00%,0.18%,97.76%,(7.00),0.00,Non-Compliant
+26,ECOP,EcoPack Ltd,Compliant,47.35%,0.33%,0.01%,83.32%,(24.50),0.00,Non-Compliant
+27,ELSM,Ellcot Spinning Mills Ltd,Compliant,43.57%,9.17%,0.31%,70.48%,(165.31),0.00,Non-Compliant
+28,FASM,Faisal Spinning Mills Ltd,Compliant,41.98%,0.00%,0.14%,86.32%,(681.28),0.00,Non-Compliant
+29,FFBL,Fauji Fertilizer Bin Qasim Ltd*,Compliant,40.79%,7.73%,3.91%,55.26%,(40.81),0.00,Non-Compliant
+30,FFC,Fauji Fertilizer Company Ltd*,Compliant,35.82%,63.64%,9.83%,22.02%,23.71,106.30,Non-Compliant
+31,FFL,Fauji Foods Ltd*,Compliant,129.31%,0.00%,0.55%,75.15%,(16.73),0.00,Non-Compliant
+32,FIBLM,First IBL Modaraba,Compliant,N/A,N/A,N/A,32.97%,5.71,2.98,Non-Compliant **
+33,GTYR,General Tyre & Rubber Co.,Compliant,48.01%,0.00%,0.11%,76.31%,(58.93),0.00,Non-Compliant
+34,GATM,Gul Ahmed Textile Mills Ltd,Compliant,54.22%,0.08%,0.01%,82.09%,(129.19),0.00,Non-Compliant
+35,HAEL,Hala Enterprises Ltd,Compliant,38.18%,0.00%,0.17%,62.01%,(5.38),0.00,Non-Compliant
+36,HASCOL,Hascol Petroleum Ltd,Compliant,62.51%,1.32%,0.15%,77.96%,(76.88),0.00,Non-Compliant3
+37,HIRAT,Hira Textile Mills Ltd,Compliant,54.94%,0.00%,0.00%,92.16%,(35.04),0.00,Non-Compliant
+38,IDYM,Indus Dyeing & Mfg Co. Ltd,Compliant,46.98%,2.48%,0.42%,76.33%,(335.14),0.00,Non-Compliant
+39,INDU,Indus Motor Company Ltd,Compliant,0.72%,48.61%,2.38%,28.77%,123.19,1358.23,Non-Compliant
+40,ILTM,Island Textile Mills Ltd,Compliant,43.57%,2.94%,0.32%,83.00%,(6402.00),0.00,Non-Compliant
+41,ISIL,Ismail Industries Ltd,Compliant,50.97%,8.58%,0.06%,75.10%,(303.88),0.00,Non-Compliant
+42,JDWS,JDW Sugar Mills Ltd*,Compliant,45.41%,0.00%,0.18%,85.63%,(697.42),0.00,Non-Compliant
+43,JOPP,Johnson & Phillips (Pakistan) Ltd,Compliant,23.99%,0.00%,100.00%,91.97%,(61.26),0.00,Non-Compliant
+44,KCL,Karam Ceramics Ltd.,Compliant,45.11%,0.35%,0.00%,93.02%,(71.75),0.00,Non-Compliant
+45,KPUS,Khairpur Sugar Mills Ltd*,Compliant,69.24%,0.00%,0.00%,89.65%,(266.48),0.00,Non-Compliant
+46,KML,Kohinoor Mills Ltd,Compliant,37.87%,0.31%,0.51%,77.59%,(106.67),0.00,Non-Compliant
+47,KOSM,Kohinoor Spinning Mills Ltd,Compliant,109.81%,0.00%,0.00%,92.33%,(16.27),0.00,Non-Compliant
+48,KAPCO,Kot Addu Power Company,Compliant,14.26%,8.40%,10.13%,8.00%,60.26,44.35,Non-Compliant
+49,LPL,Lalpir Power Ltd*,Compliant,8.21%,0.00%,18.55%,32.62%,23.27,17.86,Non-Compliant
+50,LOADS,Loads Limited,Compliant,39.58%,0.13%,0.27%,83.66%,(11.80),0.00,Non-Compliant
+51,LOTCHEM,Lotte Chemical Pakistan Ltd,Compliant,5.10%,47.26%,1.54%,34.01%,4.34,14.99,Non-Compliant
+52,MEHT,Mahmood Textile Mills Ltd,Compliant,52.73%,0.65%,0.04%,84.58%,(679.10),0.00,Non-Compliant
+53,MSOT,Masood Textile Mills,Compliant,49.90%,0.25%,0.29%,67.62%,(166.38),0.00,Non-Compliant
+54,MFL,Matco Foods Ltd,Compliant,45.17%,0.01%,0.06%,88.94%,(46.26),0.00,Non-Compliant
+55,MRNS,Mehran Sugar Mills Ltd*,Compliant,47.63%,14.41%,0.83%,75.55%,(89.13),0.00,Non-Compliant1
+56,MERIT,Merit Packaging Ltd,Compliant,58.99%,0.00%,0.23%,73.40%,(38.48),0.00,Non-Compliant
+57,MIRKS,Mirpurkhas Sugar Mills Ltd*,Compliant,50.23%,0.02%,0.14%,91.33%,(365.06),0.00,Non-Compliant
+58,NAGC,Nagina Cotton Mills Ltd,Compliant,38.39%,2.07%,0.08%,78.59%,(131.19),0.00,Non-Compliant
+59,NESTLE,Nestle Pakistan Ltd,Compliant,40.02%,0.00%,0.02%,84.22%,(1086.40),0.00,Non-Compliant
+60,NICL,Nimir Industrial Chemicals Ltd,Compliant,48.24%,0.00%,0.00%,69.92%,(69.26),0.00,Non-Compliant
+61,NCL,Nishat (Chunian) Ltd,Compliant,39.27%,0.56%,0.02%,58.84%,(42.62),0.00,Non-Compliant
+62,NCPL,Nishat Chunian Power Ltd,Compliant,18.76%,0.94%,13.21%,33.60%,28.19,15.02,Non-Compliant
+63,NPL,Nishat Power Limited,Compliant,12.07%,0.00%,11.94%,32.91%,44.84,19.65,Non-Compliant
+64,NONS,Noon Sugar Mills Ltd*,Compliant,61.67%,0.00%,0.04%,82.44%,(328.14),0.00,Non-Compliant
+65,OML,Olympia Mills Ltd,Compliant,61.84%,4.18%,1.34%,83.31%,(55.33),0.00,Non-Compliant
+66,PACE,Pace (Pakistan) Ltd,Compliant,75.76%,0.00%,2.53%,51.66%,(10.82),0.00,Non-Compliant
+67,PAKD,Pak DataCom Ltd,Compliant,2.83%,8.42%,1.52%,14.43%,59.70,69.94,Non-Compliant
+68,PKGP,Pakgen Power Ltd*,Compliant,4.14%,0.00%,18.24%,29.30%,42.21,24.66,Non-Compliant
+69,PIAA,Pakistan Intl Airlines Corporation *,Compliant,283.92%,3.81%,0.02%,69.32%,(107.28),0.00,Non-Compliant
+70,PPVC,Pakistan PVC Ltd,Compliant,144.31%,0.25%,0.10%,96.29%,(24.72),0.00,Non-Compliant
+71,PRL,Pakistan Refinery Ltd,Compliant,42.83%,0.00%,0.04%,75.71%,(46.01),0.00,Non-Compliant
+72,PSX,Pakistan Stock Exchange Ltd,Compliant,2.31%,41.66%,32.69%,47.24%,5.07,22.31,Non-Compliant
+73,PTL,Panther Tyres Ltd,Compliant,40.38%,0.00%,0.13%,65.49%,(19.78),0.00,Non-Compliant
+74,PMRS,Premier Sugar Mills Ltd*,Compliant,47.86%,0.29%,0.03%,90.70%,(3578.90),0.00,Non-Compliant
+75,PRET,Premium Textile Mills Ltd,Compliant,60.00%,0.00%,0.03%,80.18%,(1177.45),605.00,Non-Compliant
+76,PRWM,Prosperity Weaving Mills Ltd,Compliant,45.72%,0.00%,0.46%,73.44%,(8.60),0.00,Non-Compliant
+77,QUET,Quetta Textile Mills Ltd,Compliant,47.28%,0.00%,0.07%,91.47%,(651.54),0.00,Non-Compliant

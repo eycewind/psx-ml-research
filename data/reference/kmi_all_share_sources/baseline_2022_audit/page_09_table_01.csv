@@ -1,0 +1,70 @@
+No.,Ticker,Company Name,Objective,Debt Ratio (D/A < 37%),Investment Ratio (NCInv/TA < 33%),Income Ratio (NCInc/TR < 5%),Illiquid Assets Ratio (IA/TA => 25%),Net Liquid Assets Ratio (NLA < P),Share Price as of June 30 2021,Final Shariah Status
+78,RAVT,Ravi textile Mills Ltd,Compliant,1.82%,1.08%,5.10%,14.87%,0.56,8.55,Non-Compliant3
+79,REWM,Reliance Weaving Mills,Compliant,54.03%,3.11%,0.21%,70.08%,(242.29),0.00,Non-Compliant
+80,SSOM,S.S. Oil Mills Ltd,Compliant,44.71%,0.00%,0.02%,57.46%,(98.16),0.00,Non-Compliant
+81,SAIF,Saif Textile Mills Ltd,Compliant,51.21%,0.14%,0.01%,76.14%,(204.29),0.00,Non-Compliant
+82,SALT,Salfi Textile Mills Ltd,Compliant,38.56%,0.36%,0.09%,88.19%,(891.92),0.00,Non-Compliant3
+83,SLYT,Sally Textile Mills,Compliant,79.97%,0.00%,0.00%,89.63%,(209.15),0.00,Non-Compliant
+84,SMTM,Samin Textiles Ltd,Compliant,0.00%,0.00%,0.01%,1.76%,1.54,9.95,Non-Compliant
+85,SAPT,Sapphire Textile Mills,Compliant,55.56%,6.00%,0.88%,72.70%,(1982.91),0.00,Non-Compliant
+86,SEPL,Security Papers Ltd,Compliant,0.40%,33.67%,3.97%,46.58%,49.45,167.30,Non-Compliant
+87,SERF,Service Fabrics Ltd,Compliant,655.68%,92.86%,0.00%,0.00%,(1.49),0.00,Non-Compliant
+88,SRVI,Service Industries Ltd,Compliant,47.11%,0.21%,0.32%,68.06%,(385.39),0.00,Non-Compliant
+89,SHCM,Shadman Cotton Mills,Compliant,42.32%,0.06%,0.96%,91.07%,(40.52),0.00,Non-Compliant
+90,SHSML,Shahmurad Sugar Mills Ltd*,Compliant,50.30%,0.00%,3.80%,89.93%,(441.18),0.00,Non-Compliant1
+91,SHJS,Shahtaj Sugar Mills Ltd*,Compliant,55.85%,0.00%,0.01%,93.19%,(401.15),0.00,Non-Compliant
+92,SIEM,Siemens (Pakistan) Engineering*,Compliant,2.48%,0.00%,0.22%,11.07%,378.50,491.36,Non-Compliant1
+93,SINDM,Sindh Modaraba,Compliant,N/A,N/A,N/A,68.97%,10.71,8.80,Non-Compliant **
+94,SEL,Sitara Energy Ltd,Compliant,37.66%,0.00%,0.00%,43.74%,(3.95),0.00,Non-Compliant
+95,TSML,Tandlianwala Sugar Mills Ltd*,Compliant,42.16%,0.00%,0.04%,91.91%,(208.58),0.00,Non-Compliant1
+96,TICL,Thal Industries Corp*,Compliant,48.72%,0.00%,0.05%,83.23%,(867.04),0.00,Non-Compliant
+97,TPL,TPL Corporation,Compliant,37.43%,8.54%,3.63%,47.34%,(9.72),0.00,Non-Compliant
+98,TPLP,TPL Properties Ltd,Compliant,29.78%,8.22%,9.40%,35.27%,9.06,30.11,Non-Compliant
+99,TPLT,TPL Trakker Limited,Compliant,26.11%,0.00%,9.43%,56.22%,(10.59),0.00,Non-Compliant
+100,TRG,TRG Pakistan Ltd,Compliant,0.05%,98.79%,100.00%,0.00%,76.11,166.33,Non-Compliant
+101,TSPL,Tri-Star Power Ltd,Compliant,0.00%,37.37%,12.85%,7.50%,11.29,6.87,Non-Compliant
+102,YOUW,Yousaf Weaving Mills Ltd,Compliant,53.04%,0.00%,0.00%,84.47%,(11.37),0.00,Non-Compliant
+103,FCONM,First Constellation Modaraba,Compliant,N/A,N/A,N/A,N/A,N/A,N/A,No Opinion!
+104,AEL,Arshad Energy Ltd ***,Compliant,0.00%,0.00%,0.00%,94.25%,(9.50),0.00,No Opinion
+105,EPQL,Engro Powergen Qadirpur Ltd ***,Compliant,15.16%,0.19%,4.35%,49.52%,8.49,21.40,No Opinion
+106,KOHP,Kohinoor Power Company ***,Compliant,0.00%,2.75%,3.01%,72.18%,2.83,6.66,No Opinion
+107,PECO,Pakistan Engineering Co. Ltd ###,Compliant,7.95%,0.01%,0.01%,94.41%,67.31,246.25,No Opinion3
+108,SPWL,Saif Power Ltd ***,Compliant,20.26%,0.00%,0.01%,48.75%,6.95,17.34,No Opinion
+109,SGPL,SG Power Ltd ***,Compliant,7.06%,0.00%,0.00%,56.50%,0.13,5.75,No Opinion
+110,ASLCPS,Aisha Steel Convt (Pref) Right,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+111,ASLPS,Aisha Steel Convertible (Pref),Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+112,AKDCL,AKD Capital Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+113,AMBL,Apna Microfinance Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+114,AHL,Arif Habib Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+115,ARPAK,Arpak International investments,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+116,ANLNV,Azgard Nine (Non-Voting),Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+117,BOK,Bank of Khyber,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+118,BIPLS,BIPL Securities Limited,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+119,DEL,Dawood Equities Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+120,EFGH,EFG Hermes Pakistan,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+121,EPCLPS,Engro Polymer & Chemical Ltd Prefrence Sh,areNson-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+122,ESBL,Escorts Investment Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+123,FABL,Faysal Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+124,FCSC,First Capital Securities Corp. Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+125,FCIBL,First Credit & investment Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+126,FDIBL,First Dawood Investment Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+127,FNEL,First National Equities Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+128,HCL,Hallmark Company Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+129,HUMNL,Hum Network Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+130,IML,Imperial Limited,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+131,ICIBL,Invest Capital Investment Bank,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+132,JSCL,Jahangir Siddiqui & Co. Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+133,JVDCPS,Javedan Corp Preference,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+134,JSGCL,JS Global Capital Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+135,JSIL,JS Investments Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+136,MSOTPS,Masood Textile Mills Preference,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+137,MCBAH,MCB-Arif Habib Savings & investment,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+138,MDTL,Media Times Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+139,MUREB,Murree Brewery Company Limited,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+140,NEXT,Next Capital Limited,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+141,PIAB,"P.I.A.C.L ""B""",Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+142,PASL,Pervez Ahmed Securities Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
+143,SIBL,Security Investment Bank Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+144,SLL,SME Leasing Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+145,TSBL,Trust Securities & Brokerage,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by nature
+146,786,786 Investments Ltd,Non-Compliant,N/A,N/A,N/A,N/A,N/A,N/A,NC by Nature
