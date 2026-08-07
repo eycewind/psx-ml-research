@@ -1,0 +1,120 @@
+{
+  "checkpoint": "C11-CP1",
+  "contract": "C11",
+  "status": "COMPLETE",
+  "holdout_accessed": false,
+  "git": {
+    "branch": "feature/c11-deployment-policy",
+    "head": "612db3c1636d73e745def8a8c732c20279ac1f5b",
+    "accepted_c10_tag": "c10-fee-aware-portfolio-accepted",
+    "accepted_c10_commit": "612db3c1636d73e745def8a8c732c20279ac1f5b"
+  },
+  "frozen_policies": [
+    "P1_broad_canonical",
+    "P2_conservative_consensus",
+    "P4_kmi30_strict",
+    "P5_shariah_screened"
+  ],
+  "deployment_policy": {
+    "shariah_gate_version": "C11-CP1-v1",
+    "universal_buy_gate": true,
+    "unknown_eligibility_action": "reject",
+    "ineligible_action": "reject",
+    "low_confidence_action": "allow_but_flag",
+    "sector_inference_allowed": false,
+    "p1_p2_original_policy_mutation_allowed": false,
+    "p1_p2_deployment_variants_to_evaluate": [
+      "filter_only",
+      "filter_and_refill"
+    ]
+  },
+  "cp2_capital_grid_pkr": [
+    50000,
+    100000,
+    250000,
+    500000,
+    1000000
+  ],
+  "inputs": {
+    "data/processed/c9/candidate_selections.parquet": {
+      "path": "data/processed/c9/candidate_selections.parquet",
+      "sha256": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+      "rows": 5730,
+      "min_signal_date": "2023-01-02",
+      "max_signal_date": "2025-12-30",
+      "policy_ids": [
+        "P1_broad_canonical",
+        "P2_conservative_consensus",
+        "P3_high_conviction"
+      ],
+      "holdout_rows": 0
+    },
+    "data/processed/c10/p4_kmi30_selections.parquet": {
+      "path": "data/processed/c10/p4_kmi30_selections.parquet",
+      "sha256": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+      "rows": 471,
+      "min_signal_date": "2023-01-02",
+      "max_signal_date": "2025-12-29",
+      "policy_ids": [
+        "P4_kmi30_strict"
+      ],
+      "holdout_rows": 0
+    },
+    "data/processed/c10/p5_shariah_screened_selections.parquet": {
+      "path": "data/processed/c10/p5_shariah_screened_selections.parquet",
+      "sha256": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c",
+      "rows": 1550,
+      "min_signal_date": "2023-01-02",
+      "max_signal_date": "2025-12-29",
+      "policy_ids": [
+        "P5_shariah_screened"
+      ],
+      "holdout_rows": 0
+    },
+    "data/reference/kmi_all_share_screened_universe_history.csv": {
+      "path": "data/reference/kmi_all_share_screened_universe_history.csv",
+      "sha256": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a",
+      "rows": 2440,
+      "min_effective_from": "2022-01-03",
+      "max_effective_from": "2025-12-02",
+      "confidence_values": [
+        "high",
+        "low",
+        "medium"
+      ],
+      "eligible_rows": 2440
+    }
+  },
+  "p5_provenance": {
+    "required_columns": [
+      "membership_confidence",
+      "membership_source",
+      "screening_effective_from",
+      "screening_effective_to",
+      "screening_snapshot_date"
+    ],
+    "confidence_values": [
+      "low",
+      "medium"
+    ],
+    "membership_sources": [
+      "carried_forward_screening_snapshot",
+      "official_full_screening_table"
+    ]
+  },
+  "immutability": {
+    "before": {
+      "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+      "data/processed/c10/p4_kmi30_selections.parquet": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+      "data/processed/c10/p5_shariah_screened_selections.parquet": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c",
+      "data/reference/kmi_all_share_screened_universe_history.csv": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a"
+    },
+    "after": {
+      "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+      "data/processed/c10/p4_kmi30_selections.parquet": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+      "data/processed/c10/p5_shariah_screened_selections.parquet": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c",
+      "data/reference/kmi_all_share_screened_universe_history.csv": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a"
+    },
+    "unchanged": true
+  }
+}
