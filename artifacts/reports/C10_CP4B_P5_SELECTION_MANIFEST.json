@@ -1,0 +1,23 @@
+{
+  "checkpoint": "C10-CP4B-3-p5-selection",
+  "definition": "point-in-time Shariah-screened policy; not exact KMI All Share membership",
+  "holdout_accessed": false,
+  "inputs": {
+    "artifacts/predictions/c8/validation_predictions.parquet": "f5420468eb8cce20b8f9bdc1bc19585904993af69bcc95cadb60f28661466ee3",
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+    "data/processed/features/daily_features.parquet": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa",
+    "data/reference/kmi_all_share_screened_universe_history.csv": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a"
+  },
+  "maximum_holdings": 15,
+  "median_holdings": 10.0,
+  "minimum_holdings": 7,
+  "output": {
+    "path": "data/processed/c10/p5_shariah_screened_selections.parquet",
+    "rows": 1550,
+    "sha256": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c"
+  },
+  "policy_id": "P5_shariah_screened",
+  "selection_shortfall_dates": 0,
+  "signal_dates": 157,
+  "unique_symbols": 173
+}
