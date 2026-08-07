@@ -11,6 +11,7 @@ import pyarrow.parquet as pq
 from psx_ml.c10.inputs import (
     C9_SELECTIONS_PATH,
     P4_SELECTIONS_PATH,
+    P5_SELECTIONS_PATH,
     LAST_PRE_HOLDOUT_DATE,
     PRICE_PATH,
     assert_no_holdout,
@@ -155,6 +156,7 @@ def main() -> None:
         "P1_broad_canonical",
         "P2_conservative_consensus",
         "P4_kmi30_strict",
+        "P5_shariah_screened",
     ]
 
     trade_frames: list[pd.DataFrame] = []
@@ -257,7 +259,7 @@ This checkpoint evaluates portfolio construction and gross accounting only.
 
 Included:
 
-- frozen policies P1, P2 and P4;
+- frozen policies P1, P2, P4 and P5;
 - next-session adjusted-open execution;
 - equal target weights at every weekly rebalance;
 - net trading from existing holdings to new target holdings;
@@ -328,6 +330,7 @@ These are frictionless results and are not estimates of realizable net performan
         "inputs": {
             str(C9_SELECTIONS_PATH): sha256_file(C9_SELECTIONS_PATH),
             str(P4_SELECTIONS_PATH): sha256_file(P4_SELECTIONS_PATH),
+            str(P5_SELECTIONS_PATH): sha256_file(P5_SELECTIONS_PATH),
             str(PRICE_PATH): sha256_file(
                 PRICE_PATH
             ),
@@ -364,7 +367,7 @@ Status: **COMPLETE**
 
 Checkpoint 2 adds:
 
-- equal-weight portfolio construction for P1, P2 and P4;
+- equal-weight portfolio construction for P1, P2, P4 and P5;
 - net rebalancing at next-session adjusted opens;
 - trade-level gross cash-flow accounting;
 - deferred exits where a valid opening execution price is unavailable;

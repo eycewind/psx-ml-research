@@ -181,7 +181,7 @@ def main() -> None:
 
 ## Scope
 
-Checkpoint 4 measures whether the frozen P1 and P2 trade ledgers can be executed at larger portfolio sizes.
+Checkpoint 4 measures whether the frozen P1, P2, P4 and P5 trade ledgers can be executed at larger portfolio sizes.
 
 Capacity reference:
 

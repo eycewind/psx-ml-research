@@ -51,6 +51,7 @@ def test_frozen_policies_include_p4() -> None:
         "P1_broad_canonical",
         "P2_conservative_consensus",
         "P4_kmi30_strict",
+        "P5_shariah_screened",
     }
 
 
@@ -95,15 +96,20 @@ def test_combined_loader_excludes_old_p3(
     )
     p4["kmi30_member"] = True
 
+    p5 = _base_frame("P5_shariah_screened")
+
     c9_path = tmp_path / "c9.parquet"
     p4_path = tmp_path / "p4.parquet"
+    p5_path = tmp_path / "p5.parquet"
 
     _write_parquet(c9, c9_path)
     _write_parquet(p4, p4_path)
+    _write_parquet(p5, p5_path)
 
     result = load_c10_selections(
         c9_path=c9_path,
         p4_path=p4_path,
+        p5_path=p5_path,
     )
 
     assert set(
@@ -112,4 +118,5 @@ def test_combined_loader_excludes_old_p3(
         "P1_broad_canonical",
         "P2_conservative_consensus",
         "P4_kmi30_strict",
+        "P5_shariah_screened",
     }

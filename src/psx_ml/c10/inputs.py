@@ -11,6 +11,7 @@ LAST_PRE_HOLDOUT_DATE = FINAL_HOLDOUT_START - pd.Timedelta(days=1)
 
 C9_SELECTIONS_PATH = Path("data/processed/c9/candidate_selections.parquet")
 P4_SELECTIONS_PATH = Path("data/processed/c10/p4_kmi30_selections.parquet")
+P5_SELECTIONS_PATH = Path("data/processed/c10/p5_shariah_screened_selections.parquet")
 PRICE_PATH = Path("data/cache/daily_ohlcv.parquet")
 FEATURE_PATH = Path("data/processed/features/daily_features.parquet")
 
@@ -154,16 +155,55 @@ def load_p4_selections(
     ).reset_index(drop=True)
 
 
+def load_p5_selections(
+    path: Path = P5_SELECTIONS_PATH,
+) -> pd.DataFrame:
+    frame = pd.read_parquet(path)
+
+    # P5 is generated directly from accepted C8 prediction rows rather than
+    # C9 candidate_selections, so normalize the shared C10 selection fields
+    # before applying the common schema validation.
+    if "selection_tail" not in frame.columns:
+        frame = frame.copy()
+        frame["selection_tail"] = "top"
+
+    frame = _validate_selection_schema(
+        frame,
+        source_name="P5",
+    )
+
+    expected_policy = "P5_shariah_screened"
+    policies = set(frame["policy_id"].dropna().unique())
+    if policies != {expected_policy}:
+        raise ValueError(
+            "P5 selection file must contain only "
+            f"{expected_policy}; found {sorted(policies)}"
+        )
+
+    if frame.duplicated(
+        ["policy_id", "trade_date", "symbol"]
+    ).any():
+        raise ValueError(
+            "P5 selections contain duplicate policy/date/symbol rows"
+        )
+
+    return frame.sort_values(
+        ["trade_date", "policy_id", "symbol"]
+    ).reset_index(drop=True)
+
+
 def load_c10_selections(
     *,
     c9_path: Path = C9_SELECTIONS_PATH,
     p4_path: Path = P4_SELECTIONS_PATH,
+    p5_path: Path = P5_SELECTIONS_PATH,
 ) -> pd.DataFrame:
     c9 = load_c9_selections(c9_path)
     p4 = load_p4_selections(p4_path)
+    p5 = load_p5_selections(p5_path)
 
     common_columns = sorted(
-        set(c9.columns) & set(p4.columns)
+        set(c9.columns) & set(p4.columns) & set(p5.columns)
     )
 
     required_common = {
@@ -193,6 +233,7 @@ def load_c10_selections(
         [
             c9[common_columns],
             p4[common_columns],
+            p5[common_columns],
         ],
         ignore_index=True,
         sort=False,
@@ -210,6 +251,7 @@ def load_c10_selections(
         "P1_broad_canonical",
         "P2_conservative_consensus",
         "P4_kmi30_strict",
+        "P5_shariah_screened",
     }
     policies = set(
         combined["policy_id"].dropna().unique()

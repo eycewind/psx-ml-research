@@ -32,6 +32,16 @@
       "trade_count": 738
     },
     {
+      "capital_90pct_trades_feasible": 980747.3706800553,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "trade_count": 2509
+    },
+    {
       "capital_90pct_trades_feasible": 1053241.4535385938,
       "capital_95pct_trades_feasible": 698664.4267808637,
       "capital_99pct_trades_feasible": 340500.0491820041,
@@ -62,6 +72,16 @@
       "trade_count": 738
     },
     {
+      "capital_90pct_trades_feasible": 1961494.7413601107,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "trade_count": 2509
+    },
+    {
       "capital_90pct_trades_feasible": 2106482.9070771877,
       "capital_95pct_trades_feasible": 1397328.8535617273,
       "capital_99pct_trades_feasible": 681000.0983640082,
@@ -90,29 +110,39 @@
       "participation_rate": 0.2,
       "policy_id": "P4_kmi30_strict",
       "trade_count": 738
+    },
+    {
+      "capital_90pct_trades_feasible": 3922989.4827202214,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "trade_count": 2509
     }
   ],
   "checkpoint": 4,
   "contract": "C10",
   "holdout_accessed": false,
   "inputs": {
-    "data/processed/c10/frictionless_trades.parquet": "d13ac37a5e80026867ddbea43535c811f236878e3be1bc4f97a69834c2b18f7f",
+    "data/processed/c10/frictionless_trades.parquet": "f571e13e389479e5957258886f390884dd179cec49729d6c107aa058dd5ec613",
     "data/processed/features/daily_features.parquet": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa"
   },
   "liquidity_basis": "signal_date_turnover_median_20obs_adj",
   "missing_liquidity_policy": "zero_capacity",
   "outputs": {
     "data/processed/c10/capacity_limits.parquet": {
-      "rows": 9,
-      "sha256": "5f5ffd8a399870ef1e1cb0bf13b082260b6758811525dd2f5c23095b235490c2"
+      "rows": 12,
+      "sha256": "8b178eae7e84045a2167885d38e9668709d5f95d46079253bc7ac872d6a3cd95"
     },
     "data/processed/c10/capacity_summary.parquet": {
-      "rows": 45,
-      "sha256": "325acdd9a18aa82515e9aa234aa76516d39100d0196294b66eb14c60173c0700"
+      "rows": 60,
+      "sha256": "2dcd1f5be1d8f9e012278a8f21a31f240a49e795697474f34101f474596e5c2a"
     },
     "data/processed/c10/capacity_trade_diagnostics.parquet": {
-      "rows": 116805,
-      "sha256": "472585526c531b0210d9e11be76d1776eb0143775e13adb8d234857c623dda50"
+      "rows": 154440,
+      "sha256": "ea11bca5984520c447cd22dcc14d07ea0c3f036649cf455d5298d8ae9d2832f2"
     }
   },
   "scenarios": [
@@ -276,6 +306,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 141,
+      "capacity_breach_trades": 1108,
+      "capacity_executed_notional": 4009123880.0286455,
+      "capacity_unfilled_notional": 2257797207.867063,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "fully_feasible_fraction": 0.5583897967317657,
+      "fully_feasible_trades": 1401,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.7298124742762885,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "notional_fill_fraction": 0.6397278382477319,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 10000000.0,
+      "scaled_trade_notional": 6266921087.895708,
+      "scenario_id": "capital_10000000_participation_10pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 158,
       "capacity_breach_trades": 1432,
       "capacity_executed_notional": 2513685883.7858467,
@@ -340,6 +392,28 @@
       "scaled_trade_notional": 5886980374.205908,
       "scenario_id": "capital_10000000_participation_20pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 129,
+      "capacity_breach_trades": 795,
+      "capacity_executed_notional": 4982070013.577145,
+      "capacity_unfilled_notional": 1284851074.3185632,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "fully_feasible_fraction": 0.6831406935033878,
+      "fully_feasible_trades": 1714,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.8503366734347482,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "notional_fill_fraction": 0.7949788969259245,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 10000000.0,
+      "scaled_trade_notional": 6266921087.895708,
+      "scenario_id": "capital_10000000_participation_20pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 158,
@@ -408,6 +482,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 147,
+      "capacity_breach_trades": 1345,
+      "capacity_executed_notional": 3138356018.774843,
+      "capacity_unfilled_notional": 3128565069.120865,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "fully_feasible_fraction": 0.4639298525308888,
+      "fully_feasible_trades": 1164,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.6171420286832809,
+      "median_fill_ratio": 0.7624184384074494,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "notional_fill_fraction": 0.5007811610770789,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 10000000.0,
+      "scaled_trade_notional": 6266921087.895708,
+      "scenario_id": "capital_10000000_participation_5pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 127,
       "capacity_breach_trades": 353,
       "capacity_executed_notional": 345406308.3294966,
@@ -472,6 +568,28 @@
       "scaled_trade_notional": 588698037.4205908,
       "scenario_id": "capital_1000000_participation_10pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 22,
+      "capacity_breach_trades": 54,
+      "capacity_executed_notional": 622042668.5594758,
+      "capacity_unfilled_notional": 4649440.230095074,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "fully_feasible_fraction": 0.9784774810681547,
+      "fully_feasible_trades": 2455,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.9957334511221964,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "notional_fill_fraction": 0.9925809816895967,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 1000000.0,
+      "scaled_trade_notional": 626692108.7895708,
+      "scenario_id": "capital_1000000_participation_10pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 65,
@@ -540,6 +658,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 2,
+      "capacity_breach_trades": 2,
+      "capacity_executed_notional": 626435935.5476261,
+      "capacity_unfilled_notional": 256173.2419446296,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "fully_feasible_fraction": 0.9992028696691909,
+      "fully_feasible_trades": 2507,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.9997650917044826,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "notional_fill_fraction": 0.9995912295075178,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 1000000.0,
+      "scaled_trade_notional": 626692108.7895708,
+      "scenario_id": "capital_1000000_participation_20pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 152,
       "capacity_breach_trades": 782,
       "capacity_executed_notional": 313132890.04507977,
@@ -604,6 +744,28 @@
       "scaled_trade_notional": 588698037.4205908,
       "scenario_id": "capital_1000000_participation_5pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 85,
+      "capacity_breach_trades": 263,
+      "capacity_executed_notional": 596896940.7683775,
+      "capacity_unfilled_notional": 29795168.02119323,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "fully_feasible_fraction": 0.895177361498605,
+      "fully_feasible_trades": 2246,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.9686005429537914,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "notional_fill_fraction": 0.95245644934202,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 1000000.0,
+      "scaled_trade_notional": 626692108.7895708,
+      "scenario_id": "capital_1000000_participation_5pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 158,
@@ -672,6 +834,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 149,
+      "capacity_breach_trades": 1423,
+      "capacity_executed_notional": 7203028393.718792,
+      "capacity_unfilled_notional": 8464274326.020477,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "fully_feasible_fraction": 0.4328417696293344,
+      "fully_feasible_trades": 1086,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.5834687164943144,
+      "median_fill_ratio": 0.6099347507259595,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "notional_fill_fraction": 0.4597491043971264,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 25000000.0,
+      "scaled_trade_notional": 15667302719.73927,
+      "scenario_id": "capital_25000000_participation_10pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 158,
       "capacity_breach_trades": 2007,
       "capacity_executed_notional": 4583154998.301085,
@@ -736,6 +920,28 @@
       "scaled_trade_notional": 14717450935.514769,
       "scenario_id": "capital_25000000_participation_20pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 144,
+      "capacity_breach_trades": 1184,
+      "capacity_executed_notional": 9290764629.409561,
+      "capacity_unfilled_notional": 6376538090.329706,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "fully_feasible_fraction": 0.5280988441610204,
+      "fully_feasible_trades": 1325,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.6923501071884949,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "notional_fill_fraction": 0.5930034541110963,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 25000000.0,
+      "scaled_trade_notional": 15667302719.73927,
+      "scenario_id": "capital_25000000_participation_20pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 158,
@@ -804,6 +1010,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 155,
+      "capacity_breach_trades": 1629,
+      "capacity_executed_notional": 5396863926.631517,
+      "capacity_unfilled_notional": 10270438793.107752,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "fully_feasible_fraction": 0.3507373455559984,
+      "fully_feasible_trades": 880,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.48799520693694315,
+      "median_fill_ratio": 0.30496737536297974,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "notional_fill_fraction": 0.34446669111920564,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 25000000.0,
+      "scaled_trade_notional": 15667302719.73927,
+      "scenario_id": "capital_25000000_participation_5pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 158,
       "capacity_breach_trades": 2800,
       "capacity_executed_notional": 5039944179.567259,
@@ -868,6 +1096,28 @@
       "scaled_trade_notional": 29434901871.029537,
       "scenario_id": "capital_50000000_participation_10pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 155,
+      "capacity_breach_trades": 1629,
+      "capacity_executed_notional": 10793727853.263035,
+      "capacity_unfilled_notional": 20540877586.215504,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "fully_feasible_fraction": 0.3507373455559984,
+      "fully_feasible_trades": 880,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.48799520693694315,
+      "median_fill_ratio": 0.30496737536297974,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "notional_fill_fraction": 0.34446669111920564,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 50000000.0,
+      "scaled_trade_notional": 31334605439.47854,
+      "scenario_id": "capital_50000000_participation_10pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 158,
@@ -936,6 +1186,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 149,
+      "capacity_breach_trades": 1423,
+      "capacity_executed_notional": 14406056787.437584,
+      "capacity_unfilled_notional": 16928548652.040955,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "fully_feasible_fraction": 0.4328417696293344,
+      "fully_feasible_trades": 1086,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.5834687164943144,
+      "median_fill_ratio": 0.6099347507259595,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "notional_fill_fraction": 0.4597491043971264,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 50000000.0,
+      "scaled_trade_notional": 31334605439.47854,
+      "scenario_id": "capital_50000000_participation_20pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 158,
       "capacity_breach_trades": 3111,
       "capacity_executed_notional": 3512642811.895194,
@@ -1000,6 +1272,28 @@
       "scaled_trade_notional": 29434901871.029537,
       "scenario_id": "capital_50000000_participation_5pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 155,
+      "capacity_breach_trades": 1828,
+      "capacity_executed_notional": 7622949806.916182,
+      "capacity_unfilled_notional": 23711655632.56236,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "fully_feasible_fraction": 0.2714228776404942,
+      "fully_feasible_trades": 681,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.3970111849831746,
+      "median_fill_ratio": 0.15248368768148987,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "notional_fill_fraction": 0.24327575535104745,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 50000000.0,
+      "scaled_trade_notional": 31334605439.47854,
+      "scenario_id": "capital_50000000_participation_5pct",
+      "trade_count": 2509
     },
     {
       "breach_date_count": 158,
@@ -1068,6 +1362,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 129,
+      "capacity_breach_trades": 795,
+      "capacity_executed_notional": 2491035006.7885723,
+      "capacity_unfilled_notional": 642425537.1592816,
+      "capital_95pct_trades_feasible": 1418394.613383664,
+      "capital_99pct_trades_feasible": 836180.5438528055,
+      "fully_feasible_fraction": 0.6831406935033878,
+      "fully_feasible_trades": 1714,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.8503366734347482,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 15248368.768148987,
+      "minimum_supported_capital": 313106.5329121065,
+      "notional_fill_fraction": 0.7949788969259245,
+      "participation_rate": 0.1,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 5000000.0,
+      "scaled_trade_notional": 3133460543.947854,
+      "scenario_id": "capital_5000000_participation_10pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 154,
       "capacity_breach_trades": 964,
       "capacity_executed_notional": 1498505936.7188315,
@@ -1134,6 +1450,28 @@
       "trade_count": 738
     },
     {
+      "breach_date_count": 99,
+      "capacity_breach_trades": 384,
+      "capacity_executed_notional": 2900723816.939685,
+      "capacity_unfilled_notional": 232736727.00816876,
+      "capital_95pct_trades_feasible": 2836789.226767328,
+      "capital_99pct_trades_feasible": 1672361.087705611,
+      "fully_feasible_fraction": 0.8469509764846552,
+      "fully_feasible_trades": 2125,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.9490691689216294,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 30496737.536297973,
+      "minimum_supported_capital": 626213.065824213,
+      "notional_fill_fraction": 0.9257253366544889,
+      "participation_rate": 0.2,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 5000000.0,
+      "scaled_trade_notional": 3133460543.947854,
+      "scenario_id": "capital_5000000_participation_20pct",
+      "trade_count": 2509
+    },
+    {
       "breach_date_count": 158,
       "capacity_breach_trades": 1884,
       "capacity_executed_notional": 995020768.2422369,
@@ -1198,6 +1536,28 @@
       "scaled_trade_notional": 2943490187.102954,
       "scenario_id": "capital_5000000_participation_5pct",
       "trade_count": 738
+    },
+    {
+      "breach_date_count": 141,
+      "capacity_breach_trades": 1108,
+      "capacity_executed_notional": 2004561940.0143228,
+      "capacity_unfilled_notional": 1128898603.9335315,
+      "capital_95pct_trades_feasible": 709197.306691832,
+      "capital_99pct_trades_feasible": 418090.27192640275,
+      "fully_feasible_fraction": 0.5583897967317657,
+      "fully_feasible_trades": 1401,
+      "liquidity_available_fraction": 1.0,
+      "mean_fill_ratio": 0.7298124742762885,
+      "median_fill_ratio": 1.0,
+      "median_supported_capital": 7624184.384074493,
+      "minimum_supported_capital": 156553.26645605324,
+      "notional_fill_fraction": 0.6397278382477319,
+      "participation_rate": 0.05,
+      "policy_id": "P5_shariah_screened",
+      "portfolio_capital": 5000000.0,
+      "scaled_trade_notional": 3133460543.947854,
+      "scenario_id": "capital_5000000_participation_5pct",
+      "trade_count": 2509
     }
   ]
 }
