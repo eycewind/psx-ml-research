@@ -1,0 +1,30 @@
+{
+  "checkpoint": "CP4A-P4-selection",
+  "contract": "C10",
+  "definition": {
+    "feature_variant": "B_market_context",
+    "horizon": 5,
+    "model_name": "lightgbm_cpu",
+    "schedule": "P1_weekly_signal_dates",
+    "sector_cap": 2,
+    "selection": "top_10pct_within_kmi30",
+    "target_family": "market_relative",
+    "universe": "point_in_time_kmi30"
+  },
+  "holdout_accessed": false,
+  "inputs": {
+    "artifacts/predictions/c8/validation_predictions.parquet": "f5420468eb8cce20b8f9bdc1bc19585904993af69bcc95cadb60f28661466ee3",
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+    "data/reference/kmi30_membership_history.parquet": "f74ddf42d91d4229117a5dd92dc99a4c4cc933ed15aad84a6ad098ac03085e3b"
+  },
+  "output": {
+    "path": "data/processed/c10/p4_kmi30_selections.parquet",
+    "rows": 471,
+    "sha256": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+    "signal_dates": 157,
+    "unique_symbols": 51
+  },
+  "policy_id": "P4_kmi30_strict",
+  "retraining": false,
+  "status": "COMPLETE"
+}

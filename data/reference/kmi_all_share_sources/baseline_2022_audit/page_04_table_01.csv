@@ -1,0 +1,70 @@
+No.,Ticker,Company Name,Objective,Debt Ratio (D/A < 37%),Investment Ratio (NCInv/TA < 33%),Income Ratio (NCInc/TR < 5%),Illiquid Assets Ratio (IA/TA => 25%),Net Liquid Assets Ratio (NLA < P),Share Price as of June 30 2021,Final Shariah Status
+1,ABOT,Abbott Lab (Pakistan) Ltd*,Compliant,0.97%,27.19%,1.22%,54.46%,3.56,767.02,Compliant
+2,AGSML,Abdullah Shah Ghazi Sugar Mills*,Compliant,16.98%,0.00%,0.00%,97.31%,(42.57),0.00,Compliant1
+3,ADAMS,Adam Sugar Mills Ltd*,Compliant,11.99%,0.34%,0.08%,89.01%,(165.33),0.00,Compliant1
+4,ADOS,Ados Pakistan Ltd,Compliant,5.99%,0.00%,0.03%,49.71%,(14.61),0.00,Compliant
+5,AGHA,Agha Steel Ind Ltd,Compliant,33.93%,0.00%,0.24%,80.07%,(25.24),0.00,Compliant
+6,AGP,AGP Limited*,Compliant,0.00%,0.00%,0.33%,87.01%,(1.50),0.00,Compliant
+7,AGIL,Agriauto Industries Ltd,Compliant,0.81%,3.75%,Fpr,58.91%,54.79,255.40,Compliant
+8,AHTM,Ahmed Hassan Textile Mills Ltd,Compliant,20.99%,0.60%,0.02%,81.77%,(104.67),0.00,Compliant
+9,ASL,Aisha Steel Ltd,Compliant,33.61%,0.00%,0.04%,86.31%,(22.10),0.00,Compliant
+10,ASC,Al Shaheer Corporation Ltd,Compliant,2.50%,0.00%,0.00%,63.36%,1.86,19.93,Compliant
+11,AGTL,Al-Ghazi Tractors Ltd,Compliant,0.00%,0.00%,0.45%,34.22%,(3.31),0.00,Compliant
+12,AKGL,AL-Khair Gadoon Ltd,Compliant,17.91%,0.00%,0.01%,78.77%,(20.01),0.00,Compliant
+13,AWTX,Allawasaya Textile Mills Ltd,Compliant,22.30%,0.00%,0.00%,80.04%,(558.81),0.00,Compliant
+14,ARM,Allied Rental Modaraba,Compliant,N/A,N/A,N/A,75.33%,(2.73),0.00,Compliant **
+15,FANM,Al-Noor Modaraba,Compliant,N/A,N/A,N/A,64.66%,3.63,3.65,Compliant **
+16,ANTM,AN Textile Mills Ltd. (Ishaq Textile Mills Ltd.,) Compliant,13.65%,0.28%,0.01%,83.63%,(84.16),0.00,Compliant
+17,ARPL,Archroma Pakistan Ltd,Compliant,4.01%,0.00%,0.00%,45.68%,(19.17),0.00,Compliant
+18,ASHT,Ashfaq Textile Mills Ltd,Compliant,0.00%,0.00%,1.06%,81.36%,(0.02),0.00,Compliant
+19,ASTM,Asim Textile Mills Ltd,Compliant,0.00%,0.00%,0.52%,57.23%,(22.36),0.00,Compliant
+20,ATBA,Atlas Battery Ltd,Compliant,22.05%,1.48%,0.12%,82.27%,(103.41),0.00,Compliant
+21,ATLH,Atlas Honda Ltd,Compliant,1.45%,22.53%,1.11%,35.47%,27.14,480.00,Compliant1
+22,PREMA,At-Tahur Limited,Compliant,10.86%,0.00%,0.00%,89.58%,(4.89),0.00,Compliant
+23,ACPL,Attock Cement Pakistan Ltd,Compliant,18.00%,4.08%,0.08%,75.25%,(46.22),0.00,Compliant
+24,APL,Attock Petroleum Ltd,Compliant,11.12%,2.52%,0.59%,54.46%,(110.40),0.00,Compliant
+25,ATRL,Attock Refinery Ltd,Compliant,8.16%,0.00%,0.55%,67.67%,(239.63),0.00,Compliant
+26,AVN,Avanceon Limited* #,Compliant,5.31%,0.05%,0.02%,15.50%,17.28,127.99,Compliant
+27,AWWAL,Awwal Modaraba,Compliant,N/A,N/A,N/A,56.80%,4.88,11.00,Compliant **
+28,ANL,Azgard Nine Ltd,Compliant,27.57%,0.67%,0.50%,66.21%,(14.22),0.00,Compliant
+29,BFMOD,B.F. Modaraba,Compliant,N/A,N/A,N/A,94.90%,0.35,6.00,Compliant **
+30,BRR,B.R.R. Guardian Modaraba,Compliant,N/A,N/A,N/A,94.70%,(2.34),0.00,Compliant **
+31,BCML,Babri Cotton Mills Ltd,Compliant,21.66%,0.00%,0.25%,82.40%,(245.58),0.00,Compliant
+32,BGL,Balochistan Glass Ltd,Compliant,31.43%,0.00%,0.01%,95.01%,(6.04),0.00,Compliant
+33,BWHL,Baluchistan Wheels Ltd,Compliant,2.97%,23.92%,1.82%,58.78%,43.74,80.00,Compliant
+34,BIPL,BankIslami Pakistan Ltd*,Compliant,N/A,N/A,N/A,79.14%,(234.21),0.00,Compliant **
+35,BNWM,Bannu Woollen Mills Ltd,Compliant,11.24%,0.00%,0.05%,91.91%,(38.67),0.00,Compliant
+36,BATA,Bata (Pakistan) Ltd,Compliant,32.96%,3.81%,0.27%,70.83%,(486.49),0.00,Compliant
+37,BERG,Berger Paints Pakistan Ltd,Compliant,22.55%,1.65%,1.61%,57.45%,(31.97),0.00,Compliant
+38,BWCL,Bestway Cement Ltd,Compliant,14.87%,17.49%,2.20%,74.53%,(22.79),0.00,Compliant
+39,BHAT,Bhanero Textile Mills Ltd,Compliant,13.91%,0.00%,0.14%,61.72%,301.13,1040.00,Compliant
+40,BIFO,Biafo Industries Ltd,Compliant,25.15%,10.67%,0.80%,68.90%,(4.47),0.00,Compliant
+41,BTL,Blessed Textiles Ltd,Compliant,23.74%,0.00%,0.04%,79.74%,(305.56),0.00,Compliant
+42,BNL,Bunnys Limited,Compliant,30.96%,0.00%,0.24%,83.83%,(16.41),0.00,Compliant
+43,BPL,Burshane LPG (Pakistan) Ltd,Compliant,24.15%,0.00%,0.08%,68.71%,(23.69),0.00,Compliant
+44,BUXL,Buxly Paints Ltd,Compliant,19.52%,0.00%,0.00%,59.15%,(70.59),0.00,Compliant
+45,BYCO,Byco Petroleum Pakistan Ltd,Compliant,36.76%,0.00%,0.49%,90.67%,(18.33),0.00,Compliant
+46,CEPB,Century Paper & Board Mills,Compliant,20.77%,0.00%,0.07%,81.06%,(39.85),0.00,Compliant
+47,CHCC,Cherat Cement Co. Ltd,Compliant,12.43%,0.02%,0.05%,91.98%,(91.92),0.00,Compliant
+48,CPPL,Cherat Packaging Ltd,Compliant,26.36%,0.00%,0.01%,75.56%,(81.66),0.00,Compliant
+49,CLOV,Clover Pakistan Ltd,Compliant,0.00%,0.00%,0.21%,67.70%,6.72,80.30,Compliant3
+50,CCM,Crescent Cotton Mills Ltd,Compliant,6.79%,1.19%,0.23%,81.63%,(16.24),0.00,Compliant
+51,CFL,Crescent Fibres Ltd,Compliant,10.55%,0.80%,0.22%,65.90%,10.48,70.41,Compliant
+52,DGKC,D.G. Khan Cement Co. Ltd,Compliant,32.42%,12.54%,3.11%,79.70%,(88.95),0.00,Compliant
+53,DMTX,D.M. Textile Mills Ltd,Compliant,0.00%,1.42%,3.83%,90.93%,(1.88),0.00,Compliant
+54,DADX,Dadex Eternit Limited,Compliant,26.53%,0.00%,1.56%,65.37%,(10.73),0.00,Compliant
+55,DAAG,Data Agro Limited,Compliant,10.23%,0.00%,0.00%,68.35%,(5.54),0.00,Compliant
+56,DAWH,Dawood Hercules Corporation,Compliant,31.41%,23.10%,4.77%,56.44%,(203.26),0.00,Compliant
+57,DOL,Descon Oxychem Ltd,Compliant,30.87%,14.40%,0.46%,75.87%,(5.09),0.00,Compliant
+58,DCL,Dewan Cement Ltd,Compliant,17.63%,0.00%,0.01%,96.57%,(30.42),0.00,Compliant
+59,DFSM,Dewan Farooq Spinning Mills Ltd,Compliant,22.49%,0.00%,0.00%,92.56%,(13.70),0.00,Compliant
+60,DINT,Din Textile Mills Ltd,Compliant,7.35%,0.00%,0.00%,77.47%,(170.84),0.00,Compliant
+61,DCR,Dolmen City REIT,Compliant,0.00%,0.00%,0.00%,98.09%,0.20,11.02,Compliant
+62,DSIL,DS Industries Ltd,Compliant,22.03%,16.01%,3.69%,71.68%,(2.03),0.00,Compliant
+63,DYNO,Dynea Pakistan Ltd,Compliant,7.31%,0.00%,0.24%,54.35%,28.07,279.99,Compliant
+64,ELCM,Elahi Cotton Mills Ltd,Compliant,0.00%,0.00%,0.01%,87.26%,(68.46),0.00,Compliant
+65,EMCO,EMCO Industries Ltd,Compliant,20.19%,0.00%,0.00%,73.87%,(14.19),0.00,Compliant
+66,ENGRO,Engro Corporation Ltd,Compliant,34.09%,20.69%,3.73%,58.50%,(199.20),0.00,Compliant
+67,EFERT,Engro Fertilizers Ltd,Compliant,17.71%,10.73%,1.59%,73.57%,(33.92),0.00,Compliant
+68,EPCL,Engro Polymer & Chemicals,Compliant,17.03%,19.41%,1.52%,74.85%,(28.92),0.00,Compliant
+69,EXIDE,Exide Pakistan Ltd,Compliant,11.47%,0.00%,0.06%,53.84%,(40.98),0.00,Compliant1

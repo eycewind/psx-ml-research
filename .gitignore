@@ -27,4 +27,5 @@ artifacts/reports/*.parquet
 *.ckpt
 *:Zone.Identifier
 
-*:Zone.Identifier
+# Local editor settings
+.vscode/

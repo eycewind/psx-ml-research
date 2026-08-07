@@ -1,0 +1,85 @@
+{
+  "checkpoint": "C10-CP4B-2-screened-universe-history",
+  "counts": [
+    {
+      "effective_from": "2022-01-03",
+      "membership_confidence": "high",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2022-01-03",
+      "symbol_count": 256
+    },
+    {
+      "effective_from": "2022-07-15",
+      "membership_confidence": "low",
+      "membership_source": "carried_forward_screening_snapshot",
+      "screening_snapshot_date": "2022-01-03",
+      "symbol_count": 256
+    },
+    {
+      "effective_from": "2023-01-12",
+      "membership_confidence": "medium",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2023-01-12",
+      "symbol_count": 257
+    },
+    {
+      "effective_from": "2023-07-10",
+      "membership_confidence": "low",
+      "membership_source": "carried_forward_screening_snapshot",
+      "screening_snapshot_date": "2023-01-12",
+      "symbol_count": 257
+    },
+    {
+      "effective_from": "2023-12-26",
+      "membership_confidence": "medium",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2023-12-26",
+      "symbol_count": 265
+    },
+    {
+      "effective_from": "2024-06-25",
+      "membership_confidence": "medium",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2024-06-25",
+      "symbol_count": 270
+    },
+    {
+      "effective_from": "2025-01-03",
+      "membership_confidence": "medium",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2025-01-03",
+      "symbol_count": 285
+    },
+    {
+      "effective_from": "2025-06-10",
+      "membership_confidence": "low",
+      "membership_source": "carried_forward_screening_snapshot",
+      "screening_snapshot_date": "2025-01-03",
+      "symbol_count": 285
+    },
+    {
+      "effective_from": "2025-12-02",
+      "membership_confidence": "medium",
+      "membership_source": "official_full_screening_table",
+      "screening_snapshot_date": "2025-12-02",
+      "symbol_count": 309
+    }
+  ],
+  "definition": "point-in-time official Shariah screening universe; not exact index membership",
+  "holdout_accessed": false,
+  "interval_count": 9,
+  "outputs": {
+    "artifacts/reports/C10_CP4B_KMI_ALL_SHARE_SCREENED_UNIVERSE_HISTORY.md": {
+      "sha256": "8321285bde53cbcb2b5dd388ec2736bad5214ee6e479856d7754679ebd98e614"
+    },
+    "data/reference/kmi_all_share_screened_universe_history.csv": {
+      "rows": 2440,
+      "sha256": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a"
+    },
+    "data/reference/kmi_all_share_screened_universe_history.parquet": {
+      "rows": 2440,
+      "sha256": "5ffa3c076c6776a5ffabac2b58849a3bd089ca43dacf2f814b4da804e1be872e"
+    }
+  },
+  "row_count": 2440
+}

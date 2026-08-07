@@ -1,0 +1,1650 @@
+{
+  "checkpoint": "C10-CP4B-1-pdf-color-probe",
+  "holdout_accessed": false,
+  "records": [
+    {
+      "filename": "sharia_KMI_All_Share_list_June_2021_Final_27122021.pdf",
+      "pages": [
+        {
+          "char_count": 1349,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk   NOTICE FOR ALL MARKET PARTICIPANTS SUBJECT: RE-COMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX OF",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0, 0.0, 1.0)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0, 0.0, 1.0)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1328
+            ],
+            [
+              "(0.0, 0.0, 1.0)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1328
+            ],
+            [
+              "(0.0, 0.0, 1.0)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 1463,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk   PSX-KMI All Shares Recomposition for June 30, 2021 Incoming   Outgoing Sr. no Ticker Company Nam",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1456
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1456
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 667,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk 23 PTC Pakistan Telecommunication Co. Ltd    24 PIOC Pioneer Cement Limited    25 RCML Relinace Co",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              660
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              660
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 5711,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.2157, 0.3373, 0.1373)",
+              "sample_text": "CompliantCompliant1Compliant1CompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliant **Compliant **CompliantCompliantCompliantCompliantCompliantCompliant1Co",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5039
+            ],
+            [
+              "(0.2157, 0.3373, 0.1373)",
+              672
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5711
+            ]
+          ]
+        },
+        {
+          "char_count": 6304,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.2157, 0.3373, 0.1373)",
+              "sample_text": "Compliant1CompliantCompliantCompliantCompliantCompliantCompliantCompliant **Compliant **Compliant **Compliant **Compliant **Compliant **Compliant **Compliant **Compliant **Compliant **Compliant **Comp",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5542
+            ],
+            [
+              "(0.2157, 0.3373, 0.1373)",
+              762
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6304
+            ]
+          ]
+        },
+        {
+          "char_count": 6501,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.2157, 0.3373, 0.1373)",
+              "sample_text": "CompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliant **CompliantCompliantCompliantCompliant1Compliant **CompliantCompliantCompliantCompliantCompliantComp",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5762
+            ],
+            [
+              "(0.2157, 0.3373, 0.1373)",
+              739
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6501
+            ]
+          ]
+        },
+        {
+          "char_count": 2986,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.2157, 0.3373, 0.1373)",
+              "sample_text": "CompliantCompliantCompliantCompliantCompliantCompliant3Compliant3CompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliantCompliant1Complian",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              2641
+            ],
+            [
+              "(0.2157, 0.3373, 0.1373)",
+              345
+            ]
+          ],
+          "page": 7,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2986
+            ]
+          ]
+        },
+        {
+          "char_count": 6725,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.7529, 0.0, 0.0)",
+              "sample_text": "Non-CompliantNon-Compliant1Non-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-Compliant3Non-Compliant1Non-CompliantNo",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.1333, 0.1333, 0.1333)",
+              "sample_text": "DSMLDar-es-Salaam Textile Mills LtdDWTMDewan Textile MillsJOPPJohnson & Phillips (Pakistan) Ltd",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5575
+            ],
+            [
+              "(0.7529, 0.0, 0.0)",
+              1055
+            ],
+            [
+              "(0.1333, 0.1333, 0.1333)",
+              95
+            ]
+          ],
+          "page": 8,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6725
+            ]
+          ]
+        },
+        {
+          "char_count": 5643,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.7529, 0.0, 0.0)",
+              "sample_text": "Non-Compliant3Non-CompliantNon-CompliantNon-CompliantNon-Compliant3 Non-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-CompliantNon-Compliant1Non-CompliantNon-Compliant1",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              4748
+            ],
+            [
+              "(0.7529, 0.0, 0.0)",
+              895
+            ]
+          ],
+          "page": 9,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5643
+            ]
+          ]
+        },
+        {
+          "char_count": 1988,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.1333, 0.1333, 0.1333)",
+              "sample_text": "NC = Non - CompliantNOTE: The above criteria of KMI Index is approved by Sharia\u2019h Supervisory Board of KMI Index Partner, MBL. ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "N/A = Not Applicable 1 Based on March-2021 accounts2 Based on May-2021 accounts3 As per last available annual / half-yearly accountscompanies marked in red are on defaulters list ### Status of 'No Opi",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              1861
+            ],
+            [
+              "(0.1333, 0.1333, 0.1333)",
+              127
+            ]
+          ],
+          "page": 10,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1988
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "Copy_of_KMI_All_Share_June_-22_23122022.pdf",
+      "pages": [
+        {
+          "char_count": 1230,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk     NOTICE FOR ALL MARKET PARTICIPANTS SUBJECT: RECOMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX O",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0196, 0.388, 0.757)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0196, 0.388, 0.757)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1209
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1209
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 1900,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk    LIST OF INCOMING / OUTGOING COMPANIES Re-composition of PSX-KMI All Shares Islamic Index of Pak",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1893
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1893
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 8867,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              8867
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              8867
+            ]
+          ]
+        },
+        {
+          "char_count": 9583,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "111PCALPakistan Cables LtdCompliant31.07%0.00%0.00%75.25%(159.15)0.00Compliant112PIBTLPakistan International Bulk Terminal LtdCompliant25.98%0.00%0.27%88.21%(6.54)0.00Compliant113PICTPakistan Internat",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              9583
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              9583
+            ]
+          ]
+        },
+        {
+          "char_count": 9589,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "230SHDTShadab Textile Mills Ltd.Compliant31.95%0.00%0.02%79.73%(47.99)0.00Compliant231SNAISana Industries Ltd.Compliant12.33%0.00%0.07%57.73%(49.09)0.00Compliant232SURCSuraj Cotton Mills Ltd.Compliant",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              9589
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              9589
+            ]
+          ]
+        },
+        {
+          "char_count": 5238,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "349SRVIService Industries LtdCompliant52.29%0.13%0.61%75.62%(758.49)0.00Non-Compliant350STPLSiddiqsons Tin Plate LtdCompliant41.32%3.36%0.21%71.23%(6.29)0.00Non-Compliant351TRGTRG Pakistan LtdComplian",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.133,)",
+              "sample_text": "NC = Non - CompliantNOTE: The above criteria of KMI Index is approved by Sharia\u2019h Supervisory Board of KMI Index Partner, MBL. ",
+              "stroking_color": "(0.133,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              5111
+            ],
+            [
+              "(0.133,)",
+              127
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5111
+            ],
+            [
+              "(0.133,)",
+              127
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "Notice-_KMI-All-Index-Re-composition-Jun-30-2023-Final.pdf",
+      "pages": [
+        {
+          "char_count": 1206,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk                   RECOMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX OF PAKISTAN  It is hereby infor",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0196, 0.388, 0.757)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0196, 0.388, 0.757)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1185
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1185
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 2476,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk    LIST OF INCOMING / OUTGOING COMPANIES Re-composition of PSX-KMI All Shares Islamic Index of Pak",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              2469
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2469
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 6243,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              6243
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6243
+            ]
+          ]
+        },
+        {
+          "char_count": 6818,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "75GVGLGhani Value Glass LtdCompliant0.00%0.00%0.28%80.76%(6.70)0.00Compliant76GWLCGharibwal Cement LtdCompliant0.63%0.00%0.98%92.05%(24.83)0.00Compliant77HABSMHabib Sugar Mills Ltd *Compliant24.94%10.",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              6818
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6818
+            ]
+          ]
+        },
+        {
+          "char_count": 6632,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "159SHELShell (Pakistan) LtdCompliant6.80%0.00%1.15%67.68%(257.47)0.00Compliant160SHEZShezan International LtdCompliant32.63%0.00%0.02%73.40%(156.51)0.00Compliant161SHFAShifa International HospitalsCom",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              6632
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6632
+            ]
+          ]
+        },
+        {
+          "char_count": 6835,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "242FASMFaisal Spinning Mills LtdCompliant44.75%0.00%0.73%81.25%(1413.00)0.00Non-Compliant243FECMFirst Elite Capital Modaraba **CompliantN/AN/AN/A93.81%(5.33)0.00Compliant244FECTCFecto Cement LtdCompli",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              6835
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6835
+            ]
+          ]
+        },
+        {
+          "char_count": 5912,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "325SANSMSanghar Sugar Mills Ltd*Compliant18.38%0.00%0.01%94.45%(377.31)0.00Compliant1326SAPLSanofi-aventis Pakistan Ltd *Compliant0.29%10.44%0.69%53.31%(183.58)0.00Compliant327SAPTSapphire Textile Mil",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              5912
+            ]
+          ],
+          "page": 7,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5912
+            ]
+          ]
+        },
+        {
+          "char_count": 2086,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "1GRRGlobe Residency ReitNon-CompliantN/AN/AN/AN/AN/AN/ANC by nature2DCRDolmen City REIT Compliant0.00%0.00%0.00%97.87%0.3113.68Compliant1ACIETFAlfalah Consumer Index (ETF)Non-Compliant2JSMFETFJS Momen",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.133,)",
+              "sample_text": "NC = Non - Compliant",
+              "stroking_color": "(0.133,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              2066
+            ],
+            [
+              "(0.133,)",
+              20
+            ]
+          ],
+          "page": 8,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2066
+            ],
+            [
+              "(0.133,)",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "KMI-ALL-Share-Recomposition-Notice.pdf",
+      "pages": [
+        {
+          "char_count": 1220,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research Dept. | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk    RECOMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX It is hereby informed that the Pakistan ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0196, 0.388, 0.757)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0196, 0.388, 0.757)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1199
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1199
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 2184,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research Dept. | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk   LIST OF INCOMING / OUTGOING COMPANIES S.No Incoming Companies Outgoing Companies 1 AGSML A",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              2177
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2177
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 6273,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6273
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6273
+            ]
+          ]
+        },
+        {
+          "char_count": 6338,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6338
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6338
+            ]
+          ]
+        },
+        {
+          "char_count": 6459,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6459
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6459
+            ]
+          ]
+        },
+        {
+          "char_count": 6999,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6999
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6999
+            ]
+          ]
+        },
+        {
+          "char_count": 6921,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6921
+            ]
+          ],
+          "page": 7,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6921
+            ]
+          ]
+        },
+        {
+          "char_count": 6112,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6112
+            ]
+          ],
+          "page": 8,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6112
+            ]
+          ]
+        },
+        {
+          "char_count": 6655,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6655
+            ]
+          ],
+          "page": 9,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6655
+            ]
+          ]
+        },
+        {
+          "char_count": 2854,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.1333, 0.1333, 0.1333)",
+              "sample_text": "NC = Non - Compliant",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              2834
+            ],
+            [
+              "(0.1333, 0.1333, 0.1333)",
+              20
+            ]
+          ],
+          "page": 10,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2854
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "Notice-KMIALLshare-Notice-as-of-June-2024.pdf",
+      "pages": [
+        {
+          "char_count": 1214,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research Dept. | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk    RECOMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX  It is hereby informed that the Pakistan",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0196, 0.388, 0.757)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0196, 0.388, 0.757)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1193
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1193
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 1650,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Product Management & Research Dept. | UAN: +9221 111-00-11-22 | E-mail: info@psx.com.pk | Web: psx.com.pk     LIST OF INCOMING / OUTGOING COMPANIES  S.No. Incoming Companies Outgoing Companies 1 ADA",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              1643
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1643
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 5951,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5951
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5951
+            ]
+          ]
+        },
+        {
+          "char_count": 6187,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6187
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6187
+            ]
+          ]
+        },
+        {
+          "char_count": 6305,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6305
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6305
+            ]
+          ]
+        },
+        {
+          "char_count": 6292,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6292
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6292
+            ]
+          ]
+        },
+        {
+          "char_count": 6345,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              6345
+            ]
+          ],
+          "page": 7,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              6345
+            ]
+          ]
+        },
+        {
+          "char_count": 7036,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7036
+            ]
+          ],
+          "page": 8,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7036
+            ]
+          ]
+        },
+        {
+          "char_count": 5773,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              5773
+            ]
+          ],
+          "page": 9,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5773
+            ]
+          ]
+        },
+        {
+          "char_count": 4415,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.1333, 0.1333, 0.1333)",
+              "sample_text": "NOTE: The above criteria of KMI Index is approved by Sharia\u2019h Supervisory Board of KMI Index NC = Non - Compliant",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              4302
+            ],
+            [
+              "(0.1333, 0.1333, 0.1333)",
+              113
+            ]
+          ],
+          "page": 10,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              4415
+            ]
+          ]
+        },
+        {
+          "char_count": 1517,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio (NCInc/TR < 5%)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid Assets Ratio (NLA < P)Share Price as of ",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              1517
+            ]
+          ],
+          "page": 11,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              1517
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "Merged_KMIALL_Notice_and_FinalList_June2025.pdf",
+      "pages": [
+        {
+          "char_count": 2617,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Strategy, Products & Data Science | UAN: +9221 111-00-11-22 | E-mail: pd@psx.com.pk | Web: psx.com.pk    RECOMPOSITION OF PSX-KMI ALL SHARE ISLAMIC INDEX It is hereby informed that the Pakistan Stoc",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            },
+            {
+              "non_stroking_color": "(0.0196, 0.388, 0.757)",
+              "sample_text": "www.psx.com.pk",
+              "stroking_color": "(0.0196, 0.388, 0.757)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              2596
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 1,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              2596
+            ],
+            [
+              "(0.0196, 0.388, 0.757)",
+              14
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 338,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0,)",
+              "sample_text": "  Strategy, Products & Data Science | UAN: +9221 111-00-11-22 | E-mail: pd@psx.com.pk | Web: psx.com.pk    The recomposed PSX-KMI All Share Index will be implemented w.e.f Tuesday December 02, 2025.  ",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(1.0,)",
+              "sample_text": "NOTICE ",
+              "stroking_color": "(1.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0,)",
+              331
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ],
+          "page": 2,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              331
+            ],
+            [
+              "(1.0,)",
+              7
+            ]
+          ]
+        },
+        {
+          "char_count": 7340,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7340
+            ]
+          ],
+          "page": 3,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7340
+            ]
+          ]
+        },
+        {
+          "char_count": 7721,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7721
+            ]
+          ],
+          "page": 4,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7721
+            ]
+          ]
+        },
+        {
+          "char_count": 7772,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7772
+            ]
+          ],
+          "page": 5,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7772
+            ]
+          ]
+        },
+        {
+          "char_count": 7883,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7883
+            ]
+          ],
+          "page": 6,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7883
+            ]
+          ]
+        },
+        {
+          "char_count": 7274,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7274
+            ]
+          ],
+          "page": 7,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7274
+            ]
+          ]
+        },
+        {
+          "char_count": 7878,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              7878
+            ]
+          ],
+          "page": 8,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              7878
+            ]
+          ]
+        },
+        {
+          "char_count": 5050,
+          "color_samples": [
+            {
+              "non_stroking_color": "(0.0, 0.0, 0.0)",
+              "sample_text": "No.TickerCompany NameObjectiveDebt Ratio (D/A < 37%)Investment Ratio (NCInv/TA < 33%)Income Ratio  (NCInc/TR < 5%)(Charity Rate for Dividend Purification)Illiquid Assets Ratio (IA/TA => 25%)Net Liquid",
+              "stroking_color": "(0.0,)"
+            },
+            {
+              "non_stroking_color": "(0.1333, 0.1333, 0.1333)",
+              "sample_text": "NOTE: The above criteria of KMI Index is approved by Sharia\u2019h Supervisory Board of KMI Index Partner, MBL. NC = Non - Compliant",
+              "stroking_color": "(0.0,)"
+            }
+          ],
+          "non_stroking_colors": [
+            [
+              "(0.0, 0.0, 0.0)",
+              4923
+            ],
+            [
+              "(0.1333, 0.1333, 0.1333)",
+              127
+            ]
+          ],
+          "page": 9,
+          "stroking_colors": [
+            [
+              "(0.0,)",
+              5050
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

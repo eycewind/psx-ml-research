@@ -1,0 +1,87 @@
+{
+  "all_direct_sources_match": false,
+  "checkpoint": "C10-CP4B-1-defaulter-color-audit",
+  "holdout_accessed": false,
+  "records": [
+    {
+      "compliant_count": 256,
+      "derived_matches_official": false,
+      "derived_member_count": 256,
+      "duplicate_symbols": [],
+      "effective_from": "2022-01-03",
+      "filename": "sharia_KMI_All_Share_list_June_2021_Final_27122021.pdf",
+      "official_count": 250,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2021_h1"
+    },
+    {
+      "compliant_count": 110,
+      "derived_matches_official": false,
+      "derived_member_count": 110,
+      "duplicate_symbols": [],
+      "effective_from": "2023-01-12",
+      "filename": "Copy_of_KMI_All_Share_June_-22_23122022.pdf",
+      "official_count": 261,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2022_h1"
+    },
+    {
+      "compliant_count": 60,
+      "derived_matches_official": false,
+      "derived_member_count": 60,
+      "duplicate_symbols": [],
+      "effective_from": "2023-12-26",
+      "filename": "Notice-_KMI-All-Index-Re-composition-Jun-30-2023-Final.pdf",
+      "official_count": 258,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2023_h1"
+    },
+    {
+      "compliant_count": 258,
+      "derived_matches_official": false,
+      "derived_member_count": 258,
+      "duplicate_symbols": [
+        "DCR",
+        "TPLRF1"
+      ],
+      "effective_from": "2024-06-25",
+      "filename": "KMI-ALL-Share-Recomposition-Notice.pdf",
+      "official_count": 255,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2023_h2"
+    },
+    {
+      "compliant_count": 105,
+      "derived_matches_official": false,
+      "derived_member_count": 105,
+      "duplicate_symbols": [],
+      "effective_from": "2025-01-03",
+      "filename": "Notice-KMIALLshare-Notice-as-of-June-2024.pdf",
+      "official_count": 264,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2024_h1"
+    },
+    {
+      "compliant_count": 307,
+      "derived_matches_official": false,
+      "derived_member_count": 307,
+      "duplicate_symbols": [
+        "DCR",
+        "IREIT",
+        "TPLRF1"
+      ],
+      "effective_from": "2025-12-02",
+      "filename": "Merged_KMIALL_Notice_and_FinalList_June2025.pdf",
+      "official_count": 281,
+      "red_candidate_count": 0,
+      "red_candidate_symbols": [],
+      "source_id": "review_2025_h1"
+    }
+  ],
+  "row_output": "artifacts/reports/C10_CP4B_KMI_ALL_SHARE_DEFAULTER_COLOR_AUDIT.csv"
+}

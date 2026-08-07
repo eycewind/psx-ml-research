@@ -1,0 +1,26 @@
+{
+  "checkpoint": "CP4A-membership",
+  "contract": "C10",
+  "holdout_accessed": false,
+  "input": {
+    "path": "data/reference/kmi30_membership_history.csv",
+    "rows": 180,
+    "sha256": "ad4b2e328439593f61499b9e8fc64a9d195a33890725f39bf4cf21cfcad6e8dc"
+  },
+  "interval_count": 6,
+  "members_per_interval": 30,
+  "output": {
+    "path": "data/reference/kmi30_membership_history.parquet",
+    "rows": 180,
+    "sha256": "f74ddf42d91d4229117a5dd92dc99a4c4cc933ed15aad84a6ad098ac03085e3b"
+  },
+  "source_notice_numbers": [
+    "PSX/N-1231",
+    "PSX/N-1256",
+    "PSX/N-1302",
+    "PSX/N-545",
+    "PSX/N-557",
+    "PSX/N-653"
+  ],
+  "status": "COMPLETE"
+}

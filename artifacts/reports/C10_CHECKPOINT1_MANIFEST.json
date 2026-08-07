@@ -1,0 +1,75 @@
+{
+  "canonical_price_basis": {
+    "entry": "next_session_open_adj",
+    "valuation": "close_adj",
+    "volume": "volume_adj"
+  },
+  "checkpoint": 1,
+  "contract": "C10",
+  "entry_availability": [
+    {
+      "availability_rate": 1.0,
+      "available_entries": 2576,
+      "missing_entries": 0,
+      "policy_id": "P1_broad_canonical",
+      "selection_dates": 157,
+      "selection_rows": 2576,
+      "symbols": 249
+    },
+    {
+      "availability_rate": 1.0,
+      "available_entries": 2120,
+      "missing_entries": 0,
+      "policy_id": "P2_conservative_consensus",
+      "selection_dates": 157,
+      "selection_rows": 2120,
+      "symbols": 231
+    },
+    {
+      "availability_rate": 1.0,
+      "available_entries": 471,
+      "missing_entries": 0,
+      "policy_id": "P4_kmi30_strict",
+      "selection_dates": 157,
+      "selection_rows": 471,
+      "symbols": 51
+    }
+  ],
+  "holdout_accessed": false,
+  "inputs": {
+    "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e",
+    "data/processed/c10/p4_kmi30_selections.parquet": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+    "data/processed/features/daily_features.parquet": "0da1b030197519eb01c8623cc4bd3e542c275167e6a7bb89b84c15d01181e9aa"
+  },
+  "liquidity_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-29",
+    "min_date": "2020-01-01",
+    "path": "data/processed/features/daily_features.parquet",
+    "rows": 557346,
+    "symbols": 778
+  },
+  "maximum_loaded_price_date": "2025-12-31",
+  "maximum_signal_date": "2025-12-29",
+  "missing_reasons": [],
+  "price_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-31",
+    "min_date": "2020-01-01",
+    "path": "data/cache/daily_ohlcv.parquet",
+    "rows": 558325,
+    "symbols": 780
+  },
+  "selection_audit": {
+    "duplicate_keys": 0,
+    "holdout_rows": 0,
+    "max_date": "2025-12-29",
+    "min_date": "2023-01-02",
+    "path": "combined:C9+P4",
+    "rows": 5167,
+    "symbols": 254
+  }
+}

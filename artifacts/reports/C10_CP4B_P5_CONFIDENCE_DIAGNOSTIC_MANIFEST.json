@@ -1,0 +1,132 @@
+{
+  "checkpoint": "C10-CP4B-P5-confidence-diagnostic",
+  "policy_id": "P5_shariah_screened",
+  "cost_schedule_id": "actual_broker_all_in",
+  "holdout_accessed": false,
+  "definition": "confidence-conditioned performance diagnostic; does not retrain or alter P5",
+  "metric_notes": {
+    "conditioned_annualized_return_252": "252-session normalized return on the filtered confidence stream; not the official C10 calendar CAGR",
+    "conditioned_stream_max_drawdown": "drawdown of the filtered confidence return stream; not a continuous live-portfolio drawdown"
+  },
+  "inputs": {
+    "data/processed/c10/p5_shariah_screened_selections.parquet": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c",
+    "data/processed/c10/frictionless_nav.parquet": "e67b0eb5a265c424fea721939388581a7d206e452826c76ff9c42e08250b4422",
+    "data/processed/c10/costed_nav.parquet": "c2ad5a68faedfade90548005bfd4bb993f86e01f76cc2b2cf48d6be3795a0301"
+  },
+  "confidence_labels": [
+    "low",
+    "medium"
+  ],
+  "summary": [
+    {
+      "stream": "frictionless",
+      "confidence": "all",
+      "observations": 741,
+      "first_date": "2023-01-03",
+      "last_date": "2025-12-31",
+      "conditioned_total_return": 5.5759873803775895,
+      "conditioned_annualized_return_252": 0.8974614524913411,
+      "annualized_volatility": 0.30102084636303245,
+      "sharpe_zero_rf": 2.28019640137396,
+      "conditioned_stream_max_drawdown": -0.17842918908393934,
+      "positive_day_fraction": 0.5641025641025641
+    },
+    {
+      "stream": "actual_broker_all_in",
+      "confidence": "all",
+      "observations": 741,
+      "first_date": "2023-01-03",
+      "last_date": "2025-12-31",
+      "conditioned_total_return": 2.610852653182875,
+      "conditioned_annualized_return_252": 0.5475064622126682,
+      "annualized_volatility": 0.30215329251000017,
+      "sharpe_zero_rf": 1.5967382432919544,
+      "conditioned_stream_max_drawdown": -0.22861868215529724,
+      "positive_day_fraction": 0.5506072874493927
+    },
+    {
+      "stream": "frictionless",
+      "confidence": "medium",
+      "observations": 487,
+      "first_date": "2023-01-17",
+      "last_date": "2025-12-31",
+      "conditioned_total_return": 2.0669456076419235,
+      "conditioned_annualized_return_252": 0.7858620429209566,
+      "annualized_volatility": 0.3040608598812304,
+      "sharpe_zero_rf": 2.0602428547250207,
+      "conditioned_stream_max_drawdown": -0.16441353209648524,
+      "positive_day_fraction": 0.5503080082135524
+    },
+    {
+      "stream": "actual_broker_all_in",
+      "confidence": "medium",
+      "observations": 487,
+      "first_date": "2023-01-17",
+      "last_date": "2025-12-31",
+      "conditioned_total_return": 1.0342912131756257,
+      "conditioned_annualized_return_252": 0.4440743107408145,
+      "annualized_volatility": 0.3052791105464531,
+      "sharpe_zero_rf": 1.356161312475984,
+      "conditioned_stream_max_drawdown": -0.22861868215529646,
+      "positive_day_fraction": 0.5379876796714579
+    },
+    {
+      "stream": "frictionless",
+      "confidence": "low",
+      "observations": 254,
+      "first_date": "2023-01-03",
+      "last_date": "2025-12-08",
+      "conditioned_total_return": 1.1441486813434785,
+      "conditioned_annualized_return_252": 1.131309844726542,
+      "annualized_volatility": 0.29556407589412387,
+      "sharpe_zero_rf": 2.7111726529917677,
+      "conditioned_stream_max_drawdown": -0.2582176267506814,
+      "positive_day_fraction": 0.5905511811023622
+    },
+    {
+      "stream": "actual_broker_all_in",
+      "confidence": "low",
+      "observations": 254,
+      "first_date": "2023-01-03",
+      "last_date": "2025-12-08",
+      "conditioned_total_return": 0.7749929950029923,
+      "conditioned_annualized_return_252": 0.7669915195038264,
+      "annualized_volatility": 0.29648895982164514,
+      "sharpe_zero_rf": 2.0699060673017127,
+      "conditioned_stream_max_drawdown": -0.26593591662862515,
+      "positive_day_fraction": 0.5748031496062992
+    }
+  ],
+  "cost_attribution": [
+    {
+      "membership_confidence": "low",
+      "observations": 254,
+      "transaction_cost": 728565.7109679758,
+      "traded_notional": 225078372.20781654,
+      "trade_count": 857.0,
+      "weighted_cost_rate": 0.0032369423317815966
+    },
+    {
+      "membership_confidence": "medium",
+      "observations": 487,
+      "transaction_cost": 1129792.5008873441,
+      "traded_notional": 401613736.5817542,
+      "trade_count": 1652.0,
+      "weighted_cost_rate": 0.002813132116703281
+    }
+  ],
+  "selection_exposure": [
+    {
+      "membership_confidence": "low",
+      "selection_rows": 560,
+      "signal_dates": 52,
+      "unique_symbols": 120
+    },
+    {
+      "membership_confidence": "medium",
+      "selection_rows": 990,
+      "signal_dates": 105,
+      "unique_symbols": 157
+    }
+  ]
+}
