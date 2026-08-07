@@ -1,0 +1,1036 @@
+{
+  "contract": "C11",
+  "checkpoint": "CP4B",
+  "status": "COMPLETE",
+  "holdout_accessed": false,
+  "selection_rule": "predefined_allocation_grid_not_return_optimized",
+  "execution_rule": "C11_CP3_primary_touch_2pct",
+  "allocations": [
+    {
+      "allocation_id": "A01_P1_filter",
+      "category": "standalone_diagnostic",
+      "sleeves": [
+        {
+          "policy_id": "D_P1_shariah_filter",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A02_P1_refill",
+      "category": "standalone_diagnostic",
+      "sleeves": [
+        {
+          "policy_id": "D_P1_shariah_refill",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A03_P2_filter",
+      "category": "standalone",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_filter",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A04_P2_refill",
+      "category": "standalone",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_refill",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A05_P4",
+      "category": "standalone",
+      "sleeves": [
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A06_P5",
+      "category": "standalone",
+      "sleeves": [
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "allocation_id": "A07_P4_25_P5_75",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 0.25
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "allocation_id": "A08_P4_50_P5_50",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 0.5
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.5
+        }
+      ]
+    },
+    {
+      "allocation_id": "A09_P4_75_P5_25",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 0.75
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "allocation_id": "A10_P2F_25_P5_75",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_filter",
+          "weight": 0.25
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "allocation_id": "A11_P2F_50_P5_50",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_filter",
+          "weight": 0.5
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.5
+        }
+      ]
+    },
+    {
+      "allocation_id": "A12_P2F_75_P5_25",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_filter",
+          "weight": 0.75
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "allocation_id": "A13_P2R_25_P5_75",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_refill",
+          "weight": 0.25
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "allocation_id": "A14_P2R_50_P5_50",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_refill",
+          "weight": 0.5
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.5
+        }
+      ]
+    },
+    {
+      "allocation_id": "A15_P2R_75_P5_25",
+      "category": "two_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_refill",
+          "weight": 0.75
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.25
+        }
+      ]
+    },
+    {
+      "allocation_id": "A16_P2F_P4_P5_equal",
+      "category": "three_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_filter",
+          "weight": 0.3333333333333333
+        },
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 0.3333333333333333
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.3333333333333333
+        }
+      ]
+    },
+    {
+      "allocation_id": "A17_P2R_P4_P5_equal",
+      "category": "three_policy",
+      "sleeves": [
+        {
+          "policy_id": "D_P2_shariah_refill",
+          "weight": 0.3333333333333333
+        },
+        {
+          "policy_id": "D_P4_kmi30_strict",
+          "weight": 0.3333333333333333
+        },
+        {
+          "policy_id": "D_P5_shariah_screened",
+          "weight": 0.3333333333333333
+        }
+      ]
+    }
+  ],
+  "capital_grid": [
+    50000.0,
+    100000.0,
+    250000.0,
+    500000.0,
+    1000000.0
+  ],
+  "inputs": {
+    "data/processed/c11/deployment_selections.parquet": "29f288e9a162b164be5928960a24dd0af825c67708b338a4fe552982fa752b17",
+    "artifacts/reports/C11_CP4A_SHARIAH_SELECTION_MANIFEST.json": "dab9c4e4daa87fef5998023ab0acc97a1365fb9fa4c05b4788167a7c2223311d",
+    "artifacts/reports/C11_CP3_EXECUTION_MODEL_MANIFEST.json": "956b4455df8c4a4c4ae4733bc68c05751133d2bf3a3d956c787cf0530ad21233",
+    "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e"
+  },
+  "outputs": {
+    "data/processed/c11/cp4b_allocation_targets.parquet": {
+      "rows": 35697,
+      "sha256": "0d24a60359d1d5380d112db95f2237b48b2ef254a9f8edb041eab9c94ed4f48e"
+    },
+    "data/processed/c11/cp4b_execution_trades.parquet": {
+      "rows": 264929,
+      "sha256": "63d2e3628d1bba72d68b0f7179cf52fdf2977b48c2b1c9b198463d3e2bcfee8f"
+    },
+    "data/processed/c11/cp4b_execution_positions.parquet": {
+      "rows": 825626,
+      "sha256": "13ca44d060cac5556251d70131c492ee5e71251483e8770a278e56a04d91c0e3"
+    },
+    "data/processed/c11/cp4b_execution_nav.parquet": {
+      "rows": 62985,
+      "sha256": "e9ee013fba0988a51b7e9a67eb832b3c4b6bf549bc77b5af08ca79e826f987aa"
+    },
+    "data/processed/c11/cp4b_allocation_summary.parquet": {
+      "rows": 85,
+      "sha256": "1d90710b9c1db204a355340786c86d65f93b52e573e75b780ed22e5f3cc41f8c"
+    }
+  },
+  "target_diagnostics": [
+    {
+      "policy_id": "A01_P1_filter",
+      "dates": 157,
+      "target_rows": 1470,
+      "symbols": 166,
+      "target_count_min": 4,
+      "target_count_median": 9.0,
+      "target_count_max": 22,
+      "mean_max_target_weight": 0.11591873271809577,
+      "max_target_weight": 0.25,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A02_P1_refill",
+      "dates": 157,
+      "target_rows": 2576,
+      "symbols": 190,
+      "target_count_min": 9,
+      "target_count_median": 16.0,
+      "target_count_max": 27,
+      "mean_max_target_weight": 0.06408117807710169,
+      "max_target_weight": 0.1111111111111111,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A03_P2_filter",
+      "dates": 157,
+      "target_rows": 1173,
+      "symbols": 153,
+      "target_count_min": 1,
+      "target_count_median": 7.0,
+      "target_count_max": 19,
+      "mean_max_target_weight": 0.15987253750830688,
+      "max_target_weight": 1.0,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A04_P2_refill",
+      "dates": 157,
+      "target_rows": 1292,
+      "symbols": 162,
+      "target_count_min": 1,
+      "target_count_median": 8.0,
+      "target_count_max": 20,
+      "mean_max_target_weight": 0.14642648575769593,
+      "max_target_weight": 1.0,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A05_P4",
+      "dates": 157,
+      "target_rows": 471,
+      "symbols": 51,
+      "target_count_min": 3,
+      "target_count_median": 3.0,
+      "target_count_max": 3,
+      "mean_max_target_weight": 0.3333333333333333,
+      "max_target_weight": 0.3333333333333333,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A06_P5",
+      "dates": 157,
+      "target_rows": 1550,
+      "symbols": 173,
+      "target_count_min": 7,
+      "target_count_median": 10.0,
+      "target_count_max": 15,
+      "mean_max_target_weight": 0.10650566701522114,
+      "max_target_weight": 0.14285714285714285,
+      "mean_overlap_symbol_count": 0.0,
+      "max_overlap_symbol_count": 0
+    },
+    {
+      "policy_id": "A07_P4_25_P5_75",
+      "dates": 157,
+      "target_rows": 1788,
+      "symbols": 174,
+      "target_count_min": 7,
+      "target_count_median": 11.0,
+      "target_count_max": 17,
+      "mean_max_target_weight": 0.14631896765654728,
+      "max_target_weight": 0.19047619047619047,
+      "mean_overlap_symbol_count": 1.484076433121019,
+      "max_overlap_symbol_count": 3
+    },
+    {
+      "policy_id": "A08_P4_50_P5_50",
+      "dates": 157,
+      "target_rows": 1788,
+      "symbols": 174,
+      "target_count_min": 7,
+      "target_count_median": 11.0,
+      "target_count_max": 17,
+      "mean_max_target_weight": 0.20816421724065037,
+      "max_target_weight": 0.23809523809523808,
+      "mean_overlap_symbol_count": 1.484076433121019,
+      "max_overlap_symbol_count": 3
+    },
+    {
+      "policy_id": "A09_P4_75_P5_25",
+      "dates": 157,
+      "target_rows": 1788,
+      "symbols": 174,
+      "target_count_min": 7,
+      "target_count_median": 11.0,
+      "target_count_max": 17,
+      "mean_max_target_weight": 0.2707487752869918,
+      "max_target_weight": 0.2857142857142857,
+      "mean_overlap_symbol_count": 1.484076433121019,
+      "max_overlap_symbol_count": 3
+    },
+    {
+      "policy_id": "A10_P2F_25_P5_75",
+      "dates": 157,
+      "target_rows": 2615,
+      "symbols": 202,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.09453720737767839,
+      "max_target_weight": 0.25,
+      "mean_overlap_symbol_count": 0.6878980891719745,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A11_P2F_50_P5_50",
+      "dates": 157,
+      "target_rows": 2615,
+      "symbols": 202,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.09907591361035882,
+      "max_target_weight": 0.5,
+      "mean_overlap_symbol_count": 0.6878980891719745,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A12_P2F_75_P5_25",
+      "dates": 157,
+      "target_rows": 2615,
+      "symbols": 202,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.12914690779570934,
+      "max_target_weight": 0.75,
+      "mean_overlap_symbol_count": 0.6878980891719745,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A13_P2R_25_P5_75",
+      "dates": 157,
+      "target_rows": 2726,
+      "symbols": 203,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.09316570946746107,
+      "max_target_weight": 0.25,
+      "mean_overlap_symbol_count": 0.7388535031847133,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A14_P2R_50_P5_50",
+      "dates": 157,
+      "target_rows": 2726,
+      "symbols": 203,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.09276413165744375,
+      "max_target_weight": 0.5,
+      "mean_overlap_symbol_count": 0.7388535031847133,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A15_P2R_75_P5_25",
+      "dates": 157,
+      "target_rows": 2726,
+      "symbols": 203,
+      "target_count_min": 8,
+      "target_count_median": 16.0,
+      "target_count_max": 32,
+      "mean_max_target_weight": 0.11922160465154095,
+      "max_target_weight": 0.75,
+      "mean_overlap_symbol_count": 0.7388535031847133,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A16_P2F_P4_P5_equal",
+      "dates": 157,
+      "target_rows": 2835,
+      "symbols": 203,
+      "target_count_min": 9,
+      "target_count_median": 17.0,
+      "target_count_max": 33,
+      "mean_max_target_weight": 0.14808161289053007,
+      "max_target_weight": 0.3333333333333333,
+      "mean_overlap_symbol_count": 2.1656050955414012,
+      "max_overlap_symbol_count": 8
+    },
+    {
+      "policy_id": "A17_P2R_P4_P5_equal",
+      "dates": 157,
+      "target_rows": 2943,
+      "symbols": 204,
+      "target_count_min": 9,
+      "target_count_median": 18.0,
+      "target_count_max": 34,
+      "mean_max_target_weight": 0.1471959127213904,
+      "max_target_weight": 0.3333333333333333,
+      "mean_overlap_symbol_count": 2.229299363057325,
+      "max_overlap_symbol_count": 8
+    }
+  ],
+  "capital_1m_results": [
+    {
+      "policy_id": "A01_P1_filter",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 2310093.762640113,
+      "total_return": 1.310093762640113,
+      "annualized_return": 0.32286289327473705,
+      "annualized_volatility": 0.20204473677955434,
+      "sharpe_zero_rf": 1.5106580517407346,
+      "max_drawdown": -0.2339983483977165,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.012423055131303444,
+      "median_rebalance_cash_fraction": 0.00034825134320633,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 510844.9319368266,
+      "stale_position_days": 7,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 1104,
+      "missed_buy_additions": 17,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 1036,
+      "touch_buy_fills": 50,
+      "buy_fill_fraction": 0.9836956521739131,
+      "allocation_id": "A01_P1_filter",
+      "allocation_category": "standalone_diagnostic",
+      "sleeves": "D_P1_shariah_filter:1",
+      "trade_rows": 2193,
+      "unique_symbols_traded": 163
+    },
+    {
+      "policy_id": "A02_P1_refill",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3067638.88519737,
+      "total_return": 2.0676388851973697,
+      "annualized_return": 0.45437481818964676,
+      "annualized_volatility": 0.19244030773535575,
+      "sharpe_zero_rf": 2.07821478127968,
+      "max_drawdown": -0.14429851742343502,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.01140353091085892,
+      "median_rebalance_cash_fraction": 0.0008035035120864921,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 561668.9489305492,
+      "stale_position_days": 13,
+      "pending_exit_days": 2,
+      "buy_addition_attempts": 1982,
+      "missed_buy_additions": 24,
+      "unfunded_buy_additions": 0,
+      "open_buy_fills": 1869,
+      "touch_buy_fills": 89,
+      "buy_fill_fraction": 0.987891019172553,
+      "allocation_id": "A02_P1_refill",
+      "allocation_category": "standalone_diagnostic",
+      "sleeves": "D_P1_shariah_refill:1",
+      "trade_rows": 3760,
+      "unique_symbols_traded": 186
+    },
+    {
+      "policy_id": "A03_P2_filter",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 1894509.8934086144,
+      "total_return": 0.8945098934086144,
+      "annualized_return": 0.23803147929925128,
+      "annualized_volatility": 0.2110709993792159,
+      "sharpe_zero_rf": 1.1350930480703152,
+      "max_drawdown": -0.31924003415606783,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.014195491712752015,
+      "median_rebalance_cash_fraction": 0.0003302702865293185,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 429122.81982208666,
+      "stale_position_days": 3,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 887,
+      "missed_buy_additions": 16,
+      "unfunded_buy_additions": 0,
+      "open_buy_fills": 836,
+      "touch_buy_fills": 35,
+      "buy_fill_fraction": 0.9819616685456595,
+      "allocation_id": "A03_P2_filter",
+      "allocation_category": "standalone",
+      "sleeves": "D_P2_shariah_filter:1",
+      "trade_rows": 1736,
+      "unique_symbols_traded": 148
+    },
+    {
+      "policy_id": "A04_P2_refill",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 1992727.0673778066,
+      "total_return": 0.9927270673778066,
+      "annualized_return": 0.25911987127569924,
+      "annualized_volatility": 0.2064117945013138,
+      "sharpe_zero_rf": 1.2393856989762335,
+      "max_drawdown": -0.3310443781737764,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.014127841440344235,
+      "median_rebalance_cash_fraction": 0.000455522079302178,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 428799.1936533937,
+      "stale_position_days": 3,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 944,
+      "missed_buy_additions": 16,
+      "unfunded_buy_additions": 0,
+      "open_buy_fills": 893,
+      "touch_buy_fills": 35,
+      "buy_fill_fraction": 0.9830508474576272,
+      "allocation_id": "A04_P2_refill",
+      "allocation_category": "standalone",
+      "sleeves": "D_P2_shariah_refill:1",
+      "trade_rows": 1895,
+      "unique_symbols_traded": 157
+    },
+    {
+      "policy_id": "A05_P4",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3464184.927604019,
+      "total_return": 2.4641849276040193,
+      "annualized_return": 0.514675392841065,
+      "annualized_volatility": 0.3233213283938976,
+      "sharpe_zero_rf": 1.4684710003397543,
+      "max_drawdown": -0.2644510140387675,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.0068255697049946695,
+      "median_rebalance_cash_fraction": 1.1249595197772784e-05,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 960115.0100139817,
+      "stale_position_days": 0,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 379,
+      "missed_buy_additions": 5,
+      "unfunded_buy_additions": 0,
+      "open_buy_fills": 364,
+      "touch_buy_fills": 10,
+      "buy_fill_fraction": 0.9868073878627969,
+      "allocation_id": "A05_P4",
+      "allocation_category": "standalone",
+      "sleeves": "D_P4_kmi30_strict:1",
+      "trade_rows": 730,
+      "unique_symbols_traded": 51
+    },
+    {
+      "policy_id": "A06_P5",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3584671.5700035696,
+      "total_return": 2.5846715700035694,
+      "annualized_return": 0.5320800498356035,
+      "annualized_volatility": 0.29437191677060603,
+      "sharpe_zero_rf": 1.6229177846167646,
+      "max_drawdown": -0.2175779101409765,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.015992719864851058,
+      "median_rebalance_cash_fraction": 6.297462808347827e-06,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 1262978.1836707545,
+      "stale_position_days": 2,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 1267,
+      "missed_buy_additions": 32,
+      "unfunded_buy_additions": 3,
+      "open_buy_fills": 1149,
+      "touch_buy_fills": 83,
+      "buy_fill_fraction": 0.9723756906077348,
+      "allocation_id": "A06_P5",
+      "allocation_category": "standalone",
+      "sleeves": "D_P5_shariah_screened:1",
+      "trade_rows": 2451,
+      "unique_symbols_traded": 170
+    },
+    {
+      "policy_id": "A07_P4_25_P5_75",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3616319.12333677,
+      "total_return": 2.61631912333677,
+      "annualized_return": 0.536586869586958,
+      "annualized_volatility": 0.2873361414825376,
+      "sharpe_zero_rf": 1.6659188385805348,
+      "max_drawdown": -0.2092923785030557,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.013650144256046166,
+      "median_rebalance_cash_fraction": 5.039989227813198e-06,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 1204250.3050408699,
+      "stale_position_days": 2,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 1453,
+      "missed_buy_additions": 33,
+      "unfunded_buy_additions": 2,
+      "open_buy_fills": 1332,
+      "touch_buy_fills": 86,
+      "buy_fill_fraction": 0.9759119064005506,
+      "allocation_id": "A07_P4_25_P5_75",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P4_kmi30_strict:0.25|D_P5_shariah_screened:0.75",
+      "trade_rows": 2803,
+      "unique_symbols_traded": 171
+    },
+    {
+      "policy_id": "A08_P4_50_P5_50",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3603612.4240306383,
+      "total_return": 2.603612424030638,
+      "annualized_return": 0.5347805195906497,
+      "annualized_volatility": 0.2901492549131932,
+      "sharpe_zero_rf": 1.6482804857080149,
+      "max_drawdown": -0.2208225057069666,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.011322262517605089,
+      "median_rebalance_cash_fraction": 5.6868457901530425e-06,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 1134344.800485882,
+      "stale_position_days": 2,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 1454,
+      "missed_buy_additions": 34,
+      "unfunded_buy_additions": 4,
+      "open_buy_fills": 1328,
+      "touch_buy_fills": 88,
+      "buy_fill_fraction": 0.9738651994497937,
+      "allocation_id": "A08_P4_50_P5_50",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P4_kmi30_strict:0.5|D_P5_shariah_screened:0.5",
+      "trade_rows": 2797,
+      "unique_symbols_traded": 171
+    },
+    {
+      "policy_id": "A09_P4_75_P5_25",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3554681.409118637,
+      "total_return": 2.554681409118637,
+      "annualized_return": 0.5277847398755706,
+      "annualized_volatility": 0.30256795199025543,
+      "sharpe_zero_rf": 1.577136867052578,
+      "max_drawdown": -0.2420570068643345,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.009005883430394157,
+      "median_rebalance_cash_fraction": 5.8238450645031884e-06,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 1052510.8266067253,
+      "stale_position_days": 2,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 1455,
+      "missed_buy_additions": 33,
+      "unfunded_buy_additions": 7,
+      "open_buy_fills": 1325,
+      "touch_buy_fills": 90,
+      "buy_fill_fraction": 0.9725085910652921,
+      "allocation_id": "A09_P4_75_P5_25",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P4_kmi30_strict:0.75|D_P5_shariah_screened:0.25",
+      "trade_rows": 2793,
+      "unique_symbols_traded": 171
+    },
+    {
+      "policy_id": "A10_P2F_25_P5_75",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3149717.1637320463,
+      "total_return": 2.1497171637320465,
+      "annualized_return": 0.467264481532357,
+      "annualized_volatility": 0.2572264366251183,
+      "sharpe_zero_rf": 1.6463263599054048,
+      "max_drawdown": -0.19610655390543086,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.015820335904129176,
+      "median_rebalance_cash_fraction": 9.318014857298146e-05,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 984129.4155641727,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2022,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 2,
+      "open_buy_fills": 1866,
+      "touch_buy_fills": 114,
+      "buy_fill_fraction": 0.9792284866468842,
+      "allocation_id": "A10_P2F_25_P5_75",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_filter:0.25|D_P5_shariah_screened:0.75",
+      "trade_rows": 3952,
+      "unique_symbols_traded": 200
+    },
+    {
+      "policy_id": "A11_P2F_50_P5_50",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 2713014.4605985065,
+      "total_return": 1.7130144605985067,
+      "annualized_return": 0.3958783120699507,
+      "annualized_volatility": 0.2286405453717623,
+      "sharpe_zero_rf": 1.599538001370992,
+      "max_drawdown": -0.19682094114880733,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.015233558043874704,
+      "median_rebalance_cash_fraction": 0.00029817040070481655,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 754044.3691562733,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2039,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 1886,
+      "touch_buy_fills": 112,
+      "buy_fill_fraction": 0.9798921039725356,
+      "allocation_id": "A11_P2F_50_P5_50",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_filter:0.5|D_P5_shariah_screened:0.5",
+      "trade_rows": 3962,
+      "unique_symbols_traded": 200
+    },
+    {
+      "policy_id": "A12_P2F_75_P5_25",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 2287542.089204674,
+      "total_return": 1.287542089204674,
+      "annualized_return": 0.318533262105932,
+      "annualized_volatility": 0.21228049889982042,
+      "sharpe_zero_rf": 1.4321936883014095,
+      "max_drawdown": -0.2572283197268461,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.01471554564143335,
+      "median_rebalance_cash_fraction": 0.0006680805737406765,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 572255.7871800857,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2039,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 3,
+      "open_buy_fills": 1882,
+      "touch_buy_fills": 114,
+      "buy_fill_fraction": 0.9789112309955861,
+      "allocation_id": "A12_P2F_75_P5_25",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_filter:0.75|D_P5_shariah_screened:0.25",
+      "trade_rows": 3956,
+      "unique_symbols_traded": 200
+    },
+    {
+      "policy_id": "A13_P2R_25_P5_75",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3188003.496206182,
+      "total_return": 2.188003496206182,
+      "annualized_return": 0.47320058487460814,
+      "annualized_volatility": 0.2568912182513756,
+      "sharpe_zero_rf": 1.664151419590001,
+      "max_drawdown": -0.1964087518640507,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.01601931235242991,
+      "median_rebalance_cash_fraction": 0.0002918277733969568,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 987816.7992315606,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2062,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 1908,
+      "touch_buy_fills": 113,
+      "buy_fill_fraction": 0.9801163918525703,
+      "allocation_id": "A13_P2R_25_P5_75",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_refill:0.25|D_P5_shariah_screened:0.75",
+      "trade_rows": 4101,
+      "unique_symbols_traded": 201
+    },
+    {
+      "policy_id": "A14_P2R_50_P5_50",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 2780736.9088413073,
+      "total_return": 1.7807369088413072,
+      "annualized_return": 0.40742675992526367,
+      "annualized_volatility": 0.22740481360355766,
+      "sharpe_zero_rf": 1.643908511378295,
+      "max_drawdown": -0.20231670697590176,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.015198972826716025,
+      "median_rebalance_cash_fraction": 0.0003736560446123093,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 756913.9083740548,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2082,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 1930,
+      "touch_buy_fills": 111,
+      "buy_fill_fraction": 0.9803073967339097,
+      "allocation_id": "A14_P2R_50_P5_50",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_refill:0.5|D_P5_shariah_screened:0.5",
+      "trade_rows": 4106,
+      "unique_symbols_traded": 201
+    },
+    {
+      "policy_id": "A15_P2R_75_P5_25",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 2373304.5591643048,
+      "total_return": 1.3733045591643047,
+      "annualized_return": 0.3348504810230253,
+      "annualized_volatility": 0.20953279830436358,
+      "sharpe_zero_rf": 1.5080223302474332,
+      "max_drawdown": -0.2669536732404457,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.014563098784182802,
+      "median_rebalance_cash_fraction": 0.0005379281679521349,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 574076.3371312779,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2082,
+      "missed_buy_additions": 40,
+      "unfunded_buy_additions": 2,
+      "open_buy_fills": 1926,
+      "touch_buy_fills": 114,
+      "buy_fill_fraction": 0.9798270893371758,
+      "allocation_id": "A15_P2R_75_P5_25",
+      "allocation_category": "two_policy",
+      "sleeves": "D_P2_shariah_refill:0.75|D_P5_shariah_screened:0.25",
+      "trade_rows": 4102,
+      "unique_symbols_traded": 201
+    },
+    {
+      "policy_id": "A16_P2F_P4_P5_equal",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3009315.093532351,
+      "total_return": 2.0093150935323507,
+      "annualized_return": 0.44507536606915643,
+      "annualized_volatility": 0.24432860419810218,
+      "sharpe_zero_rf": 1.6563379949657226,
+      "max_drawdown": -0.17887700112028693,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.012597842017607703,
+      "median_rebalance_cash_fraction": 0.00028262713795681104,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 823342.5331575089,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2203,
+      "missed_buy_additions": 41,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 2044,
+      "touch_buy_fills": 117,
+      "buy_fill_fraction": 0.9809350885156605,
+      "allocation_id": "A16_P2F_P4_P5_equal",
+      "allocation_category": "three_policy",
+      "sleeves": "D_P2_shariah_filter:0.333333333333|D_P4_kmi30_strict:0.333333333333|D_P5_shariah_screened:0.333333333333",
+      "trade_rows": 4275,
+      "unique_symbols_traded": 201
+    },
+    {
+      "policy_id": "A17_P2R_P4_P5_equal",
+      "starting_capital": 1000000.0,
+      "start_date": "2023-01-03",
+      "end_date": "2025-12-31",
+      "observations": 741,
+      "ending_nav": 3059710.242088806,
+      "total_return": 2.059710242088806,
+      "annualized_return": 0.45311758710612415,
+      "annualized_volatility": 0.2438140759671664,
+      "sharpe_zero_rf": 1.6825146730721665,
+      "max_drawdown": -0.17679027942209602,
+      "rebalance_count": 157,
+      "mean_cash_fraction": 0.012663588147207229,
+      "median_rebalance_cash_fraction": 0.0004730278550992458,
+      "total_skipped_price_targets": 0,
+      "rebalance_dates_with_price_skips": 0,
+      "total_transaction_cost": 825789.1235822948,
+      "stale_position_days": 5,
+      "pending_exit_days": 0,
+      "buy_addition_attempts": 2251,
+      "missed_buy_additions": 41,
+      "unfunded_buy_additions": 1,
+      "open_buy_fills": 2093,
+      "touch_buy_fills": 116,
+      "buy_fill_fraction": 0.9813416259440249,
+      "allocation_id": "A17_P2R_P4_P5_equal",
+      "allocation_category": "three_policy",
+      "sleeves": "D_P2_shariah_refill:0.333333333333|D_P4_kmi30_strict:0.333333333333|D_P5_shariah_screened:0.333333333333",
+      "trade_rows": 4414,
+      "unique_symbols_traded": 202
+    }
+  ]
+}
