@@ -1,0 +1,119 @@
+{
+  "contract": "C11",
+  "checkpoint": "CP6",
+  "status": "COMPLETE",
+  "holdout_accessed": false,
+  "primary_deployment_allocation": "A07_P4_25_P5_75",
+  "secondary_diagnostic_allocation": "A17_P2R_P4_P5_equal",
+  "reference_allocation": "A06_P5",
+  "selection_method": "predefined_finalists_multicriteria_policy_freeze_not_return_or_sharpe_argmax",
+  "execution_rule": "C11_CP3_primary_touch_2pct",
+  "inputs": {
+    "data/processed/c11/cp4b_allocation_summary.parquet": "1d90710b9c1db204a355340786c86d65f93b52e573e75b780ed22e5f3cc41f8c",
+    "data/processed/c11/cp4b_execution_nav.parquet": "e9ee013fba0988a51b7e9a67eb832b3c4b6bf549bc77b5af08ca79e826f987aa",
+    "data/processed/c11/cp4b_execution_trades.parquet": "63d2e3628d1bba72d68b0f7179cf52fdf2977b48c2b1c9b198463d3e2bcfee8f",
+    "data/processed/c11/cp5_concentration_summary.parquet": "3fb50cfa5788609627e3456f012aca4c870571347d53e359d1b1b7851f5e7798",
+    "artifacts/reports/C11_CP4B_CAPITAL_ALLOCATION_MANIFEST.json": "cd4245a4a790bf91fd6423e440173814c7aade7db5963f88a483aae6a5fc1924",
+    "artifacts/reports/C11_CP5_CONCENTRATION_OVERLAP_MANIFEST.json": "5acd76294a336d1d76f2b7a43da28a3771810fd9a5f3594f7b6a50ef68757585"
+  },
+  "outputs": {
+    "data/processed/c11/cp6_finalist_scorecard.parquet": {
+      "rows": 15,
+      "sha256": "7605d0343afb2febf31e03bd6b4e7ffb691c27f554312cf3a1073fe176511b79"
+    },
+    "data/processed/c11/cp6_finalist_nav.parquet": {
+      "rows": 11115,
+      "sha256": "9c6188effa483bd7101361e987f68ba145dca2ab4e7e745a3670f0097671dac0"
+    },
+    "data/processed/c11/cp6_finalist_trades.parquet": {
+      "rows": 47658,
+      "sha256": "d223f0ce5e6cbb3394b5226e8c0cf9cb79024016a029ce2961d35108baffce16"
+    }
+  },
+  "capital_grid": [
+    50000.0,
+    100000.0,
+    250000.0,
+    500000.0,
+    1000000.0
+  ],
+  "pk1m_scorecard": [
+    {
+      "allocation_id": "A06_P5",
+      "ending_nav": 3584671.5700035696,
+      "annualized_return": 0.5320800498356035,
+      "sharpe_zero_rf": 1.6229177846167646,
+      "max_drawdown": -0.2175779101409765,
+      "buy_fill_fraction": 0.9723756906077348,
+      "mean_cash_fraction": 0.015992719864851058,
+      "total_transaction_cost": 1262978.1836707545,
+      "realized_max_name_worst": 0.508213790483315,
+      "realized_max_sector_worst": 0.508213790483315,
+      "realized_effective_names_mean": 9.698221370314105
+    },
+    {
+      "allocation_id": "A07_P4_25_P5_75",
+      "ending_nav": 3616319.12333677,
+      "annualized_return": 0.536586869586958,
+      "sharpe_zero_rf": 1.6659188385805348,
+      "max_drawdown": -0.2092923785030557,
+      "buy_fill_fraction": 0.9759119064005506,
+      "mean_cash_fraction": 0.013650144256046166,
+      "total_transaction_cost": 1204250.3050408699,
+      "realized_max_name_worst": 0.38394688296911067,
+      "realized_max_sector_worst": 0.45508065789041763,
+      "realized_effective_names_mean": 10.28501809970794
+    },
+    {
+      "allocation_id": "A17_P2R_P4_P5_equal",
+      "ending_nav": 3059710.242088806,
+      "annualized_return": 0.45311758710612415,
+      "sharpe_zero_rf": 1.6825146730721665,
+      "max_drawdown": -0.17679027942209602,
+      "buy_fill_fraction": 0.9813416259440249,
+      "mean_cash_fraction": 0.012663588147207229,
+      "total_transaction_cost": 825789.1235822948,
+      "realized_max_name_worst": 0.6527236874667731,
+      "realized_max_sector_worst": 0.6527236874667731,
+      "realized_effective_names_mean": 12.621725341909213
+    }
+  ],
+  "capital_stability": [
+    {
+      "allocation_id": "A06_P5",
+      "capital_levels": 5,
+      "annualized_return_min": 0.5312146781278382,
+      "annualized_return_max": 0.5321870532827646,
+      "sharpe_min": 1.6229177846167646,
+      "sharpe_max": 1.625853051506066,
+      "max_drawdown_worst": -0.2175779101409765,
+      "buy_fill_fraction_min": 0.9722222222222222,
+      "mean_cash_fraction_max": 0.019657512378020638,
+      "ending_nav_1m": 3584671.5700035696
+    },
+    {
+      "allocation_id": "A07_P4_25_P5_75",
+      "capital_levels": 5,
+      "annualized_return_min": 0.534670222434114,
+      "annualized_return_max": 0.5365970248515886,
+      "sharpe_min": 1.6658875804342004,
+      "sharpe_max": 1.6671097485398216,
+      "max_drawdown_worst": -0.2092923785030557,
+      "buy_fill_fraction_min": 0.9744475138121547,
+      "mean_cash_fraction_max": 0.018265284368455568,
+      "ending_nav_1m": 3616319.12333677
+    },
+    {
+      "allocation_id": "A17_P2R_P4_P5_equal",
+      "capital_levels": 5,
+      "annualized_return_min": 0.4365199780554252,
+      "annualized_return_max": 0.45311758710612415,
+      "sharpe_min": 1.655914517950364,
+      "sharpe_max": 1.683256216114736,
+      "max_drawdown_worst": -0.17679027942209602,
+      "buy_fill_fraction_min": 0.9810981098109811,
+      "mean_cash_fraction_max": 0.04507045526274742,
+      "ending_nav_1m": 3059710.242088806
+    }
+  ]
+}
