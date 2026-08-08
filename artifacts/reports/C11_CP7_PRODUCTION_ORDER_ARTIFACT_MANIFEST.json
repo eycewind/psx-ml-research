@@ -1,0 +1,24 @@
+{
+  "contract": "C11",
+  "checkpoint": "CP7",
+  "status": "COMPLETE",
+  "holdout_accessed": false,
+  "primary_allocation": "A07_P4_25_P5_75",
+  "historical_fixture_signal_date": "2025-12-22",
+  "production_architecture": "two_phase_signal_plan_then_session_open_orders",
+  "execution_rule": "C11_CP3_primary_touch_2pct",
+  "inputs": {
+    "data/processed/c11/deployment_selections.parquet": "29f288e9a162b164be5928960a24dd0af825c67708b338a4fe552982fa752b17",
+    "artifacts/reports/C11_CP6_FINAL_DEPLOYMENT_BACKTEST_MANIFEST.json": "04320e36d218537ba954b8a1163dc35c4dfdbbb0dd0976da341c595bb989ba78",
+    "data/cache/daily_ohlcv.parquet": "7a6c0cbdeef66adb2ad87a7f29c5ca80559190440b4547c78154f842e834c02e"
+  },
+  "outputs": {
+    "data/processed/c11/cp7_historical_signal_plan.parquet": {
+      "rows": 17,
+      "sha256": "4e2896dfbe8593a1be2558bf665043c4dcacbd29ccc5097c13c1210882f7beb2"
+    },
+    "artifacts/reports/C11_CP7_HISTORICAL_SIGNAL_PLAN.json": {
+      "sha256": "06dcb729eaa5cdd4c693b506f12d896bb48fc4072ec74a58ec612a3db4235f1a"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "contract": "C11",
+  "checkpoint": "CP4A",
+  "status": "COMPLETE",
+  "holdout_accessed": false,
+  "git_parent_checkpoint": "C11 CP3",
+  "c9_reconstruction": {
+    "p1_exact": true,
+    "p2_exact": true,
+    "c9_generation_commit": "1d2a54aa296f5a7ecfd0e30b24cf91bb38a51c57"
+  },
+  "rules": {
+    "D_P1_shariah_filter": "accepted P1 selected rows -> PIT Shariah filter only",
+    "D_P1_shariah_refill": "scan full accepted LightGBM ranking on accepted P1 dates; PIT Shariah gate; S1 cap2; refill to accepted P1 holding count where possible",
+    "D_P2_shariah_filter": "accepted P2 selected rows -> PIT Shariah filter only",
+    "D_P2_shariah_refill": "accepted P2 top10 LightGBM/XGBoost consensus intersection only; PIT Shariah gate; LightGBM percentile order; S1 cap2; refill to accepted P2 holding count where possible",
+    "D_P4_kmi30_strict": "accepted P4 rows -> authoritative PIT KMI30 Shariah provenance; generic screening history secondary diagnostic only",
+    "D_P5_shariah_screened": "accepted P5 rows -> defensive PIT Shariah gate"
+  },
+  "input_hashes": {
+    "data/processed/c9/candidate_selections.parquet": "3ff902152a75d168218850535d4c40da4dd949b54e22ccdfc6560d39646dc520",
+    "data/processed/c10/p4_kmi30_selections.parquet": "75ef50328110d573649906d47ee08733b60977953bb7c67c37d869eae05fd03c",
+    "data/processed/c10/p5_shariah_screened_selections.parquet": "0166c4a67c6d12241ddef1b7f7fc4002d6fa8071d01cbd6499b32dd22811c57c",
+    "data/reference/kmi_all_share_screened_universe_history.csv": "525bb1e26e4b9ec71b838122b27e63ce1c95755f4b244991973f6d2da949f70a"
+  },
+  "outputs": {
+    "data/processed/c11/deployment_selections.parquet": {
+      "rows": 8532,
+      "sha256": "29f288e9a162b164be5928960a24dd0af825c67708b338a4fe552982fa752b17"
+    },
+    "data/processed/c11/deployment_shariah_gate_audit.parquet": {
+      "rows": 40414,
+      "sha256": "2d002bd5fdbe3dca164efcc856e8d4d7bb19928d88cdd52e549c3b0a92b8d800"
+    }
+  },
+  "summary": [
+    {
+      "policy_id": "D_P1_shariah_filter",
+      "rows": 1470,
+      "dates": 157,
+      "symbols": 166,
+      "holdings_min": 4,
+      "holdings_median": 9.0,
+      "holdings_max": 22,
+      "gate_rejections_in_audit": 1106,
+      "unknown_rejections_in_audit": 1106,
+      "low_confidence_selected_rows": 548,
+      "refill_selected_rows": 0,
+      "shortfall_dates": 0
+    },
+    {
+      "policy_id": "D_P1_shariah_refill",
+      "rows": 2576,
+      "dates": 157,
+      "symbols": 190,
+      "holdings_min": 9,
+      "holdings_median": 16.0,
+      "holdings_max": 27,
+      "gate_rejections_in_audit": 11490,
+      "unknown_rejections_in_audit": 11490,
+      "low_confidence_selected_rows": 946,
+      "refill_selected_rows": 1108,
+      "shortfall_dates": 0
+    },
+    {
+      "policy_id": "D_P2_shariah_filter",
+      "rows": 1173,
+      "dates": 157,
+      "symbols": 153,
+      "holdings_min": 1,
+      "holdings_median": 7.0,
+      "holdings_max": 19,
+      "gate_rejections_in_audit": 947,
+      "unknown_rejections_in_audit": 947,
+      "low_confidence_selected_rows": 461,
+      "refill_selected_rows": 0,
+      "shortfall_dates": 0
+    },
+    {
+      "policy_id": "D_P2_shariah_refill",
+      "rows": 1292,
+      "dates": 157,
+      "symbols": 162,
+      "holdings_min": 1,
+      "holdings_median": 8.0,
+      "holdings_max": 20,
+      "gate_rejections_in_audit": 1161,
+      "unknown_rejections_in_audit": 1161,
+      "low_confidence_selected_rows": 507,
+      "refill_selected_rows": 120,
+      "shortfall_dates": 153
+    },
+    {
+      "policy_id": "D_P4_kmi30_strict",
+      "rows": 471,
+      "dates": 157,
+      "symbols": 51,
+      "holdings_min": 3,
+      "holdings_median": 3.0,
+      "holdings_max": 3,
+      "gate_rejections_in_audit": 0,
+      "unknown_rejections_in_audit": 0,
+      "low_confidence_selected_rows": 0,
+      "refill_selected_rows": 0,
+      "shortfall_dates": 0
+    },
+    {
+      "policy_id": "D_P5_shariah_screened",
+      "rows": 1550,
+      "dates": 157,
+      "symbols": 173,
+      "holdings_min": 7,
+      "holdings_median": 10.0,
+      "holdings_max": 15,
+      "gate_rejections_in_audit": 0,
+      "unknown_rejections_in_audit": 0,
+      "low_confidence_selected_rows": 560,
+      "refill_selected_rows": 0,
+      "shortfall_dates": 0
+    }
+  ],
+  "shortfalls": {
+    "D_P1_shariah_filter": {
+      "dates": 155,
+      "total_missing_holdings": 1106,
+      "maximum_shortfall": 12
+    },
+    "D_P1_shariah_refill": {
+      "dates": 0,
+      "total_missing_holdings": 0,
+      "maximum_shortfall": 0
+    },
+    "D_P2_shariah_filter": {
+      "dates": 153,
+      "total_missing_holdings": 947,
+      "maximum_shortfall": 11
+    },
+    "D_P2_shariah_refill": {
+      "dates": 153,
+      "total_missing_holdings": 828,
+      "maximum_shortfall": 11
+    }
+  }
+}
