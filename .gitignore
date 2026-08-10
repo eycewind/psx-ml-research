@@ -29,3 +29,6 @@ artifacts/reports/*.parquet
 
 # Local editor settings
 .vscode/
+
+config/live_account.json
+artifacts/live/
