@@ -12,6 +12,7 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 import pyarrow as pa
+import pyarrow.parquet as pq
 
 from psx_ml.c8.context_features import build_context_features
 from psx_ml.data.sqlite import connect_readonly
@@ -175,8 +176,13 @@ def _build_b_market_context(eligible_rows: pd.DataFrame, feature_order: list[str
     rows_df = eligible_rows.sort_values(["trade_date","symbol"], kind="mergesort").reset_index(drop=True)
     rows = rows_df.to_dict("records")
     context = build_context_features(rows, minimum_sector_peers=5, rolling_window=60, minimum_rolling=30)
+    # Match C8 feature-variant precedence exactly:
+    # B_market_context = dict.fromkeys(c7 + market + market_relative).
+    # If a C8 context feature duplicates an existing C3/C7 feature,
+    # the C3/C7 value must win.
     for name, values in context.items():
-        rows_df[name] = values
+        if name not in rows_df.columns:
+            rows_df[name] = values
     missing = [f for f in feature_order if f not in rows_df.columns]
     if missing:
         raise ValueError(f"Live feature builder missing frozen features: {missing}")
@@ -250,9 +256,22 @@ def score(paths: LiveScoringPaths, score_date: str | None = None) -> dict:
 def parity(paths: LiveScoringPaths, date: str, rtol: float = 1e-10, atol: float = 1e-12) -> dict:
     feature_order = _load_c8_feature_order(paths.c8_manifest)
     date = _normalize_date(date)
-    with connect_readonly(paths.source_db) as con:
-        daily = _query_daily(con, date)
-        c1_universe = _build_c1_universe(con, date)
+    # Historical parity must use the exact frozen C1 inputs that produced
+    # the accepted research artifacts. The current watcher DB may contain
+    # later corrections/backfills that change historical PIT eligibility.
+    frozen_daily_path = paths.repo / "data/cache/daily_ohlcv.parquet"
+    frozen_universe_path = paths.repo / "data/cache/point_in_time_universe.parquet"
+
+    daily = pq.read_table(frozen_daily_path)
+    universe = pq.read_table(frozen_universe_path)
+
+    daily = daily.filter(
+        pa.compute.less_equal(daily["trade_date"], pa.scalar(date))
+    )
+    c1_universe = universe.filter(
+        pa.compute.less_equal(universe["trade_date"], pa.scalar(date))
+    )
+
     c3 = _c3_frame(daily, c1_universe, paths.feature_config, paths.repo)
     eligible, _ = _eligible_c8_rows(c3, c1_universe, paths.c6_universe, paths.security_master, date)
     live = _build_b_market_context(eligible, feature_order)
@@ -264,7 +283,28 @@ def parity(paths: LiveScoringPaths, date: str, rtol: float = 1e-10, atol: float 
     for df in (c3_hist, market, relative):
         df["trade_date"] = pd.to_datetime(df["trade_date"]).dt.normalize(); df["symbol"] = df["symbol"].astype(str).str.strip().str.upper()
     keys = ["trade_date","symbol"]
-    accepted = c3_hist.merge(market, on=keys, how="inner").merge(relative, on=keys, how="inner")
+    accepted = c3_hist.copy()
+
+    market_add = [
+        c for c in market.columns
+        if c not in keys and c not in accepted.columns
+    ]
+    accepted = accepted.merge(
+        market[keys + market_add],
+        on=keys,
+        how="inner",
+    )
+
+    relative_add = [
+        c for c in relative.columns
+        if c not in keys and c not in accepted.columns
+    ]
+    accepted = accepted.merge(
+        relative[keys + relative_add],
+        on=keys,
+        how="inner",
+    )
+
     accepted = accepted.loc[accepted["trade_date"] == day].copy()
     common = live.merge(accepted[keys + feature_order], on=keys, how="inner", suffixes=("_live","_accepted"))
     if common.empty:
