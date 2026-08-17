@@ -32,3 +32,4 @@ artifacts/reports/*.parquet
 
 config/live_account.json
 artifacts/live/
+config/live_ntfy.env
