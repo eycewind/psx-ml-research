@@ -56,9 +56,9 @@ def refresh(repo:Path,cpu_result:str,gpu_result:str):
                     n=sum(b["n"] for b in r["bins"]); eces.append(sum(b["n"]*abs(b["mean_probability"]-b["observed_rate"]) for b in r["bins"] if b["n"])/n)
                 folds=", ".join(f"{v:.5g}" for v in s["fold_roc_auc"])
                 f.write(f"| `{s['target_name']}` | `{s['model_name']}` | {s['roc_auc']:.6g} | {s['pr_auc']:.6g} | {s['log_loss']:.6g} | {s['brier']:.6g} | {s['balanced_accuracy']:.6g} | {s['prevalence']:.6g} | {folds} | {s['fold_roc_auc_std']:.6g} | {sum(eces)/len(eces):.6g} |\n")
-    bucket_report(result,repo/"artifacts/reports/C8_BUCKET_REPORT.md"); ablation_report(result,repo/"artifacts/reports/C8_ABLATION_REPORT.md"); delivery_report(result,manifest,repo/"artifacts/reports/C8_DELIVERY.md")
+    bucket_report(result,repo/"artifacts/reports/C8_BUCKET_REPORT.md"); ablation_report(result,repo/"artifacts/reports/C8_ABLATION_REPORT.md"); delivery_report(result,manifest,repo/"contracts/C08-DELIVERY.md")
     if supplemental:
-        delivery=repo/"artifacts/reports/C8_DELIVERY.md"
+        delivery=repo/"contracts/C08-DELIVERY.md"
         with delivery.open("a") as f:
             best=next(r for r in supplemental["summary"]["rank"] if r["horizon"]==5 and r["feature_variant"]=="B_market_context" and r["model_name"]=="lightgbm_cpu")
             cls=next(r for r in supplemental["summary"]["classification"] if r["target_name"]=="outperform_market_5s" and r["model_name"]=="lightgbm_cpu")

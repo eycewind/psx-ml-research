@@ -821,7 +821,7 @@ artifacts/reports/C8_FEATURE_REPORT.md
 artifacts/reports/C8_MODEL_REPORT.md
 artifacts/reports/C8_BUCKET_REPORT.md
 artifacts/reports/C8_ABLATION_REPORT.md
-artifacts/reports/C8_DELIVERY.md
+contracts/C08-DELIVERY.md
 artifacts/reports/C8_MANIFEST.json
 ```
 

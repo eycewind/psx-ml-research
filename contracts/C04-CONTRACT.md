@@ -300,7 +300,7 @@ Required:
 ```text
 artifacts/reports/C4_TARGET_REPORT.md
 artifacts/reports/C4_SPLIT_REPORT.md
-artifacts/reports/C4_DELIVERY.md
+contracts/C04-DELIVERY.md
 artifacts/reports/C4_TARGET_SPLIT_MANIFEST.json
 ```
 

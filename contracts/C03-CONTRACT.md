@@ -834,14 +834,14 @@ Record:
 C3 delivery must include:
 
 ```text
-contracts/C3_POINT_IN_TIME_FEATURE_ENGINEERING/CONTRACT.md
+contracts/C03-CONTRACT.md
 config/features.example.toml
 feature registry/catalog
 feature pipeline implementation
 C3 tests
 feature-manifest schema/example
 artifacts/reports/C3_FEATURE_REPORT.md
-artifacts/reports/C3_DELIVERY.md
+contracts/C03-DELIVERY.md
 ```
 
 The delivery report must map every acceptance test to concrete evidence.

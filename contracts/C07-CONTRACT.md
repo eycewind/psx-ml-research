@@ -552,7 +552,7 @@ Required tracked reports:
 artifacts/reports/C7_MODEL_REPORT.md
 artifacts/reports/C7_FEATURE_IMPORTANCE_REPORT.md
 artifacts/reports/C7_RUNTIME_REPORT.md
-artifacts/reports/C7_DELIVERY.md
+contracts/C07-DELIVERY.md
 artifacts/reports/C7_MODEL_MANIFEST.json
 ```
 

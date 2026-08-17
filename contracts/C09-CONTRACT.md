@@ -685,7 +685,7 @@ artifacts/reports/C9_TURNOVER_REPORT.md
 artifacts/reports/C9_MODEL_AGREEMENT_REPORT.md
 artifacts/reports/C9_BASELINE_REPORT.md
 artifacts/reports/C9_POLICY_DECISION.md
-artifacts/reports/C9_DELIVERY.md
+contracts/C09-DELIVERY.md
 artifacts/reports/C9_MANIFEST.json
 ```
 

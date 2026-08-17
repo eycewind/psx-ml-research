@@ -44,7 +44,7 @@ viewer_summary_path = "data/processed/diagnostics/c8_signal_viewer_summary.json"
 model_report_path = "artifacts/reports/C8_MODEL_REPORT.md"
 bucket_report_path = "artifacts/reports/C8_BUCKET_REPORT.md"
 ablation_report_path = "artifacts/reports/C8_ABLATION_REPORT.md"
-delivery_path = "artifacts/reports/C8_DELIVERY.md"
+delivery_path = "contracts/C08-DELIVERY.md"
 
 [evaluation]
 seed = 42

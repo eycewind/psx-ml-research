@@ -297,7 +297,7 @@ Update or produce:
 artifacts/reports/C6_INSTRUMENT_REPORT.md
 artifacts/reports/C6_UNIVERSE_REPORT.md
 artifacts/reports/C6_ROBUST_EVALUATION_REPORT.md
-artifacts/reports/C6_DELIVERY.md
+contracts/C06-DELIVERY.md
 artifacts/reports/C6_MANIFEST.json
 artifacts/reports/C6_MANUAL_REVIEW_QUEUE.csv
 ```

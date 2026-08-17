@@ -722,7 +722,7 @@ It must contain:
 Create:
 
 ```text
-artifacts/reports/C2_DELIVERY.md
+contracts/C02-DELIVERY.md
 ```
 
 It must contain:

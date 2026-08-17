@@ -28,7 +28,7 @@ Tracked outputs:
 ```text
 artifacts/reports/C5_MODEL_REPORT.md
 artifacts/reports/C5_COEFFICIENT_REPORT.md
-artifacts/reports/C5_DELIVERY.md
+contracts/C05-DELIVERY.md
 artifacts/reports/C5_MODEL_MANIFEST.json
 ```
 

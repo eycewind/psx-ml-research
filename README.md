@@ -61,5 +61,5 @@ cache:
 psx-c1 run --source-db /home/hassan/psx-stock-watcher/data/psx_watcher.db
 ```
 
-See [the C1 contract](contracts/C1_DATA_FOUNDATION_AND_AUDIT/CONTRACT.md) and
+See [the C1 contract](contracts/C01-CONTRACT.md) and
 the C2 environment contract and generated reports under `artifacts/reports/`.
