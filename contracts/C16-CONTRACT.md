@@ -50,9 +50,9 @@ this file records the ML-side C16 requirement labels used for this component.
 | ML-R3 | Reuse accepted C10 P4/P5 selection mechanics and accepted C11 signal/open order builders. |
 | ML-R4 | Preserve allocation `A07_P4_25_P5_75` and existing ML order-ticket schema. |
 | ML-R5 | Fail closed on missing, stale, wrong-date, inconsistent, or manually substituted required production inputs. |
-| ML-R6 | Write production artifacts under canonical `artifacts/live/<signal-date>/` layout with sufficient provenance. |
+| ML-R6 | Write production artifacts under canonical `artifacts/live/<signal-date>/` layout with sufficient provenance, including both retained Parquet ticket and watcher-facing JSON handoff hashes. |
 | ML-R7 | Support explicit dates and reproducible deterministic reruns. |
-| ML-R8 | Add automated tests for selection determinism, no manual selection-file dependency, fail-closed input handling, allocation/schema preservation, and existing accepted live behavior. |
+| ML-R8 | Add automated tests for selection determinism, JSON handoff determinism/reconciliation, no manual selection-file dependency, fail-closed input handling, allocation/schema preservation, and existing accepted live behavior. |
 
 ## Applicable SYS-AT Trace
 
@@ -68,14 +68,33 @@ acceptance requirements supplied for C16.
 | SYS-AT-C16-5 | Accepted allocation remains `A07_P4_25_P5_75`. |
 | SYS-AT-C16-6 | Existing signal-plan and order-ticket constructors remain the production constructors. |
 | SYS-AT-C16-7 | Production artifacts include provenance for code revision, dates, allocation, inputs, selections, signal plan, ticket, and hashes. |
+| SYS-AT-C16-8 | Watcher-facing ticket handoff is `order_ticket_<execution-date>.json`, a top-level non-empty JSON array of the same business rows emitted by `build_session_open_orders`. |
 
 ## Interface Boundary
 
-C16 must inspect and preserve the ML-emitted order-ticket schema. If a
-cross-repository incompatibility with stock-watcher is discovered, the ML repo
-must not invent a new shared schema independently. The blocker must be reported
-with exact ML schema, expected watcher schema if known, incompatibility, and the
-smallest proposed resolution.
+C16 preserves the ML Parquet order-ticket artifact and emits an additional
+watcher-facing JSON handoff artifact:
+
+```text
+artifacts/live/<signal-date>/order_ticket_<execution-date>.parquet
+artifacts/live/<signal-date>/order_ticket_<execution-date>.json
+```
+
+The JSON document must be a top-level non-empty array of order-row objects:
+
+```json
+[
+  {
+    "allocation_id": "A07_P4_25_P5_75"
+  }
+]
+```
+
+It must not be wrapped as `{"orders": [...]}`. JSON rows must represent the
+exact business rows returned by the accepted `build_session_open_orders(...)`
+constructor. `signal_date` and `execution_date` must serialize as ISO
+`YYYY-MM-DD` strings. This serialization correction must not alter strategy,
+policy, allocation, order construction, or business values.
 
 ## Planned Implementation
 
@@ -86,7 +105,8 @@ Add a small production orchestration adapter that:
 3. Generates current P4/P5 selections with `psx_ml.live.live_selection`.
 4. Builds the accepted C11 signal plan.
 5. Builds the accepted C11 session-open order ticket.
-6. Writes date-partitioned live artifacts and a final manifest containing
+6. Writes retained Parquet and watcher-facing JSON order-ticket artifacts.
+7. Writes date-partitioned live artifacts and a final manifest containing
    hashes and provenance.
 
 The adapter may add validation around existing functions, but it must not fork
@@ -103,6 +123,8 @@ Automated tests must cover:
 - accepted allocation remains unchanged;
 - existing signal-plan construction still works;
 - existing order-ticket construction still works;
+- watcher-facing JSON is a top-level list;
+- watcher-facing JSON business rows reconcile with the retained Parquet ticket;
 - no regression of existing accepted live tests.
 
 ## Out of Scope

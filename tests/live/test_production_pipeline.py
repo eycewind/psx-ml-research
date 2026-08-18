@@ -146,6 +146,23 @@ def _stale_feature_scorer(scoring_paths, signal_date: str) -> dict:
     return manifest
 
 
+def _business_rows(frame: pd.DataFrame) -> list[dict[str, object]]:
+    rows = []
+    for row in frame.to_dict("records"):
+        out = {}
+        for key, value in row.items():
+            if key in {"signal_date", "execution_date"}:
+                out[key] = pd.Timestamp(value).date().isoformat()
+            elif pd.isna(value):
+                out[key] = None
+            elif hasattr(value, "item"):
+                out[key] = value.item()
+            else:
+                out[key] = value
+        rows.append(out)
+    return rows
+
+
 def _paths(repo: Path) -> ProductionPipelinePaths:
     _write_reference_inputs(repo)
     return ProductionPipelinePaths(
@@ -168,11 +185,33 @@ def test_production_pipeline_generates_selection_plan_and_ticket_without_manual_
     live_dir = tmp_path / "artifacts/live/2026-08-10"
     assert (live_dir / "selections.parquet").is_file()
     assert (live_dir / "signal_plan.parquet").is_file()
+    assert (live_dir / "order_ticket_2026-08-11.json").is_file()
     ticket = pd.read_parquet(live_dir / "order_ticket_2026-08-11.parquet")
     assert list(ticket.columns) == ORDER_COLUMNS
     assert set(ticket["allocation_id"]) == {PRIMARY_ALLOCATION_ID}
     assert manifest["allocation_id"] == PRIMARY_ALLOCATION_ID
+    assert manifest["outputs"]["order_ticket_json"]["top_level_type"] == "list"
     assert "--selections" not in build_parser().format_help()
+
+
+def test_json_ticket_is_top_level_list_and_matches_parquet_business_rows(tmp_path: Path) -> None:
+    paths = _paths(tmp_path)
+    run_production_pipeline(
+        paths=paths,
+        signal_date="2026-08-10",
+        execution_date="2026-08-11",
+        scorer=_fake_scorer,
+    )
+
+    live_dir = tmp_path / "artifacts/live/2026-08-10"
+    parquet = pd.read_parquet(live_dir / "order_ticket_2026-08-11.parquet")
+    payload = json.loads((live_dir / "order_ticket_2026-08-11.json").read_text(encoding="utf-8"))
+
+    assert isinstance(payload, list)
+    assert payload
+    assert payload == _business_rows(parquet)
+    assert {row["signal_date"] for row in payload} == {"2026-08-10"}
+    assert {row["execution_date"] for row in payload} == {"2026-08-11"}
 
 
 def test_production_selection_is_deterministic(tmp_path: Path) -> None:
@@ -184,7 +223,9 @@ def test_production_selection_is_deterministic(tmp_path: Path) -> None:
         scorer=_fake_scorer,
     )
     first_selection_hash = first["outputs"]["selections"]["sha256"]
+    first_json_hash = first["outputs"]["order_ticket_json"]["sha256"]
     first_ticket = pd.read_parquet(tmp_path / "artifacts/live/2026-08-10/order_ticket_2026-08-11.parquet")
+    first_json = json.loads((tmp_path / "artifacts/live/2026-08-10/order_ticket_2026-08-11.json").read_text(encoding="utf-8"))
 
     second = run_production_pipeline(
         paths=paths,
@@ -195,7 +236,9 @@ def test_production_selection_is_deterministic(tmp_path: Path) -> None:
     second_ticket = pd.read_parquet(tmp_path / "artifacts/live/2026-08-10/order_ticket_2026-08-11.parquet")
 
     assert second["outputs"]["selections"]["sha256"] == first_selection_hash
+    assert second["outputs"]["order_ticket_json"]["sha256"] == first_json_hash
     pd.testing.assert_frame_equal(second_ticket, first_ticket)
+    assert json.loads((tmp_path / "artifacts/live/2026-08-10/order_ticket_2026-08-11.json").read_text(encoding="utf-8")) == first_json
 
 
 def test_missing_required_input_fails_closed(tmp_path: Path) -> None:

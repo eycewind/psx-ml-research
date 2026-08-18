@@ -122,11 +122,42 @@ def _write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
 
 
+def _write_order_ticket_json(path: Path, orders: pd.DataFrame) -> list[dict[str, object]]:
+    rows = []
+    for row in orders.to_dict("records"):
+        out = {}
+        for key, value in row.items():
+            if key in {"signal_date", "execution_date"}:
+                out[key] = _day(value)
+            elif pd.isna(value):
+                out[key] = None
+            elif hasattr(value, "item"):
+                out[key] = value.item()
+            else:
+                out[key] = value
+        rows.append(out)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rows, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
+    return rows
+
+
 def _artifact(path: Path) -> dict[str, object]:
     return {
         "path": str(path.resolve()),
         "sha256": sha256_file(path),
         "rows": int(pd.read_parquet(path).shape[0]),
+    }
+
+
+def _json_artifact(path: Path) -> dict[str, object]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError(f"JSON handoff artifact must be a top-level list: {path}")
+    return {
+        "path": str(path.resolve()),
+        "sha256": sha256_file(path),
+        "rows": len(payload),
+        "top_level_type": "list",
     }
 
 
@@ -212,6 +243,8 @@ def run_production_pipeline(
     )
     order_ticket_path = live_dir / f"order_ticket_{execution_day}.parquet"
     orders.to_parquet(order_ticket_path, index=False)
+    order_ticket_json_path = live_dir / f"order_ticket_{execution_day}.json"
+    _write_order_ticket_json(order_ticket_json_path, orders)
 
     selection_manifest = {
         "date": signal_day,
@@ -249,6 +282,7 @@ def run_production_pipeline(
             "selections": _artifact(selections_path),
             "signal_plan": _artifact(signal_plan_path),
             "order_ticket": _artifact(order_ticket_path),
+            "order_ticket_json": _json_artifact(order_ticket_json_path),
         },
         "scoring_manifest": scoring_manifest,
         "selection_manifest": selection_manifest,
@@ -261,6 +295,7 @@ def run_production_pipeline(
         "execution_date": execution_day,
         "allocation_id": PRIMARY_ALLOCATION_ID,
         "order_ticket": str(order_ticket_path.resolve()),
+        "order_ticket_json": str(order_ticket_json_path.resolve()),
         "production_manifest": str(manifest_path.resolve()),
     }, indent=2, sort_keys=True))
     return manifest

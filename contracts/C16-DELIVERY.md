@@ -17,12 +17,20 @@ The adapter:
   which reuses C10 P4/P5 mechanics;
 - builds the signal plan through accepted C11 `build_signal_plan`;
 - builds the order ticket through accepted C11 `build_session_open_orders`;
+- preserves the existing Parquet ticket at
+  `order_ticket_<execution-date>.parquet`;
+- emits the watcher-facing handoff artifact at
+  `order_ticket_<execution-date>.json`;
+- serializes the watcher-facing JSON as a top-level array of the exact order
+  business rows, with `signal_date` and `execution_date` as ISO `YYYY-MM-DD`
+  strings;
 - preserves allocation `A07_P4_25_P5_75`;
 - writes canonical live artifacts under `artifacts/live/<signal-date>/`;
 - writes `production_manifest.json` with code revision, dates, allocation,
   source DB identity, account-state hash, feature/prediction hashes, selection
-  hash, signal-plan hash, order-ticket hash, scoring manifest, selection
-  manifest, and emitted order-ticket schema.
+  hash, signal-plan hash, Parquet order-ticket hash, JSON order-ticket hash,
+  JSON top-level type, scoring manifest, selection manifest, and emitted
+  order-ticket schema.
 
 No strategy research, model retraining, parameter optimization, broker API
 execution, or order-ticket schema redesign was performed.
@@ -63,8 +71,21 @@ estimated_total_cost
 cash_after_planned_orders
 ```
 
-No stock-watcher schema conflict was discovered from available files in this
-repository. No cross-repository interface was changed.
+## Watcher Handoff Correction
+
+System acceptance identified that stock-watcher imports only a top-level
+non-empty JSON array of order-row objects. C16 now keeps the existing ML Parquet
+artifact and additionally emits:
+
+```text
+artifacts/live/<signal-date>/order_ticket_<execution-date>.json
+```
+
+The JSON handoff is not wrapped in an object. It represents the same business
+rows as the Parquet ticket and is included in `production_manifest.json` with
+path, SHA-256, row count, and `top_level_type = list`.
+
+No `psx-system` or stock-watcher files were changed.
 
 ## Commands and Results
 
@@ -77,8 +98,14 @@ UV_CACHE_DIR=/tmp/uv-cache UV_PYTHON_INSTALL_DIR=/tmp/uv-python uv run --python 
 Result:
 
 ```text
-.................................                                        [100%]
+..................................                                       [100%]
 ```
+
+The focused suite includes
+`test_json_ticket_is_top_level_list_and_matches_parquet_business_rows`, which
+loads `order_ticket_2026-08-11.json`, proves the JSON top-level type is `list`,
+proves it is non-empty, proves dates are serialized as `2026-08-10` and
+`2026-08-11`, and proves JSON rows equal the normalized Parquet business rows.
 
 Compile check:
 
@@ -113,9 +140,17 @@ ModuleNotFoundError: No module named 'torch'
   C10 P4/P5, and C11 order/allocation suites passed.
 - The adapter still uses the existing manual account-state file for cash and
   positions. It does not add broker API execution.
-- Stock-watcher importer expectations were not available in this repository, so
-  no watcher-side schema validation was performed here.
+- Stock-watcher importer execution was not run in this repository. The
+  watcher-facing artifact shape was implemented from the system architect's
+  frozen interface decision.
 
 ## Final Commit Hash
 
+Initial C16 implementation:
+
 `5e00fdddb8a53d6614a6402dec53068ebdb1a611`
+
+JSON handoff follow-up:
+
+Created after this delivery document update; exact commit hash is reported in
+the final C16 follow-up response.
