@@ -118,4 +118,4 @@ ModuleNotFoundError: No module named 'torch'
 
 ## Final Commit Hash
 
-Pending until the delivery commit is created.
+`5e00fdddb8a53d6614a6402dec53068ebdb1a611`
