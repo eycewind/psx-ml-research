@@ -92,6 +92,25 @@ No `psx-system` or stock-watcher files were changed.
 Focused C16-relevant test suite:
 
 ```bash
+pytest -q tests/live tests/c10/test_p4_selection.py tests/c10/test_p5_selection.py tests/c10/test_p4_c10_integration.py tests/c10/test_p5_c10_integration.py tests/c11/test_live_orders.py tests/c11/test_capital_allocation.py
+```
+
+Environment:
+
+```text
+/home/ata/miniconda3/envs/psx-ml-research/bin/python
+Python 3.12.12
+```
+
+Result:
+
+```text
+..................................                                       [100%]
+```
+
+Earlier focused C16-relevant test suite:
+
+```bash
 UV_CACHE_DIR=/tmp/uv-cache UV_PYTHON_INSTALL_DIR=/tmp/uv-python uv run --python 3.11 --extra dev --extra trees pytest -q tests/live tests/c10/test_p4_selection.py tests/c10/test_p5_selection.py tests/c10/test_p4_c10_integration.py tests/c10/test_p5_c10_integration.py tests/c11/test_live_orders.py tests/c11/test_capital_allocation.py
 ```
 
@@ -106,6 +125,42 @@ The focused suite includes
 loads `order_ticket_2026-08-11.json`, proves the JSON top-level type is `list`,
 proves it is non-empty, proves dates are serialized as `2026-08-10` and
 `2026-08-11`, and proves JSON rows equal the normalized Parquet business rows.
+
+## Production Acceptance Evidence
+
+System acceptance reported a successful real production C16 run with:
+
+```text
+signal_date: 2026-08-13
+execution_date: 2026-08-17
+allocation: A07_P4_25_P5_75
+account cash: PKR 50,000
+code revision: 6897fec2e3bc9aa1c35804b2f4060420cd63663d
+features/predictions: 303
+selections: 18
+P4 selections: 3
+P5 selections: 15
+overlap: 1
+signal-plan rows: 17
+order-ticket rows: 17
+watcher JSON top-level type: list
+watcher JSON SHA-256: 683439c19dbd54f0766682a2c91ee1aafafed157b0142ef0fc47a8bee3b7de02
+watcher import: accepted unchanged
+second watcher import: idempotent
+```
+
+The same acceptance run confirmed the frozen model:
+
+```text
+artifacts/models/c8_supplemental/rank_5_B_market_context_fold_2025_lightgbm_cpu.txt
+SHA-256: ecc95b9d78aa4dd26b30dbe4560eec716d4f21a8e190e59ea02b84a75d3643d5
+retrained: false
+```
+
+The model artifact and SHA-256 were verified in this checkout. The
+`artifacts/live/2026-08-13` production-run directory is not present in this
+checkout, so the row counts and watcher import result above are recorded as
+system-acceptance evidence rather than locally regenerated artifacts.
 
 Compile check:
 
@@ -151,6 +206,11 @@ Initial C16 implementation:
 `5e00fdddb8a53d6614a6402dec53068ebdb1a611`
 
 JSON handoff follow-up:
+
+Created after this delivery document update; exact commit hash is reported in
+the final C16 follow-up response.
+
+System-acceptance delivery refresh:
 
 Created after this delivery document update; exact commit hash is reported in
 the final C16 follow-up response.

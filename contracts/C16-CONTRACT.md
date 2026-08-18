@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft implementation contract for branch `c16-production-ticket-pipeline`.
+Implemented on branch `c16-production-ticket-pipeline`.
 
 Immutable baseline:
 
