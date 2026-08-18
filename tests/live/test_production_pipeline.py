@@ -9,6 +9,8 @@ from psx_ml.c11.live_orders import PRIMARY_ALLOCATION_ID
 from psx_ml.live.production_pipeline import (
     ProductionPipelinePaths,
     build_parser,
+    run_phase_a,
+    run_phase_b,
     run_production_pipeline,
 )
 
@@ -66,7 +68,13 @@ def _write_account(repo: Path) -> Path:
     return path
 
 
-def _write_source_db(repo: Path, include_execution_date: bool = True, include_close: bool = True) -> Path:
+def _write_source_db(
+    repo: Path,
+    include_execution_date: bool = True,
+    include_close: bool = True,
+    signal_date: str = "2026-08-10",
+    execution_date: str = "2026-08-11",
+) -> Path:
     path = repo / "source.db"
     con = sqlite3.connect(path)
     close_col = "close_adj REAL," if include_close else ""
@@ -86,11 +94,11 @@ def _write_source_db(repo: Path, include_execution_date: bool = True, include_cl
         ("FFF", 50.0, 51.0),
     ]:
         if include_close:
-            rows.append(("2026-08-10", symbol, open_ - 1.0, close, 1000.0))
+            rows.append((signal_date, symbol, open_ - 1.0, close, 1000.0))
             if include_execution_date:
-                rows.append(("2026-08-11", symbol, open_, close + 1.0, 1000.0))
+                rows.append((execution_date, symbol, open_, close + 1.0, 1000.0))
         else:
-            rows.append(("2026-08-10", symbol, open_ - 1.0, 1000.0))
+            rows.append((signal_date, symbol, open_ - 1.0, 1000.0))
     placeholders = ",".join(["?"] * (5 if include_close else 4))
     con.executemany(f"INSERT INTO daily_ohlc VALUES ({placeholders})", rows)
     con.commit()
@@ -129,6 +137,14 @@ def _fake_scorer(scoring_paths, signal_date: str) -> dict:
     features.to_parquet(features_path, index=False)
     return {
         "score_date": signal_date,
+        "model": {
+            "path": "artifacts/models/c8_supplemental/rank_5_B_market_context_fold_2025_lightgbm_cpu.txt",
+            "sha256": "ecc95b9d78aa4dd26b30dbe4560eec716d4f21a8e190e59ea02b84a75d3643d5",
+            "model_name": "lightgbm_cpu",
+            "target_name": "fwd_market_relative_rank_5s",
+            "feature_variant": "B_market_context",
+            "retrained": False,
+        },
         "outputs": {
             "predictions_path": str(predictions_path),
             "features_path": str(features_path),
@@ -171,6 +187,55 @@ def _paths(repo: Path) -> ProductionPipelinePaths:
         account_state=_write_account(repo),
         output_root=Path("artifacts/live"),
     )
+
+
+def _phase_a_paths(repo: Path, signal_date: str = "2026-08-13", execution_date: str = "2026-08-17") -> ProductionPipelinePaths:
+    _write_reference_inputs(repo)
+    return ProductionPipelinePaths(
+        repo=repo,
+        source_db=_write_source_db(
+            repo,
+            include_execution_date=False,
+            signal_date=signal_date,
+            execution_date=execution_date,
+        ),
+        account_state=_write_account(repo),
+        output_root=Path("artifacts/live"),
+    )
+
+
+def _write_live_open(repo: Path, signal_date: str, execution_date: str, *, missing_symbol: str | None = None, wrong_date: bool = False) -> Path:
+    plan = pd.read_parquet(repo / f"artifacts/live/{signal_date}/signal_plan.parquet")
+    rows = []
+    for idx, symbol in enumerate(plan["symbol"].astype(str).str.upper()):
+        if symbol == missing_symbol:
+            continue
+        rows.append(
+            {
+                "trade_date": "2026-08-18" if wrong_date else execution_date,
+                "symbol": symbol,
+                "open": 50.0 + idx,
+                "first_qualifying_poll_ts": f"{execution_date}T09:40:30+05:00",
+                "confirmed_poll_ts": f"{execution_date}T09:42:00+05:00",
+                "confirmation_count": 2,
+                "source": "psx_portal",
+            }
+        )
+    if not rows:
+        rows.append(
+            {
+                "trade_date": "2026-08-18" if wrong_date else execution_date,
+                "symbol": "ZZZ",
+                "open": 99.0,
+                "first_qualifying_poll_ts": f"{execution_date}T09:40:30+05:00",
+                "confirmed_poll_ts": f"{execution_date}T09:42:00+05:00",
+                "confirmation_count": 2,
+                "source": "psx_portal",
+            }
+        )
+    path = repo / "settled_live_open.json"
+    path.write_text(json.dumps(rows, indent=2), encoding="utf-8")
+    return path
 
 
 def test_production_pipeline_generates_selection_plan_and_ticket_without_manual_selection_file(tmp_path: Path) -> None:
@@ -292,4 +357,133 @@ def test_execution_date_must_follow_signal_date(tmp_path: Path) -> None:
             signal_date="2026-08-10",
             execution_date="2026-08-10",
             scorer=_fake_scorer,
+        )
+
+
+def test_phase_a_requires_no_execution_session_open_and_supports_holiday_pair(tmp_path: Path) -> None:
+    manifest = run_phase_a(
+        paths=_phase_a_paths(tmp_path),
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    assert manifest["allocation_id"] == PRIMARY_ALLOCATION_ID
+    assert manifest["signal_date"] == "2026-08-13"
+    assert manifest["execution_date"] == "2026-08-17"
+    assert manifest["model"]["retrained"] is False
+    assert (tmp_path / "artifacts/live/2026-08-13/phase_a_decision_manifest.json").is_file()
+    assert (tmp_path / "artifacts/live/2026-08-13/signal_plan.parquet").is_file()
+
+
+def test_phase_a_decision_is_deterministic_and_conflict_checked(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path)
+    first = run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    second = run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    assert second["phase_a_decision_sha256"] == first["phase_a_decision_sha256"]
+
+    def changed_scorer(scoring_paths, signal_date: str) -> dict:
+        manifest = _fake_scorer(scoring_paths, signal_date)
+        predictions_path = Path(manifest["outputs"]["predictions_path"])
+        predictions = pd.read_parquet(predictions_path)
+        predictions.loc[predictions["symbol"] == "AAA", "prediction"] = -9.0
+        predictions.to_parquet(predictions_path, index=False)
+        return manifest
+
+    with pytest.raises(ValueError, match="Conflicting Phase-A decision"):
+        run_phase_a(
+            paths=paths,
+            signal_date="2026-08-13",
+            execution_date="2026-08-17",
+            scorer=changed_scorer,
+        )
+
+
+def test_phase_b_consumes_phase_a_and_emits_canonical_json_with_provenance(tmp_path: Path) -> None:
+    phase_a = run_phase_a(
+        paths=_phase_a_paths(tmp_path),
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    live_open = _write_live_open(tmp_path, "2026-08-13", "2026-08-17")
+    manifest = run_phase_b(
+        phase_a_manifest_path=tmp_path / "artifacts/live/2026-08-13/phase_a_decision_manifest.json",
+        live_open_path=live_open,
+        account_state_path=tmp_path / "account.json",
+    )
+
+    live_dir = tmp_path / "artifacts/live/2026-08-13"
+    parquet = pd.read_parquet(live_dir / "order_ticket_2026-08-17.parquet")
+    payload = json.loads((live_dir / "order_ticket_2026-08-17.json").read_text(encoding="utf-8"))
+    assert isinstance(payload, list)
+    assert payload == _business_rows(parquet)
+    assert manifest["phase_a"]["phase_a_decision_sha256"] == phase_a["phase_a_decision_sha256"]
+    assert manifest["outputs"]["order_ticket_json"]["top_level_type"] == "list"
+    assert set(parquet["allocation_id"]) == {PRIMARY_ALLOCATION_ID}
+
+
+def test_phase_b_rejects_wrong_date_and_missing_required_open(tmp_path: Path) -> None:
+    run_phase_a(
+        paths=_phase_a_paths(tmp_path),
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    phase_a_manifest = tmp_path / "artifacts/live/2026-08-13/phase_a_decision_manifest.json"
+    with pytest.raises(ValueError, match="wrong execution date"):
+        run_phase_b(
+            phase_a_manifest_path=phase_a_manifest,
+            live_open_path=_write_live_open(tmp_path, "2026-08-13", "2026-08-17", wrong_date=True),
+            account_state_path=tmp_path / "account.json",
+        )
+
+    required_symbol = pd.read_parquet(tmp_path / "artifacts/live/2026-08-13/signal_plan.parquet")["symbol"].iloc[0]
+    with pytest.raises(ValueError, match="Missing required execution open"):
+        run_phase_b(
+            phase_a_manifest_path=phase_a_manifest,
+            live_open_path=_write_live_open(tmp_path, "2026-08-13", "2026-08-17", missing_symbol=required_symbol),
+            account_state_path=tmp_path / "account.json",
+        )
+
+
+def test_phase_b_is_idempotent_and_conflict_checked(tmp_path: Path) -> None:
+    run_phase_a(
+        paths=_phase_a_paths(tmp_path),
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    phase_a_manifest = tmp_path / "artifacts/live/2026-08-13/phase_a_decision_manifest.json"
+    live_open = _write_live_open(tmp_path, "2026-08-13", "2026-08-17")
+    first = run_phase_b(
+        phase_a_manifest_path=phase_a_manifest,
+        live_open_path=live_open,
+        account_state_path=tmp_path / "account.json",
+    )
+    second = run_phase_b(
+        phase_a_manifest_path=phase_a_manifest,
+        live_open_path=live_open,
+        account_state_path=tmp_path / "account.json",
+    )
+    assert second["phase_b_ticket_sha256"] == first["phase_b_ticket_sha256"]
+
+    rows = json.loads(live_open.read_text(encoding="utf-8"))
+    rows[0]["open"] = rows[0]["open"] + 1.0
+    live_open.write_text(json.dumps(rows, indent=2), encoding="utf-8")
+    with pytest.raises(ValueError, match="Conflicting Phase-B ticket"):
+        run_phase_b(
+            phase_a_manifest_path=phase_a_manifest,
+            live_open_path=live_open,
+            account_state_path=tmp_path / "account.json",
         )
