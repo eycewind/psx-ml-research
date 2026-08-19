@@ -68,6 +68,15 @@ def _write_account(repo: Path) -> Path:
     return path
 
 
+def _write_account_state(repo: Path, *, cash: float, positions: dict[str, int]) -> Path:
+    path = repo / "account.json"
+    path.write_text(
+        json.dumps({"cash_pkr": cash, "positions": positions}, indent=2),
+        encoding="utf-8",
+    )
+    return path
+
+
 def _write_source_db(
     repo: Path,
     include_execution_date: bool = True,
@@ -236,6 +245,94 @@ def _write_live_open(repo: Path, signal_date: str, execution_date: str, *, missi
     path = repo / "settled_live_open.json"
     path.write_text(json.dumps(rows, indent=2), encoding="utf-8")
     return path
+
+
+def _write_actual_holdings_acceptance_phase_a(repo: Path) -> Path:
+    signal_date = "2026-08-18"
+    execution_date = "2026-08-19"
+    live_dir = repo / f"artifacts/live/{signal_date}"
+    live_dir.mkdir(parents=True, exist_ok=True)
+
+    opening_cash = 3_200.0
+    positions = {
+        "APL": 4,
+        "ICL": 17,
+        "IMAGE": 92,
+        "KSBP": 10,
+        "LCI": 11,
+        "MARI": 9,
+        "MTL": 22,
+        "OCTOPUS": 79,
+        "SGF": 21,
+        "SSOM": 5,
+        "WAFI": 13,
+    }
+    _write_account_state(repo, cash=opening_cash, positions=positions)
+    open_price = 100.0
+    nav_open = opening_cash + sum(positions.values()) * open_price
+
+    def weight_for(target_shares: int) -> float:
+        return ((target_shares + 0.001) * open_price) / nav_open
+
+    signal_plan = pd.DataFrame(
+        {
+            "allocation_id": [PRIMARY_ALLOCATION_ID] * 5,
+            "trade_date": pd.to_datetime([signal_date] * 5),
+            "symbol": ["APL", "ICL", "IMAGE", "LCI", "NEWC"],
+            "target_weight": [
+                weight_for(4),
+                weight_for(20),
+                weight_for(50),
+                weight_for(11),
+                weight_for(5),
+            ],
+            "signal_close": [100.0] * 5,
+            "buy_limit_price": [102.0] * 5,
+            "shariah_eligible": [True] * 5,
+        }
+    )
+    signal_plan_path = live_dir / "signal_plan.parquet"
+    signal_plan.to_parquet(signal_plan_path, index=False)
+
+    selected = set(signal_plan["symbol"])
+    live_open = [
+        {
+            "trade_date": execution_date,
+            "symbol": symbol,
+            "open": open_price,
+            "first_qualifying_poll_ts": f"{execution_date}T09:40:30+05:00",
+            "confirmed_poll_ts": f"{execution_date}T09:42:00+05:00",
+            "confirmation_count": 2,
+            "source": "psx_portal",
+        }
+        for symbol in sorted(set(positions) | selected)
+    ]
+    (repo / "settled_live_open.json").write_text(
+        json.dumps(live_open, indent=2),
+        encoding="utf-8",
+    )
+
+    phase_a_manifest = {
+        "manifest_version": 1,
+        "artifact_kind": "c17_phase_a_decision",
+        "allocation_id": PRIMARY_ALLOCATION_ID,
+        "signal_date": signal_date,
+        "execution_date": execution_date,
+        "phase_a_decision_sha256": "actual-holdings-acceptance-fixture",
+        "outputs": {
+            "signal_plan": {
+                "path": str(signal_plan_path.resolve()),
+                "rows": int(len(signal_plan)),
+                "sha256": "fixture",
+            },
+        },
+    }
+    phase_a_manifest_path = live_dir / "phase_a_decision_manifest.json"
+    phase_a_manifest_path.write_text(
+        json.dumps(phase_a_manifest, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    return phase_a_manifest_path
 
 
 def test_production_pipeline_generates_selection_plan_and_ticket_without_manual_selection_file(tmp_path: Path) -> None:
@@ -487,3 +584,63 @@ def test_phase_b_is_idempotent_and_conflict_checked(tmp_path: Path) -> None:
             live_open_path=live_open,
             account_state_path=tmp_path / "account.json",
         )
+
+
+def test_phase_a_keeps_owned_symbol_eligible_for_scoring_and_selection(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path)
+    _write_account_state(tmp_path, cash=100_000.0, positions={"AAA": 10})
+
+    run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    predictions = pd.read_parquet(tmp_path / "artifacts/live/2026-08-13/predictions.parquet")
+    selections = pd.read_parquet(tmp_path / "artifacts/live/2026-08-13/selections.parquet")
+    assert "AAA" in set(predictions["symbol"])
+    assert "AAA" in set(selections["symbol"])
+
+
+def test_phase_b_rebalances_against_actual_2026_08_19_holdings(tmp_path: Path) -> None:
+    phase_a_manifest = _write_actual_holdings_acceptance_phase_a(tmp_path)
+    manifest = run_phase_b(
+        phase_a_manifest_path=phase_a_manifest,
+        live_open_path=tmp_path / "settled_live_open.json",
+        account_state_path=tmp_path / "account.json",
+    )
+    ticket = pd.read_parquet(tmp_path / "artifacts/live/2026-08-18/order_ticket_2026-08-19.parquet")
+    rows = {row.symbol: row for row in ticket.itertuples(index=False)}
+
+    assert manifest["outputs"]["order_ticket_json"]["top_level_type"] == "list"
+    assert "APL" not in rows
+    assert "LCI" not in rows
+    assert "HOLD" not in set(ticket["order_side"])
+
+    icl = rows["ICL"]
+    assert icl.current_shares == 17
+    assert icl.target_shares == 20
+    assert icl.order_side == "BUY"
+    assert icl.order_shares == 3
+
+    image = rows["IMAGE"]
+    assert image.current_shares == 92
+    assert image.target_shares == 50
+    assert image.order_side == "SELL"
+    assert image.order_shares == 42
+
+    ksbp = rows["KSBP"]
+    assert ksbp.current_shares == 10
+    assert ksbp.target_shares == 0
+    assert ksbp.order_side == "SELL"
+    assert ksbp.order_shares == 10
+
+    newc = rows["NEWC"]
+    assert newc.current_shares == 0
+    assert newc.target_shares == 5
+    assert newc.order_side == "BUY"
+    assert newc.order_shares == 5
+
+    assert rows["ICL"].target_shares == 20
+    assert rows["NEWC"].target_shares == 5

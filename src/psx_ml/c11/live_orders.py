@@ -378,28 +378,6 @@ def build_session_open_orders(
         wanted = int(desired[symbol])
         delta = wanted - current
         if delta <= 0:
-            if current == wanted and current > 0:
-                rows.append({
-                    "allocation_id": PRIMARY_ALLOCATION_ID,
-                    "signal_date": _norm_date(signal_plan["trade_date"].iloc[0]),
-                    "execution_date": execution_date,
-                    "symbol": symbol,
-                    "target_weight": float(weights[symbol]),
-                    "current_shares": current,
-                    "target_shares": wanted,
-                    "order_side": "HOLD",
-                    "order_shares": 0,
-                    "order_type": "NONE",
-                    "reference_open": open_map[symbol],
-                    "buy_limit_price": limits[symbol],
-                    "status": "NO_ACTION",
-                    "reason": "AT_TARGET",
-                    "estimated_notional": 0.0,
-                    "estimated_commission": 0.0,
-                    "estimated_sst": 0.0,
-                    "estimated_cdc": 0.0,
-                    "estimated_total_cost": 0.0,
-                })
             continue
 
         open_price = open_map[symbol]

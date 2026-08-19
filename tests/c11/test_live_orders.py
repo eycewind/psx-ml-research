@@ -127,3 +127,30 @@ def test_session_open_orders_whole_shares_and_nonnegative_cash() -> None:
     q = orders.loc[orders["order_side"] == "BUY", "order_shares"]
     assert ((q >= 0) & (q == q.astype(int))).all()
     assert float(orders["cash_after_planned_orders"].iloc[0]) >= -1e-7
+
+
+def test_session_open_orders_omit_exact_target_hold_rows() -> None:
+    plan = build_signal_plan(
+        selections=_sel(),
+        signal_date="2025-12-22",
+        signal_closes=_closes(),
+    )
+    opens = pd.DataFrame({
+        "trade_date": pd.to_datetime(["2025-12-23"] * 3),
+        "symbol": ["AAA", "BBB", "CCC"],
+        "open_adj": [100.0, 50.0, 25.0],
+    })
+    positions = pd.DataFrame({
+        "symbol": ["AAA"],
+        "shares": [5],
+    })
+    orders = build_session_open_orders(
+        signal_plan=plan,
+        execution_date="2025-12-23",
+        session_opens=opens,
+        current_positions=positions,
+        cash=500.0,
+    )
+
+    assert "AAA" not in set(orders["symbol"])
+    assert "HOLD" not in set(orders["order_side"])

@@ -35,6 +35,19 @@ Phase B:
   `phase_a_decision_sha256`;
 - fails explicitly on conflicting same allocation/signal/execution tickets.
 
+C17.2 actual-holdings rebalance acceptance:
+
+- Phase A scoring/selection does not use ownership to exclude otherwise
+  eligible symbols.
+- Phase B sizes from watcher-supplied account cash plus actual current
+  positions reported in account-state.
+- Phase B compares frozen target shares to actual current shares:
+  equal target/current produces no ticket row; higher target buys only the
+  delta; lower non-zero target sells only the delta; dropped targets sell the
+  existing position; new targets with no current holding buy normally.
+- Pending or unfilled orders are not treated as holdings unless account-state
+  reports filled shares.
+
 The C16-compatible `run` command remains available for regression coverage.
 
 ## Files Changed
@@ -42,7 +55,9 @@ The C16-compatible `run` command remains available for regression coverage.
 - `README_C17_DAILY_PRODUCTION.md`
 - `contracts/C17-CONTRACT.md`
 - `contracts/C17-DELIVERY.md`
+- `src/psx_ml/c11/live_orders.py`
 - `src/psx_ml/live/production_pipeline.py`
+- `tests/c11/test_live_orders.py`
 - `tests/live/test_production_pipeline.py`
 
 ## CLI
@@ -67,26 +82,26 @@ Python 3.12.12
 Live/compile check:
 
 ```bash
-python -m py_compile src/psx_ml/live/production_pipeline.py tests/live/test_production_pipeline.py
-pytest -q tests/live
+conda run -n psx-ml-research python -m py_compile src/psx_ml/live/production_pipeline.py src/psx_ml/c11/live_orders.py tests/live/test_production_pipeline.py tests/c11/test_live_orders.py
+conda run -n psx-ml-research pytest -q tests/live/test_production_pipeline.py tests/c11/test_live_orders.py
 ```
 
 Result:
 
 ```text
-..................                                                       [100%]
+...................                                                      [100%]
 ```
 
 C17-relevant plus accepted C16 regression suite:
 
 ```bash
-pytest -q tests/live tests/c10/test_p4_selection.py tests/c10/test_p5_selection.py tests/c10/test_p4_c10_integration.py tests/c10/test_p5_c10_integration.py tests/c11/test_live_orders.py tests/c11/test_capital_allocation.py
+conda run -n psx-ml-research pytest -q tests/live tests/c10/test_p4_selection.py tests/c10/test_p5_selection.py tests/c10/test_p4_c10_integration.py tests/c10/test_p5_c10_integration.py tests/c11/test_live_orders.py tests/c11/test_capital_allocation.py
 ```
 
 Result:
 
 ```text
-.......................................                                  [100%]
+..........................................                               [100%]
 ```
 
 ## Coverage Notes
@@ -99,6 +114,10 @@ Automated tests cover:
 - exact signal/execution date validation;
 - stale/missing signal-date input fails closed through existing C16 tests;
 - Phase B consumes frozen Phase A and has no scorer/regeneration path;
+- Phase B actual-holdings rebalance semantics for equal, increased, reduced,
+  dropped, and new targets;
+- supplied current cash is honored in Phase-B target share sizing;
+- owned symbols remain eligible for scoring and selection;
 - wrong-date live-open artifact fails;
 - missing required symbol open fails;
 - canonical watcher JSON is a top-level non-empty list;
