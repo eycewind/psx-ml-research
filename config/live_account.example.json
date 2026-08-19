@@ -1,5 +1,6 @@
 {
   "cash_pkr": 50000,
+  "deployable_capital_pkr": 50000,
   "positions": {
     "DGKC": 200
   }

@@ -32,6 +32,21 @@ cp config/live_account.example.json config/live_account.json
 Keep `config/live_account.json` out of Git. It represents operational broker
 state until StockIntel can provide cash/positions through an API.
 
+Production C17 Phase B requires:
+
+```json
+{
+  "cash_pkr": 23688,
+  "deployable_capital_pkr": 50000,
+  "positions": {
+    "MARI": 9
+  }
+}
+```
+
+The deployable capital is the explicit strategy mandate used for target share
+sizing. It is not inferred from brokerage NAV.
+
 ## ntfy
 
 ```bash

@@ -68,6 +68,22 @@ Input:
 - C17 `LIVE-OPEN` artifact;
 - manual account-state file.
 
+The manual account-state schema is:
+
+```json
+{
+  "cash_pkr": 23688,
+  "deployable_capital_pkr": 50000,
+  "positions": {
+    "MARI": 9
+  }
+}
+```
+
+`cash_pkr` and `positions` are factual broker state. `deployable_capital_pkr` is
+the explicit strategy capital mandate and must not be inferred from broker NAV
+in production Phase B.
+
 Phase B must not rescore or regenerate selections.
 
 The C17 live-open logical schema is:
@@ -94,6 +110,17 @@ Validation:
 
 Phase B maps raw live `open` to the accepted `build_session_open_orders(...)`
 execution reference input without changing business semantics.
+
+Target sizing is:
+
+```text
+target_value(symbol) = deployable_capital_pkr * target_weight
+target_shares = floor(target_value(symbol) / execution_open_price)
+```
+
+Actual broker cash remains the affordability constraint for BUY orders after
+SELL proceeds and fees. If the requested BUY delta cannot be afforded, existing
+cash clipping/skip behavior applies without changing desired target shares.
 
 Output:
 

@@ -243,13 +243,15 @@ def build_session_open_orders(
     session_opens: pd.DataFrame,
     current_positions: pd.DataFrame,
     cash: float,
+    deployable_capital_pkr: float | None = None,
     config: LiveOrderConfig = LiveOrderConfig(),
 ) -> pd.DataFrame:
     """Resolve exact whole-share orders at the next session open.
 
-    This mirrors the CP3/CP4B sizing convention:
-      - NAV is valued at actual session opens for currently held names when
-        available;
+    By default this preserves the historical CP3/CP4B sizing convention. When
+    ``deployable_capital_pkr`` is provided, target share counts use that
+    explicit strategy capital mandate instead of broker-account NAV:
+      target_shares = floor(deployable_capital_pkr * target_weight / open)
       - target share counts use actual session opens;
       - SELL reductions/exits are resolved first;
       - BUY additions are constrained by remaining cash and exact fees;
@@ -330,9 +332,15 @@ def build_session_open_orders(
     )
     if nav_open <= 0:
         raise ValueError("Invalid opening NAV")
+    if deployable_capital_pkr is None:
+        sizing_capital = nav_open
+    else:
+        sizing_capital = float(deployable_capital_pkr)
+        if not np.isfinite(sizing_capital) or sizing_capital <= 0:
+            raise ValueError("deployable_capital_pkr must be finite and positive")
 
     desired = {
-        symbol: max(int(math.floor(nav_open * weight / open_map[symbol])), 0)
+        symbol: max(int(math.floor(sizing_capital * weight / open_map[symbol])), 0)
         for symbol, weight in weights.items()
     }
 

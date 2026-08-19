@@ -39,6 +39,30 @@ Phase B consumes the frozen Phase-A decision, a watcher-produced settled
 live-open artifact, and manual account state. It does not rescore or regenerate
 selections.
 
+The manual account-state file must separate factual broker state from the
+strategy capital mandate:
+
+```json
+{
+  "cash_pkr": 23688,
+  "deployable_capital_pkr": 50000,
+  "positions": {
+    "MARI": 9
+  }
+}
+```
+
+`cash_pkr` and `positions` are actual broker state. `deployable_capital_pkr` is
+the explicit production A07 deployable capital ceiling. Phase B target sizing
+uses:
+
+```text
+target_shares = floor(deployable_capital_pkr * target_weight / execution_open_price)
+```
+
+Actual broker cash remains the BUY affordability constraint after SELL proceeds
+and fees. Phase B fails closed when `deployable_capital_pkr` is absent.
+
 ```bash
 psx-live-production-ticket phase-b \
   --phase-a-manifest artifacts/live/2026-08-13/phase_a_decision_manifest.json \
@@ -77,3 +101,7 @@ psx-live-production-ticket run \
   --execution-date 2026-08-17 \
   --account-state config/live_account.json
 ```
+
+Historical fixtures that omit `deployable_capital_pkr` retain legacy
+broker-NAV sizing in the lower-level C11 order builder and this compatibility
+wrapper. Production C17 Phase B requires the explicit field.

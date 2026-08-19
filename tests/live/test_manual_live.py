@@ -12,7 +12,20 @@ def test_manual_state(tmp_path: Path):
     p.write_text(json.dumps({"cash_pkr": 50000, "positions": {"DGKC": 200}}))
     state = load_manual_account_state(p)
     assert state.cash_pkr == 50000
+    assert state.deployable_capital_pkr is None
     assert dict(zip(state.positions.symbol, state.positions.shares)) == {"DGKC": 200}
+
+
+def test_manual_state_loads_deployable_capital(tmp_path: Path):
+    p = tmp_path / "state.json"
+    p.write_text(json.dumps({
+        "cash_pkr": 23688,
+        "deployable_capital_pkr": 50000,
+        "positions": {"MARI": 9},
+    }))
+    state = load_manual_account_state(p, require_deployable_capital=True)
+    assert state.cash_pkr == 23688
+    assert state.deployable_capital_pkr == 50000
 
 
 def test_order_render_contains_no_chase():

@@ -258,6 +258,7 @@ def _phase_b_decision_hash(
     phase_a_hash: str,
     live_open_path: Path,
     account_state_path: Path,
+    deployable_capital_pkr: float,
     orders: pd.DataFrame,
 ) -> str:
     return _stable_json_hash(
@@ -267,6 +268,7 @@ def _phase_b_decision_hash(
             "phase_a_decision_sha256": phase_a_hash,
             "live_open_sha256": sha256_file(live_open_path),
             "account_state_sha256": sha256_file(account_state_path),
+            "deployable_capital_pkr": float(deployable_capital_pkr),
             "orders": _business_rows(orders),
         }
     )
@@ -535,7 +537,10 @@ def run_phase_b(
     if set(pd.to_datetime(signal_plan["trade_date"]).dt.normalize().dt.strftime("%Y-%m-%d")) != {signal_day}:
         raise ValueError("Phase-A signal plan date does not match manifest")
 
-    state = load_manual_account_state(account_state_path)
+    state = load_manual_account_state(
+        account_state_path,
+        require_deployable_capital=True,
+    )
     required_symbols = set(signal_plan["symbol"].astype(str).str.strip().str.upper()) | set(
         state.positions["symbol"].astype(str).str.strip().str.upper()
     )
@@ -551,11 +556,13 @@ def run_phase_b(
         session_opens=opens,
         current_positions=state.positions,
         cash=state.cash_pkr,
+        deployable_capital_pkr=state.deployable_capital_pkr,
     )
     phase_b_hash = _phase_b_decision_hash(
         phase_a_hash=phase_a["phase_a_decision_sha256"],
         live_open_path=live_open_path,
         account_state_path=account_state_path,
+        deployable_capital_pkr=state.deployable_capital_pkr,
         orders=orders,
     )
 
@@ -596,6 +603,18 @@ def run_phase_b(
         "inputs": {
             "live_open": _file_artifact(live_open_path),
             "account_state": _file_artifact(account_state_path),
+        },
+        "account_state_schema": {
+            "cash_pkr": "actual broker cash available for orders",
+            "deployable_capital_pkr": "explicit strategy capital mandate used for target sizing",
+            "positions": "object mapping broker-held symbol to current whole shares",
+        },
+        "strategy_capital": {
+            "deployable_capital_pkr": float(state.deployable_capital_pkr),
+            "source": "manual_account_state.deployable_capital_pkr",
+            "target_sizing_formula": (
+                "target_shares = floor(deployable_capital_pkr * target_weight / execution_open_price)"
+            ),
         },
         "outputs": {
             "order_ticket": _artifact(order_ticket_path),
@@ -673,6 +692,7 @@ def run_production_pipeline(
         session_opens=opens,
         current_positions=state.positions,
         cash=state.cash_pkr,
+        deployable_capital_pkr=state.deployable_capital_pkr,
     )
     order_ticket_path = live_dir / f"order_ticket_{execution_day}.parquet"
     orders.to_parquet(order_ticket_path, index=False)

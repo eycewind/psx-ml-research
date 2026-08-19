@@ -62,16 +62,28 @@ def _write_reference_inputs(repo: Path) -> None:
     ).to_csv(ref / "kmi_all_share_screened_universe_history.csv", index=False)
 
 
-def _write_account(repo: Path) -> Path:
+def _write_account(repo: Path, *, deployable_capital: float | None = 100_000.0) -> Path:
     path = repo / "account.json"
-    path.write_text(json.dumps({"cash_pkr": 100_000, "positions": {}}), encoding="utf-8")
+    payload = {"cash_pkr": 100_000, "positions": {}}
+    if deployable_capital is not None:
+        payload["deployable_capital_pkr"] = deployable_capital
+    path.write_text(json.dumps(payload), encoding="utf-8")
     return path
 
 
-def _write_account_state(repo: Path, *, cash: float, positions: dict[str, int]) -> Path:
+def _write_account_state(
+    repo: Path,
+    *,
+    cash: float,
+    positions: dict[str, int],
+    deployable_capital: float | None = 50_000.0,
+) -> Path:
     path = repo / "account.json"
+    payload = {"cash_pkr": cash, "positions": positions}
+    if deployable_capital is not None:
+        payload["deployable_capital_pkr"] = deployable_capital
     path.write_text(
-        json.dumps({"cash_pkr": cash, "positions": positions}, indent=2),
+        json.dumps(payload, indent=2),
         encoding="utf-8",
     )
     return path
@@ -254,6 +266,7 @@ def _write_actual_holdings_acceptance_phase_a(repo: Path) -> Path:
     live_dir.mkdir(parents=True, exist_ok=True)
 
     opening_cash = 3_200.0
+    deployable_capital = 50_000.0
     positions = {
         "APL": 4,
         "ICL": 17,
@@ -267,12 +280,16 @@ def _write_actual_holdings_acceptance_phase_a(repo: Path) -> Path:
         "SSOM": 5,
         "WAFI": 13,
     }
-    _write_account_state(repo, cash=opening_cash, positions=positions)
+    _write_account_state(
+        repo,
+        cash=opening_cash,
+        positions=positions,
+        deployable_capital=deployable_capital,
+    )
     open_price = 100.0
-    nav_open = opening_cash + sum(positions.values()) * open_price
 
     def weight_for(target_shares: int) -> float:
-        return ((target_shares + 0.001) * open_price) / nav_open
+        return ((target_shares + 0.001) * open_price) / deployable_capital
 
     signal_plan = pd.DataFrame(
         {
@@ -526,8 +543,27 @@ def test_phase_b_consumes_phase_a_and_emits_canonical_json_with_provenance(tmp_p
     assert isinstance(payload, list)
     assert payload == _business_rows(parquet)
     assert manifest["phase_a"]["phase_a_decision_sha256"] == phase_a["phase_a_decision_sha256"]
+    assert manifest["strategy_capital"]["deployable_capital_pkr"] == 100_000.0
+    assert manifest["strategy_capital"]["source"] == "manual_account_state.deployable_capital_pkr"
+    assert "deployable_capital_pkr" in manifest["account_state_schema"]
     assert manifest["outputs"]["order_ticket_json"]["top_level_type"] == "list"
     assert set(parquet["allocation_id"]) == {PRIMARY_ALLOCATION_ID}
+
+
+def test_phase_b_requires_explicit_deployable_capital(tmp_path: Path) -> None:
+    run_phase_a(
+        paths=_phase_a_paths(tmp_path),
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    _write_account(tmp_path, deployable_capital=None)
+    with pytest.raises(ValueError, match="deployable_capital_pkr is required"):
+        run_phase_b(
+            phase_a_manifest_path=tmp_path / "artifacts/live/2026-08-13/phase_a_decision_manifest.json",
+            live_open_path=_write_live_open(tmp_path, "2026-08-13", "2026-08-17"),
+            account_state_path=tmp_path / "account.json",
+        )
 
 
 def test_phase_b_rejects_wrong_date_and_missing_required_open(tmp_path: Path) -> None:
