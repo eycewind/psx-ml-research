@@ -18,6 +18,12 @@ from psx_ml.c8.context_features import build_context_features
 from psx_ml.data.sqlite import connect_readonly
 from psx_ml.features.config import load_feature_config
 from psx_ml.features.pipeline import compute_features
+from psx_ml.live.eod_exclusions import (
+    REQUIRED_CONSUMER,
+    SOURCE as EOD_EXCLUSION_SOURCE,
+    exclusion_symbols,
+    load_eod_symbol_exclusions,
+)
 from psx_ml.universe.point_in_time import build_point_in_time
 
 DEFAULT_MODEL = Path("artifacts/models/c8_supplemental/rank_5_B_market_context_fold_2025_lightgbm_cpu.txt")
@@ -210,7 +216,16 @@ def _score_latest(feature_frame: pd.DataFrame, feature_order: list[str], model_p
     cols = ["trade_date","symbol","sector","prediction","horizon","target_name","target_family","feature_variant","model_name","model_fold","universe_provenance"]
     return latest[cols].sort_values(["prediction","symbol"], ascending=[False,True], kind="mergesort").reset_index(drop=True)
 
-def _write_outputs(paths, score_date, feature_frame, predictions, feature_order, model_sha, universe_provenance):
+def _write_outputs(
+    paths,
+    score_date,
+    feature_frame,
+    predictions,
+    feature_order,
+    model_sha,
+    universe_provenance,
+    eod_symbol_exclusions,
+):
     out_dir = paths.output_root / score_date
     out_dir.mkdir(parents=True, exist_ok=True)
     features_path = out_dir / "features.parquet"
@@ -232,6 +247,13 @@ def _write_outputs(paths, score_date, feature_frame, predictions, feature_order,
                   "feature_variant": EXPECTED_FEATURE_VARIANT, "retrained": False},
         "universe": {"name": CANONICAL_UNIVERSE, "provenance": universe_provenance,
                      "security_master": str(paths.security_master), "c6_universe": str(paths.c6_universe)},
+        "eod_symbol_exclusions": {
+            "source": EOD_EXCLUSION_SOURCE,
+            "required_consumer": REQUIRED_CONSUMER,
+            "signal_date": score_date,
+            "excluded_symbol_count": len(eod_symbol_exclusions),
+            "symbols": eod_symbol_exclusions,
+        },
         "features": {"count": len(feature_order), "ordered_names": feature_order,
                      "latest_rows": int(len(latest_features)), "finite_count_by_feature": finite_counts},
         "outputs": {"features_path": str(features_path), "features_sha256": sha256_file(features_path),
@@ -247,11 +269,30 @@ def score(paths: LiveScoringPaths, score_date: str | None = None) -> dict:
         date = _normalize_date(score_date or latest_trade_date(con))
         daily = _query_daily(con, date)
         c1_universe = _build_c1_universe(con, date)
+    eod_symbol_exclusions = load_eod_symbol_exclusions(paths.source_db, date)
     c3 = _c3_frame(daily, c1_universe, paths.feature_config, paths.repo)
     eligible, universe_provenance = _eligible_c8_rows(c3, c1_universe, paths.c6_universe, paths.security_master, date)
+    excluded = exclusion_symbols(eod_symbol_exclusions)
+    if excluded:
+        day = pd.Timestamp(date).normalize()
+        eligible = eligible.loc[
+            ~(
+                eligible["trade_date"].eq(day)
+                & eligible["symbol"].astype(str).str.strip().str.upper().isin(excluded)
+            )
+        ].copy()
     features = _build_b_market_context(eligible, feature_order)
     predictions = _score_latest(features, feature_order, paths.model, date)
-    return _write_outputs(paths, date, features, predictions, feature_order, model_sha, universe_provenance)
+    return _write_outputs(
+        paths,
+        date,
+        features,
+        predictions,
+        feature_order,
+        model_sha,
+        universe_provenance,
+        eod_symbol_exclusions,
+    )
 
 def parity(paths: LiveScoringPaths, date: str, rtol: float = 1e-10, atol: float = 1e-12) -> dict:
     feature_order = _load_c8_feature_order(paths.c8_manifest)

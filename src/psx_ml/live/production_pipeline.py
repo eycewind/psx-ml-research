@@ -21,6 +21,12 @@ from psx_ml.c11.live_orders import (
 )
 from psx_ml.data.sqlite import connect_readonly, require_daily_schema
 from psx_ml.live.account_state import load_manual_account_state
+from psx_ml.live.eod_exclusions import (
+    REQUIRED_CONSUMER,
+    SOURCE as EOD_EXCLUSION_SOURCE,
+    exclusion_symbols,
+    load_eod_symbol_exclusions,
+)
 from psx_ml.live.live_scoring import LiveScoringPaths, score, sha256_file
 from psx_ml.live.live_selection import (
     DEFAULT_KMI30_HISTORY,
@@ -223,6 +229,23 @@ def _require_exact_frame_date(frame: pd.DataFrame, date: str, name: str) -> pd.D
     return result
 
 
+def _remove_exact_date_exclusions(
+    frame: pd.DataFrame,
+    *,
+    date: str,
+    name: str,
+    excluded_symbols: set[str],
+) -> pd.DataFrame:
+    if not excluded_symbols:
+        return frame
+    if "trade_date" not in frame.columns or "symbol" not in frame.columns:
+        raise ValueError(f"{name} missing required trade_date/symbol columns")
+    day = pd.Timestamp(date).normalize()
+    symbols = frame["symbol"].astype(str).str.strip().str.upper()
+    mask = frame["trade_date"].eq(day) & symbols.isin(excluded_symbols)
+    return frame.loc[~mask].copy()
+
+
 def _phase_a_decision_hash(
     *,
     signal_date: str,
@@ -231,6 +254,7 @@ def _phase_a_decision_hash(
     selections: pd.DataFrame,
     signal_plan: pd.DataFrame,
     source_db: Path,
+    eod_symbol_exclusions: list[dict[str, str]],
 ) -> str:
     model = scoring_manifest.get("model", {})
     payload = {
@@ -247,6 +271,7 @@ def _phase_a_decision_hash(
             "feature_variant": model.get("feature_variant"),
             "retrained": model.get("retrained"),
         },
+        "eod_symbol_exclusions": eod_symbol_exclusions,
         "selections": _business_rows(selections),
         "signal_plan": _business_rows(signal_plan),
     }
@@ -309,6 +334,8 @@ def run_phase_a(
     manifest_path = _phase_a_manifest_path(output_root, signal_day)
     existing = _load_existing_manifest(manifest_path)
 
+    eod_symbol_exclusions = load_eod_symbol_exclusions(paths.source_db, signal_day)
+    excluded_symbols = exclusion_symbols(eod_symbol_exclusions)
     closes = _load_exact_daily_prices(paths.source_db, signal_day, "close_adj")
     with tempfile.TemporaryDirectory(prefix="psx-c17-phase-a-") as tmp:
         candidate_root = Path(tmp)
@@ -327,6 +354,18 @@ def run_phase_a(
         features_path = Path(scoring_manifest["outputs"]["features_path"])
         predictions = _require_exact_frame_date(pd.read_parquet(predictions_path), signal_day, "predictions")
         features = _require_exact_frame_date(pd.read_parquet(features_path), signal_day, "features")
+        predictions = _remove_exact_date_exclusions(
+            predictions,
+            date=signal_day,
+            name="predictions",
+            excluded_symbols=excluded_symbols,
+        )
+        features = _remove_exact_date_exclusions(
+            features,
+            date=signal_day,
+            name="features",
+            excluded_symbols=excluded_symbols,
+        )
 
         kmi30 = _load_kmi30_history(repo / DEFAULT_KMI30_HISTORY)
         screened = load_screened_history(repo / DEFAULT_SHARIAH_HISTORY)
@@ -352,6 +391,7 @@ def run_phase_a(
             selections=selections,
             signal_plan=signal_plan,
             source_db=paths.source_db,
+            eod_symbol_exclusions=eod_symbol_exclusions,
         )
 
         expected_identity = {
@@ -373,8 +413,12 @@ def run_phase_a(
         final_features_path = live_dir / "features.parquet"
         final_selections_path = live_dir / "selections.parquet"
         final_signal_plan_path = live_dir / "signal_plan.parquet"
-        _copy_artifact(predictions_path, final_predictions_path)
-        _copy_artifact(features_path, final_features_path)
+        if excluded_symbols:
+            predictions.to_parquet(final_predictions_path, index=False)
+            features.to_parquet(final_features_path, index=False)
+        else:
+            _copy_artifact(predictions_path, final_predictions_path)
+            _copy_artifact(features_path, final_features_path)
         selections.to_parquet(final_selections_path, index=False)
         signal_plan.to_parquet(final_signal_plan_path, index=False)
         durable_scoring_manifest = dict(scoring_manifest)
@@ -394,6 +438,13 @@ def run_phase_a(
             "overlap_symbols": int(selections.groupby("symbol")["policy_id"].nunique().eq(2).sum()),
             "output": str(final_selections_path.resolve()),
             "output_sha256": sha256_file(final_selections_path),
+            "eod_symbol_exclusions": {
+                "source": EOD_EXCLUSION_SOURCE,
+                "required_consumer": REQUIRED_CONSUMER,
+                "signal_date": signal_day,
+                "excluded_symbol_count": len(eod_symbol_exclusions),
+                "symbols": eod_symbol_exclusions,
+            },
         }
         _write_json(live_dir / "selection_manifest.json", selection_manifest)
 
@@ -410,6 +461,14 @@ def run_phase_a(
                 "source_db": str(paths.source_db.resolve()),
                 "source_db_sha256": sha256_file(paths.source_db),
                 "signal_close_date": signal_day,
+                "eod_symbol_exclusion_source": EOD_EXCLUSION_SOURCE,
+            },
+            "eod_symbol_exclusions": {
+                "source": EOD_EXCLUSION_SOURCE,
+                "required_consumer": REQUIRED_CONSUMER,
+                "signal_date": signal_day,
+                "excluded_symbol_count": len(eod_symbol_exclusions),
+                "symbols": eod_symbol_exclusions,
             },
             "model": scoring_manifest.get("model", {}),
             "inputs": {

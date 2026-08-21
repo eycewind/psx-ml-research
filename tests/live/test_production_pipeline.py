@@ -105,6 +105,10 @@ def _write_source_db(
         + close_col
         + "volume_adj REAL)"
     )
+    con.execute(
+        "CREATE TABLE c17_eod_symbol_exclusions ("
+        "signal_date TEXT, symbol TEXT, reason TEXT, recorded_at TEXT)"
+    )
     rows = []
     for symbol, close, open_ in [
         ("AAA", 100.0, 101.0),
@@ -125,6 +129,23 @@ def _write_source_db(
     con.commit()
     con.close()
     return path
+
+
+def _insert_eod_exclusion(
+    source_db: Path,
+    *,
+    signal_date: str,
+    symbol: str | None,
+    reason: str | None = "malformed official EOD bar: open NULL/high-low zero/volume 2",
+) -> None:
+    con = sqlite3.connect(source_db)
+    con.execute(
+        "INSERT INTO c17_eod_symbol_exclusions "
+        "(signal_date, symbol, reason, recorded_at) VALUES (?, ?, ?, ?)",
+        (signal_date, symbol, reason, f"{signal_date}T18:00:00+05:00"),
+    )
+    con.commit()
+    con.close()
 
 
 def _fake_scorer(scoring_paths, signal_date: str) -> dict:
@@ -521,6 +542,146 @@ def test_phase_a_decision_is_deterministic_and_conflict_checked(tmp_path: Path) 
             execution_date="2026-08-17",
             scorer=changed_scorer,
         )
+
+
+def test_phase_a_eod_exclusion_removes_symbol_before_selection_and_signal_plan(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path)
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-13", symbol="AAA")
+
+    manifest = run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    live_dir = tmp_path / "artifacts/live/2026-08-13"
+    predictions = pd.read_parquet(live_dir / "predictions.parquet")
+    features = pd.read_parquet(live_dir / "features.parquet")
+    selections = pd.read_parquet(live_dir / "selections.parquet")
+    signal_plan = pd.read_parquet(live_dir / "signal_plan.parquet")
+
+    assert "AAA" not in set(predictions["symbol"])
+    assert "AAA" not in set(features["symbol"])
+    assert "AAA" not in set(selections["symbol"])
+    assert "AAA" not in set(signal_plan["symbol"])
+    assert "AAA" not in set(selections.loc[selections["policy_id"].eq("D_P4_kmi30_strict"), "symbol"])
+    assert "AAA" not in set(selections.loc[selections["policy_id"].eq("D_P5_shariah_screened"), "symbol"])
+    assert manifest["eod_symbol_exclusions"]["excluded_symbol_count"] == 1
+    assert manifest["eod_symbol_exclusions"]["symbols"] == [
+        {
+            "symbol": "AAA",
+            "reason": "malformed official EOD bar: open NULL/high-low zero/volume 2",
+        }
+    ]
+
+
+def test_phase_a_eod_exclusions_are_exact_signal_date_scoped(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path)
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-12", symbol="AAA")
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-14", symbol="BBB")
+
+    manifest = run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    selections = pd.read_parquet(tmp_path / "artifacts/live/2026-08-13/selections.parquet")
+    signal_plan = pd.read_parquet(tmp_path / "artifacts/live/2026-08-13/signal_plan.parquet")
+    assert manifest["eod_symbol_exclusions"]["excluded_symbol_count"] == 0
+    assert "AAA" in set(selections["symbol"])
+    assert "AAA" in set(signal_plan["symbol"])
+
+
+def test_phase_a_no_exclusion_case_preserves_existing_selection_output(tmp_path: Path) -> None:
+    baseline_paths = _phase_a_paths(tmp_path / "baseline")
+    excluded_paths = _phase_a_paths(tmp_path / "excluded")
+    _insert_eod_exclusion(excluded_paths.source_db, signal_date="2026-08-12", symbol="AAA")
+
+    baseline = run_phase_a(
+        paths=baseline_paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    scoped = run_phase_a(
+        paths=excluded_paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    pd.testing.assert_frame_equal(
+        pd.read_parquet(tmp_path / "baseline/artifacts/live/2026-08-13/selections.parquet"),
+        pd.read_parquet(tmp_path / "excluded/artifacts/live/2026-08-13/selections.parquet"),
+    )
+    pd.testing.assert_frame_equal(
+        pd.read_parquet(tmp_path / "baseline/artifacts/live/2026-08-13/signal_plan.parquet"),
+        pd.read_parquet(tmp_path / "excluded/artifacts/live/2026-08-13/signal_plan.parquet"),
+    )
+    assert baseline["eod_symbol_exclusions"]["symbols"] == []
+    assert scoped["eod_symbol_exclusions"]["symbols"] == []
+
+
+def test_phase_a_decision_hash_changes_when_eod_exclusion_set_changes(tmp_path: Path) -> None:
+    baseline_paths = _phase_a_paths(tmp_path / "baseline")
+    excluded_paths = _phase_a_paths(tmp_path / "excluded")
+    _insert_eod_exclusion(excluded_paths.source_db, signal_date="2026-08-13", symbol="AAA")
+
+    baseline = run_phase_a(
+        paths=baseline_paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+    excluded = run_phase_a(
+        paths=excluded_paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    assert excluded["phase_a_decision_sha256"] != baseline["phase_a_decision_sha256"]
+
+
+def test_phase_a_rejects_malformed_and_conflicting_eod_exclusion_metadata(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path / "blank")
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-13", symbol="AAA", reason="")
+    with pytest.raises(ValueError, match="Malformed EOD symbol exclusion row"):
+        run_phase_a(
+            paths=paths,
+            signal_date="2026-08-13",
+            execution_date="2026-08-17",
+            scorer=_fake_scorer,
+        )
+
+    conflict_paths = _phase_a_paths(tmp_path / "conflict")
+    _insert_eod_exclusion(conflict_paths.source_db, signal_date="2026-08-13", symbol="AAA", reason="first")
+    _insert_eod_exclusion(conflict_paths.source_db, signal_date="2026-08-13", symbol="AAA", reason="second")
+    with pytest.raises(ValueError, match="Conflicting EOD exclusion reasons"):
+        run_phase_a(
+            paths=conflict_paths,
+            signal_date="2026-08-13",
+            execution_date="2026-08-17",
+            scorer=_fake_scorer,
+        )
+
+
+def test_phase_a_allows_duplicate_identical_eod_exclusions(tmp_path: Path) -> None:
+    paths = _phase_a_paths(tmp_path)
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-13", symbol="AAA", reason="same")
+    _insert_eod_exclusion(paths.source_db, signal_date="2026-08-13", symbol="AAA", reason="same")
+
+    manifest = run_phase_a(
+        paths=paths,
+        signal_date="2026-08-13",
+        execution_date="2026-08-17",
+        scorer=_fake_scorer,
+    )
+
+    assert manifest["eod_symbol_exclusions"]["symbols"] == [{"symbol": "AAA", "reason": "same"}]
 
 
 def test_phase_b_consumes_phase_a_and_emits_canonical_json_with_provenance(tmp_path: Path) -> None:
